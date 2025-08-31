@@ -1,62 +1,91 @@
 // @ts-check
-// `@type` JSDoc annotations allow editor autocompletion and type checking
-// (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
-// See: https://docusaurus.io/docs/api/docusaurus-config
+// Note: type annotations allow type checking and IDEs autocompletion
 
-import {themes as prismThemes} from 'prism-react-renderer';
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+const {themes} = require('prism-react-renderer');
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
-module.exports = {
-  title: 'Send Info Docs',
-  tagline: 'Send, Save, Invest. Your global wallet app, built for real life.',
-  url: 'https://github.com/0xsend',
-  baseUrl: '/send-info-docs/',
-  organizationName: '0xSend', // Replace with your GitHub username
+const config = {
+  title: 'Send Info Documentation',
+  tagline: 'Your comprehensive guide to the Send ecosystem',
+  favicon: 'img/favicon.ico',
+
+  // Set the production url of your site here
+  url: 'https://info.send.it',
+  baseUrl: '/',
+
+  // GitHub pages deployment config
+  organizationName: 'your-github-username',
   projectName: 'send-info-docs',
+
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
+
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en'],
+  },
+
   presets: [
     [
       'classic',
-      {
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
         docs: {
+          routeBasePath: '/', // Serve docs at site root
           sidebarPath: require.resolve('./sidebars.js'),
-          routeBasePath: '/',
         },
-        blog: false,
+        blog: false, // Disable blog if you don't need it
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      },
+      }),
     ],
   ],
-  themeConfig: {
-    navbar: {
-      title: 'Send Info Docs',
-      logo: {
-        alt: 'Send Logo',
-        src: 'img/logo.svg',
-      },
-      items: [
-        { to: '/', label: 'Docs', position: 'left' },
-        { href: 'https://https://github.com/0xsend/send-info-docs', label: 'GitHub', position: 'right' },
-      ],
-    },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Community',
-          items: [
-            { label: 'X', href: 'https://x.com/send' },
-            { label: 'Telegram', href: 'https://t.me/send_app' },
-          ],
+
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      // Replace with your project's social card
+      image: 'img/docusaurus-social-card.jpg',
+      
+      navbar: {
+        title: 'Send Info Docs',
+        logo: {
+          alt: 'Send Logo',
+          src: 'img/logo.svg',
         },
-      ],
-      copyright: `© 2025 Send, Inc.`,
-    },
-  },
+        items: [
+          {
+            href: 'https://github.com/0xsend/send-info-docs',
+            label: 'GitHub',
+            position: 'right',
+          },
+        ],
+        hideOnScroll: false,
+      },
+      
+      footer: {
+        style: 'dark',
+        links: [
+        ],
+        copyright: `© Send, Inc.`,
+      },
+      
+      prism: {
+        theme: lightCodeTheme,
+        darkTheme: darkCodeTheme,
+      },
+      
+      // REMOVED: docs configuration (was in wrong place)
+      
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
+      },
+    }),
 };
+
+module.exports = config;
