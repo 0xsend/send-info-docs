@@ -9,7 +9,7 @@ const darkCodeTheme = themes.dracula;
 const config = {
   title: 'Send Info Documentation',
   tagline: 'Your comprehensive guide to the Send ecosystem',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
   url: 'https://info.send.it',
@@ -54,7 +54,7 @@ const config = {
         title: 'Send Info Docs',
         logo: {
           alt: 'Send Logo',
-          src: 'img/logo.svg',
+          src: 'img/logo.png',
         },
         items: [
           {
