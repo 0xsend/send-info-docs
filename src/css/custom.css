@@ -72,6 +72,19 @@
   font-size: 14px;
   text-transform: none;
   letter-spacing: normal;
+  margin-top: 0;
+  padding-top: 0.25rem;
+}
+
+/* Reduce space above category items */
+.theme-doc-sidebar-item-category {
+  margin-top: 0.25rem;
+}
+
+/* Tighter spacing for sidebar items */
+.menu__list-item {
+  margin-top: 0;
+  margin-bottom: 0.125rem;
 }
 
 /* Content area improvements */
@@ -82,46 +95,86 @@
 article {
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
 }
 
-/* Typography improvements for readability */
+/* Reduce space above breadcrumbs to align with sidebar */
+.theme-doc-breadcrumbs {
+  margin-bottom: 0.5rem;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Remove top padding of main content area */
+.main-wrapper main {
+  padding-top: 0;
+}
+
+/* Align content with sidebar top */
+.theme-doc-version-wrapper {
+  padding-top: 0.5rem;
+}
+
+/* Typography improvements for readability with tighter spacing */
 .markdown h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   color: var(--ifm-heading-color);
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  line-height: 1.2;
 }
 
 .markdown h2 {
   font-size: 2rem;
   font-weight: 600;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
   color: var(--ifm-heading-color);
+  line-height: 1.3;
 }
 
 .markdown h3 {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
 }
 
 .markdown p {
-  margin-bottom: 1.25rem;
-  line-height: 1.7;
+  margin-bottom: 1rem;
+  line-height: 1.5;
 }
 
 .markdown ul, .markdown ol {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   padding-left: 1.5rem;
 }
 
 .markdown li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.0;
+}
+
+/* Tighter spacing for consecutive list items */
+.markdown li p {
+  margin-bottom: 0.25rem;
+}
+
+/* Remove extra spacing from blockquotes and callouts */
+.markdown blockquote {
+  margin: 1rem 0;
+}
+
+/* Super tight spacing specifically for navigation divs */
+.markdown div[style*="lineHeight"] {
+  line-height: 0.8 !important;
+}
+
+.markdown div[style*="lineHeight"] br {
+  line-height: 0.8;
 }
 
 /* Code blocks GitBook style */
