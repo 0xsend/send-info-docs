@@ -115,6 +115,11 @@ article {
   padding-top: 0.5rem;
 }
 
+/* Custom footer color */
+footer.footer {
+  background-color: #122023 !important;
+}
+
 /* Typography improvements for readability with tighter spacing */
 .markdown h1 {
   font-size: 2.5rem;

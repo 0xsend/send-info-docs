@@ -1,0 +1,46 @@
+---
+id: tokenomics
+title: $SEND Tokenomics
+sidebar_position: 2
+---
+
+# Tokenomics
+
+Send Token economics, covering its creation, distribution, usage, and value within the network.
+
+:::info Token Upgrade
+Send Token ($SEND) launched on June 28, 2023, with an initial supply of 100B tokens. Following a token upgrade on January 19, 2025, the total supply was reduced to 1B tokens. All values shown reflect this new supply. [Learn more about the upgrade details here](/send-token/upgrade)
+:::
+
+## Token Allocation
+
+| Wallet | Initial Allocation | Percentage |
+|--------|-------------------|------------|
+| **Rewards** | 300,000,000 | 30% |
+| **Exchange Listings** | 200,000,000 | 20% |
+| **Treasury** | 200,000,000 | 20% |
+| **Liquidity Providers** | 100,000,000 | 10% |
+| **Core Team** | 100,000,000 | 10% |
+| **Contributor Incentives** | 100,000,000 | 10% |
+
+---
+
+## Allocation Details
+
+### **Rewards - 30%**
+A total of 300 million $SEND tokens are allocated for long-term holders and participants of the Send ecosystem. To participate, users reserve a Sendtag, and hold $Send tokens. Distributions include a holder pool, fixed pool, and bonus pool with variable allocation. Eligible holders are determined through snapshots, while tasks boost bonus rewards.
+
+### **Exchange Listings - 20%**
+A total of 80 million tokens, equivalent to 8% of the total supply, were paired with 165 ETH from the contribution round. These tokens were listed on Uniswap at an initial price of $0.0038. The circulating market capitalization stood at $640,000, while the Fully Diluted Valuation (FDV) amounted to $3,800,000.
+
+### **Treasury - 20%**
+These funds have the potential to enter circulation at any given moment. Distribution of the Treasury revolves around employing these funds for successive contribution rounds, aiming to propel the project's advancement. The most recent of these rounds, known as Contribution #4 (Jan, 2025), involved the issuance of 7 million tokens in exchange for 100,000 USDC, with a vesting period spanning 10 months. Each contribution agreement will be carefully crafted for strategic purposes and tokens will be subject to vesting conditions.
+
+### **Liquidity Providers - 10%**
+During the initial contribution round, 171 participants collectively contributed 200 Ethereum. Each contributor adhered to the specified contribution range of 0.5 ETH to 2 ETH without any exceptions. A 0.5 ETH contribution resulted in the allocation of 250,000 $SEND tokens, while a 2 ETH contribution yielded 1 million $SEND tokens. As a token of appreciation, these contributors were awarded 10% of the total token supply with their tokens being fully accessible upon the Token Generation Event.
+
+### **Core Team - 10%**
+Payouts for the Core Team are divided into two distinct groups: the Token Generation Event (TGE) team and the team accountable for product development. The TGE team's allocation totals 10 million, which will be disbursed over a duration of 20 months to three individuals. On the product front, the team is composed of 5 engineers, two designers, and an operations lead. At present, approximately 1,000,000 in $SEND tokens are allocated monthly to the product team.
+
+### **Contributor Incentives - 10%**
+Contributor Incentives are tokens allocated to individuals outside the core team who contribute to the project's growth. This system rewards community members, developers, and others for valuable contributions like code, community engagement, or marketing efforts. It aims to encourage participation, align interests, and foster a sense of ownership, driving the project's overall success.

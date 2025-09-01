@@ -22,7 +22,7 @@ const sidebars = {
       collapsed: true,
       items: [
         'send-token/what-is-send-token',
-        'send-token/send-tokenomics',
+        'send-token/tokenomics',
         'send-token/bridge',
         'send-token/upgrade',
       ],

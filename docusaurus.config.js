@@ -7,12 +7,12 @@ const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Send Info Documentation',
+  title: 'Send Documentation',
   tagline: 'Your comprehensive guide to the Send ecosystem',
   favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
-  url: 'https://info.send.it',
+  url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
 
   // GitHub pages deployment config
@@ -51,14 +51,14 @@ const config = {
       image: 'img/docusaurus-social-card.jpg',
       
       navbar: {
-        title: 'Send Info Docs',
+        title: 'Send Docs',
         logo: {
           alt: 'Send Logo',
           src: 'img/logo.png',
         },
         items: [
           {
-            href: 'https://github.com/0xsend/send-info-docs',
+            href: 'https://github.com/your-username/send-info-docs',
             label: 'GitHub',
             position: 'right',
           },
@@ -69,8 +69,26 @@ const config = {
       footer: {
         style: 'dark',
         links: [
+          {
+            title: 'Documentation',
+            items: [
+              {
+                label: 'Welcome',
+                to: '/welcome/what-is-send',
+              },
+            ],
+          },
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'GitHub',
+                href: 'https://github.com/your-username/send-info-docs',
+              },
+            ],
+          },
         ],
-        copyright: `© Send, Inc.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Send Project.`,
       },
       
       prism: {
