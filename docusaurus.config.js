@@ -58,9 +58,19 @@ const config = {
         },
         items: [
           {
-            href: 'https://github.com/your-username/send-info-docs',
-            label: 'GitHub',
-            position: 'right',
+            label: 'Send.it',
+            href: 'https://send.it',
+            position: 'left',
+          },
+          {
+            label: 'Send.app',
+            href: 'https://send.app',
+            position: 'left',
+          },
+          {
+            label: 'Canton Wallet',
+            href: 'https://cantonwallet.com',
+            position: 'left',
           },
         ],
         hideOnScroll: false,
@@ -69,26 +79,9 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          {
-            title: 'Documentation',
-            items: [
-              {
-                label: 'Welcome',
-                to: '/welcome/what-is-send',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/your-username/send-info-docs',
-              },
-            ],
-          },
+          // Your footer links here if any
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Send Project.`,
+        copyright: `© Send, Inc.`,
       },
       
       prism: {

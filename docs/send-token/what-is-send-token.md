@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # What is Send Token
 
-SEND is an ERC-20 token that powers the Send ecosystem.
+$SEND is an ERC-20 token that powers the Send ecosystem.
 
 ## Token Details
 
@@ -29,5 +29,5 @@ SEND is an ERC-20 token that powers the Send ecosystem.
 ---
 
 :::info Token Network
-SEND operates on the Base network, providing fast and low-cost transactions for all ecosystem interactions.
+$SEND operates on the Base network, providing fast and low-cost transactions for all ecosystem interactions.
 :::

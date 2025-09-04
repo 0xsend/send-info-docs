@@ -3,7 +3,7 @@ const sidebars = {
   docs: [
     {
       type: 'category',
-      label: 'WELCOME',
+      label: 'Welcome',
       collapsible: true,
       collapsed: false,
       items: [
@@ -17,7 +17,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'SEND TOKEN',
+      label: 'Send Token',
       collapsible: true,
       collapsed: true,
       items: [
@@ -29,21 +29,48 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'FEATURES',
+      label: 'Send App',
       collapsible: true,
       collapsed: true,
       items: [
-        'features/invest',
-        'features/passkeys',
-        'features/referrals',
-        'features/rewards',
-        'features/sendtags',
-        'features/savings',
+        'send-app/send-app-overview',
+        {
+          type: 'category',
+          label: 'Features',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'features/invest',
+            'features/passkeys',
+            'features/referrals',
+            'features/rewards',
+            'features/sendtags',
+            'features/savings',
+          ],
+        },
       ],
     },
     {
       type: 'category',
-      label: 'FINANCE',
+      label: 'Canton Wallet',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'canton-wallet/canton-wallet-overview',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Dolar Stablecoin',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'dolar-stablecoin/dolar-stablecoin-overview',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Finance',
       collapsible: true,
       collapsed: true,
       items: [
@@ -57,7 +84,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'MISCELLANEOUS',
+      label: 'Miscellaneous',
       collapsible: true,
       collapsed: true,
       items: [
@@ -70,7 +97,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'LINKS',
+      label: 'Links',
       collapsible: true,
       collapsed: true,
       items: [
@@ -83,7 +110,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'LEGAL',
+      label: 'Legal',
       collapsible: true,
       collapsed: true,
       items: [

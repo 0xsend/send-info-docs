@@ -23,9 +23,7 @@ Send Token ($SEND) launched on June 28, 2023, with an initial supply of 100B tok
 | **Core Team** | 100,000,000 | 10% |
 | **Contributor Incentives** | 100,000,000 | 10% |
 
----
-
-## Allocation Details
+![Tokenomics Details](/img/tokenomics.png)
 
 ### **Rewards - 30%**
 A total of 300 million $SEND tokens are allocated for long-term holders and participants of the Send ecosystem. To participate, users reserve a Sendtag, and hold $Send tokens. Distributions include a holder pool, fixed pool, and bonus pool with variable allocation. Eligible holders are determined through snapshots, while tasks boost bonus rewards.
