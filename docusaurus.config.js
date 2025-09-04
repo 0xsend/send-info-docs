@@ -58,7 +58,7 @@ const config = {
         },
         items: [
           {
-            label: 'Send.it',
+            label: 'Send Info Docs',
             href: 'https://send.it',
             position: 'left',
           },
