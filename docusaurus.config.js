@@ -67,11 +67,6 @@ const config = {
             href: 'https://send.app',
             position: 'left',
           },
-          {
-            label: 'Canton Wallet',
-            href: 'https://cantonwallet.com',
-            position: 'left',
-          },
         ],
         hideOnScroll: false,
       },
@@ -79,7 +74,31 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          // Your footer links here if any
+          {
+            title: 'Links',
+            items: [
+              {
+                label: 'Github',
+                href: 'https://github.com/0xsend/sendapp',
+              },
+              {
+                label: 'X Profile',
+                href: 'https://x.com/send',
+              },
+              {
+                label: 'Telegram',
+                href: 'https://t.me/send_app',
+              },
+              {
+                label: 'Buy $SEND',
+                href: 'https://aerodrome.finance/swap?from=0x833589fcd6edb6e08f4c7c32d4f71b54bda02913&to=0xeab49138ba2ea6dd776220fe26b7b8e446638956&chain0=8453&chain1=8453',
+              },
+              {
+                label: 'Support',
+                href: 'https://support.send.app/en/',
+              },
+            ],
+          },
         ],
         copyright: `© Send, Inc.`,
       },
@@ -88,8 +107,6 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-      
-      // REMOVED: docs configuration (was in wrong place)
       
       colorMode: {
         defaultMode: 'light',

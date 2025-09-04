@@ -163,6 +163,19 @@ footer.footer {
   line-height: 1.0;
 }
 
+/* Increase spacing between bullet points */
+.markdown ul li,
+.markdown ol li {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+/* Adjust nested list items */
+.markdown ul li ul li,
+.markdown ol li ol li {
+  margin-bottom: 0.25rem;
+}
+
 /* Tighter spacing for consecutive list items */
 .markdown li p {
   margin-bottom: 0.25rem;

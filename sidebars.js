@@ -50,24 +50,24 @@ const sidebars = {
         },
       ],
     },
-    {
-      type: 'category',
-      label: 'Canton Wallet',
-      collapsible: true,
-      collapsed: true,
-      items: [
-        'canton-wallet/canton-wallet-overview',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Dolar Stablecoin',
-      collapsible: true,
-      collapsed: true,
-      items: [
-        'dolar-stablecoin/dolar-stablecoin-overview',
-      ],
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Canton Wallet',
+    //   collapsible: true,
+    //   collapsed: true,
+    //   items: [
+    //     'canton-wallet/canton-wallet-overview',
+    //   ],
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Dolar Stablecoin',
+    //   collapsible: true,
+    //   collapsed: true,
+    //   items: [
+    //     'dolar-stablecoin/dolar-stablecoin-overview',
+    //   ],
+    // },
     {
       type: 'category',
       label: 'Finance',
@@ -93,19 +93,6 @@ const sidebars = {
         'miscellaneous/intellectual-property',
         'miscellaneous/send-contract-addresses',
         'miscellaneous/brand-links-assets',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Links',
-      collapsible: true,
-      collapsed: true,
-      items: [
-        'links/github',
-        'links/x-profile',
-        'links/telegram',
-        'links/buy-send',
-        'links/support',
       ],
     },
     {
