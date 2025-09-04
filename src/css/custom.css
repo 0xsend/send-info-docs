@@ -1,406 +1,259 @@
-/**
- * Custom CSS for GitBook-style documentation site
- */
-
 :root {
-  --ifm-color-primary: #122023;
-  --ifm-color-primary-dark: #0f1b1e;
-  --ifm-color-primary-darker: #0e191c;
-  --ifm-color-primary-darkest: #0b1417;
-  --ifm-color-primary-light: #152528;
-  --ifm-color-primary-lighter: #16272a;
-  --ifm-color-primary-lightest: #1a2e32;
+  --ifm-color-primary: #00c46c;
+  --ifm-color-primary-dark: #009e56;
+  --ifm-background-color: #f7f9fb;
+  --ifm-font-family-base: 'Inter', 'Segoe UI', Arial, sans-serif;
+  --ifm-heading-color: #222;
+  --ifm-link-color: #00c46c;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  
-  /* GitBook-style spacing and typography */
-  --ifm-spacing-horizontal: 1.5rem;
-  --ifm-navbar-height: 3.75rem;
-  --ifm-menu-color-background-active: rgba(0, 0, 0, 0.05);
-  --ifm-menu-color-background-hover: rgba(0, 0, 0, 0.025);
-  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --ifm-font-size-base: 16px;
-  --ifm-line-height-base: 1.6;
+  --ifm-border-radius: 12px;
+  --ifm-box-shadow: 0 2px 12px rgba(0,196,108,0.08);
 }
 
-/* Dark theme adjustments */
 [data-theme='dark'] {
-  --ifm-color-primary: #122023;
-  --ifm-color-primary-dark: #0f1b1e;
-  --ifm-color-primary-darker: #0e191c;
-  --ifm-color-primary-darkest: #0b1417;
-  --ifm-color-primary-light: #152528;
-  --ifm-color-primary-lighter: #16272a;
-  --ifm-color-primary-lightest: #1a2e32;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --ifm-menu-color-background-active: rgba(255, 255, 255, 0.05);
-  --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.025);
+  --ifm-background-color: #101915;
+  --ifm-heading-color: #fff;
+  --ifm-link-color: #fff;
+  --ifm-color-primary: #00c46c;
+  --ifm-color-primary-dark: #009e56;
+  --ifm-box-shadow: 0 2px 12px rgba(0,196,108,0.18);
 }
 
-/* GitBook-style content layout */
+body {
+  background: var(--ifm-background-color);
+  font-family: var(--ifm-font-family-base);
+  color: var(--ifm-heading-color);
+}
+
 .main-wrapper {
   max-width: none;
 }
 
-/* Sidebar styling to match GitBook */
-.theme-doc-sidebar-container {
-  border-right: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.menu__link {
-  font-size: 17px;
-  font-weight: 400;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.25rem;
-  transition: all 0.2s ease;
-}
-
-.menu__link--active {
-  font-weight: 600;
-  background-color: var(--ifm-menu-color-background-active);
-  color: var(--ifm-color-primary);
-}
-
-.menu__link:hover {
-  background-color: var(--ifm-menu-color-background-hover);
-  text-decoration: none;
-}
-
-/* Category styling */
-.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link {
-  font-weight: 600;
-  font-size: 17px;
-  text-transform: none;
-  letter-spacing: normal;
-  margin-top: 0;
-  padding-top: 0.25rem;
-}
-
-/* Reduce space above category items */
-.theme-doc-sidebar-item-category {
-  margin-top: 0.25rem;
-}
-
-/* Tighter spacing for sidebar items */
-.menu__list-item {
-  margin-top: 0;
-  margin-bottom: 0.125rem;
-}
-
-/* Content area improvements */
-.theme-doc-markdown {
-  max-width: none;
-}
-
 article {
-  max-width: 800px;
+  max-width: 820px;
   margin: 0 auto;
-  padding: 0 2rem 2rem 2rem;
+  padding: 2rem 1.5rem 2rem 1.5rem;
+  background: #fff;
+  border-radius: var(--ifm-border-radius);
+  box-shadow: var(--ifm-box-shadow);
+}
+[data-theme='dark'] article {
+  background: #181f1b;
+  color: #fff;
 }
 
-/* Reduce space above breadcrumbs to align with sidebar */
-.theme-doc-breadcrumbs {
-  margin-bottom: 0.5rem;
-  padding-top: 0;
-  margin-top: 0;
+.markdown h1, .markdown h2, .markdown h3 {
+  font-family: inherit;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
 }
 
-/* Remove top padding of main content area */
-.main-wrapper main {
-  padding-top: 0;
-}
-
-/* Align content with sidebar top */
-.theme-doc-version-wrapper {
-  padding-top: 0.5rem;
-}
-
-/* Custom footer color */
-footer.footer {
-  background-color: #122023 !important;
-}
-
-/* Typography improvements for readability with tighter spacing */
 .markdown h1 {
   font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--ifm-heading-color);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom: 2px solid #e7eaf3;
   padding-bottom: 0.5rem;
-  line-height: 1.2;
+}
+[data-theme='dark'] .markdown h1 {
+  border-bottom: 2px solid #22372c;
 }
 
 .markdown h2 {
   font-size: 2rem;
-  font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-  color: var(--ifm-heading-color);
-  line-height: 1.3;
 }
 
 .markdown h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
+  font-size: 1.4rem;
 }
 
 .markdown p {
-  margin-bottom: 1rem;
-  line-height: 1.5;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
 }
 
 .markdown ul, .markdown ol {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
+  padding-left: 1.5em;
+  margin-bottom: 1.2rem;
 }
 
 .markdown li {
-  margin-bottom: 0.25rem;
-  line-height: 1.0;
-}
-
-/* Increase spacing between bullet points */
-.markdown ul li,
-.markdown ol li {
   margin-bottom: 0.5rem;
-  line-height: 1.4;
 }
 
-/* Adjust nested list items */
-.markdown ul li ul li,
-.markdown ol li ol li {
-  margin-bottom: 0.25rem;
+.markdown a {
+  color: var(--ifm-link-color);
+  text-decoration: underline;
+  transition: color 0.2s;
 }
 
-/* Tighter spacing for consecutive list items */
-.markdown li p {
-  margin-bottom: 0.25rem;
-}
-
-/* Remove extra spacing from blockquotes and callouts */
-.markdown blockquote {
-  margin: 1rem 0;
-}
-
-/* Super tight spacing specifically for navigation divs */
-.markdown div[style*="lineHeight"] {
-  line-height: 0.8 !important;
-}
-
-.markdown div[style*="lineHeight"] br {
-  line-height: 0.8;
-}
-
-/* Code blocks GitBook style */
-.prism-code {
-  border-radius: 0.5rem;
-  font-size: 14px;
-}
-
-/* Inline code styling */
-code {
-  background-color: var(--ifm-color-emphasis-100);
-  border-radius: 0.25rem;
-  padding: 0.125rem 0.25rem;
-  font-size: 0.875em;
-}
-
-/* Table of contents */
-.table-of-contents {
-  font-size: 14px;
-}
-
-.table-of-contents__link {
-  color: var(--ifm-toc-link-color);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  transition: all 0.2s ease;
-}
-
-.table-of-contents__link:hover {
-  background-color: var(--ifm-menu-color-background-hover);
-  text-decoration: none;
-}
-
-.table-of-contents__link--active {
+.markdown a:hover {
   color: var(--ifm-color-primary);
+  text-decoration: underline;
+}
+
+[data-theme='dark'] .markdown a,
+[data-theme='dark'] .table-of-contents__link,
+[data-theme='dark'] .navbar__link,
+[data-theme='dark'] .menu__link,
+[data-theme='dark'] .breadcrumbs__link {
+  color: #fff !important;
+}
+
+[data-theme='dark'] .menu__link--active,
+[data-theme='dark'] .menu__link:hover,
+[data-theme='dark'] .table-of-contents__link--active,
+[data-theme='dark'] .table-of-contents__link:hover {
+  background: #22372c;
+  color: #fff !important;
   font-weight: 600;
 }
 
-/* Admonitions (callouts) GitBook style */
+[data-theme='dark'] .breadcrumbs__item,
+[data-theme='dark'] .breadcrumbs__link {
+  color: #fff !important;
+}
+
+code, .prism-code {
+  background: #f3f6fa;
+  border-radius: 6px;
+  font-size: 0.95em;
+  padding: 0.2em 0.4em;
+}
+[data-theme='dark'] code, [data-theme='dark'] .prism-code {
+  background: #22372c;
+  color: #b7ffd8;
+}
+
+.prism-code {
+  box-shadow: 0 1px 6px rgba(0,196,108,0.06);
+}
+[data-theme='dark'] .prism-code {
+  box-shadow: 0 1px 6px rgba(0,196,108,0.18);
+}
+
+.markdown blockquote {
+  background: #f0f4ff;
+  border-left: 4px solid var(--ifm-color-primary);
+  padding: 0.75em 1em;
+  border-radius: 8px;
+  margin: 1.5em 0;
+  color: #333;
+}
+[data-theme='dark'] .markdown blockquote {
+  background: #22372c;
+  color: #b7ffd8;
+}
+
+.table-of-contents {
+  background: #f3f6fa;
+  border-radius: 8px;
+  padding: 1em;
+  font-size: 0.98em;
+  box-shadow: 0 1px 6px rgba(0,196,108,0.04);
+}
+[data-theme='dark'] .table-of-contents {
+  background: #181f1b;
+  box-shadow: 0 1px 6px rgba(0,196,108,0.12);
+}
+
 .admonition {
-  border-radius: 0.5rem;
-  margin: 1.5rem 0;
-  padding: 1rem 1.25rem;
-  border-left: 4px solid;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(0,196,108,0.07);
+  padding: 1em 1.5em;
+  margin: 2em 0;
+}
+[data-theme='dark'] .admonition {
+  background: #22372c;
+  color: #b7ffd8;
+  box-shadow: 0 1px 8px rgba(0,196,108,0.18);
 }
 
-/* Navigation improvements */
-.pagination-nav {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
+footer.footer {
+  background: #00c46c !important;
+  color: #fff;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -2px 12px rgba(0,196,108,0.08);
+}
+[data-theme='dark'] footer.footer {
+  background: #101915 !important;
+  color: #b7ffd8;
+  box-shadow: 0 -2px 12px rgba(0,196,108,0.18);
 }
 
-/* Search bar styling if using search */
-.navbar__search-input {
-  border-radius: 1.5rem;
-  padding: 0.375rem 1rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
+.navbar {
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,196,108,0.07);
+  border-bottom: 1px solid #e7eaf3;
+}
+[data-theme='dark'] .navbar {
+  background: #181f1b;
+  border-bottom: 1px solid #22372c;
+  box-shadow: 0 2px 12px rgba(0,196,108,0.18);
 }
 
-/* Mobile responsiveness */
+.navbar__link {
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.5em 1em;
+  transition: background 0.2s;
+}
+
+.navbar__link:hover {
+  background: #f3f6fa;
+}
+[data-theme='dark'] .navbar__link:hover {
+  background: #22372c;
+  color: #fff !important;
+}
+
+.theme-doc-sidebar-container {
+  background: #f3f6fa;
+  border-right: 1px solid #e7eaf3;
+}
+[data-theme='dark'] .theme-doc-sidebar-container {
+  background: #181f1b;
+  border-right: 1px solid #22372c;
+}
+
+.menu__link {
+  border-radius: 8px;
+  padding: 0.4em 0.8em;
+  font-size: 1.05em;
+  transition: background 0.2s;
+}
+
+.menu__link--active, .menu__link:hover {
+  background: #e7eaf3;
+  color: var(--ifm-color-primary);
+}
+[data-theme='dark'] .menu__link--active,
+[data-theme='dark'] .menu__link:hover {
+  background: #22372c;
+  color: #fff !important;
+  font-weight: 600;
+}
+
 @media (max-width: 996px) {
   article {
     padding: 1rem;
+    border-radius: 0;
+    box-shadow: none;
   }
-  
-  .markdown h1 {
-    font-size: 2rem;
+  .navbar {
+    border-radius: 0;
+    box-shadow: none;
   }
-  
-  .markdown h2 {
-    font-size: 1.75rem;
-    margin-top: 2rem;
+  .theme-doc-sidebar-container {
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 
-/* Hide edit page link if desired */
-.theme-edit-this-page {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-}
-
-/* Remove external link icons from navbar - comprehensive approach */
-.navbar__link::after,
-.navbar__item .navbar__link::after,
-.navbar__items .navbar__link::after,
-.navbar .navbar__link[href*="://"]::after,
-[class*="iconExternalLink"] {
-  display: none !important;
-  content: none !important;
-}
-
-/* Hide any SVG icons in navbar links */
-.navbar__link svg,
-.navbar__item .navbar__link svg {
-  display: none !important;
-}
-
-/* Keep color mode toggle on the right */
-.navbar__items--right {
-  margin-left: auto !important;
-}
-
-/* Ensure color mode toggle stays right-aligned */
-[class*="colorModeToggle"],
-[class*="toggle"] {
-  margin-left: auto !important;
-}
-
-/* Add spacing between logo/title and left navbar items */
-.navbar__items--left {
-  gap: 3rem;
-}
-
-/* Remove external link icons from navbar */
-.navbar__link[href*="://"]::after,
-.navbar__link[href*="://"] .iconExternalLink_node_modules-\@docusaurus-theme-classic-lib-theme-Icon-ExternalLink-styles-module {
-  display: none !important;
-}
-
-/* Style navbar links */
-.navbar__items--left .navbar__link {
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-}
-
-/* Position navbar items to start where sidebar ends */
-.navbar__items--right {
-  flex: 1;
-  justify-content: flex-start;
-  margin-left: var(--doc-sidebar-width, 300px);
-  padding-left: 2rem;
-}
-
-/* Remove external link icons */
+/* Hide external link icons in navbar */
 .navbar__link[href*="://"]::after {
   display: none !important;
-}
-
-/* Style the navbar links */
-.navbar__item .navbar__link {
-  padding: 0.5rem 1rem;
-  margin: 0 0.5rem;
-  border-radius: 0.25rem;
-  transition: all 0.2s ease;
-}
-
-.navbar__item .navbar__link:hover {
-  background-color: var(--ifm-menu-color-background-hover);
-  text-decoration: none;
-}
-
-/* Custom sidebar footer links */
-.custom-sidebar-links {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  width: var(--doc-sidebar-width);
-  padding: 0 1rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  background-color: var(--ifm-background-color);
-  z-index: 10;
-}
-
-.custom-sidebar-links a {
-  display: block;
-  padding: 0.5rem 0;
-  color: var(--ifm-font-color-base);
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 400;
-  border-radius: 0.25rem;
-  transition: all 0.2s ease;
-}
-
-.custom-sidebar-links a:hover {
-  background-color: var(--ifm-menu-color-background-hover);
-  text-decoration: none;
-}
-
-/* Hide external link icons */
-.custom-sidebar-links a::after {
-  display: none !important;
-}
-
-/* Hide on mobile */
-@media (max-width: 996px) {
-  .custom-sidebar-links {
-    display: none;
-  }
-}
-
-/* Multisig table link styling */
-.multisig-token-link {
-  color: blue !important;
-  text-decoration: none;
-}
-
-.multisig-token-link:hover {
-  text-decoration: underline;
-}
-
-.multisig-revenue-link {
-  color: green !important;
-  text-decoration: none;
-}
-
-.multisig-revenue-link:hover {
-  text-decoration: underline;
 }

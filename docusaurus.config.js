@@ -8,7 +8,7 @@ const darkCodeTheme = themes.dracula;
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Send Documentation',
-  tagline: 'Your comprehensive guide to the Send ecosystem',
+  tagline: 'Your comprehensive guide to Send',
   favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
