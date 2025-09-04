@@ -10,8 +10,7 @@ Comprehensive information about the Send ecosystem, token, and platform.
 
 - **Welcome**: Introduction to Send, mission, and team
 - **Send Token**: $SEND token information and tokenomics  
-- **Features**: Platform features and capabilities
-- **Finance**: Financial details and business model
+- **Products**: Ecosystem products and features
+- **Finance**: Financial details and business models
 - **Miscellaneous**: Roadmap, metrics, and resources
-- **Links**: Official Send channels
 - **Legal**: Terms, privacy, and legal information
