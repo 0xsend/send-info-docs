@@ -17,7 +17,7 @@ $SEND is an ERC-20 token that powers the Send ecosystem.
 | Type | Amount | Link |
 |------|--------|------|
 | **Total Supply** | 1 Billion | [View Live Data](https://supply.send.it/total) |
-| **Circulating Supply** | [Live Data](https://supply.send.it/circulating) | [View Live Data](https://supply.send.it/circulating) |
+| **Circulating Supply** | | [View Live Data](https://supply.send.it/circulating) |
 
 ## Market Data & Charts
 
