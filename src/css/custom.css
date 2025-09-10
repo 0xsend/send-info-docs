@@ -257,3 +257,36 @@ footer.footer {
 .navbar__link[href*="://"]::after {
   display: none !important;
 }
+
+/* Multisig table link styling */
+.multisig-token-link {
+  color: blue !important;
+  text-decoration: none;
+}
+
+.multisig-token-link:hover {
+  text-decoration: underline;
+}
+
+.multisig-revenue-link {
+  color: green !important;
+  text-decoration: none;
+}
+
+.multisig-revenue-link:hover {
+  text-decoration: underline;
+}
+
+/* Roadmap working on section - theme-aware styling */
+.roadmap-working-section {
+  background-color: var(--ifm-color-emphasis-100);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .roadmap-working-section {
+  background-color: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-emphasis-300);
+}
