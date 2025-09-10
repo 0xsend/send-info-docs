@@ -8,9 +8,7 @@ sidebar_position: 5
 
 Comprehensive brand resources and design assets for Send.
 
-## Brand Guidelines
-
-<a href="https://www.figma.com/proto/T944OuIGQWaTTUpWgbbGP0/-send-Brand-Guidelines--Community-?node-id=1-2923&p=f&t=V7caQ89XjZpk2TvP-1&scaling=contain&content-scaling=fixed&page-id=0%3A1" class="multisig-token-link" target="_blank">Brand Guidelines</a>
+## <a href="https://www.figma.com/proto/T944OuIGQWaTTUpWgbbGP0/-send-Brand-Guidelines--Community-?node-id=1-2923&p=f&t=V7caQ89XjZpk2TvP-1&scaling=contain&content-scaling=fixed&page-id=0%3A1" class="multisig-token-link" target="_blank">Brand Guidelines</a>
 
 Official brand guidelines including logo usage, color palette, typography, and visual identity standards.
 

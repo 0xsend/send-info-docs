@@ -50,24 +50,24 @@ const sidebars = {
         },
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Canton Wallet',
-    //   collapsible: true,
-    //   collapsed: true,
-    //   items: [
-    //     'canton-wallet/canton-wallet-overview',
-    //   ],
-    // },
-    // {
-    //   type: 'category',
-    //   label: 'Dolar Stablecoin',
-    //   collapsible: true,
-    //   collapsed: true,
-    //   items: [
-    //     'dolar-stablecoin/dolar-stablecoin-overview',
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'Canton Wallet',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'canton-wallet/canton-wallet-overview',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'CUSD Stablecoin',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'cusd-stablecoin/cusd-stablecoin-overview',
+      ],
+    },
     {
       type: 'category',
       label: 'Finance',
