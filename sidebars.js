@@ -7,9 +7,8 @@ const sidebars = {
       collapsible: true,
       collapsed: false,
       items: [
-        'welcome/what-is-send',
-        'welcome/why-send',
-        'welcome/the-problem',
+        'welcome/send-overview',
+        'welcome/problem-statement',
         'welcome/mission-vision-values',
         'welcome/team',
         'welcome/contact',
@@ -21,7 +20,7 @@ const sidebars = {
       collapsible: true,
       collapsed: true,
       items: [
-        'send-token/what-is-send-token',
+        'send-token/send-token-overview',
         'send-token/tokenomics',
         'send-token/bridge',
         'send-token/upgrade',
@@ -29,11 +28,11 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Send App',
+      label: 'Send Mobile Apps',
       collapsible: true,
       collapsed: true,
       items: [
-        'send-app/send-app-overview',
+        'send-mobile-apps/send-mobile-apps-overview',
         {
           type: 'category',
           label: 'Features',

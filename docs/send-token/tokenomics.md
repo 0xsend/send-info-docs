@@ -1,6 +1,6 @@
 ---
 id: tokenomics
-title: $SEND Tokenomics
+title: Tokenomics
 sidebar_position: 2
 ---
 

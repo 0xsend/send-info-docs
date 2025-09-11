@@ -8,22 +8,22 @@ sidebar_position: 5
 
 ## Leadership
 
-### **Allen Eubank - Founder & CTO**
+### **Allen Eubank - Founding CTO**
 
-### **Ethen Eric - Founder & CEO**
+### **Ethen Eric - Founding CEO**
 Oversees all things finance, tokenomics, and product. Passionate about decentralized finance and making money more accessible.
 
 ### **Bill Barth - CFO**
 Experienced Business Finance Professional. Skilled in Financial Analysis, Investment Strategies, Negotiation, Business Planning, Operations Management, Value Stream Mapping, and Pricing Strategy. Strong Financial professional with a Master of Business Administration (MBA) from Loyola Marymount University, College of Business Administration.
 
-### **Erick Ho - Strategy**
+### **Erick Ho - Head of Strategy**
 
-### **Xino - Africa Lead**
-A soon-to-be legal practitioner with a firm interest in corporate legal practice, virtual assets, insurance and regulatory compliance.
+### **Xino Zee- Africa Lead**
+A soon-to-be legal practitioner with a firm interest in corporate legal practice, digital assets, insurance and regulatory compliance.
 
 ## Engineering
 
-### **Beezy - Founder, Software Architect & DevOps Automation Expert**
+### **Beezy - Founding Engineer, Software Architect & DevOps Automation Expert**
 Brandon Young is a seasoned Software Architect with over 15 years of experience in enterprise healthcare. He excels as a DevOps engineer and Web3 expert, specializing in deploying blockchain solutions, staking, and automating processes across diverse networks, alongside full-stack development.
 
 ### **Victor Ginelli - Engineering Full Stack**
@@ -36,7 +36,7 @@ Alexander Girardet is a software engineer turned vibe marketer. He specialises i
 
 ## Design
 
-### **Rit Sriv - Founder & Designer**
+### **Rit Sriv - Founding Designer**
 Product designer with a thing for clean systems, bad puns, and ideas that don't try too hard. I like turning complex concepts into visuals that feel obvious in hindsight. Most of my work lives somewhere between "why didn't anyone do this before?" and "this is kind of stupid, but I love it."
 
 ### **Gustas - Designer**

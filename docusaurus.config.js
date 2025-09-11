@@ -67,6 +67,11 @@ const config = {
             href: 'https://send.app',
             position: 'left',
           },
+          {
+            label: 'Canton Wallet by Send',
+            href: 'https://cantonwallet.com',
+            position: 'left',
+          },
         ],
         hideOnScroll: false,
       },

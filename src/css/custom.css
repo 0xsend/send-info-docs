@@ -253,9 +253,33 @@ footer.footer {
   }
 }
 
-/* Hide external link icons in navbar */
-.navbar__link[href*="://"]::after {
+/* Force hide all external link icons */
+.navbar__item .navbar__link[href^="http"]::after,
+.navbar__item .navbar__link[href^="https://"]::after,
+.navbar .navbar__link::after,
+.navbar__link[href*="://"]::after,
+.footer__link-item[href*="://"]::after,
+.footer__links a[href*="://"]::after,
+a[href*="://"]::after,
+[class*="iconExternalLink"] {
   display: none !important;
+  content: "" !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Reduce space between breadcrumbs and page header */
+.theme-doc-breadcrumbs {
+  margin-bottom: 0.5rem;
+}
+
+.markdown h1:first-child {
+  margin-top: 0.5rem;
+}
+
+/* Adjust overall content top spacing */
+.theme-doc-markdown {
+  padding-top: 0;
 }
 
 /* Multisig table link styling */

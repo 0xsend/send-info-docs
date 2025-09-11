@@ -1,6 +1,6 @@
 ---
 id: cusd-stablecoin-overview
-title: CUSD Stablecoin Overview
+title: Overview
 sidebar_position: 1
 ---
 
@@ -8,7 +8,8 @@ sidebar_position: 1
 
 **CUSD ($CUSD) - Privacy-Native Stablecoin**
 
-CUSD is redefining what a stablecoin can be: private, programmable, and built for real-world use.
+*CUSD is redefining what a stablecoin can be: private, programmable, and built for real-world use.*
+
 
 ## Executive Summary
 

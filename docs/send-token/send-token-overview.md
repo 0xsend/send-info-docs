@@ -1,10 +1,10 @@
 ---
-id: what-is-send-token
-title: What is Send Token
+id: send-token-overview
+title: Overview
 sidebar_position: 1
 ---
 
-# What is Send Token
+# Send Token Overview
 
 $SEND is an ERC-20 token that powers the Send ecosystem.
 

@@ -6,7 +6,7 @@ sidebar_position: 6
 
 # Revenue
 
-## Send App
+## Send Mobile Apps
 
 | Dates | Sendtags | Trades | Transactions | Total |
 |-------|----------|--------|--------------|-------|
