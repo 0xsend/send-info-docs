@@ -12,6 +12,29 @@ Comprehensive brand resources and design assets for Send.
 
 Official brand guidelines including logo usage, color palette, typography, and visual identity standards.
 
+## Brand Assets
+
+### Send
+
+| Asset Preview | Asset Type | PNG | SVG |
+|---------------|------------|-----|-----|
+| Coming Soon | Send Brandmark | Coming Soon | Coming Soon |
+| Coming Soon | Send Wordmark | Coming Soon | Coming Soon |
+
+### Canton Wallet
+
+| Asset Preview | Asset Type | PNG | SVG |
+|---------------|------------|-----|-----|
+| Coming Soon | Canton Wallet Brandmark | Coming Soon | Coming Soon |
+| Coming Soon | Canton Wallet Wordmark | Coming Soon | Coming Soon |
+
+### CUSD
+
+| Asset Preview | Asset Type | PNG | SVG |
+|---------------|------------|-----|-----|
+| <img src="/img/CUSDbrandmark.svg" alt="CUSD Brandmark" width="80" height="80" /> | CUSD Brandmark | Coming Soon | <a href="/img/CUSDbrandmark.svg" class="multisig-revenue-link" download>Download SVG</a> |
+| Coming Soon | CUSD Wordmark | Coming Soon | Coming Soon |
+
 ## Design Resources
 
 | Resource | Description |

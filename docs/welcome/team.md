@@ -17,6 +17,7 @@ Oversees all things finance, tokenomics, and product. Passionate about decentral
 Experienced Business Finance Professional. Skilled in Financial Analysis, Investment Strategies, Negotiation, Business Planning, Operations Management, Value Stream Mapping, and Pricing Strategy. Strong Financial professional with a Master of Business Administration (MBA) from Loyola Marymount University, College of Business Administration.
 
 ### **Erick Ho - Head of Strategy**
+Erick is a serial entrepreneur in both consumer and infrastructure startups. He cofounded multiple blockchain infrastructure startups, Nodies and Function. Previously, he served as a Senior Software Engineer at Coinbase and advised seed to Series A startups as a Solutions Architect at Amazon Web Services. He is currently an investor and advisor to Send and Mamo  (edited) 
 
 ### **Xino Zee- Africa Lead**
 A soon-to-be legal practitioner with a firm interest in corporate legal practice, digital assets, insurance and regulatory compliance.
