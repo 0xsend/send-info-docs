@@ -6,18 +6,20 @@ sidebar_position: 1
 
 # Send Token Overview
 
-$SEND is an ERC-20 token that powers the Send ecosystem.
+$SEND is an ERC-20 currently live and trading on the Base network. 
 
 ## Token Details
 
-**Contract Address:** [`0xEab49138BA2Ea6dd776220fE26b7b8E446638956`](https://basescan.org/token/0xeab49138ba2ea6dd776220fe26b7b8e446638956)
+| Network | Contract Address | Explorer |
+|---------|------------------|----------|
+| Base | `0xEab49138BA2Ea6dd776220fE26b7b8E446638956` | <a href="https://basescan.org/token/0xeab49138ba2ea6dd776220fe26b7b8e446638956" class="multisig-token-link" target="_blank">View on BaseScan</a> |
 
 ## Supply Information
 
 | Type | Amount | Link |
 |------|--------|------|
 | **Total Supply** | 1 Billion | [View Live Data](https://supply.send.it/total) |
-| **Circulating Supply** | | [View Live Data](https://supply.send.it/circulating) |
+| **Circulating Supply** | 315m (9/7/25) | [View Live Data](https://supply.send.it/circulating) |
 
 ## Market Data & Charts
 
@@ -26,8 +28,17 @@ $SEND is an ERC-20 token that powers the Send ecosystem.
 | **CoinGecko** | Ranking & Data | [View on CoinGecko](https://www.coingecko.com/en/coins/send-token) |
 | **DexScreener** | Live Chart | [View Chart](https://dexscreener.com/base/0x69bc1d350fe13f499c6aeded2c5ea9471b2a599a) |
 
+## Trading
+
+| Exchange | Network | Link |
+|------|--------|------|
+| **Send.app** | Base | [Buy](https://send.app) |
+| **Aerodrome** | Base | [Buy](https://aerodrome.finance/swap?from=0x833589fcd6edb6e08f4c7c32d4f71b54bda02913&to=0xeab49138ba2ea6dd776220fe26b7b8e446638956&chain0=8453&chain1=8453) |
+| **Temple** | Canton | Coming Soon |
+| **CantonSwap** | Canton | Coming Soon |
+
 ---
 
-:::info Token Network
-$SEND operates on the Base network, providing fast and low-cost transactions for all ecosystem interactions.
+:::info Multi-Network Trading
+$SEND is currently trading live on Base network and will begin trading on Canton Network soon.
 :::
