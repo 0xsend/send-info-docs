@@ -12,7 +12,7 @@ const config = {
   favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://info.send.it',
   baseUrl: '/',
 
   // GitHub pages deployment config
