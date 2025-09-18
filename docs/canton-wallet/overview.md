@@ -6,33 +6,27 @@ sidebar_position: 1
 
 # Canton Wallet Overview
 
-CantonWallet.com is a secure, private wallet application designed specifically for Canton Network that enables users to send and receive Canton Coin with external signing capabilities using passkeys (WebAuthn).
+We're building a crypto wallet that lets you log in with your face or fingerprint instead of seed phrases. It runs on Canton Network, so your transactions stay private.
 
-## Product Vision
+## What It Does
 
-Create the simplest and most secure way for crypto investors to hold and manage their Canton Coin, leveraging Canton Network's privacy-first architecture and modern WebAuthn standards for keyless authentication.
+**Input:** Your biometric authentication (face, fingerprint, or hardware key)  
+**Output:** Send and receive Canton Coin privately  
+**How:** WebAuthn passkeys replace seed phrases, Canton Network hides transaction details
 
-## Key Features
+## Why This Matters
 
-### Privacy-First Design
-Leverages Canton Network's sub-transaction privacy capabilities to ensure user transactions remain confidential while maintaining network integrity.
+Seed phrases are terrible UX and a massive security risk. Most people either lose them or store them insecurely. Meanwhile, every transaction on public blockchains is visible forever.
 
-### Keyless Security
-WebAuthn passkeys eliminate traditional seed phrase vulnerabilities, providing institutional-grade security through biometric authentication and hardware security keys.
+Canton Wallet fixes both problems: no seed phrases to lose, no public transaction history to expose your financial activity.
 
-### Simplified User Experience
-Familiar wallet interface enhanced with cutting-edge security features, making advanced privacy accessible to everyday users.
+## What You Get
 
-### Gateway to Canton Ecosystem
-Serves as the primary entry point to the broader Canton Network ecosystem, enabling seamless interaction with privacy-preserving applications and services.
-
-## Architecture Highlights
-
-* **Native Canton Network Integration**: Built specifically for Canton's unique privacy and compliance features
-* **WebAuthn Standards**: Implements modern authentication protocols for passwordless, keyless security
-* **Enterprise-Grade Privacy**: Sub-transaction level privacy controls for institutional and individual users
-* **Streamlined Onboarding**: Simplified user experience without compromising security standards
+- **No seed phrases:** Login with biometrics like you do with your banking app
+- **Private transactions:** Canton Network keeps amounts and recipients confidential
+- **Institutional security:** Same WebAuthn standards banks and enterprises use
+- **Canton ecosystem access:** Gateway to privacy-first DeFi applications
 
 ## Status
 
-Canton Wallet is currently in development. Stay tuned for updates on release timeline and beta access.
+Going live September 28th, 2025. Visit [CantonWallet.com](https://cantonwallet.com) for early access.
