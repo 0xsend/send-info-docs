@@ -2,6 +2,8 @@
 id: canton-wallet-overview
 title: Overview
 sidebar_position: 1
+description: Crypto wallet with biometric login and private transactions on Canton Network.
+image: /img/canton-wallet-og.png
 ---
 
 # Canton Wallet Overview
