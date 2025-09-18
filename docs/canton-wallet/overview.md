@@ -33,4 +33,4 @@ Canton Wallet fixes both problems: no seed phrases to lose, no public transactio
 
 ## Status
 
-Going live September 28th, 2025. Visit [CantonWallet.com](https://cantonwallet.com) for early access.
+Going live September 28th, 2025. Visit [CantonWallet.com](https://cantonwallet.com) for access.
