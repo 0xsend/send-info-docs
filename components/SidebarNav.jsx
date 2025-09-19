@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { buildSidebarTree } from '../lib/md';
 
 const sectionIcons = {
   'welcome': (
@@ -83,8 +82,8 @@ const sectionLabels = {
   'legal': 'Legal'
 };
 
-export default function SidebarNav() {
-  const tree = buildSidebarTree();
+export default function SidebarNav({ treeData }) {
+  const tree = treeData;
   const sections = Object.keys(tree);
   const pathname = usePathname();
   const [expandedSections, setExpandedSections] = useState(['welcome']);
