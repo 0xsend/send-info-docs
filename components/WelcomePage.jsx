@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import WelcomeHero from './WelcomeHero';
 
-const navigationCards = [
+export const navigationCards = [
   {
     id: 'send-overview',
     title: 'Send Overview',
