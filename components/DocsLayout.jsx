@@ -35,6 +35,10 @@ export default function DocsLayout({ children, treeData }) {
   
   const sectionLabel = sectionLabels[section] || section.replace(/-/g, ' ');
   const pageLabel = pageLabels[page] || page.replace(/-/g, ' ');
+  const currentId = `${section}/${page}`;
+  const currentItem = (treeData && treeData[section]) ? treeData[section].find((it) => it.id === currentId) : null;
+  const currentPageTitle = currentItem?.title || pageLabel;
+  const sectionDefault = (treeData && treeData[section] && treeData[section][0]) ? treeData[section][0].id : null;
 
   return (
     <div className="docs-shell">
@@ -72,7 +76,18 @@ export default function DocsLayout({ children, treeData }) {
               <div className="divider"></div>
             </>
           ) : (
-            <div className="divider"></div>
+            <>
+              <div className="breadcrumb-row">
+                {sectionDefault ? (
+                  <Link href={`/docs/${sectionDefault}`} className="breadcrumb-link">{sectionLabel}</Link>
+                ) : (
+                  <span className="breadcrumb-link">{sectionLabel}</span>
+                )}
+                <span className="breadcrumb-separator">›</span>
+                <span className="breadcrumb-current">{currentPageTitle}</span>
+              </div>
+              <div className="divider"></div>
+            </>
           )}
           <div className="article-container">
             {children}
