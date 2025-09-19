@@ -176,17 +176,6 @@ export default function SidebarNav({ treeData }) {
           );
         })}
       </ul>
-
-      <div className="sidebar-footer">
-        <div className="sidebar-footer-title">Links</div>
-        <ul className="sidebar-footer-list">
-          <li><a href="https://github.com/0xsend/sendapp" target="_blank" rel="noopener noreferrer">Github</a></li>
-          <li><a href="https://x.com/send" target="_blank" rel="noopener noreferrer">X Profile</a></li>
-          <li><a href="https://t.me/send_app" target="_blank" rel="noopener noreferrer">Telegram</a></li>
-          <li><a href="https://aerodrome.finance/swap?from=0x833589fcd6edb6e08f4c7c32d4f71b54bda02913&to=0xeab49138ba2ea6dd776220fe26b7b8e446638956&chain0=8453&chain1=8453" target="_blank" rel="noopener noreferrer">Buy $SEND</a></li>
-          <li><a href="https://support.send.app/en/" target="_blank" rel="noopener noreferrer">Support</a></li>
-        </ul>
-      </div>
     </nav>
   );
 }
