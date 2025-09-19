@@ -57,7 +57,8 @@ body {
   gap: 32px;
   position: fixed;
   height: 100vh;
-  overflow-y: hidden;
+  overflow-y: auto; /* only shows scroll when content exceeds viewport */
+  overscroll-behavior: contain;
 }
 
 .content-panel {
@@ -350,6 +351,10 @@ body {
     margin-left: 0;
   }
 
+  .footer {
+    margin-left: 0; /* full width on mobile */
+  }
+
   .main-content {
     padding: 40px 20px;
   }
@@ -440,6 +445,7 @@ body {
 .footer {
   background: transparent;
   border-top: 1px solid var(--Border-Color);
+  margin-left: 320px; /* avoid being covered by fixed sidebar */
 }
 
 .footer-container {
