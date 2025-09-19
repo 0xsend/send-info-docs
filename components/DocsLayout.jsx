@@ -44,7 +44,7 @@ export default function DocsLayout({ children, treeData }) {
           <div className="welcome-header">
             <div className="welcome-title">{sectionLabel}</div>
           </div>
-          {section === 'welcome' && (
+          {pathname === '/' ? (
             <>
               <WelcomeHero />
               <div className="navigation-grid">
@@ -71,8 +71,9 @@ export default function DocsLayout({ children, treeData }) {
               </div>
               <div className="divider"></div>
             </>
+          ) : (
+            <div className="divider"></div>
           )}
-          {section !== 'welcome' && <div className="divider"></div>}
           <div className="article-container">
             {children}
           </div>
