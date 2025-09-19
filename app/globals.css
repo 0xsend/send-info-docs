@@ -67,6 +67,10 @@
   margin: 0.2rem 0;
 }
 
+.not-found-message {
+  padding: 2rem;
+}
+
 @media (max-width: 996px) {
   .docs-shell {
     display: block;
