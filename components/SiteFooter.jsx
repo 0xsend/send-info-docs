@@ -3,7 +3,6 @@ export default function SiteFooter() {
     <footer className="footer footer--dark">
       <div className="container footer-container">
         <div className="footer__links">
-          <div className="footer__link-item footer-section-title">Links</div>
           <ul className="footer-links-list">
             <li><a className="footer__link-item" href="https://github.com/0xsend/sendapp">Github</a></li>
             <li><a className="footer__link-item" href="https://x.com/send">X Profile</a></li>

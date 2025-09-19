@@ -1,16 +1,18 @@
-import WelcomePage from '../components/WelcomePage';
-import SidebarNav from '../components/SidebarNav';
-import { buildSidebarTree } from '../lib/md';
+import DocsLayout from '../components/DocsLayout';
+import { readDocBySlug, renderMarkdownToHtml, buildSidebarTree } from '../lib/md';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const doc = readDocBySlug('welcome/send-overview');
+  const html = doc ? await renderMarkdownToHtml(doc.content) : '';
   const sidebarTree = buildSidebarTree();
 
   return (
-    <div className="docs-shell">
-      <SidebarNav treeData={sidebarTree} />
-      <div className="content-panel">
-        <WelcomePage />
-      </div>
-    </div>
+    <DocsLayout treeData={sidebarTree}>
+      {doc ? (
+        <article className="markdown" dangerouslySetInnerHTML={{ __html: html }} />
+      ) : (
+        <div className="not-found-message">Not found</div>
+      )}
+    </DocsLayout>
   );
 }
