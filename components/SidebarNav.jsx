@@ -184,7 +184,7 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
           const isActive = isActiveSection(section);
           
           return (
-            <li key={section} className="sidebar-section">
+            <li key={section} className={`sidebar-section ${isExpanded ? 'expanded' : ''}`}>
               <div 
                 className={`sidebar-section-header ${isActive ? 'active' : ''}`}
                 onClick={() => toggleSection(section)}
