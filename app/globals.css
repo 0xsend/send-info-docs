@@ -81,6 +81,10 @@ body {
   position: relative;
 }
 
+/* Default hidden mobile header; shown only in media query */
+.mobile-header { display: none; }
+.brand-link { position: relative; display: inline-flex; align-items: center; }
+
 .docs-badge {
   display: flex;
   width: 48px;
@@ -100,6 +104,7 @@ body {
   top: -8px;
   left: 64px;
   background: var(--Content-Light);
+  pointer-events: none;
 }
 
 /* Sidebar Navigation */
