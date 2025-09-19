@@ -85,7 +85,7 @@ const sectionLabels = {
   'legal': 'Legal'
 };
 
-export default function SidebarNav({ treeData }) {
+export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) {
   const tree = treeData;
   const pathname = usePathname();
 
@@ -166,9 +166,25 @@ export default function SidebarNav({ treeData }) {
     return pathname === `/docs/${itemId}`;
   };
 
+  const handleLinkClick = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <nav className="sidebar-panel">
-      <SiteHeader />
+    <nav className={`sidebar-panel ${isMobileOpen ? 'open' : ''}`}>
+      <div className="sidebar-mobile-controls">
+        <SiteHeader />
+        <button
+          type="button"
+          className="sidebar-close"
+          onClick={onClose}
+          aria-label="Close navigation"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
       <ul className="sidebar-list">
         {sections.map((section) => {
           const isExpanded = expandedSections.includes(section);
@@ -208,6 +224,7 @@ export default function SidebarNav({ treeData }) {
                       <Link
                         href={`/docs/${item.id}`}
                         className={`sidebar-link ${isActiveLink(item.id) ? 'active' : ''}`}
+                        onClick={handleLinkClick}
                       >
                         {item.title}
                       </Link>
@@ -242,6 +259,7 @@ export default function SidebarNav({ treeData }) {
                             <Link
                               href={`/docs/${item.id}`}
                               className={`sidebar-link ${isActiveLink(item.id) ? 'active' : ''}`}
+                              onClick={handleLinkClick}
                             >
                               {item.title}
                             </Link>

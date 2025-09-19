@@ -2,12 +2,15 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import SidebarNav from './SidebarNav';
 import WelcomeHero from './WelcomeHero';
 import { navigationCards } from './WelcomePage';
+import SiteHeader from './SiteHeader';
 
 export default function DocsLayout({ children, treeData }) {
   const pathname = usePathname();
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   
   // Extract page info from pathname
   const pathParts = pathname.split('/').filter(Boolean);
@@ -40,11 +43,40 @@ export default function DocsLayout({ children, treeData }) {
   const currentPageTitle = currentItem?.title || pageLabel;
   const sectionDefault = (treeData && treeData[section] && treeData[section][0]) ? treeData[section][0].id : null;
 
+  useEffect(() => {
+    setIsMobileNavOpen(false);
+  }, [pathname]);
+
   return (
-    <div className="docs-shell">
-      <SidebarNav treeData={treeData} />
+    <div className={`docs-shell ${isMobileNavOpen ? 'mobile-nav-open' : ''}`}>
+      <SidebarNav
+        treeData={treeData}
+        isMobileOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+      />
+      {isMobileNavOpen && (
+        <button
+          type="button"
+          className="mobile-nav-overlay"
+          aria-label="Close menu"
+          onClick={() => setIsMobileNavOpen(false)}
+        />
+      )}
       <div className="content-panel">
         <div className="main-content">
+          <div className="mobile-header">
+            <SiteHeader />
+            <button
+              type="button"
+              className="mobile-nav-toggle"
+              aria-label="Open menu"
+              onClick={() => setIsMobileNavOpen(true)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
           {pathname === '/' && (
             <div className="welcome-header">
               <div className="welcome-title">{sectionLabel}</div>
