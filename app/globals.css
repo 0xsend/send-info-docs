@@ -745,10 +745,10 @@ body {
 
 /* Markdown images sizing */
 .markdown img {
-  max-width: 100%;
+  max-width: min(100%, 560px);
   height: auto;
   display: block;
-  margin: 16px 0;
+  margin: 16px auto;
 }
 
 .markdown ul {
