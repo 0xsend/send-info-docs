@@ -1,0 +1,25 @@
+@import '../src/css/custom.css';
+
+/* Layout wrappers for Next.js docs pages, reusing existing variables/classes */
+
+.docs-shell {
+  display: flex;
+  gap: 0;
+}
+
+.sidebar-panel {
+  width: 300px;
+}
+
+.content-panel {
+  flex: 1;
+}
+
+@media (max-width: 996px) {
+  .docs-shell {
+    display: block;
+  }
+  .sidebar-panel {
+    width: 100%;
+  }
+}
