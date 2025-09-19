@@ -226,8 +226,9 @@ body {
   padding: 45.685px;
   align-items: center;
   gap: 5.711px;
+  aspect-ratio: 3/1;
   border-radius: 14.262px;
-  background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
+  background: url('https://api.builder.io/api/v1/image/assets/TEMP/52bda10082008564d69327145ed24f4a31df3131?width=1920') lightgray 0px -204.866px / 120.867% 228.041% no-repeat;
   background-size: cover;
   background-position: center;
   margin-bottom: 40px;
@@ -242,11 +243,15 @@ body {
 }
 
 .hero-title {
-  color: var(--Color-Neutral-White);
+  color: #FFF;
+  font-feature-settings: 'ss02' on, 'ss03' on, 'ss04' on, 'ss05' on, 'ss07' on;
+  font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 36.548px;
+  font-style: normal;
   font-weight: 600;
   line-height: 100%;
   letter-spacing: -1.096px;
+  position: relative;
 }
 
 .hero-icon {
@@ -257,8 +262,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  aspect-ratio: 65.81/65.81;
   border-radius: 18.274px;
-  background: var(--Color-Primary-Green);
+  background: #40FB50;
+  position: relative;
 }
 
 .divider {
