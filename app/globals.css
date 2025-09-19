@@ -185,7 +185,7 @@ body {
 
 .sidebar-sublist {
   list-style: none;
-  padding: 0 0 12px 52px; /* 16 (pad) + 20 (icon) + 16 (gap) */
+  padding: 0 0 12px 36px; /* 36 + link's 16px left padding = 52px to align with section title */
   margin: 0;
   display: none;
 }
