@@ -45,9 +45,11 @@ export default function DocsLayout({ children, treeData }) {
       <SidebarNav treeData={treeData} />
       <div className="content-panel">
         <div className="main-content">
-          <div className="welcome-header">
-            <div className="welcome-title">{sectionLabel}</div>
-          </div>
+          {pathname === '/' && (
+            <div className="welcome-header">
+              <div className="welcome-title">{sectionLabel}</div>
+            </div>
+          )}
           {pathname === '/' ? (
             <>
               <WelcomeHero />
