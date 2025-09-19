@@ -359,6 +359,7 @@ body {
 
   .content-panel {
     margin-left: 0;
+    width: 100%;
   }
 
   .footer {
