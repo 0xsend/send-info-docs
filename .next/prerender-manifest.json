@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/docs/canton-wallet/overview":{},"/docs/cusd-stablecoin/overview":{},"/docs/features/invest":{},"/docs/features/passkeys":{},"/docs/features/referrals":{},"/docs/features/rewards":{},"/docs/features/savings":{},"/docs/features/sendtags":{},"/docs/finance/business-models":{},"/docs/finance/funding-rounds":{},"/docs/finance/multisigs":{},"/docs/finance/revenue":{},"/docs/finance/token-emissions":{},"/docs/finance/treasury":{},"/docs/legal/affiliate-marketing-disclaimer":{},"/docs/legal/disclaimer":{},"/docs/legal/licenses":{},"/docs/legal/privacy-policy":{},"/docs/legal/terms-of-service":{},"/docs/links/buy-send":{},"/docs/links/github":{},"/docs/links/support":{},"/docs/links/telegram":{},"/docs/links/x-profile":{},"/docs/miscellaneous/brand-links-assets":{},"/docs/miscellaneous/intellectual-property":{},"/docs/miscellaneous/roadmap":{},"/docs/miscellaneous/send-contract-addresses":{},"/docs/miscellaneous/send-metrics":{},"/docs/send-mobile-apps/overview":{},"/docs/send-token/bridge":{},"/docs/send-token/send-token-overview":{},"/docs/send-token/tokenomics":{},"/docs/send-token/upgrade":{},"/docs/welcome/contact":{},"/docs/welcome/mission-vision-values":{},"/docs/welcome/problem-statement":{},"/docs/welcome/send-overview":{},"/docs/welcome/team":{}},"dynamicRoutes":{"/docs/[...slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/docs/[...slug]","routeRegex":"^\\/docs\\/(.+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"4a2b7f972f9e39b83276ff5325c96aa5","previewModeSigningKey":"8e386de0c47ede8f9b646a1eeab120a6bbeb2cbe17d2ba6513ae46c4518324c6","previewModeEncryptionKey":"9efed9e66723fce84cee37f04a4012e3730ae17f74997e2bbf1dbe3434b5cc3e"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "34f621776dd12f7fd273e16358f7b487",
+    "previewModeSigningKey": "c9eabb0b938836135444bcb2ab87aa99889cf30af1b6c54bc39ba77e089a6b3e",
+    "previewModeEncryptionKey": "5f1b6ce63b0b764c7466f6728d7b0289d2c713d83630ac86e462e40b8f1e8216"
+  }
+}
