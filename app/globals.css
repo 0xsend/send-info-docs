@@ -305,10 +305,11 @@ body {
 .breadcrumb-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: var(--Text-Secondary);
-  font-size: 12px;
-  margin: 0 0 12px 0;
+  font-size: 36px;
+  line-height: 1.1;
+  margin: 0 0 16px 0;
 }
 .breadcrumb-link {
   color: var(--Text-Secondary);
@@ -327,6 +328,13 @@ body {
 }
 .breadcrumb-current {
   color: var(--Content-Primary);
+}
+
+@media (max-width: 640px) {
+  .breadcrumb-row {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
 }
 
 /* Navigation Cards */
