@@ -53,6 +53,7 @@ export default function DocsLayout({ children, treeData }) {
           {pathname === '/' ? (
             <>
               <WelcomeHero />
+              <div className="divider"></div>
               <div className="navigation-grid">
                 {navigationCards.map((card) => (
                   <Link key={card.id} href={card.href} className="nav-card">
@@ -75,7 +76,6 @@ export default function DocsLayout({ children, treeData }) {
                   </Link>
                 ))}
               </div>
-              <div className="divider"></div>
             </>
           ) : (
             <>
