@@ -94,7 +94,6 @@ export default function SidebarNav({ treeData }) {
     'welcome',
     'send-token',
     'send-mobile-apps',
-    'features',
     'canton-wallet',
     'cusd-stablecoin',
     'finance',
@@ -106,6 +105,7 @@ export default function SidebarNav({ treeData }) {
   const sections = desiredOrder.filter((key) => tree[key]);
 
   const [expandedSections, setExpandedSections] = useState(['welcome']);
+  const [featuresExpanded, setFeaturesExpanded] = useState(false);
 
   const toggleSection = (section) => {
     setExpandedSections(prev => 
@@ -116,7 +116,8 @@ export default function SidebarNav({ treeData }) {
   };
 
   const isActiveSection = (section) => {
-    return section === 'welcome' && (pathname === '/' || pathname.startsWith('/docs/welcome'));
+    if (section === 'welcome') return pathname === '/' || pathname.startsWith('/docs/welcome');
+    return pathname.startsWith(`/docs/${section}`);
   };
 
   const isActiveLink = (itemId) => {
@@ -162,14 +163,51 @@ export default function SidebarNav({ treeData }) {
                 <ul className="sidebar-sublist expanded">
                   {tree[section].map((item) => (
                     <li key={item.id} className="sidebar-item">
-                      <Link 
-                        href={`/docs/${item.id}`} 
+                      <Link
+                        href={`/docs/${item.id}`}
                         className={`sidebar-link ${isActiveLink(item.id) ? 'active' : ''}`}
                       >
                         {item.title}
                       </Link>
                     </li>
                   ))}
+
+                  {section === 'send-mobile-apps' && tree['features'] && (
+                    <>
+                      <li className="sidebar-item">
+                        <button
+                          className={`sidebar-nested-toggle ${featuresExpanded ? 'expanded' : ''}`}
+                          onClick={() => setFeaturesExpanded((v) => !v)}
+                          aria-expanded={featuresExpanded}
+                          type="button"
+                        >
+                          Features
+                          <svg
+                            className={`sidebar-arrow ${featuresExpanded ? 'expanded' : ''}`}
+                            width="20"
+                            height="20"
+                            viewBox="0 0 10 7"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M5 0.9375L10 5.9375L8.9375 7L5 3.0625L1.0625 7L9.28867e-08 5.9375L5 0.9375Z" fill="#666"/>
+                          </svg>
+                        </button>
+                      </li>
+                      {featuresExpanded && (
+                        tree['features'].map((item) => (
+                          <li key={item.id} className="sidebar-item nested">
+                            <Link
+                              href={`/docs/${item.id}`}
+                              className={`sidebar-link ${isActiveLink(item.id) ? 'active' : ''}`}
+                            >
+                              {item.title}
+                            </Link>
+                          </li>
+                        ))
+                      )}
+                    </>
+                  )}
                 </ul>
               )}
             </li>
