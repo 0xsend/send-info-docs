@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation';
 import SidebarNav from './SidebarNav';
-import SiteHeader from './SiteHeader';
 
 export default function DocsLayout({ children, treeData }) {
   const pathname = usePathname();
@@ -38,7 +37,6 @@ export default function DocsLayout({ children, treeData }) {
     <div className="docs-shell">
       <SidebarNav treeData={treeData} />
       <div className="content-panel">
-        <SiteHeader />
         <div className="main-content">
           <div className="welcome-header">
             <div className="welcome-title">{sectionLabel}</div>
