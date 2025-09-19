@@ -177,8 +177,8 @@ body {
 }
 
 .sidebar-arrow {
-  width: 14px;
-  height: 14px;
+  width: 12.6px;
+  height: 12.6px;
   transition: transform 0.2s ease;
   display: none;
 }
