@@ -555,6 +555,29 @@ body {
   padding-left: 1.5em;
 }
 
+/* Table styles for markdown */
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+}
+.markdown thead th {
+  background: var(--Content-Light);
+  color: var(--Content-Primary);
+  font-weight: 600;
+}
+.markdown th,
+.markdown td {
+  border: 1px solid var(--Border-Color);
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  vertical-align: top;
+}
+.markdown tbody tr:nth-child(even) {
+  background: #FAFAFA;
+}
+
 .not-found-message {
   padding: 2rem;
   color: var(--Content-Primary);
