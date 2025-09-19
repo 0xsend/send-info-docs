@@ -1,6 +1,9 @@
+import Link from 'next/link';
+
 export default function SiteHeader() {
   return (
     <div className="header-brand">
+      <Link href="/" aria-label="Go to home" className="brand-link">
       <svg width="88" height="32" viewBox="0 0 88 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_17137_10184)">
           <path d="M0 32L9.13386 0H13.392L4.25812 32H0Z" fill="#122023"/>
@@ -15,9 +18,10 @@ export default function SiteHeader() {
           </clipPath>
         </defs>
       </svg>
-      <div className="docs-badge">
+      <div className="docs-badge bubble">
         <span>docs</span>
       </div>
+      </Link>
     </div>
   );
 }
