@@ -7,7 +7,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const slugPath = (params.slug || []).join('/');
+  const p = await params;
+  const slugPath = (p?.slug || []).join('/');
   const doc = readDocBySlug(slugPath);
   if (!doc) return { title: 'Not found' };
   const title = extractTitle(doc.content, doc.data) || slugPath.split('/').slice(-1)[0];
@@ -15,9 +16,10 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function DocPage({ params }) {
-  const slugPath = (params.slug || []).join('/');
+  const p = await params;
+  const slugPath = (p?.slug || []).join('/');
   const doc = readDocBySlug(slugPath);
-  if (!doc) return <div style={{ padding: '2rem' }}>Not found</div>;
+  if (!doc) return <div className="not-found-message">Not found</div>;
   const html = await renderMarkdownToHtml(doc.content);
   return (
     <DocsLayout>
