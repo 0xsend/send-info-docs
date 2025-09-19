@@ -280,6 +280,29 @@ body {
   max-width: 734px;
 }
 
+/* Breadcrumbs */
+.breadcrumb-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--Text-Secondary);
+  font-size: 12px;
+  margin: 0 0 12px 0;
+}
+.breadcrumb-link {
+  color: var(--Text-Secondary);
+  text-decoration: none;
+}
+.breadcrumb-link:hover {
+  color: var(--Content-Primary);
+}
+.breadcrumb-separator {
+  color: var(--Text-Secondary);
+}
+.breadcrumb-current {
+  color: var(--Content-Primary);
+}
+
 /* Navigation Cards */
 .navigation-grid {
   display: flex;
