@@ -54,10 +54,10 @@ body {
   padding: 80px 40px 40px 40px;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 32px;
   position: fixed;
   height: 100vh;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .content-panel {
@@ -74,9 +74,9 @@ body {
 /* Header */
 .header-brand {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
-  margin-bottom: 64px;
+  margin-bottom: 24px;
 }
 
 .docs-badge {
@@ -337,22 +337,23 @@ body {
   .docs-shell {
     display: block;
   }
-  
+
   .sidebar-panel {
     position: relative;
     width: 100%;
     height: auto;
     padding: 40px 20px;
+    overflow-y: visible;
   }
-  
+
   .content-panel {
     margin-left: 0;
   }
-  
+
   .main-content {
     padding: 40px 20px;
   }
-  
+
   .hero-section {
     height: 240px;
     padding: 30px;
@@ -433,6 +434,49 @@ body {
 
 .sidebar-footer-list a:hover {
   color: var(--Content-Primary);
+}
+
+/* Footer (horizontal links) */
+.footer {
+  background: transparent;
+  border-top: 1px solid var(--Border-Color);
+}
+
+.footer-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__links {
+  display: flex;
+  align-items: center;
+}
+
+.footer-links-list {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__link-item {
+  color: var(--Text-Secondary);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.footer__link-item:hover {
+  color: var(--Content-Primary);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--Text-Secondary);
 }
 
 /* Legacy compatibility for other pages */
