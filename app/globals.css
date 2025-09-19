@@ -464,6 +464,13 @@ body {
   font-size: 19px;
   line-height: 1.2;
 }
+.breadcrumb-subsection {
+  color: var(--Text-Secondary);
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 500;
+  text-transform: capitalize;
+}
 .breadcrumb-current {
   color: var(--Content-Primary);
   font-size: 19px;
@@ -763,24 +770,28 @@ body {
 
   .footer-container {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    align-items: stretch;
+    gap: 12px;
     padding: 16px 20px 28px;
   }
 
   .footer__links {
     width: 100%;
     justify-content: flex-start;
+    order: 1;
   }
 
   .footer-links-list {
-    flex-wrap: wrap;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px 12px;
+    width: 100%;
   }
 
   .footer-copy {
     width: 100%;
     text-align: left;
+    order: 2;
   }
 }
 

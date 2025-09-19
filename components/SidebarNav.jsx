@@ -142,6 +142,14 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
     prevPathRef.current = pathname;
   }, [pathname, isActiveFeature]);
 
+  useEffect(() => {
+    if (isActiveFeature) {
+      setExpandedSections((prev) => (
+        prev.includes('send-mobile-apps') ? prev : [...prev, 'send-mobile-apps']
+      ));
+    }
+  }, [isActiveFeature]);
+
   const toggleSection = (section) => {
     setExpandedSections(prev => 
       prev.includes(section) 
@@ -151,7 +159,12 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
   };
 
   const isActiveSection = (section) => {
-    if (section === 'welcome') return pathname === '/' || pathname.startsWith('/docs/welcome');
+    if (section === 'welcome') {
+      return pathname === '/' || pathname.startsWith('/docs/welcome');
+    }
+    if (section === 'send-mobile-apps') {
+      return pathname.startsWith('/docs/send-mobile-apps') || pathname.startsWith('/docs/features');
+    }
     return pathname.startsWith(`/docs/${section}`);
   };
 

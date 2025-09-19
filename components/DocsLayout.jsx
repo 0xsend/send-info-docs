@@ -17,6 +17,8 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
   const pathParts = pathname.split('/').filter(Boolean);
   const section = pathParts[1] || 'welcome';
   const page = pathParts[2] || 'send-overview';
+  const isFeaturePage = section === 'features';
+  const effectiveSection = isFeaturePage ? 'send-mobile-apps' : section;
   
   const sectionLabels = {
     'welcome': 'Welcome',
@@ -37,12 +39,14 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
     'contact': 'Contact'
   };
   
-  const sectionLabel = sectionLabels[section] || section.replace(/-/g, ' ');
+  const sectionLabel = sectionLabels[effectiveSection] || effectiveSection.replace(/-/g, ' ');
   const pageLabel = pageLabels[page] || page.replace(/-/g, ' ');
   const currentId = `${section}/${page}`;
-  const currentItem = (treeData && treeData[section]) ? treeData[section].find((it) => it.id === currentId) : null;
+  const currentSectionItems = (treeData && treeData[section]) ? treeData[section] : [];
+  const currentItem = currentSectionItems.find((it) => it.id === currentId);
   const currentPageTitle = currentItem?.title || pageLabel;
-  const sectionDefault = (treeData && treeData[section] && treeData[section][0]) ? treeData[section][0].id : null;
+  const effectiveSectionItems = (treeData && treeData[effectiveSection]) ? treeData[effectiveSection] : [];
+  const sectionDefault = effectiveSectionItems.length ? effectiveSectionItems[0].id : null;
 
   useEffect(() => {
     setIsMobileNavOpen(false);
@@ -125,6 +129,12 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
                   </Link>
                 ) : (
                   <span className="breadcrumb-link breadcrumb-section">{sectionLabel}</span>
+                )}
+                {isFeaturePage && (
+                  <>
+                    <span className="breadcrumb-separator">&gt;</span>
+                    <span className="breadcrumb-subsection">Features</span>
+                  </>
                 )}
                 <span className="breadcrumb-separator">&gt;</span>
                 <span className="breadcrumb-current">{currentPageTitle}</span>
