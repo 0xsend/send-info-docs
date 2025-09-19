@@ -154,10 +154,12 @@ body {
   width: 20px;
   height: 20px;
   transition: transform 0.2s ease;
+  display: none;
 }
 
 .sidebar-arrow.expanded {
   transform: rotate(180deg);
+  display: block;
 }
 
 .sidebar-sublist {
@@ -398,6 +400,39 @@ body {
   .hero-title {
     font-size: 24px;
   }
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--Border-Color);
+  padding-top: 16px;
+}
+
+.sidebar-footer-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--Content-Primary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.sidebar-footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-footer-list a {
+  color: var(--Text-Secondary);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.sidebar-footer-list a:hover {
+  color: var(--Content-Primary);
 }
 
 /* Legacy compatibility for other pages */
