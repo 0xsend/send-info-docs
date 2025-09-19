@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import SidebarNav from './SidebarNav';
+import WelcomeHero from './WelcomeHero';
 
 export default function DocsLayout({ children, treeData }) {
   const pathname = usePathname();
@@ -43,11 +44,11 @@ export default function DocsLayout({ children, treeData }) {
           </div>
           {section === 'welcome' && (
             <>
-              {/** Banner on Welcome docs pages */}
-              {require('./WelcomeHero') && null}
+              <WelcomeHero />
+              <div className="divider"></div>
             </>
           )}
-          {section === 'welcome' ? <div className="divider"></div> : <div className="divider"></div>}
+          {section !== 'welcome' && <div className="divider"></div>}
           <div style={{ maxWidth: '734px' }}>
             {children}
           </div>
