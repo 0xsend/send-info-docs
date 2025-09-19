@@ -1,5 +1,5 @@
 import DocsLayout from '../../../components/DocsLayout';
-import { getAllDocSlugs, readDocBySlug, renderMarkdownToHtml, extractTitle } from '../../../lib/md';
+import { getAllDocSlugs, readDocBySlug, renderMarkdownToHtml, extractTitle, buildSidebarTree } from '../../../lib/md';
 
 export async function generateStaticParams() {
   const slugs = await getAllDocSlugs();
@@ -21,9 +21,10 @@ export default async function DocPage({ params }) {
   const doc = readDocBySlug(slugPath);
   if (!doc) return <div className="not-found-message">Not found</div>;
   const html = await renderMarkdownToHtml(doc.content);
-  
+  const sidebarTree = buildSidebarTree();
+
   return (
-    <DocsLayout>
+    <DocsLayout treeData={sidebarTree}>
       <article className="markdown" dangerouslySetInnerHTML={{ __html: html }} />
     </DocsLayout>
   );
