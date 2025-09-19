@@ -414,6 +414,9 @@ body {
   .footer {
     margin-left: 0; /* full width on mobile */
   }
+  .footer-container {
+    padding: 12px 20px 24px; /* align with mobile content padding */
+  }
 
   .main-content {
     padding: 40px 20px;
@@ -511,7 +514,7 @@ body {
 .footer-container {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 12px 20px 24px;
+  padding: 12px 80px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
