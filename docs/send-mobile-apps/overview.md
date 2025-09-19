@@ -22,7 +22,7 @@ Native iOS and Android applications are currently in development, bringing optim
 - **Privacy-First Design**: Non-custodial architecture keeps you in control of your funds
 - **Passkey Security**: Secure access using your face, fingerprint, or device passcode
 - **Sendtags**: Custom usernames that replace complex wallet addresses
-- **Savings & Investments**: Earn yield on your USDC holdings
+- **Savings and Investments**: Earn yield on your USDC holdings
 - **Referral Rewards**: Earn by growing the Send ecosystem
 
 ## Getting Started

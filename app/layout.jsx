@@ -1,5 +1,4 @@
 import './globals.css';
-import SiteFooter from '../components/SiteFooter';
 
 export const metadata = {
   title: 'Send Documentation',
@@ -12,7 +11,6 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body>
         {children}
-        <SiteFooter />
       </body>
     </html>
   );

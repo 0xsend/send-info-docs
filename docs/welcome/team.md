@@ -24,7 +24,7 @@ A soon-to-be legal practitioner with a firm interest in corporate legal practice
 
 ## Engineering
 
-### **Beezy - Founding Engineer, Software Architect & DevOps Automation Expert**
+### **Beezy - Founding Engineer, Software Architect and DevOps Automation Expert**
 Brandon Young is a seasoned Software Architect with over 15 years of experience in enterprise healthcare. He excels as a DevOps engineer and Web3 expert, specializing in deploying blockchain solutions, staking, and automating processes across diverse networks, alongside full-stack development.
 
 ### **Victor Ginelli - Engineering Full Stack**
