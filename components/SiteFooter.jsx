@@ -1,10 +1,10 @@
 export default function SiteFooter() {
   return (
     <footer className="footer footer--dark">
-      <div className="container" style={{ padding: '2rem 1rem' }}>
+      <div className="container footer-container">
         <div className="footer__links">
-          <div className="footer__link-item" style={{ marginBottom: '0.75rem', fontWeight: 700 }}>Links</div>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+          <div className="footer__link-item footer-section-title">Links</div>
+          <ul className="footer-links-list">
             <li><a className="footer__link-item" href="https://github.com/0xsend/sendapp">Github</a></li>
             <li><a className="footer__link-item" href="https://x.com/send">X Profile</a></li>
             <li><a className="footer__link-item" href="https://t.me/send_app">Telegram</a></li>
@@ -12,7 +12,7 @@ export default function SiteFooter() {
             <li><a className="footer__link-item" href="https://support.send.app/en/">Support</a></li>
           </ul>
         </div>
-        <div style={{ marginTop: '1rem' }}>© Send, Inc.</div>
+        <div className="footer-copy">© Send, Inc.</div>
       </div>
     </footer>
   );
