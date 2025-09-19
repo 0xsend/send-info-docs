@@ -185,7 +185,7 @@ body {
 
 .sidebar-sublist {
   list-style: none;
-  padding: 0 0 12px 36px; /* align items with section title, not icon */
+  padding: 0 0 12px 52px; /* 16 (pad) + 20 (icon) + 16 (gap) */
   margin: 0;
   display: none;
 }
@@ -312,6 +312,11 @@ body {
 .breadcrumb-link {
   color: var(--Text-Secondary);
   text-decoration: none;
+}
+.breadcrumb-section {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--Content-Primary);
 }
 .breadcrumb-link:hover {
   color: var(--Content-Primary);
@@ -568,7 +573,7 @@ body {
 
 /* Markdown images sizing */
 .markdown img {
-  max-width: min(100%, 640px);
+  max-width: min(100%, 560px);
   height: auto;
   display: block;
   margin: 16px auto;
