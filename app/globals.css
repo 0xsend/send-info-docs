@@ -252,8 +252,6 @@ body {
   aspect-ratio: 3/1;
   border-radius: 14.262px;
   background: url('https://api.builder.io/api/v1/image/assets/TEMP/52bda10082008564d69327145ed24f4a31df3131?width=1920') lightgray 0px -204.866px / 120.867% 228.041% no-repeat;
-  background-size: cover;
-  background-position: center;
   margin-bottom: 40px;
   position: relative;
 }
