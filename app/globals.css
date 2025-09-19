@@ -317,8 +317,8 @@ body {
   text-transform: uppercase;
   font-weight: 700;
   color: var(--Content-Primary);
-  font-size: 19px;
-  line-height: 1.2;
+  font-size: 36px;
+  line-height: 1.1;
 }
 .breadcrumb-link:hover {
   color: var(--Content-Primary);
@@ -330,15 +330,15 @@ body {
 }
 .breadcrumb-current {
   color: var(--Content-Primary);
-  font-size: 36px;
-  line-height: 1.1;
-  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 600;
 }
 
 @media (max-width: 640px) {
-  .breadcrumb-section { font-size: 16px; }
+  .breadcrumb-section { font-size: 28px; }
   .breadcrumb-separator { font-size: 16px; }
-  .breadcrumb-current { font-size: 28px; }
+  .breadcrumb-current { font-size: 16px; }
 }
 
 /* Navigation Cards */
