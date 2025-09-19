@@ -16,12 +16,13 @@ const sectionIcons = {
       width: 20, 
       height: 20, 
       borderRadius: '50%', 
-      background: '#263437', 
+      background: '#666', 
       display: 'flex', 
       alignItems: 'center', 
       justifyContent: 'center',
       fontSize: '8px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      color: 'white'
     }}>
       S
     </div>
@@ -31,12 +32,13 @@ const sectionIcons = {
       width: 20, 
       height: 20, 
       borderRadius: '5px', 
-      background: '#263437', 
+      background: '#666', 
       display: 'flex', 
       alignItems: 'center', 
       justifyContent: 'center',
       fontSize: '8px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      color: 'white'
     }}>
       S
     </div>
@@ -96,7 +98,7 @@ export default function SidebarNav() {
   };
 
   const isActiveSection = (section) => {
-    return tree[section]?.some(item => pathname === `/docs/${item.id}`);
+    return section === 'welcome' && (pathname === '/' || pathname.startsWith('/docs/welcome'));
   };
 
   const isActiveLink = (itemId) => {
@@ -113,14 +115,14 @@ export default function SidebarNav() {
           return (
             <li key={section} className="sidebar-section">
               <div 
-                className={`sidebar-section-header ${isExpanded ? 'active' : ''}`}
+                className={`sidebar-section-header ${isActive ? 'active' : ''}`}
                 onClick={() => toggleSection(section)}
               >
                 <div className="sidebar-section-content">
                   <div className="sidebar-section-icon">
                     {sectionIcons[section] || sectionIcons['miscellaneous']}
                   </div>
-                  <div className={`sidebar-section-title ${!isActive ? 'secondary' : ''}`}>
+                  <div className={`sidebar-section-title ${isActive ? 'active' : ''}`}>
                     {sectionLabels[section] || section.replace(/-/g, ' ')}
                   </div>
                 </div>
@@ -132,21 +134,23 @@ export default function SidebarNav() {
                   fill="none" 
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path d="M5 0.9375L10 5.9375L8.9375 7L5 3.0625L1.0625 7L9.28867e-08 5.9375L5 0.9375Z" fill="white"/>
+                  <path d="M5 0.9375L10 5.9375L8.9375 7L5 3.0625L1.0625 7L9.28867e-08 5.9375L5 0.9375Z" fill="#666"/>
                 </svg>
               </div>
-              <ul className={`sidebar-sublist ${isExpanded ? 'expanded' : ''}`}>
-                {tree[section].map((item) => (
-                  <li key={item.id} className="sidebar-item">
-                    <Link 
-                      href={`/docs/${item.id}`} 
-                      className={`sidebar-link ${isActiveLink(item.id) ? 'active' : ''}`}
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {isExpanded && (
+                <ul className="sidebar-sublist expanded">
+                  {tree[section].map((item) => (
+                    <li key={item.id} className="sidebar-item">
+                      <Link 
+                        href={`/docs/${item.id}`} 
+                        className={`sidebar-link ${isActiveLink(item.id) ? 'active' : ''}`}
+                      >
+                        {item.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           );
         })}
