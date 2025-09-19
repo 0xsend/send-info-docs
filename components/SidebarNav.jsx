@@ -125,9 +125,7 @@ export default function SidebarNav({ treeData }) {
 
   return (
     <nav className="sidebar-panel">
-      <div className="header-brand">
-        <SiteHeader />
-      </div>
+      <SiteHeader />
       <ul className="sidebar-list">
         {sections.map((section) => {
           const isExpanded = expandedSections.includes(section);
