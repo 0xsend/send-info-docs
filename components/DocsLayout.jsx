@@ -81,11 +81,11 @@ export default function DocsLayout({ children, treeData }) {
             <>
               <div className="breadcrumb-row">
                 {sectionDefault ? (
-                  <Link href={`/docs/${sectionDefault}`} className="breadcrumb-link">{sectionLabel}</Link>
+                  <Link href={`/docs/${sectionDefault}`} className="breadcrumb-link breadcrumb-section">{sectionLabel}</Link>
                 ) : (
-                  <span className="breadcrumb-link">{sectionLabel}</span>
+                  <span className="breadcrumb-link breadcrumb-section">{sectionLabel}</span>
                 )}
-                <span className="breadcrumb-separator">›</span>
+                <span className="breadcrumb-separator">&gt;</span>
                 <span className="breadcrumb-current">{currentPageTitle}</span>
               </div>
               <div className="divider"></div>
