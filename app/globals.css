@@ -97,26 +97,37 @@ body {
 
 /* Header */
 .header-brand {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 0;
   margin-bottom: 24px;
   text-decoration: none;
   color: inherit;
 }
 
+.docs-badge-wrapper {
+  position: absolute;
+  top: -12px;
+  right: -54px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .docs-badge {
-  display: flex;
-  width: 48px;
-  padding: 4px 8px;
+  display: inline-flex;
+  min-width: 36px;
+  height: 22px;
+  padding: 3px 8px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  border-radius: 40px;
+  border-radius: 999px;
   border: 1px solid var(--Text-Secondary);
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--Text-Secondary);
+  background: var(--Content-Light);
 }
 
 /* Sidebar Navigation */

@@ -17,8 +17,10 @@ export default function SiteHeader() {
           </clipPath>
         </defs>
       </svg>
-      <div className="docs-badge">
-        <span>docs</span>
+      <div className="docs-badge-wrapper">
+        <div className="docs-badge">
+          <span>docs</span>
+        </div>
       </div>
     </Link>
   );
