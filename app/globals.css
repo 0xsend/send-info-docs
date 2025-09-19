@@ -270,6 +270,10 @@ body {
   margin-bottom: 40px;
 }
 
+.article-container {
+  max-width: 734px;
+}
+
 /* Navigation Cards */
 .navigation-grid {
   display: flex;
