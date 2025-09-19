@@ -32,7 +32,7 @@ export default function DocsLayout({ children, treeData }) {
   
   const sectionLabel = sectionLabels[section] || section.replace(/-/g, ' ');
   const pageLabel = pageLabels[page] || page.replace(/-/g, ' ');
-  
+
   return (
     <div className="docs-shell">
       <SidebarNav treeData={treeData} />
@@ -41,7 +41,13 @@ export default function DocsLayout({ children, treeData }) {
           <div className="welcome-header">
             <div className="welcome-title">{sectionLabel}</div>
           </div>
-          <div className="divider"></div>
+          {section === 'welcome' && (
+            <>
+              {/** Banner on Welcome docs pages */}
+              {require('./WelcomeHero') && null}
+            </>
+          )}
+          {section === 'welcome' ? <div className="divider"></div> : <div className="divider"></div>}
           <div style={{ maxWidth: '734px' }}>
             {children}
           </div>
