@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import SiteHeader from './SiteHeader';
+import React from 'react';
 
 const sectionIcons = {
   'welcome': (
@@ -75,6 +77,7 @@ const sectionLabels = {
   'welcome': 'Welcome',
   'send-token': 'Send Token',
   'send-mobile-apps': 'Send Mobile Apps',
+  'features': 'Features',
   'canton-wallet': 'Canton Wallet',
   'cusd-stablecoin': 'CUSD Stablecoin',
   'finance': 'Finance',
@@ -84,8 +87,24 @@ const sectionLabels = {
 
 export default function SidebarNav({ treeData }) {
   const tree = treeData;
-  const sections = Object.keys(tree);
   const pathname = usePathname();
+
+  // Desired order
+  const desiredOrder = [
+    'welcome',
+    'send-token',
+    'send-mobile-apps',
+    'features',
+    'canton-wallet',
+    'cusd-stablecoin',
+    'finance',
+    'miscellaneous',
+    'legal'
+  ];
+
+  // Filter existing keys to desired order and drop "links" section
+  const sections = desiredOrder.filter((key) => tree[key]);
+
   const [expandedSections, setExpandedSections] = useState(['welcome']);
 
   const toggleSection = (section) => {
@@ -106,6 +125,9 @@ export default function SidebarNav({ treeData }) {
 
   return (
     <nav className="sidebar-panel">
+      <div className="header-brand">
+        <SiteHeader />
+      </div>
       <ul className="sidebar-list">
         {sections.map((section) => {
           const isExpanded = expandedSections.includes(section);
@@ -125,16 +147,18 @@ export default function SidebarNav({ treeData }) {
                     {sectionLabels[section] || section.replace(/-/g, ' ')}
                   </div>
                 </div>
-                <svg 
-                  className={`sidebar-arrow ${isExpanded ? 'expanded' : ''}`}
-                  width="20" 
-                  height="20" 
-                  viewBox="0 0 10 7" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M5 0.9375L10 5.9375L8.9375 7L5 3.0625L1.0625 7L9.28867e-08 5.9375L5 0.9375Z" fill="#666"/>
-                </svg>
+                {isExpanded && (
+                  <svg
+                    className={`sidebar-arrow expanded`}
+                    width="20"
+                    height="20"
+                    viewBox="0 0 10 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M5 0.9375L10 5.9375L8.9375 7L5 3.0625L1.0625 7L9.28867e-08 5.9375L5 0.9375Z" fill="#666"/>
+                  </svg>
+                )}
               </div>
               {isExpanded && (
                 <ul className="sidebar-sublist expanded">
@@ -154,6 +178,17 @@ export default function SidebarNav({ treeData }) {
           );
         })}
       </ul>
+
+      <div className="sidebar-footer">
+        <div className="sidebar-footer-title">Links</div>
+        <ul className="sidebar-footer-list">
+          <li><a href="https://github.com/0xsend/sendapp" target="_blank" rel="noopener noreferrer">Github</a></li>
+          <li><a href="https://x.com/send" target="_blank" rel="noopener noreferrer">X Profile</a></li>
+          <li><a href="https://t.me/send_app" target="_blank" rel="noopener noreferrer">Telegram</a></li>
+          <li><a href="https://aerodrome.finance/swap?from=0x833589fcd6edb6e08f4c7c32d4f71b54bda02913&to=0xeab49138ba2ea6dd776220fe26b7b8e446638956&chain0=8453&chain1=8453" target="_blank" rel="noopener noreferrer">Buy $SEND</a></li>
+          <li><a href="https://support.send.app/en/" target="_blank" rel="noopener noreferrer">Support</a></li>
+        </ul>
+      </div>
     </nav>
   );
 }
