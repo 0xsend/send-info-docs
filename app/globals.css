@@ -163,9 +163,29 @@ body {
   display: block;
 }
 
+/* Nested group under a section */
+.sidebar-nested-toggle {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 8px 16px;
+  color: var(--Text-Secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: var(--Corner-Radius-S);
+}
+.sidebar-item.nested .sidebar-link {
+  padding-left: 32px; /* extra indent for nested links */
+}
+
 .sidebar-sublist {
   list-style: none;
-  padding: 0 0 12px 0;
+  padding: 0 0 12px 36px; /* align items with section title, not icon */
   margin: 0;
   display: none;
 }
@@ -544,6 +564,14 @@ body {
   line-height: 26px;
   color: var(--Text-Secondary);
   margin-bottom: 24px;
+}
+
+/* Markdown images sizing */
+.markdown img {
+  max-width: min(100%, 640px);
+  height: auto;
+  display: block;
+  margin: 16px auto;
 }
 
 .markdown ul {
