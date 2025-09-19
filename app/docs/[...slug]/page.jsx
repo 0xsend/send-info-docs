@@ -20,11 +20,11 @@ export default async function DocPage({ params }) {
   const slugPath = (p?.slug || []).join('/');
   const doc = readDocBySlug(slugPath);
   if (!doc) return <div className="not-found-message">Not found</div>;
-  const html = await renderMarkdownToHtml(doc.content);
+  const { html, headings } = await renderMarkdownToHtml(doc.content);
   const sidebarTree = buildSidebarTree();
 
   return (
-    <DocsLayout treeData={sidebarTree}>
+    <DocsLayout treeData={sidebarTree} headings={headings}>
       <article className="markdown" dangerouslySetInnerHTML={{ __html: html }} />
     </DocsLayout>
   );

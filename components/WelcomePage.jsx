@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import WelcomeHero from './WelcomeHero';
 
 export const navigationCards = [
@@ -91,23 +92,26 @@ export default function WelcomePage() {
       
       <div className="navigation-grid">
         {navigationCards.map((card) => (
-          <Link key={card.id} href={card.href} className="nav-card">
+          <Link
+            key={card.id}
+            href={card.href}
+            className="nav-card"
+          >
             <div className="nav-card-icon">
               {card.icon}
             </div>
             <div className="nav-card-title">
               {card.title}
             </div>
-            <svg 
-              className="nav-card-arrow"
-              width="32" 
-              height="32" 
-              viewBox="0 0 10 16" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M9.89995 8L1.89995 16L0.199951 14.3L6.49995 8L0.199951 1.7L1.89995 1.83304e-06L9.89995 8Z" fill="#666666"/>
-            </svg>
+            <span className="nav-card-arrow" aria-hidden="true">
+              <Image
+                className="nav-card-arrow-icon"
+                src="/img/arrow.svg"
+                alt=""
+                width={10}
+                height={10}
+              />
+            </span>
           </Link>
         ))}
       </div>

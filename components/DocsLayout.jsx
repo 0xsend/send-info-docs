@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import SidebarNav from './SidebarNav';
@@ -8,7 +9,7 @@ import WelcomeHero from './WelcomeHero';
 import { navigationCards } from './WelcomePage';
 import SiteHeader from './SiteHeader';
 
-export default function DocsLayout({ children, treeData }) {
+export default function DocsLayout({ children, treeData, headings = [] }) {
   const pathname = usePathname();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   
@@ -88,23 +89,26 @@ export default function DocsLayout({ children, treeData }) {
               <div className="divider"></div>
               <div className="navigation-grid">
                 {navigationCards.map((card) => (
-                  <Link key={card.id} href={card.href} className="nav-card">
+                  <Link
+                    key={card.id}
+                    href={card.href}
+                    className="nav-card"
+                  >
                     <div className="nav-card-icon">
                       {card.icon}
                     </div>
                     <div className="nav-card-title">
                       {card.title}
                     </div>
-                    <svg
-                      className="nav-card-arrow"
-                      width="32"
-                      height="32"
-                      viewBox="0 0 10 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M9.89995 8L1.89995 16L0.199951 14.3L6.49995 8L0.199951 1.7L1.89995 1.83304e-06L9.89995 8Z" fill="#666666"/>
-                    </svg>
+                    <span className="nav-card-arrow" aria-hidden="true">
+                      <Image
+                        className="nav-card-arrow-icon"
+                        src="/img/arrow.svg"
+                        alt=""
+                        width={10}
+                        height={10}
+                      />
+                    </span>
                   </Link>
                 ))}
               </div>
@@ -113,7 +117,12 @@ export default function DocsLayout({ children, treeData }) {
             <>
               <div className="breadcrumb-row">
                 {sectionDefault ? (
-                  <Link href={`/docs/${sectionDefault}`} className="breadcrumb-link breadcrumb-section">{sectionLabel}</Link>
+                  <Link
+                    href={`/docs/${sectionDefault}`}
+                    className="breadcrumb-link breadcrumb-section"
+                  >
+                    {sectionLabel}
+                  </Link>
                 ) : (
                   <span className="breadcrumb-link breadcrumb-section">{sectionLabel}</span>
                 )}
@@ -123,8 +132,24 @@ export default function DocsLayout({ children, treeData }) {
               <div className="divider"></div>
             </>
           )}
-          <div className="article-container">
-            {children}
+          <div className={`article-layout${pathname !== '/' && headings.length ? ' has-toc' : ''}`}>
+            <div className="article-container">
+              {children}
+            </div>
+            {pathname !== '/' && headings.length > 0 && (
+              <aside className="article-toc" aria-label="On this page">
+                <ul className="toc-list">
+                  {headings.map((heading) => (
+                    <li
+                      key={heading.id}
+                      className={`toc-item toc-item-depth-${heading.level}`}
+                    >
+                      <a href={`#${heading.id}`}>{heading.text}</a>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            )}
           </div>
         </div>
       </div>
