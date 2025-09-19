@@ -1,0 +1,26 @@
+---
+id: sendtags
+title: Sendtags
+sidebar_position: 5
+---
+
+# Sendtags
+
+Sendtags are unique usernames within Send that serve as your personal identifier. They offer a user-friendly alternative to complex wallet addresses, making it easier for others to send you funds.
+
+## Key Features
+
+- **Simplifies transactions**: Users can send funds to you using your Sendtag instead of a wallet address
+- **Customizable**: Choose a Sendtag that represents you best
+- **Limited availability**: Users can register up to 5 Sendtags per account
+
+## Pricing
+
+| Characters | Price |
+|------------|-------|
+| 6+ characters | 2 USDC |
+| 5 characters | 4 USDC |
+| 4 characters | 8 USDC |
+| 1-3 characters | 16 USDC |
+
+Register your Sendtag at <a href="https://send.app" class="multisig-revenue-link" target="_blank">send.app ↗</a>

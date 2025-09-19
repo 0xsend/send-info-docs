@@ -1,0 +1,121 @@
+---
+id: terms-of-service
+title: Terms of Service
+sidebar_position: 4
+---
+
+# Terms of Service
+
+**Effective as of 6/28/23**
+
+This Customer Terms of Service together with all supplemental terms that may be presented to you for your review and acceptance (collectively, the "Agreement"), is by and between Send, Inc., ("Send"), and you ("Customer" or "you").
+
+**PLEASE READ THIS AGREEMENT CAREFULLY. THIS AGREEMENT GOVERNS YOUR ACCESS TO AND USE OF THE SERVICES. BY ENROLLING IN THE AGREEMENT, CLICKING THE "I ACCEPT" BUTTON, OR ACCESSING OR USING ANY PORTION OF THE SERVICES, YOU REPRESENT THAT (1) YOU HAVE READ, UNDERSTAND, AND AGREE TO BE BOUND BY THIS AGREEMENT, (2) YOU ARE OF LEGAL AGE TO FORM A BINDING CONTRACT WITH SEND, AND (3) YOU HAVE THE AUTHORITY TO ENTER INTO THE AGREEMENT PERSONALLY. IF YOU OR IF APPLICABLE, SUCH LEGAL ENTITY, DO NOT AGREE TO BE BOUND BY THIS AGREEMENT, YOU MAY NOT ACCESS OR PARTICIPATE IN THE SERVICES.**
+
+The "Effective Date" of this Agreement shall be the earlier of (i) Customer's acceptance of the terms of this Agreement by clicking on the "I Accept" button, or (ii) Customer's successful enrollment in the Services.
+
+**SEND IS NOT A BROKER, FINANCIAL INSTITUTION OR INTERMEDIARY AND IS IN NO WAY CUSTOMER AGENT, ADVISOR, OR CUSTODIAN. SEND IS A NON-CUSTODIAL PLATFORM. SEND CANNOT INITIATE A TRANSFER OF ANY OF CUSTOMER CRYPTOCURRENCY OR DIGITAL ASSETS OR OTHERWISE ACCESS CUSTOMER DIGITAL ASSETS. SEND HAS NO FIDUCIARY RELATIONSHIP OR OBLIGATION TO CUSTOMER REGARDING ANY DECISIONS OR ACTIVITIES THAT CUSTOMER EFFECT IN CONNECTION WITH CUSTOMER USE OF THE SERVICES.**
+
+**ALL TRANSACTIONS INITIATED THROUGH THE SERVICES ARE AFFECTED BY CUSTOMER'S WALLET OR OTHER THIRD-PARTY DIGITAL WALLET EXTENSIONS. BY USING THE SERVICES CUSTOMER AGREES THAT SUCH TRANSACTIONS ARE GOVERNED BY THE TERMS OF SERVICE AND PRIVACY POLICY FOR THE APPLICABLE EXTENSIONS.**
+
+**PLEASE NOTE THAT THE AGREEMENT IS SUBJECT TO CHANGE BY SEND IN ITS SOLE DISCRETION AT ANY TIME. WHEN CHANGES ARE MADE, SEND WILL MAKE A COPY OF THE UPDATED AGREEMENT AVAILABLE AT THE WEBSITE AND UPDATE THE "LAST UPDATED DATE" AT THE TOP OF THIS AGREEMENT.**
+
+## 1. The Services
+
+### 1.1 Access
+Subject to Customer's payment of the fees set forth herein, Send will provide Customers with access to the Services. On or as soon as reasonably practicable after the Effective Date, Send will provide to Customer the necessary passwords, security protocols and policies and network links or connections and access protocols to allow Customer and its Authorized Users to access the Services.
+
+### 1.2 License to the Services
+The Services are protected by copyright laws throughout the world. Subject to Customer's fulfillment of its obligations under this Agreement, Send hereby grants Customer a revocable, non-transferable, non-sublicensable, royalty-free, limited license to access and use the Services for the sole purpose of Customer's internal business purposes.
+
+### 1.3 Restrictions
+Customer will not, and will not permit any Authorized User or other party to:
+- Allow any third party to access the Services, except as expressly allowed herein
+- Modify, adapt, alter or translate the Services
+- Reverse engineer, decompile, disassemble, or otherwise derive the source code of the Services
+- Interfere in any manner with the operation of the Services
+- Access or use the Services to build a similar or competitive product or service
+
+## 2. Registration
+
+### 2.1 Connecting Customer Wallet
+In order to use the Interface and access certain features of the Services Customer may need a Wallet that is supported by or compatible with the Services.
+
+### 2.2 Representations
+Customer represents that Customer is not a person barred from using the Services under the laws of the United States, Customer place of residence or any other applicable jurisdiction. Customer is responsible for all activities that occur during Customer's use of the Services and under Customer's Wallet.
+
+## 3. Security and Responsibility for Content
+
+### 3.1 Send Security Responsibility
+Send shall use commercially reasonable efforts to maintain the security of the Services. Send has implemented and will maintain commercially reasonable technical and organizational measures intended to protect Connected Content against accidental, unauthorized, or unlawful access or disclosure.
+
+### 3.2 Customer Content
+Customer acknowledges that all Content is the sole responsibility of the party from whom such Content originated. Customer and other Registered Users of the Services, and not Send, are responsible for all User Content.
+
+## 4. Ownership
+
+### 4.1 The Services
+Customer agrees that Send and its licensors own all rights, title and interest in and to the Services. Customer will not remove, alter or obscure any copyright, trademark, service mark or other proprietary rights notices incorporated in or accompanying any Services.
+
+### 4.2 Customer User Content
+Send does not claim ownership of Customer User Content. However, when Customer post or publish Customer User Content on or in the Services, Customer grants to Send a royalty-free, perpetual, irrevocable, worldwide, non-exclusive right and license to use, reproduce, modify, adapt, publish, translate, create derivative works from, and distribute Customer User Content.
+
+## 5. User Conduct
+
+Customer agrees that it will not:
+- Provide false or misleading information to Send
+- Use or attempt to use another user's Wallet without authorization
+- Pose as another person or entity
+- Use the Services in any manner that could interfere with or disrupt the Services
+- Engage in any illegal activities or money laundering
+- Use the Services to carry out any financial activities subject to registration or licensing
+
+## 6. Assumption of Risk Related to Blockchain Technology
+
+Customer accepts and acknowledges the following risks:
+- Digital Asset transactions must be confirmed on the relevant blockchain
+- Send has no control over any blockchain and cannot ensure transaction validation
+- Prices of Digital Assets can be extremely volatile
+- Customer is solely responsible for determining applicable taxes
+- There are inherent risks with blockchain technology and Internet-based currencies
+- The regulatory regime governing blockchain technologies is uncertain
+
+## 7. Disclaimer of Warranties
+
+**EXCEPT AS SET FORTH HEREIN, THE SERVICES ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS. SEND EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.**
+
+## 8. Limitation of Liability
+
+**SEND SHALL NOT BE LIABLE FOR ANY LOSS OF PROFITS, REVENUE OR DATA, OR FOR INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES. SEND'S TOTAL LIABILITY SHALL NOT EXCEED THE GREATER OF $100 OR THE AMOUNTS PAID BY CUSTOMER TO SEND IN THE 12 MONTHS PRECEDING THE CLAIM.**
+
+## 9. Indemnification
+
+Customer agrees to indemnify, defend and hold Send harmless from any losses, costs, liabilities and expenses relating to:
+- Customer User Content
+- Customer use of the Services
+- Customer violation of this Agreement
+- Customer violation of any applicable laws
+
+## 10. Term and Termination
+
+### 10.1 Term
+This Agreement remains in effect for one (1) year unless terminated earlier.
+
+### 10.2 Termination
+Either party may terminate this Agreement for any reason. Send may suspend or terminate Customer's access to the Services at any time for violation of this Agreement.
+
+## 11. General Provisions
+
+### 11.1 Governing Law
+This Agreement is governed by the laws of the State of California. Any disputes shall be resolved in the state and federal courts for Santa Clara County, California.
+
+### 11.2 Contact Information
+If you have any questions, complaints or claims, please contact us at: send@send.it
+
+## 12. Definitions
+
+- **Digital Asset**: Any cryptocurrency, cryptoasset, blockchain-based token, or other digital asset supported by the Services
+- **Services**: Any products and services made available by Send
+- **Wallet**: A digital wallet compatible with the Services
+- **Connected Content**: Any content or personal financial data stored in Customer's Wallet
+- **Registered User**: A user with a valid account connected to the Services
