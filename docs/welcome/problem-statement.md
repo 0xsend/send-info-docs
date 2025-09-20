@@ -62,7 +62,6 @@ No major financial platform prioritizes privacy by design. Every existing soluti
 
 Send fills this gap by building financial tools that are private by default, globally accessible, and aligned with user sovereignty rather than surveillance capitalism.
 
----
 
 :::tip Our Solution
 Send addresses these fundamental problems through privacy-first financial infrastructure built on Canton Network, enabling confidential transactions, non-custodial control, and global accessibility without compromising regulatory compliance.

@@ -56,7 +56,6 @@ Before bridging your tokens, ensure you have:
 
 **Step 9:** After the waiting period, you should see your bridged Send tokens in your wallet on Base network.
 
----
 
 :::tip Success!
 You have now successfully bridged your Send Tokens from Ethereum to Base.

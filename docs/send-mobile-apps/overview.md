@@ -29,7 +29,6 @@ Native iOS and Android applications are currently in development, bringing optim
 
 Visit <a href="https://send.app" class="multisig-token-link" target="_blank">send.app</a> on your mobile device to create your account and start using Send today. The PWA can be added to your home screen for quick access and app-like functionality.
 
----
 
 :::tip Stay Updated
 Follow our progress on native app development through our official channels. Native apps will provide enhanced performance while maintaining all the privacy and security features you expect from Send.

@@ -48,7 +48,6 @@ sidebar_position: 1
 
 </div>
 
----
 
 :::tip What's Next?
 Follow our progress on [X](https://x.com/send) or join our [Telegram](https://t.me/sendcommunity) to stay updated on roadmap developments.

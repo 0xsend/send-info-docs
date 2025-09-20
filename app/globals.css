@@ -927,7 +927,7 @@ body {
   line-height: 1.7;
   color: var(--Text-Secondary);
   margin-bottom: 24px;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 /* Markdown images sizing */
@@ -945,7 +945,7 @@ body {
   color: var(--Text-Secondary);
   margin-bottom: 24px;
   padding-left: 1.5em;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .markdown ol {
@@ -955,12 +955,21 @@ body {
   color: var(--Text-Secondary);
   margin-bottom: 24px;
   padding-left: 1.5em;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.markdown code {
+  font-family: 'DM Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  background: rgba(18, 32, 35, 0.05);
+  padding: 0 4px;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
 }
 
 /* Table styles for markdown */
 .markdown table {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   border-collapse: collapse;
   margin: 24px 0;
   overflow-x: auto;
@@ -1000,11 +1009,6 @@ body {
 @media (max-width: 768px) {
   .markdown table {
     margin: 16px 0;
-  }
-
-  .markdown th,
-  .markdown td {
-    white-space: nowrap;
   }
 }
 

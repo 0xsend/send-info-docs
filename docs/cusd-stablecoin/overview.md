@@ -154,7 +154,6 @@ $CUSD aligns with Canton Network's privacy-first infrastructure while supporting
 
 **Assessment**: Privacy-native design creates inherent differentiation from transparent alternatives, with alignment mechanisms favoring sustainable ecosystem growth over speculative activity. Risk mitigation strategies emphasize proactive compliance and user education rather than reactive adjustments.
 
----
 
 :::note Disclaimer
 This document is for informational purposes only and does not constitute an offer to sell or the solicitation of an offer to buy any securities. The features and functionality described herein are subject to change based on regulatory guidance, technical considerations, or business development.

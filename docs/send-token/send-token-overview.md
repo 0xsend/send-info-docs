@@ -37,7 +37,6 @@ $SEND is an ERC-20 currently live and trading on the Base network.
 | **Temple** | Canton | Coming Soon |
 | **CantonSwap** | Canton | Coming Soon |
 
----
 
 :::info Multi-Network Trading
 $SEND is currently trading live on Base network and will begin trading on Canton Network soon.

@@ -29,7 +29,6 @@ A universal tool that is accessible to all, breaking down financial barriers.
 ### Community
 Fostering a sense of connection and shared experiences through transactions.
 
----
 
 :::tip Core Philosophy
 Send believes in empowering individuals with direct control over their financial future while making blockchain technology accessible to everyone.
