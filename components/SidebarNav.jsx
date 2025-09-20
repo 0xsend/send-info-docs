@@ -195,24 +195,40 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
         {sections.map((section) => {
           const isExpanded = expandedSections.includes(section);
           const isActive = isActiveSection(section);
+          const label = sectionLabels[section] || section.replace(/-/g, ' ');
           
           return (
             <li key={section} className={`sidebar-section ${isExpanded ? 'expanded' : ''}`}>
-              <div 
-                className={`sidebar-section-header ${isActive ? 'active' : ''}`}
-                onClick={() => toggleSection(section)}
-              >
-                <div className="sidebar-section-content">
-                  <div className="sidebar-section-icon">
-                    {sectionIcons[section] || sectionIcons['miscellaneous']}
+              <div className={`sidebar-section-header ${isActive ? 'active' : ''}`}>
+                <Link
+                  href={`/docs/${section}`}
+                  className={`sidebar-section-link ${isActive ? 'active' : ''}`}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleLinkClick();
+                  }}
+                >
+                  <div className="sidebar-section-content">
+                    <div className="sidebar-section-icon">
+                      {sectionIcons[section] || sectionIcons['miscellaneous']}
+                    </div>
+                    <div className={`sidebar-section-title ${isActive ? 'active' : ''}`}>
+                      {label}
+                    </div>
                   </div>
-                  <div className={`sidebar-section-title ${isActive ? 'active' : ''}`}>
-                    {sectionLabels[section] || section.replace(/-/g, ' ')}
-                  </div>
-                </div>
-                {isExpanded && (
+                </Link>
+                <button
+                  type="button"
+                  className={`sidebar-section-toggle ${isExpanded ? 'expanded' : ''}`}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    toggleSection(section);
+                  }}
+                  aria-label={isExpanded ? `Collapse ${label}` : `Expand ${label}`}
+                  aria-expanded={isExpanded}
+                >
                   <svg
-                    className={`sidebar-arrow expanded`}
+                    className={`sidebar-arrow ${isExpanded ? 'expanded' : ''}`}
                     width="20"
                     height="20"
                     viewBox="0 0 10 7"
@@ -221,7 +237,7 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
                   >
                     <path d="M5 0.9375L10 5.9375L8.9375 7L5 3.0625L1.0625 7L9.28867e-08 5.9375L5 0.9375Z" fill="#666"/>
                   </svg>
-                )}
+                </button>
               </div>
               {isExpanded && (
                 <ul className="sidebar-sublist expanded">

@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "19a3af1e52785757b7ad89ed38240e38",
-    "previewModeSigningKey": "dbfca2ebc510722cd2d251ba4649f1d3ddf5b024f9ff712d915b38347e1d74fd",
-    "previewModeEncryptionKey": "02478c2df0b541f3627f40070405f5c53d1a6044386a84d197b110455fb5b265"
-  }
-}
+{"version":4,"routes":{"/docs/canton-wallet/overview":{},"/docs/cusd-stablecoin/overview":{},"/docs/features/invest":{},"/docs/features/passkeys":{},"/docs/features/referrals":{},"/docs/features/rewards":{},"/docs/features/savings":{},"/docs/features/sendtags":{},"/docs/finance/business-models":{},"/docs/finance/funding-rounds":{},"/docs/finance/multisigs":{},"/docs/finance/revenue":{},"/docs/finance/token-emissions":{},"/docs/finance/treasury":{},"/docs/legal/affiliate-marketing-disclaimer":{},"/docs/legal/disclaimer":{},"/docs/legal/licenses":{},"/docs/legal/privacy-policy":{},"/docs/legal/terms-of-service":{},"/docs/links/buy-send":{},"/docs/links/github":{},"/docs/links/support":{},"/docs/links/telegram":{},"/docs/links/x-profile":{},"/docs/miscellaneous/brand-links-assets":{},"/docs/miscellaneous/intellectual-property":{},"/docs/miscellaneous/roadmap":{},"/docs/miscellaneous/send-contract-addresses":{},"/docs/miscellaneous/send-metrics":{},"/docs/send-mobile-apps/overview":{},"/docs/send-token/bridge":{},"/docs/send-token/send-token-overview":{},"/docs/send-token/tokenomics":{},"/docs/send-token/upgrade":{},"/docs/welcome/contact":{},"/docs/welcome/mission-vision-values":{},"/docs/welcome/problem-statement":{},"/docs/welcome/send-overview":{},"/docs/welcome/team":{},"/docs/canton-wallet":{},"/docs/cusd-stablecoin":{},"/docs/features":{},"/docs/finance":{},"/docs/legal":{},"/docs/links":{},"/docs/miscellaneous":{},"/docs/send-mobile-apps":{},"/docs/send-token":{},"/docs/welcome":{}},"dynamicRoutes":{"/docs/[...slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/docs/[...slug]","routeRegex":"^\\/docs\\/(.+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"00189dd1adeb2fd1fc97b7625bb05a7d","previewModeSigningKey":"0048587927a0f4dff8c0ed750d818abb5000a63f9cc6f337a36cca6ff1f2e6c3","previewModeEncryptionKey":"27f42cac538fb17e5db5f877b2b84d71886f63b4c5829628f5c3ea04262a1aad"}}
