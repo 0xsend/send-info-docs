@@ -12,6 +12,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const p = await params;
   const segments = p?.slug || [];
+  const sectionOgImages = {
+    'welcome': '/img/welcome-opengraph.png',
+    'send-mobile-apps': '/img/sendmobileapps-opengraph.png',
+    'cusd-stablecoin': '/img/cusd-opengraph.png'
+  };
   if (segments.length === 1) {
     const section = segments[0];
     const sectionLabels = {
@@ -25,14 +30,21 @@ export async function generateMetadata({ params }) {
       'legal': 'Legal'
     };
     const title = sectionLabels[section] || section.replace(/-/g, ' ');
-    return { title };
+    const ogImage = sectionOgImages[section];
+    const meta = { title };
+    if (ogImage) meta.openGraph = { images: [{ url: ogImage }] };
+    return meta;
   }
 
   const slugPath = segments.join('/');
   const doc = readDocBySlug(slugPath);
   if (!doc) return { title: 'Not found' };
   const title = extractTitle(doc.content, doc.data) || slugPath.split('/').slice(-1)[0];
-  return { title };
+  const section = segments[0];
+  const ogImage = sectionOgImages[section];
+  const meta = { title };
+  if (ogImage) meta.openGraph = { images: [{ url: ogImage }] };
+  return meta;
 }
 
 export default async function DocPage({ params }) {
