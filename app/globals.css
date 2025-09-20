@@ -927,6 +927,7 @@ body {
   line-height: 1.7;
   color: var(--Text-Secondary);
   margin-bottom: 24px;
+  word-break: break-word;
 }
 
 /* Markdown images sizing */
@@ -944,6 +945,7 @@ body {
   color: var(--Text-Secondary);
   margin-bottom: 24px;
   padding-left: 1.5em;
+  word-break: break-word;
 }
 
 .markdown ol {
@@ -953,6 +955,7 @@ body {
   color: var(--Text-Secondary);
   margin-bottom: 24px;
   padding-left: 1.5em;
+  word-break: break-word;
 }
 
 /* Table styles for markdown */
@@ -960,6 +963,9 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin: 24px 0;
+  overflow-x: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
 }
 .markdown thead th {
   background: var(--Content-Light);
@@ -977,6 +983,17 @@ body {
 }
 .markdown tbody tr:nth-child(even) {
   background: #FAFAFA;
+}
+
+@media (max-width: 768px) {
+  .markdown table {
+    margin: 16px 0;
+  }
+
+  .markdown th,
+  .markdown td {
+    white-space: nowrap;
+  }
 }
 
 .not-found-message {
