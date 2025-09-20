@@ -55,7 +55,7 @@ body {
 .sidebar-panel {
   width: 320px;
   background: var(--Content-Light);
-  padding: 80px 40px 40px 56px;
+  padding: 80px 40px 40px 40px;
   display: flex;
   flex-direction: column;
   gap: 32px;
