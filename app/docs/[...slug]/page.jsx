@@ -19,25 +19,25 @@ export async function generateMetadata({ params }) {
       description: 'Start with Send’s mission, vision, team, and key storylines.'
     },
     'send-token': {
-      title: 'Send Token – Native Token of the Send Ecosystem',
+      title: 'Send Token Info Docs – Native Token of the Send Ecosystem',
       description: 'Dig into issuance, supply, and utility for the SEND token.'
     },
     'send-mobile-apps': {
       image: '/img/sendmobileapps-opengraph.png',
-      title: 'Send Apps – Your global wallet',
+      title: 'Send Apps Info Docs – Your global wallet',
       description: 'Learn how Send Apps deliver fast, private peer-to-peer transfers.'
     },
     'canton-wallet': {
-      title: 'Canton Wallet – Secure account access for Canton',
+      title: 'Canton Wallet Info Docs – Secure account access for Canton',
       description: 'Understand passkeys, privacy, and workflows for the Canton Wallet.'
     },
     'cusd-stablecoin': {
       image: '/img/cusd-opengraph.png',
-      title: 'CUSD – Privacy-Native Stablecoin',
+      title: 'CUSD Info Docs – Privacy-Native Stablecoin',
       description: 'See how CUSD keeps balances private while remaining fully collateralized.'
     },
     'finance': {
-      title: 'Send Finance – Treasury & Metrics',
+      title: 'Send Finance Info Docs – Treasury & Metrics',
       description: 'Review treasury balances, revenue streams, and financial operations.'
     },
     'miscellaneous': {

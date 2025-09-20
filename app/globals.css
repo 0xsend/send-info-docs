@@ -927,7 +927,7 @@ body {
   line-height: 1.7;
   color: var(--Text-Secondary);
   margin-bottom: 24px;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Markdown images sizing */
@@ -945,7 +945,7 @@ body {
   color: var(--Text-Secondary);
   margin-bottom: 24px;
   padding-left: 1.5em;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .markdown ol {
@@ -955,7 +955,7 @@ body {
   color: var(--Text-Secondary);
   margin-bottom: 24px;
   padding-left: 1.5em;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Table styles for markdown */
@@ -966,6 +966,18 @@ body {
   overflow-x: auto;
   display: block;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+.markdown table::-webkit-scrollbar {
+  height: 6px;
+}
+.markdown table::-webkit-scrollbar-track {
+  background: transparent;
+}
+.markdown table::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
 }
 .markdown thead th {
   background: var(--Content-Light);
