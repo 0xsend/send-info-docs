@@ -12,33 +12,41 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const p = await params;
   const segments = p?.slug || [];
-  const sectionOg = {
+  const sectionMeta = {
     'welcome': {
       image: '/img/welcome-opengraph.png',
-      title: 'Send Info Docs – Your guide to the Send ecosystem'
+      title: 'Send Info Docs – Your guide to the Send ecosystem',
+      description: 'Start with Send’s mission, vision, team, and key storylines.'
     },
     'send-token': {
-      title: 'Send Token – Native Token of the Send Ecosystem'
+      title: 'Send Token – Native Token of the Send Ecosystem',
+      description: 'Dig into issuance, supply, and utility for the SEND token.'
     },
     'send-mobile-apps': {
       image: '/img/sendmobileapps-opengraph.png',
-      title: 'Send Apps – Your global wallet'
+      title: 'Send Apps – Your global wallet',
+      description: 'Learn how Send Apps deliver fast, private peer-to-peer transfers.'
     },
     'canton-wallet': {
-      title: 'Canton Wallet – Your gateway to the Canton Network'
+      title: 'Canton Wallet – Secure account access for Canton',
+      description: 'Understand passkeys, privacy, and workflows for the Canton Wallet.'
     },
     'cusd-stablecoin': {
       image: '/img/cusd-opengraph.png',
-      title: 'CUSD – Privacy-Native Stablecoin'
+      title: 'CUSD – Privacy-Native Stablecoin',
+      description: 'See how CUSD keeps balances private while remaining fully collateralized.'
     },
     'finance': {
-      title: 'Send Finance – Treasury & Metrics'
+      title: 'Send Finance – Treasury & Metrics',
+      description: 'Review treasury balances, revenue streams, and financial operations.'
     },
     'miscellaneous': {
-      title: 'Send Info Docs – Additional Resources'
+      title: 'Send Info Docs – Additional Resources',
+      description: 'Browse roadmaps, metrics, brand assets, and other helpful links.'
     },
     'legal': {
-      title: 'Send Info Docs – Legal & Policies'
+      title: 'Send Info Docs – Legal & Policies',
+      description: 'Access terms, disclosures, and other legal documentation for Send.'
     }
   };
   if (segments.length === 1) {
@@ -54,7 +62,7 @@ export async function generateMetadata({ params }) {
       'legal': 'Legal'
     };
     const title = sectionLabels[section] || section.replace(/-/g, ' ');
-    const config = sectionOg[section];
+    const config = sectionMeta[section];
     const meta = { title };
     if (config) {
       meta.openGraph = {
@@ -62,6 +70,10 @@ export async function generateMetadata({ params }) {
       };
       if (config.image) {
         meta.openGraph.images = [{ url: config.image }];
+      }
+      if (config.description) {
+        meta.description = config.description;
+        meta.openGraph.description = config.description;
       }
     }
     return meta;
@@ -72,7 +84,7 @@ export async function generateMetadata({ params }) {
   if (!doc) return { title: 'Not found' };
   const title = extractTitle(doc.content, doc.data) || slugPath.split('/').slice(-1)[0];
   const section = segments[0];
-  const config = sectionOg[section];
+  const config = sectionMeta[section];
   const meta = { title };
   if (config) {
     meta.openGraph = {
@@ -80,6 +92,10 @@ export async function generateMetadata({ params }) {
     };
     if (config.image) {
       meta.openGraph.images = [{ url: config.image }];
+    }
+    if (config.description) {
+      meta.description = config.description;
+      meta.openGraph.description = config.description;
     }
   }
   return meta;
