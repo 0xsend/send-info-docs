@@ -4,10 +4,6 @@ title: Overview
 sidebar_position: 1
 ---
 
-import CantonWalletSEO from '@site/src/components/CantonWalletSEO';
-
-<CantonWalletSEO />
-
 # Canton Wallet Overview
 
 We're building a crypto wallet that lets you log in with your face or fingerprint instead of seed phrases. It runs on Canton Network, so your transactions stay private.
