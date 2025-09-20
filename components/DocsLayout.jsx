@@ -27,7 +27,7 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
   const sectionLabels = {
     'welcome': 'Welcome',
     'send-token': 'Send Token',
-    'send-mobile-apps': 'Send Mobile Apps',
+    'send-mobile-apps': 'Send Apps',
     'canton-wallet': 'Canton Wallet',
     'cusd-stablecoin': 'CUSD Stablecoin',
     'finance': 'Finance',

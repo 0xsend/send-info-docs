@@ -5,7 +5,7 @@ import WelcomeHero from './WelcomeHero';
 const sectionCards = [
   { key: 'welcome', title: 'Welcome', href: '/docs/welcome' },
   { key: 'send-token', title: 'Send Token', href: '/docs/send-token' },
-  { key: 'send-mobile-apps', title: 'Send Mobile Apps', href: '/docs/send-mobile-apps' },
+  { key: 'send-mobile-apps', title: 'Send Apps', href: '/docs/send-mobile-apps' },
   { key: 'canton-wallet', title: 'Canton Wallet', href: '/docs/canton-wallet' },
   { key: 'cusd-stablecoin', title: 'CUSD Stablecoin', href: '/docs/cusd-stablecoin' },
   { key: 'finance', title: 'Finance', href: '/docs/finance' },

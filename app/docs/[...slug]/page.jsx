@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
     },
     'send-mobile-apps': {
       image: '/img/sendmobileapps-opengraph.png',
-      title: 'Send Mobile Apps – Your global wallet'
+      title: 'Send Apps – Your global wallet'
     },
     'canton-wallet': {
       title: 'Canton Wallet – Your gateway to the Canton Network'
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }) {
     const sectionLabels = {
       'welcome': 'Welcome',
       'send-token': 'Send Token',
-      'send-mobile-apps': 'Send Mobile Apps',
+      'send-mobile-apps': 'Send Apps',
       'canton-wallet': 'Canton Wallet',
       'cusd-stablecoin': 'CUSD Stablecoin',
       'finance': 'Finance',
@@ -95,7 +95,7 @@ export default async function DocPage({ params }) {
     const sectionLabels = {
       'welcome': 'Welcome',
       'send-token': 'Send Token',
-      'send-mobile-apps': 'Send Mobile Apps',
+      'send-mobile-apps': 'Send Apps',
       'canton-wallet': 'Canton Wallet',
       'cusd-stablecoin': 'CUSD Stablecoin',
       'finance': 'Finance',

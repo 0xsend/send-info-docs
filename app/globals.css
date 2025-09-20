@@ -354,11 +354,11 @@ body {
   color: var(--Content-Primary);
   font-feature-settings: 'ss02' on, 'ss03' on, 'ss04' on, 'ss05' on, 'ss07' on;
   font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 48px;
+  font-size: 36px;
   font-style: normal;
   font-weight: 600;
-  line-height: 44px;
-  letter-spacing: -1.44px;
+  line-height: 40px;
+  letter-spacing: -1.08px;
   text-transform: uppercase;
 }
 

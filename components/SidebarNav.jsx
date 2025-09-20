@@ -69,7 +69,7 @@ const sectionIcons = {
 const sectionLabels = {
   'welcome': 'Welcome',
   'send-token': 'Send Token',
-  'send-mobile-apps': 'Send Mobile Apps',
+  'send-mobile-apps': 'Send Apps',
   'features': 'Features',
   'canton-wallet': 'Canton Wallet',
   'cusd-stablecoin': 'CUSD Stablecoin',
