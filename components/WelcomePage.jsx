@@ -13,6 +13,14 @@ const sectionCards = [
   { key: 'legal', title: 'Legal', href: '/docs/legal' },
 ];
 
+const cardImages = {
+  'welcome': { src: '/img/sendwelcome.png', alt: 'Welcome' },
+  'send-token': { src: '/img/sendtoken.png', alt: 'Send Token' },
+  'send-mobile-apps': { src: '/img/sendapps.png', alt: 'Send Apps' },
+  'canton-wallet': { src: '/img/cantonwallet.png', alt: 'Canton Wallet' },
+  'cusd-stablecoin': { src: '/img/cusd.png', alt: 'CUSD Stablecoin' }
+};
+
 function getInitials(title) {
   const parts = title.split(' ').filter(Boolean);
   if (parts.length === 0) return '';
@@ -25,9 +33,21 @@ export const navigationCards = sectionCards.map((section) => ({
   title: section.title,
   href: section.href,
   icon: (
-    <span className="nav-card-initial" aria-hidden="true">
-      {getInitials(section.title)}
-    </span>
+    cardImages[section.key]
+      ? (
+        <Image
+          src={cardImages[section.key].src}
+          alt={cardImages[section.key].alt}
+          width={72}
+          height={72}
+          className="nav-card-icon-image"
+        />
+      )
+      : (
+        <span className="nav-card-initial" aria-hidden="true">
+          {getInitials(section.title)}
+        </span>
+      )
   )
 }));
 

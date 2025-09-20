@@ -574,6 +574,12 @@ body {
   height: 72px;
 }
 
+.nav-card-icon-image {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
 .nav-card-initial {
   display: inline-flex;
   align-items: center;
