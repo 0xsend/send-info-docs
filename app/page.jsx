@@ -3,6 +3,7 @@ import { buildSidebarTree } from '../lib/md';
 
 export const metadata = {
   openGraph: {
+    title: 'Send Docs – Welcome Hub',
     images: [{ url: '/img/welcome-opengraph.png' }]
   }
 };
