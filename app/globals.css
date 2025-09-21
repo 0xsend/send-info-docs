@@ -55,7 +55,7 @@ body {
 .sidebar-panel {
   width: 320px;
   background: var(--Content-Light);
-  padding: 80px 40px 40px 40px;
+  padding: 56px 40px 40px 40px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -72,7 +72,7 @@ body {
 
 .main-content {
   flex: 1;
-  padding: 80px;
+  padding: 56px 80px 80px;
   max-width: none;
 }
 

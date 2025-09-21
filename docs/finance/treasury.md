@@ -41,7 +41,6 @@ Treasury balances are revised on the 7th of every month.
 | 9/7/23 | 42.32 | 19,905,976,741 | - | 14,600 | $15,041.81 | - | - |
 | 8/7/23 | 7.08 | 20,068,662,194 | - | 14,568 | - | - | - |
 
----
 
 **POL** = Protocol Owned Liquidity
 
