@@ -9,6 +9,8 @@ sidebar_position: 5
 ## Leadership
 
 ### **Allen Eubank - Founding CTO**
+A polyglot programmer and systems architect who brings deep expertise in product development and infrastructure. Allen's journey includes a successful exit as CTO at AdLibertas, where he led engineering teams building ad waterfall optimization and pLTV pipelines. Prior to Send, he was a founding engineer at SendNodes, developing POKT Wallet browser extension and staking platform. At Send, Allen leads R&D efforts focused on self-sovereign control of digital assets and identities. With experience spanning JavaScript, Ruby, Python, Java, Kotlin, Go, and Ethereum, he's built everything from big data pipelines to Send app itself. A committed open-source contributor since
+entering crypto in 2021, his philosophy is simple: "We can build anything we want given enough time."
 
 ### **Ethen Eric - Founding CEO**
 Oversees all things finance, tokenomics, and product. Passionate about decentralized finance and making money more accessible.
@@ -17,7 +19,7 @@ Oversees all things finance, tokenomics, and product. Passionate about decentral
 Experienced Business Finance Professional. Skilled in Financial Analysis, Investment Strategies, Negotiation, Business Planning, Operations Management, Value Stream Mapping, and Pricing Strategy. Strong Financial professional with a Master of Business Administration (MBA) from Loyola Marymount University, College of Business Administration.
 
 ### **Erick Ho - Head of Strategy**
-Erick is a serial entrepreneur in both consumer and infrastructure startups. He cofounded multiple blockchain infrastructure startups, Nodies and Function. Previously, he served as a Senior Software Engineer at Coinbase and advised seed to Series A startups as a Solutions Architect at Amazon Web Services. He is currently an investor and advisor to Send and Mamo  (edited) 
+Erick is a serial entrepreneur in both consumer and infrastructure startups. He cofounded multiple blockchain infrastructure startups, Nodies and Function. Previously, he served as a Senior Software Engineer at Coinbase and advised seed to Series A startups as a Solutions Architect at Amazon Web Services. He is currently an investor and advisor to Send and Mamo.
 
 ### **Xino Zee- Africa Lead**
 A soon-to-be legal practitioner with a firm interest in corporate legal practice, digital assets, insurance and regulatory compliance.
