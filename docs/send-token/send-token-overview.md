@@ -21,11 +21,11 @@ $SEND is an ERC-20 currently live and trading on the Base network.
 | **Total Supply** | 1 Billion | [View Live Data](https://supply.send.it/total) |
 | **Circulating Supply** | 315m (9/7/25) | [View Live Data](https://supply.send.it/circulating) |
 
-## Market Data and Charts
+## Market Data & Charts
 
 | Platform | Type | Link |
 |----------|------|------|
-| **CoinGecko** | Ranking and Data | [View on CoinGecko](https://www.coingecko.com/en/coins/send-token) |
+| **CoinGecko** | Ranking & Data | [View on CoinGecko](https://www.coingecko.com/en/coins/send-token) |
 | **DexScreener** | Live Chart | [View Chart](https://dexscreener.com/base/0x69bc1d350fe13f499c6aeded2c5ea9471b2a599a) |
 
 ## Trading
@@ -37,6 +37,7 @@ $SEND is an ERC-20 currently live and trading on the Base network.
 | **Temple** | Canton | Coming Soon |
 | **CantonSwap** | Canton | Coming Soon |
 
+---
 
 :::info Multi-Network Trading
 $SEND is currently trading live on Base network and will begin trading on Canton Network soon.
