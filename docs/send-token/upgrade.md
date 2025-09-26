@@ -21,12 +21,10 @@ We're also moving our liquidity pools from Uniswap to Aerodrome:
 
 ## Important Notes
 
-:::warning Mandatory Upgrade
 - Your proportional ownership remains exactly the same
 - This upgrade is mandatory to continue using the Send app
 - The upgrade process is one-time only and cannot be reversed
 - If you deposit any old SEND Tokens into the app after upgrading, you'll need to upgrade those tokens as well
-:::
 
 ## What You Need to Do
 
