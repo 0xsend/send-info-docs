@@ -990,8 +990,9 @@ body {
   min-width: 100%;
   border-collapse: collapse;
   margin: 24px 0;
-  overflow-x: auto;
   display: block;
+  overflow-x: auto;
+  max-width: 100%;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
