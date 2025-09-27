@@ -23,4 +23,4 @@ Sendtags are unique usernames within Send that serve as your personal identifier
 | 4 characters | 8 USDC |
 | 1-3 characters | 16 USDC |
 
-Register your Sendtag at <a href="https://send.app" class="multisig-revenue-link" target="_blank">send.app ↗</a>
+Register your Sendtag at <a href="https://send.app" className="multisig-revenue-link" target="_blank">send.app ↗</a>

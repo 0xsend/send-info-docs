@@ -11,7 +11,7 @@ Send's mobile apps bring privacy-first financial tools directly to your smartpho
 ## Platform Availability
 
 ### Progressive Web App (PWA)
-Experience Send today through our full-featured web application at <a href="https://send.app" class="multisig-token-link" target="_blank">send.app</a>. Our PWA provides native app-like performance with instant access through your mobile browser.
+Experience Send today through our full-featured web application at <a href="https://send.app" className="multisig-token-link" target="_blank">send.app</a>. Our PWA provides native app-like performance with instant access through your mobile browser.
 
 ### Native Mobile Apps
 Native iOS and Android applications are currently in development, bringing optimized performance and device-specific features to Send users.
@@ -27,7 +27,7 @@ Native iOS and Android applications are currently in development, bringing optim
 
 ## Getting Started
 
-Visit <a href="https://send.app" class="multisig-token-link" target="_blank">send.app</a> on your mobile device to create your account and start using Send today. The PWA can be added to your home screen for quick access and app-like functionality.
+Visit <a href="https://send.app" className="multisig-token-link" target="_blank">send.app</a> on your mobile device to create your account and start using Send today. The PWA can be added to your home screen for quick access and app-like functionality.
 
 
 :::tip Stay Updated

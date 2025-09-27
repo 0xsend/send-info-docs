@@ -35,12 +35,12 @@ We've built multiple layers of security to protect your funds:
 
 ## Behind the Scenes
 
-Send Earn operates similarly to traditional bank lending but with enhanced efficiency and transparency. Your deposited USDC is put to work through established lending protocols (<a href="https://moonwell.fi/" class="multisig-token-link" target="_blank">Moonwell ↗</a> and <a href="https://morpho.org/" class="multisig-token-link" target="_blank">Morpho ↗</a>) that have been thoroughly tested and secured. These protocols facilitate lending to verified borrowers who pay interest, which is then shared with you as a depositor.
+Send Earn operates similarly to traditional bank lending but with enhanced efficiency and transparency. Your deposited USDC is put to work through established lending protocols (<a href="https://moonwell.fi/" className="multisig-token-link" target="_blank">Moonwell ↗</a> and <a href="https://morpho.org/" className="multisig-token-link" target="_blank">Morpho ↗</a>) that have been thoroughly tested and secured. These protocols facilitate lending to verified borrowers who pay interest, which is then shared with you as a depositor.
 
 Our lending strategy focuses on security and sustainability:
 
 - All lending is done against blue-chip digital assets only
 - Borrowing is overcollateralized with conservative loan-to-value ratios for added security
-- Risk management is handled by industry leaders <a href="https://blockanalitica.com/" class="multisig-token-link" target="_blank">BlockAnalitica ↗</a> and <a href="https://www.bprotocol.org/" class="multisig-token-link" target="_blank">B.Protocol ↗</a>, who collectively advise projects managing over $12 billion in assets
+- Risk management is handled by industry leaders <a href="https://blockanalitica.com/" className="multisig-token-link" target="_blank">BlockAnalitica ↗</a> and <a href="https://www.bprotocol.org/" className="multisig-token-link" target="_blank">B.Protocol ↗</a>, who collectively advise projects managing over $12 billion in assets
 
 Unlike traditional banks that often keep lending practices opaque, Send Earn's operations are transparent and verifiable. Our lending protocols maintain conservative risk parameters and automated safeguards to ensure the security of your deposits while generating competitive returns.
