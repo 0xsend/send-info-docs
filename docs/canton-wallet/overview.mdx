@@ -27,6 +27,12 @@ Canton Wallet fixes both problems: no seed phrases to lose, no public transactio
 - **Institutional security:** Same WebAuthn standards banks and enterprises use
 - **Canton ecosystem access:** Gateway to privacy-first DeFi applications
 
+## Security FAQ
+
+- **Is face login secure?** Yes. Passkeys require possession of your trusted device and a successful biometric unlock. Spoofed photos or video replays fail because the device performs hardware-level liveness checks before releasing your credential.
+- **Do attackers need my phone?** Yes. Without the physical device, the passkey cannot be used, and even with the device, they still need your biometric or device passcode.
+- **What counts as a hardware key?** Any FIDO2/WebAuthn security key (like YubiKey or Feitian) that plugs into or pairs with your device. You can enroll one as an additional passkey for extra assurance.
+
 ## Status
 
 Going live September 28th, 2025. Visit [CantonWallet.com](https://cantonwallet.com) for access.

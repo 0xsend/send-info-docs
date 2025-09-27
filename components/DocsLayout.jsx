@@ -9,6 +9,45 @@ import WelcomeHero from './WelcomeHero';
 import { navigationCards } from './WelcomePage';
 import SiteHeader from './SiteHeader';
 
+const heroItemIcons = {
+  'send-token/send-token-overview': (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <rect x="4" y="8" width="40" height="32" rx="12" fill="url(#cardGradientOverview)" />
+      <path d="M16 20H32" stroke="#041814" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M16 28H26" stroke="#041814" strokeWidth="2.5" strokeLinecap="round" />
+      <defs>
+        <linearGradient id="cardGradientOverview" x1="4" y1="8" x2="44" y2="40" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#40FB50" stopOpacity="0.85" />
+          <stop offset="1" stopColor="#12C48F" />
+        </linearGradient>
+      </defs>
+    </svg>
+  ),
+  'send-token/tokenomics': (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <circle cx="24" cy="24" r="18" fill="#041814" />
+      <path d="M24 12C29.523 12 34 16.477 34 22C34 27.523 29.523 32 24 32" stroke="#40FB50" strokeWidth="3" strokeLinecap="round" />
+      <path d="M24 36C18.477 36 14 31.523 14 26C14 20.477 18.477 16 24 16" stroke="#87B7A8" strokeWidth="2.5" strokeLinecap="round" />
+    </svg>
+  ),
+  'send-token/bridge': (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <rect x="8" y="18" width="32" height="12" rx="6" fill="#0D241F" />
+      <path d="M12 24H20" stroke="#40FB50" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M28 24H36" stroke="#40FB50" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M20 24L24 20L28 24L24 28L20 24Z" fill="#40FB50" />
+    </svg>
+  ),
+  'send-token/upgrade': (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <rect x="14" y="10" width="20" height="20" rx="6" fill="#0D241F" />
+      <path d="M24 14V6" stroke="#40FB50" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M18 28V34C18 36.2091 19.7909 38 22 38H26C28.2091 38 30 36.2091 30 34V28" stroke="#87B7A8" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M20 20L24 16L28 20" stroke="#40FB50" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+};
+
 export default function DocsLayout({ children, treeData, headings = [] }) {
   const pathname = usePathname();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -71,9 +110,11 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
         href,
         title: titleText,
         icon: (
-          <span className="nav-card-initial" aria-hidden="true">
-            {initial}
-          </span>
+          heroItemIcons[item.id] || (
+            <span className="nav-card-initial" aria-hidden="true">
+              {initial}
+            </span>
+          )
         )
       };
     });

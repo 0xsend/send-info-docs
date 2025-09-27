@@ -105,7 +105,6 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0;
-  margin-bottom: 16px;
   text-decoration: none;
   color: inherit;
 }
@@ -139,6 +138,7 @@ body {
   color: var(--Text-Secondary);
   background: var(--Content-Light);
 }
+
 
 /* Sidebar Navigation */
 .sidebar-list {
@@ -661,18 +661,12 @@ body {
     transform: translateX(0);
   }
 
-  .sidebar-mobile-controls {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 24px;
-  }
-
-  .sidebar-mobile-controls .header-brand {
-    margin-bottom: 0;
-    flex: 1 1 auto;
-    gap: 8px;
-  }
+.sidebar-mobile-controls {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
 
   .sidebar-mobile-controls .docs-badge-wrapper {
     position: static;
@@ -735,12 +729,6 @@ body {
     gap: 12px;
     margin-bottom: 24px;
     width: 100%;
-  }
-
-  .mobile-header .header-brand {
-    margin-bottom: 0;
-    flex: 1 1 auto;
-    gap: 8px;
   }
 
   .mobile-header .docs-badge-wrapper {
@@ -914,21 +902,30 @@ body {
 
 /* Legacy compatibility for other pages */
 .markdown h1 {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: -0.72px;
+  font-size: clamp(32px, 2.4rem + 0.4vw, 42px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
   color: var(--Content-Primary);
-  margin: 0 0 24px 0;
+  margin: 0 0 32px 0;
 }
 
 .markdown h2 {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: -0.72px;
+  font-size: clamp(26px, 1.8rem + 0.3vw, 32px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
   color: var(--Content-Primary);
-  margin: 40px 0 24px 0;
+  margin: 48px 0 24px 0;
+}
+
+.markdown h3 {
+  font-size: clamp(20px, 1.35rem + 0.2vw, 24px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--Content-Primary);
+  margin: 32px 0 16px 0;
 }
 
 .markdown p {
@@ -977,26 +974,28 @@ body {
 }
 
 /* Table styles for markdown */
-.markdown table {
-  width: max-content;
-  min-width: 100%;
-  border-collapse: collapse;
+.markdown .table-scroll {
   margin: 24px 0;
   overflow-x: auto;
-  display: block;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
-.markdown table::-webkit-scrollbar {
+.markdown .table-scroll::-webkit-scrollbar {
   height: 6px;
 }
-.markdown table::-webkit-scrollbar-track {
+.markdown .table-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
-.markdown table::-webkit-scrollbar-thumb {
+.markdown .table-scroll::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.25);
   border-radius: 999px;
+}
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--Content-Light);
+  min-width: 520px;
 }
 .markdown thead th {
   background: var(--Content-Light);
@@ -1017,8 +1016,11 @@ body {
 }
 
 @media (max-width: 768px) {
-  .markdown table {
+  .markdown .table-scroll {
     margin: 16px 0;
+  }
+  .markdown table {
+    min-width: 480px;
   }
 }
 
