@@ -108,7 +108,11 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
     return [];
   });
 
+  const featureItems = tree['features'] || [];
   const isFeatureDetailPath = pathname.startsWith('/docs/features/');
+  const isFeatureLandingPath = pathname === '/docs/send-mobile-apps/features';
+  const shouldExpandFeatures = isFeatureDetailPath || isFeatureLandingPath;
+  const [featuresExpanded, setFeaturesExpanded] = useState(shouldExpandFeatures);
   const prevSectionRef = useRef(currentSection);
 
   useEffect(() => {
@@ -130,12 +134,16 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
   }, [currentSection, sections]);
 
   useEffect(() => {
-    if (isFeatureDetailPath) {
+    if (shouldExpandFeatures) {
       setExpandedSections((prev) => (
         prev.includes('send-mobile-apps') ? prev : [...prev, 'send-mobile-apps']
       ));
     }
-  }, [isFeatureDetailPath]);
+  }, [shouldExpandFeatures]);
+
+  useEffect(() => {
+    setFeaturesExpanded(shouldExpandFeatures);
+  }, [shouldExpandFeatures]);
 
   const toggleSection = (section) => {
     setExpandedSections(prev => 
@@ -231,17 +239,73 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
               </div>
               {isExpanded && (
                 <ul className="sidebar-sublist expanded">
-                  {tree[section].map((item) => (
-                    <li key={item.id} className="sidebar-item">
-                      <Link
-                        href={`/docs/${item.id}`}
-                        className={`sidebar-link ${isActiveLink(item.id) ? 'active' : ''}`}
-                        onClick={handleLinkClick}
-                      >
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
+                  {tree[section].map((item) => {
+                    const isFeaturesItem =
+                      section === 'send-mobile-apps' && item.id === 'send-mobile-apps/features' && featureItems.length > 0;
+
+                    if (isFeaturesItem) {
+                      const isItemActive = isActiveLink(item.id);
+                      return (
+                        <li key={item.id} className={`sidebar-item sidebar-item-with-children${featuresExpanded ? ' expanded' : ''}`}>
+                          <div className="sidebar-item-toggle-row">
+                            <Link
+                              href={`/docs/${item.id}`}
+                              className={`sidebar-link ${isItemActive ? 'active' : ''}`}
+                              onClick={handleLinkClick}
+                            >
+                              {item.title}
+                            </Link>
+                            <button
+                              type="button"
+                              className={`sidebar-item-toggle ${featuresExpanded ? 'expanded' : ''}`}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                setFeaturesExpanded((prev) => !prev);
+                              }}
+                              aria-expanded={featuresExpanded}
+                              aria-label={featuresExpanded ? 'Collapse Features' : 'Expand Features'}
+                            >
+                              <svg
+                                className={`sidebar-arrow ${featuresExpanded ? 'expanded' : ''}`}
+                                width="20"
+                                height="20"
+                                viewBox="0 0 10 7"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M5 0.9375L10 5.9375L8.9375 7L5 3.0625L1.0625 7L9.28867e-08 5.9375L5 0.9375Z" fill="#666"/>
+                              </svg>
+                            </button>
+                          </div>
+                          <ul className={`sidebar-sublist nested-group ${featuresExpanded ? 'expanded' : ''}`}>
+                            {featureItems.map((featureItem) => (
+                              <li key={featureItem.id} className="sidebar-item nested">
+                                <Link
+                                  href={`/docs/${featureItem.id}`}
+                                  className={`sidebar-link ${isActiveLink(featureItem.id) ? 'active' : ''}`}
+                                  onClick={handleLinkClick}
+                                >
+                                  {featureItem.title}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                      );
+                    }
+
+                    return (
+                      <li key={item.id} className="sidebar-item">
+                        <Link
+                          href={`/docs/${item.id}`}
+                          className={`sidebar-link ${isActiveLink(item.id) ? 'active' : ''}`}
+                          onClick={handleLinkClick}
+                        >
+                          {item.title}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </li>

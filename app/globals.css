@@ -315,6 +315,44 @@ body {
   margin-top: 8px;
 }
 
+.sidebar-item-with-children {
+  margin: 0;
+}
+
+.sidebar-item-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-item-toggle-row .sidebar-link {
+  flex: 1 1 auto;
+}
+
+.sidebar-item-toggle {
+  border: 0;
+  background: transparent;
+  padding: 8px 16px 8px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--Corner-Radius-S);
+}
+
+.sidebar-item-toggle .sidebar-arrow {
+  opacity: 0.6;
+}
+
+.sidebar-item-toggle.expanded .sidebar-arrow {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+.sidebar-sublist.nested-group {
+  padding: 0 0 12px 0;
+}
+
 .sidebar-item {
   margin: 0;
 }
