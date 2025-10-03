@@ -108,12 +108,8 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
     return [];
   });
 
-  const featureIds = tree['features'] ? tree['features'].map((item) => item.id) : [];
-  const isActiveFeature = featureIds.some((id) => pathname === `/docs/${id}`);
-
-  const [featuresExpanded, setFeaturesExpanded] = useState(isActiveFeature);
+  const isFeatureDetailPath = pathname.startsWith('/docs/features/');
   const prevSectionRef = useRef(currentSection);
-  const prevPathRef = useRef(pathname);
 
   useEffect(() => {
     const prevSection = prevSectionRef.current;
@@ -134,21 +130,12 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
   }, [currentSection, sections]);
 
   useEffect(() => {
-    if (pathname === prevPathRef.current) {
-      return;
-    }
-
-    setFeaturesExpanded(isActiveFeature);
-    prevPathRef.current = pathname;
-  }, [pathname, isActiveFeature]);
-
-  useEffect(() => {
-    if (isActiveFeature) {
+    if (isFeatureDetailPath) {
       setExpandedSections((prev) => (
         prev.includes('send-mobile-apps') ? prev : [...prev, 'send-mobile-apps']
       ));
     }
-  }, [isActiveFeature]);
+  }, [isFeatureDetailPath]);
 
   const toggleSection = (section) => {
     setExpandedSections(prev => 
@@ -169,6 +156,9 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
   };
 
   const isActiveLink = (itemId) => {
+    if (itemId === 'send-mobile-apps/features') {
+      return pathname === `/docs/${itemId}` || isFeatureDetailPath;
+    }
     return pathname === `/docs/${itemId}`;
   };
 
@@ -252,44 +242,6 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
                       </Link>
                     </li>
                   ))}
-
-                  {section === 'send-mobile-apps' && tree['features'] && (
-                    <>
-                      <li className="sidebar-item">
-                        <button
-                          className={`sidebar-nested-toggle ${featuresExpanded ? 'expanded' : ''}`}
-                          onClick={() => setFeaturesExpanded((v) => !v)}
-                          aria-expanded={featuresExpanded}
-                          type="button"
-                        >
-                          Features
-                          <svg
-                            className={`sidebar-arrow ${featuresExpanded ? 'expanded' : ''}`}
-                            width="20"
-                            height="20"
-                            viewBox="0 0 10 7"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M5 0.9375L10 5.9375L8.9375 7L5 3.0625L1.0625 7L9.28867e-08 5.9375L5 0.9375Z" fill="#666"/>
-                          </svg>
-                        </button>
-                      </li>
-                      {featuresExpanded && (
-                        tree['features'].map((item) => (
-                          <li key={item.id} className="sidebar-item nested">
-                            <Link
-                              href={`/docs/${item.id}`}
-                              className={`sidebar-link ${isActiveLink(item.id) ? 'active' : ''}`}
-                              onClick={handleLinkClick}
-                            >
-                              {item.title}
-                            </Link>
-                          </li>
-                        ))
-                      )}
-                    </>
-                  )}
                 </ul>
               )}
             </li>
