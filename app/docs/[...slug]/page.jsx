@@ -1,4 +1,5 @@
 import DocsLayout from '../../../components/DocsLayout';
+import SendAppsPage from '../../../components/SendAppsPage';
 import { getAllDocSlugs, readDocBySlug, renderDocToComponent, extractTitle, buildSidebarTree } from '../../../lib/md';
 
 export async function generateStaticParams() {
@@ -119,6 +120,16 @@ export default async function DocPage({ params }) {
       'legal': 'Legal'
     };
     const label = sectionLabels[section] || section.replace(/-/g, ' ');
+
+    // Show custom page for send-mobile-apps section
+    if (section === 'send-mobile-apps') {
+      return (
+        <DocsLayout treeData={sidebarTree} headings={[]}>
+          <SendAppsPage />
+        </DocsLayout>
+      );
+    }
+
     return (
       <DocsLayout treeData={sidebarTree} headings={[]} />
     );

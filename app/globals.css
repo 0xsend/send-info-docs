@@ -580,15 +580,14 @@ body {
 /* Navigation Cards */
 .navigation-grid {
   display: flex;
-  align-items: stretch;
-  gap: 32px;
+  align-items: center;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .nav-card {
-  width: 161px;
-  min-height: 220px;
-  height: 220px;
+  width: 309px;
+  height: 56px;
   position: relative;
   background: var(--Card-Background);
   border-radius: 16px;
@@ -597,26 +596,44 @@ body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-decoration: none;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  gap: 16px;
-  padding: 26px 18px 20px;
+  justify-content: space-between;
+  padding: 24px;
 }
 
 .nav-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
 }
 
+.nav-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
 .nav-card-icon {
-  width: 72px;
-  height: 72px;
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #F2F2F2;
+  flex-shrink: 0;
+}
+
+.nav-card-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: #999999;
 }
 
 .nav-card-icon-image {
-  width: 72px;
-  height: 72px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 
@@ -624,44 +641,151 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: #f1f3f5;
-  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--Content-Primary);
+  color: #999999;
 }
 
 .nav-card-title {
   color: var(--Content-Primary);
-  font-size: 12px;
+  font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 18px;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 0;
+  line-height: 24px;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .nav-card-arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #f1f3f5;
-  border: 1px solid var(--Border-Color);
-  color: var(--Text-Secondary);
+  width: 32px;
+  height: 32px;
+  transform: rotate(-90deg);
   flex-shrink: 0;
-  margin-top: auto;
-  align-self: center;
 }
 
 .nav-card-arrow-icon {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 10px;
   display: block;
+  fill: #999999;
+}
+
+/* Send Apps Page Styles */
+.page-header {
+  display: flex;
+  height: 32px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.page-title {
+  color: var(--Content-Primary);
+  font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.96px;
+}
+
+.apps-hero {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto 40px auto;
+}
+
+.apps-hero-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+  aspect-ratio: 3/1;
+}
+
+.apps-navigation-grid {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.apps-nav-card {
+  display: flex;
+  width: 309.333px;
+  padding: 24px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 16px;
+  background: var(--Card-Background);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
+}
+
+.apps-nav-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .apps-nav-card:hover {
+    transform: none;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
+  }
+
+  .apps-nav-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+}
+
+.apps-nav-card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.apps-nav-card-icon {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #F2F2F2;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+}
+
+.apps-nav-card-title {
+  color: var(--Content-Primary);
+  text-align: center;
+  font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.apps-nav-card-arrow {
+  width: 32px;
+  height: 32px;
+  transform: rotate(-90deg);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Mobile Responsive */
@@ -669,11 +793,76 @@ body {
   .navigation-grid {
     gap: 20px;
   }
-  
+
   .nav-card {
     width: 140px;
     min-height: 190px;
     height: 190px;
+  }
+
+  .apps-navigation-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .apps-nav-card {
+    width: 100%;
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 768px) {
+  .apps-navigation-grid {
+    flex-direction: column;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .apps-nav-card {
+    width: 100%;
+    max-width: none;
+    padding: 20px;
+    min-height: 64px;
+    height: auto;
+  }
+
+  .apps-nav-card-content {
+    gap: 12px;
+  }
+
+  .apps-nav-card-icon {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+  }
+
+  .apps-nav-card-title {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .apps-nav-card-arrow {
+    width: 28px;
+    height: 28px;
+  }
+
+  .apps-hero {
+    margin-bottom: 32px;
+  }
+
+  .apps-hero-image {
+    height: 200px;
+  }
+
+  .page-header {
+    margin-bottom: 32px;
+  }
+
+  .page-title {
+    font-size: 28px;
+    line-height: 32px;
   }
 }
 
@@ -695,6 +884,14 @@ body {
     box-shadow: 0 16px 40px rgba(18, 32, 35, 0.16);
     z-index: 1001;
     background: var(--Content-Light);
+  }
+
+  .apps-hero-image {
+    height: 240px;
+  }
+
+  .page-title {
+    font-size: 28px;
   }
 
   .sidebar-panel.open {
@@ -844,23 +1041,79 @@ body {
     gap: 16px;
     grid-auto-rows: 1fr;
   }
-  
+
   .nav-card {
     width: 100%;
     min-width: 140px;
     min-height: 180px;
     height: 180px;
   }
-  
+
   .hero-section {
     height: 200px;
     padding: 20px;
   }
-  
+
   .hero-title {
     font-size: 24px;
   }
 
+  .apps-hero-image {
+    height: 180px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .apps-navigation-grid {
+    gap: 10px;
+    padding: 0 4px;
+  }
+
+  .apps-nav-card {
+    padding: 16px;
+    min-height: 56px;
+  }
+
+  .apps-nav-card-content {
+    gap: 10px;
+  }
+
+  .apps-nav-card-icon {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+  }
+
+  .apps-nav-card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .apps-nav-card-title {
+    font-size: 15px;
+    line-height: 18px;
+  }
+
+  .apps-nav-card-arrow {
+    width: 24px;
+    height: 24px;
+  }
+
+  .apps-nav-card-arrow svg {
+    width: 12px;
+    height: 8px;
+  }
+
+  .page-header {
+    margin-bottom: 24px;
+  }
+
+  .apps-hero {
+    margin-bottom: 24px;
+  }
 }
 
 .sidebar-footer {
@@ -1104,7 +1357,7 @@ body {
   }
 
   .main-content {
-    padding: 28px 14px;
+    padding: 24px 12px;
   }
 
   .welcome-title,
@@ -1128,6 +1381,70 @@ body {
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
+  }
+
+  /* Send Apps specific mobile styles */
+  .page-title {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .apps-hero {
+    margin-bottom: 20px;
+  }
+
+  .apps-hero-image {
+    height: 160px;
+    border-radius: 12px;
+  }
+
+  .apps-navigation-grid {
+    gap: 8px;
+    padding: 0 2px;
+  }
+
+  .apps-nav-card {
+    padding: 14px;
+    border-radius: 12px;
+    min-height: 52px;
+    /* Ensure good touch target size */
+    min-height: 48px;
+  }
+
+  .apps-nav-card-content {
+    gap: 8px;
+  }
+
+  .apps-nav-card-icon {
+    width: 28px;
+    height: 28px;
+    padding: 2px;
+    border-radius: 6px;
+  }
+
+  .apps-nav-card-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .apps-nav-card-title {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 600;
+  }
+
+  .apps-nav-card-arrow {
+    width: 20px;
+    height: 20px;
+  }
+
+  .apps-nav-card-arrow svg {
+    width: 10px;
+    height: 6px;
+  }
+
+  .page-header {
+    margin-bottom: 20px;
   }
 }
 
