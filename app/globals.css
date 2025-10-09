@@ -579,15 +579,14 @@ body {
 
 /* Navigation Cards */
 .navigation-grid {
-  display: flex;
-  align-items: center;
+  display: grid;
+  align-items: stretch;
   gap: 16px;
-  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .nav-card {
-  width: 309px;
-  height: 56px;
+  width: 100%;
   position: relative;
   background: var(--Card-Background);
   border-radius: 16px;
@@ -598,7 +597,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px;
+  gap: 16px;
+  padding: 20px 24px;
 }
 
 .nav-card:hover {
@@ -655,7 +655,9 @@ body {
   font-weight: 700;
   line-height: 24px;
   margin: 0;
-  white-space: nowrap;
+  white-space: normal;
+  flex: 1;
+  overflow-wrap: anywhere;
 }
 
 .nav-card-arrow {
@@ -709,17 +711,17 @@ body {
 }
 
 .apps-navigation-grid {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
   gap: 16px;
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .apps-nav-card {
   display: flex;
-  width: 309.333px;
+  width: 100%;
   padding: 24px;
   justify-content: space-between;
   align-items: center;
@@ -728,6 +730,7 @@ body {
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
+  gap: 16px;
 }
 
 .apps-nav-card:hover {
@@ -751,9 +754,10 @@ body {
 
 .apps-nav-card-content {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 16px;
+  flex: 1;
 }
 
 .apps-nav-card-icon {
@@ -770,12 +774,14 @@ body {
 
 .apps-nav-card-title {
   color: var(--Content-Primary);
-  text-align: center;
+  text-align: left;
   font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .apps-nav-card-arrow {
@@ -791,41 +797,28 @@ body {
 /* Mobile Responsive */
 @media (max-width: 1200px) {
   .navigation-grid {
-    gap: 20px;
-  }
-
-  .nav-card {
-    width: 140px;
-    min-height: 190px;
-    height: 190px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
   }
 
   .apps-navigation-grid {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-  }
-
-  .apps-nav-card {
-    width: 100%;
-    max-width: 480px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
+  .navigation-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
   .apps-navigation-grid {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 12px;
     max-width: 100%;
   }
 
   .apps-nav-card {
-    width: 100%;
-    max-width: none;
     padding: 20px;
-    min-height: 64px;
-    height: auto;
   }
 
   .apps-nav-card-content {
@@ -1016,37 +1009,27 @@ body {
   }
 
   .navigation-grid {
-    justify-content: center;
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .nav-card {
-    width: 120px;
-    min-height: 180px;
-    height: 180px;
-    padding: 20px 16px;
+    padding: 20px;
   }
 
   .nav-card-icon {
-    width: 56px;
-    height: 56px;
-    margin-bottom: 20px;
+    width: 48px;
+    height: 48px;
   }
 }
 
 @media (max-width: 640px) {
   .navigation-grid {
-    grid-template-columns: repeat(2, 1fr);
-    display: grid;
-    gap: 16px;
-    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .nav-card {
-    width: 100%;
-    min-width: 140px;
-    min-height: 180px;
-    height: 180px;
+    padding: 18px 20px;
   }
 
   .hero-section {
@@ -1068,6 +1051,7 @@ body {
   }
 
   .apps-navigation-grid {
+    grid-template-columns: 1fr;
     gap: 10px;
     padding: 0 4px;
   }

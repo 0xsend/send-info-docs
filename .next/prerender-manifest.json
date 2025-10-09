@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/docs/canton-wallet/overview":{},"/docs/cusd-stablecoin/overview":{},"/docs/features/invest":{},"/docs/features/passkeys":{},"/docs/features/referrals":{},"/docs/features/rewards":{},"/docs/features/savings":{},"/docs/features/sendtags":{},"/docs/features/verified-profiles":{},"/docs/finance/business-models":{},"/docs/finance/funding-rounds":{},"/docs/finance/multisigs":{},"/docs/finance/revenue":{},"/docs/finance/token-emissions":{},"/docs/finance/treasury":{},"/docs/legal/affiliate-marketing-disclaimer":{},"/docs/legal/disclaimer":{},"/docs/legal/licenses":{},"/docs/legal/privacy-policy":{},"/docs/legal/terms-of-service":{},"/docs/links/buy-send":{},"/docs/links/github":{},"/docs/links/support":{},"/docs/links/telegram":{},"/docs/links/x-profile":{},"/docs/miscellaneous/brand-links-assets":{},"/docs/miscellaneous/glossary":{},"/docs/miscellaneous/intellectual-property":{},"/docs/miscellaneous/roadmap":{},"/docs/miscellaneous/send-contract-addresses":{},"/docs/miscellaneous/send-metrics":{},"/docs/send-mobile-apps/features":{},"/docs/send-mobile-apps/overview":{},"/docs/send-token/bridge":{},"/docs/send-token/send-token-overview":{},"/docs/send-token/tokenomics":{},"/docs/send-token/upgrade":{},"/docs/welcome/contact":{},"/docs/welcome/mission-vision-values":{},"/docs/welcome/problem-statement":{},"/docs/welcome/send-overview":{},"/docs/welcome/team":{},"/docs/canton-wallet":{},"/docs/cusd-stablecoin":{},"/docs/features":{},"/docs/finance":{},"/docs/legal":{},"/docs/links":{},"/docs/miscellaneous":{},"/docs/send-mobile-apps":{},"/docs/send-token":{},"/docs/welcome":{}},"dynamicRoutes":{"/docs/[...slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/docs/[...slug]","routeRegex":"^\\/docs\\/(.+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"8b4888b8615983abfd321a9d3a7d50c4","previewModeSigningKey":"c453f240691431b4cf178d5bc7ed6067e4efe33ec1dabe3b95c862b853aff278","previewModeEncryptionKey":"ec2399895662fd4a85c9ff00002528d03d384249b2fc3c29734d6c8f76c03cac"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "abd364f4b6fb7e42af3b04b26e3006cd",
+    "previewModeSigningKey": "13f043e13f544651a6f90c56af30e871eb39102346cdf452069d155ca6dd4d1c",
+    "previewModeEncryptionKey": "3063fb3e82179b6b79b273e017a465dbde8af567882835d916563d311d8da056"
+  }
+}
