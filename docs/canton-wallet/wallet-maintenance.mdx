@@ -1,0 +1,47 @@
+---
+id: canton-wallet-maintenance
+title: Wallet Maintenance
+sidebar_position: 4
+---
+
+# Wallet Maintenance
+
+Routine upkeep keeps Canton Wallet responsive and avoids unnecessary network fees. The actions below explain how to manage automated transfers and optimize your unspent transaction outputs (UTXOs).
+
+## Enable Transfer Pre-Approval
+
+Transfer pre-approval automatically accepts incoming Canton Coin transfers without showing a confirmation prompt.
+
+:::info Rewards drip requirement
+To receive the ongoing $CC drip documented in [Canton Rewards](./canton-rewards), a wallet must have transfer pre-approval enabled so incoming credits settle without manual approval.
+:::
+
+### Benefits
+
+- Automatic acceptance of inbound $CC transfers  
+- No manual confirmation workflow  
+- Faster completion for frequent or scheduled transfers
+
+### Considerations
+
+- Enabling the feature deploys a contract on Canton Network.  
+- The authorization is auto-renewed by the validator operator.  
+- You cannot disable pre-approval after activation, so confirm the requirement with your treasury policies before proceeding.
+
+## Consolidate UTXOs
+
+Each Canton Wallet balance is stored as individual UTXOs—similar to holding many small bills. Large numbers of UTXOs increase holding fees and slow down signing operations. Consolidation merges the fragments into fewer, larger outputs.
+
+### Why Consolidate
+
+- Lower aggregate holding fees  
+- Faster transaction signing and broadcasting  
+- Cleaner wallet state for future transactions
+
+### How It Works
+
+1. Open the UTXO consolidation prompt when the wallet surfaces an alert.  
+2. Select **Send max consolidatable amount** to route the recommended total back to your own Canton Wallet address.  
+3. Approve the self-transfer; the wallet merges the source UTXOs into fewer outputs automatically.
+
+Allow the transaction to finalize on Canton Network before initiating time-sensitive transfers.
