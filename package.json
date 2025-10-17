@@ -20,7 +20,9 @@
     "remark-gfm": "^4.0.0",
     "remark-parse": "^11.0.0",
     "unified": "^11.0.4",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "@supabase/supabase-js": "^2.47.10",
+    "viem": "^2.13.1"
   },
   "engines": {
     "node": ">=18.0"
