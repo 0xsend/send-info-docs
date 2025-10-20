@@ -29,7 +29,7 @@ High-level architecture
   - app/docs/[...slug]/page.jsx (docs & section landings)
     - generateStaticParams: prebuilds routes for every MDX in docs/ and for section landing pages.
     - generateMetadata: sets section-aware Open Graph (image/title/description) when on a section root; otherwise uses the MDX page title.
-    - On section root: renders a section landing (custom behavior for Send Apps).
+    - On section root: renders a section landing (custom behavior for the Send App).
     - On page slug: loads the MDX via renderDocToComponent and renders it inside DocsLayout with a ToC.
 
 - MDX pipeline and content model (lib/md.js)
@@ -45,14 +45,14 @@ High-level architecture
   - buildSidebarTree(): walks docs/ and returns a section→[{id, title}] map.
     - Title per item is derived from frontmatter.title or the first H1.
     - Custom ordering is applied per section (e.g., welcome, send-token, send-mobile-apps, canton-wallet, finance, miscellaneous, legal).
-    - The docs/features folder is intentionally surfaced under Send Apps (nested under send-mobile-apps) rather than a top-level "features" section.
+    - The docs/features folder is intentionally surfaced under the Send App section (nested under send-mobile-apps) rather than a top-level "features" section.
 
 - Layout, hero, and ToC
   - components/DocsLayout.jsx
     - Determines if we’re on home or section landing and shows a hero grid (navigationCards for home; section-mapped hero for landings).
     - On article routes, shows breadcrumbs, content, and a right-hand ToC from extracted H2/H3.
   - components/SidebarNav.jsx
-    - Renders curated sections, handles expansion state, highlights the active route, and nests “Features” under Send Apps.
+    - Renders curated sections, handles expansion state, highlights the active route, and nests “Features” under Send App.
   - components/mdx/Callout.jsx
     - Visual component used by admonition→Callout transformation.
 

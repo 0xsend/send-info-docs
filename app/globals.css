@@ -677,7 +677,7 @@ body {
   fill: #999999;
 }
 
-/* Send Apps Page Styles */
+/* Send App Page Styles */
 .page-header {
   display: flex;
   height: 32px;
@@ -1367,7 +1367,7 @@ body {
     gap: 6px;
   }
 
-  /* Send Apps specific mobile styles */
+  /* Send App specific mobile styles */
   .page-title {
     font-size: 22px;
     line-height: 26px;
