@@ -42,7 +42,7 @@ const sectionIcons = {
   ),
   'cusd-stablecoin': (
     <Image
-      src="/img/cusdicon.svg"
+      src="/img/CUSDlogomark.svg"
       alt=""
       width={20}
       height={20}

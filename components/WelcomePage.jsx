@@ -18,7 +18,7 @@ const cardImages = {
   'send-token': { src: '/img/sendtoken.png', alt: 'Send Token' },
   'send-mobile-apps': { src: '/img/sendapps.png', alt: 'Send App' },
   'canton-wallet': { src: '/img/cantonwallet.png', alt: 'Canton Wallet' },
-  'cusd-stablecoin': { src: '/img/cusd.png', alt: 'CUSD Stablecoin' }
+  'cusd-stablecoin': { src: '/img/CUSDlogomark.png', alt: 'CUSD Logomark' }
 };
 
 function getInitials(title) {
