@@ -31,7 +31,7 @@ Vault is in limited launch. Early teams receive invite links inside Canton Walle
 1. Open Canton Wallet, navigate to **Canton Wallet → Vault**, and select **Create Vault**.  
 2. Name the vault and pick a unique slug; this cannot be changed later.  
 3. Choose a signing policy: `m-of-n` (default) or `tiered` (separate thresholds for routine vs. high-value transfers).  
-4. Add signer emails or Canton Wallet usernames. Invitations stay pending until each signer accepts from their wallet.  
+4. Add signer party ids or Canton Wallet usernames. Invitations stay pending until each signer accepts from their wallet.  
 5. Fund the vault by transferring assets from an existing Canton Wallet or importing an on-chain balance using the provided deposit address.
 
 Vault stays in a draft state until the final signer joins and the funding transaction finalizes. Draft vaults cannot hold assets.
@@ -40,7 +40,7 @@ Vault stays in a draft state until the final signer joins and the funding transa
 
 1. Any signer can propose a transfer by selecting **New Proposal**, entering the destination address, asset, and amount, then choosing the applicable policy (e.g., routine or high-value).  
 2. The proposal is staged on Canton Network and split into discreet approval slots equal to the threshold.  
-3. Signers receive push and email notifications. Approvals happen inside Canton Wallet with the same passkey prompt they use for personal transfers.  
+3. Approvals happen inside Canton Wallet with the same passkey prompt they use for personal transfers.  
 4. Once the threshold is met, Canton executes the transfer and posts a completion receipt in the vault activity log.
 
 ## Managing Signers
