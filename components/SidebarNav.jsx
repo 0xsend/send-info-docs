@@ -85,10 +85,10 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
   // Desired order
   const desiredOrder = [
     'welcome',
-    'send-token',
     'send-mobile-apps',
-    'canton-wallet',
+    'send-token',
     'cusd-stablecoin',
+    'canton-wallet',
     'finance',
     'miscellaneous',
     'legal'
