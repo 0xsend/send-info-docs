@@ -56,12 +56,16 @@ export default function SearchDialog({ isOpen, onClose }) {
     }
   }, [isOpen, searchIndex]);
 
-  // Focus input when dialog opens
+  // Focus input when dialog opens and is ready (not loading)
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
+    if (isOpen && mounted && !loading) {
+      // Use requestAnimationFrame to ensure DOM is painted after animation starts
+      const rafId = requestAnimationFrame(() => {
+        inputRef.current?.focus();
+      });
+      return () => cancelAnimationFrame(rafId);
     }
-  }, [isOpen]);
+  }, [isOpen, mounted, loading]);
 
   // Reset state when dialog closes
   useEffect(() => {
