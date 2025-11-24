@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.10",
+    "flexsearch": "^0.8.212",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "mdast-util-to-string": "^4.0.0",
@@ -21,7 +23,6 @@
     "remark-parse": "^11.0.0",
     "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0",
-    "@supabase/supabase-js": "^2.47.10",
     "viem": "^2.13.1"
   },
   "engines": {

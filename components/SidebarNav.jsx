@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import SiteHeader from './SiteHeader';
+import SearchDialog from './SearchDialog';
 import React from 'react';
 
 const sectionIcons = {
@@ -81,6 +82,19 @@ const sectionLabels = {
 export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) {
   const tree = treeData;
   const pathname = usePathname();
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  // Keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Desired order
   const desiredOrder = [
@@ -189,6 +203,31 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
           <span aria-hidden="true">×</span>
         </button>
       </div>
+      <button
+        className="sidebar-search-button"
+        onClick={() => setSearchOpen(true)}
+        aria-label="Search documentation"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M7 13A6 6 0 1 0 7 1a6 6 0 0 0 0 12ZM15 15l-3.35-3.35"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <span>Search</span>
+        <kbd className="sidebar-search-kbd">⌘K</kbd>
+      </button>
+      <SearchDialog isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <ul className="sidebar-list">
         {sections.map((section) => {
           const isExpanded = expandedSections.includes(section);
