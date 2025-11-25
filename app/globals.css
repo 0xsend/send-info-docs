@@ -1002,6 +1002,8 @@ body {
   .hero-section {
     height: 240px;
     padding: 30px;
+    background-size: contain;
+    background-position: center;
   }
 
   .hero-title {
@@ -1035,6 +1037,8 @@ body {
   .hero-section {
     height: 200px;
     padding: 20px;
+    background-size: contain;
+    background-position: center;
   }
 
   .hero-title {

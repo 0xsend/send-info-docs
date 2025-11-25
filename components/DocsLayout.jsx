@@ -93,8 +93,13 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
   const shouldShowHero = isRoot || isSectionLanding;
   const heroConfigMap = {
     welcome: { image: '/img/welcome-banner.png', aria: 'Welcome to Send documentation' },
-    'canton-wallet': { image: '/img/cantonwallet-banner.png', aria: 'Canton Wallet documentation banner' },
-    'cusd-stablecoin': { image: '/img/cusd-banner.png', aria: 'CUSD stablecoin overview banner' }
+    'send-token': { image: '/img/send-token-banner.png', aria: 'Send Token documentation banner' },
+    'send-mobile-apps': { image: '/img/send-app-banner.png', aria: 'Send App documentation banner' },
+    'canton-wallet': { image: '/img/canton-wallet-banner.png', aria: 'Canton Wallet documentation banner' },
+    'cusd-stablecoin': { image: '/img/cusd-banner.png', aria: 'CUSD stablecoin overview banner' },
+    finance: { image: '/img/finance-banner.png', aria: 'Finance documentation banner' },
+    miscellaneous: { image: '/img/misc-banner.png', aria: 'Miscellaneous documentation banner' },
+    legal: { image: '/img/legal-banner.png', aria: 'Legal documentation banner' }
   };
   const heroConfig = heroConfigMap[effectiveSection] || { image: '/img/globalwallet.png', aria: `${sectionLabel} hero` };
 
