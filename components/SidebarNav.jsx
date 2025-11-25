@@ -10,13 +10,17 @@ import React from 'react';
 
 const sectionIcons = {
   'welcome': (
-    <svg width="20" height="20" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1.5 12.5H3.5V7.5H8.5V12.5H10.5V5.25L6 1.875L1.5 5.25V12.5ZM0 14V4.5L6 0L12 4.5V14H7V9H5V14H0Z" fill="currentColor"/>
-    </svg>
+    <Image
+      src="/img/sendwelcome.png"
+      alt=""
+      width={20}
+      height={20}
+      className="sidebar-section-icon-image"
+    />
   ),
   'send-token': (
     <Image
-      src="/img/sendtokenicon.svg"
+      src="/img/sendtoken.png"
       alt=""
       width={20}
       height={20}
@@ -25,7 +29,7 @@ const sectionIcons = {
   ),
   'send-mobile-apps': (
     <Image
-      src="/img/sendappicon.svg"
+      src="/img/sendapps.png"
       alt=""
       width={20}
       height={20}
@@ -43,7 +47,7 @@ const sectionIcons = {
   ),
   'cusd-stablecoin': (
     <Image
-      src="/img/CUSDlogomark.svg"
+      src="/img/cusdstablecoin.jpg"
       alt=""
       width={20}
       height={20}
@@ -100,8 +104,8 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
   const desiredOrder = [
     'welcome',
     'send-mobile-apps',
-    'send-token',
     'cusd-stablecoin',
+    'send-token',
     'canton-wallet',
     'finance',
     'miscellaneous',
