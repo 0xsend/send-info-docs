@@ -244,6 +244,11 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.sidebar-section-icon-image[src*="sendtoken"],
+.sidebar-section-icon-image[src*="cusdstablecoin"],
+.sidebar-section-icon-image[src*="cantonwallet"] {
   border-radius: 50%;
 }
 
@@ -638,6 +643,11 @@ body {
   width: 24px;
   height: 24px;
   object-fit: contain;
+}
+
+.nav-card-icon-image[src*="sendtoken"],
+.nav-card-icon-image[src*="cusdstablecoin"],
+.nav-card-icon-image[src*="cantonwallet"] {
   border-radius: 50%;
 }
 
@@ -670,7 +680,7 @@ body {
   justify-content: center;
   width: 32px;
   height: 32px;
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
   flex-shrink: 0;
 }
 
@@ -791,7 +801,7 @@ body {
 .apps-nav-card-arrow {
   width: 32px;
   height: 32px;
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
   flex-shrink: 0;
   display: flex;
   align-items: center;
