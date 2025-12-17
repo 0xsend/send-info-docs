@@ -380,7 +380,7 @@ export default function Treasury() {
         <div style={styles.metricCard}>
           <div style={styles.metricHeader}>
             <div style={{ ...styles.metricIcon, backgroundColor: '#E8FDE9', color: '#122023', fontSize: '11px' }}>$SEND</div>
-            <span style={styles.metricLabel}>$SEND Token</span>
+            <span style={styles.metricLabel}>SEND Token</span>
           </div>
           <div style={styles.metricValue}>{formatNumber(currentHoldings.send)}</div>
           <div style={styles.metricSubtext}>Treasury allocation</div>
@@ -389,7 +389,7 @@ export default function Treasury() {
         <div style={styles.metricCard}>
           <div style={styles.metricHeader}>
             <div style={{ ...styles.metricIcon, backgroundColor: '#FFF3E0', color: '#E65100', fontSize: '12px' }}>$CC</div>
-            <span style={styles.metricLabel}>$CC Canton Coin</span>
+            <span style={styles.metricLabel}>Canton Coin</span>
           </div>
           <div style={styles.metricValue}>{formatNumber(currentHoldings.cc)}</div>
           <div style={styles.metricSubtext}>$CC holdings</div>
@@ -398,7 +398,7 @@ export default function Treasury() {
         <div style={styles.metricCard}>
           <div style={styles.metricHeader}>
             <div style={{ ...styles.metricIcon, backgroundColor: '#E3F2FD', color: '#1565C0', fontSize: '10px' }}>$CUSD</div>
-            <span style={styles.metricLabel}>$CUSD</span>
+            <span style={styles.metricLabel}>CUSD</span>
           </div>
           <div style={styles.metricValue}>{formatNumber(currentHoldings.cusd)}</div>
           <div style={styles.metricSubtext}>Stablecoin</div>
@@ -407,7 +407,7 @@ export default function Treasury() {
         <div style={styles.metricCard}>
           <div style={styles.metricHeader}>
             <div style={{ ...styles.metricIcon, backgroundColor: '#E8F5E9', color: '#2E7D32', fontSize: '10px' }}>$USDC</div>
-            <span style={styles.metricLabel}>$USDC</span>
+            <span style={styles.metricLabel}>USDC</span>
           </div>
           <div style={styles.metricValue}>{formatCurrency(currentHoldings.usdc)}</div>
           <div style={styles.metricSubtext}>Circle stablecoin</div>
