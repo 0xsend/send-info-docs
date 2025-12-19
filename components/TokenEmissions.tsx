@@ -8,7 +8,7 @@ const tokenData = {
   circulating: 327_985_505,
   nonCirculating: 672_014_495,
   circulationRate: 32.80,
-  avgAnnualInflation: 26.4,
+  avgAnnualInflation: 27.5,
 
   allocations: [
     { name: 'Rewards', allocation: 300_000_000, remaining: 225_005_988, color: '#10B981', status: 'Active Distribution' },
@@ -19,45 +19,32 @@ const tokenData = {
     { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#06B6D4', status: 'Fully Distributed' },
   ],
 
-  monthlyData: [
-    { date: 'Jul 2023', circulating: 39_627_648, momChange: null, momPct: null },
-    { date: 'Aug 2023', circulating: 45_874_932, momChange: 6_247_284, momPct: 15.77 },
-    { date: 'Sep 2023', circulating: 53_041_898, momChange: 7_166_966, momPct: 15.62 },
-    { date: 'Oct 2023', circulating: 68_088_716, momChange: 15_046_818, momPct: 28.37 },
-    { date: 'Nov 2023', circulating: 76_672_538, momChange: 8_583_822, momPct: 12.61 },
-    { date: 'Dec 2023', circulating: 85_553_806, momChange: 8_881_268, momPct: 11.58 },
-    { date: 'Jan 2024', circulating: 103_786_498, momChange: 18_232_692, momPct: 21.31 },
-    { date: 'Feb 2024', circulating: 111_303_204, momChange: 7_516_706, momPct: 7.24 },
-    { date: 'Mar 2024', circulating: 120_361_688, momChange: 9_058_484, momPct: 8.14 },
-    { date: 'Apr 2024', circulating: 138_849_740, momChange: 18_488_052, momPct: 15.36 },
-    { date: 'May 2024', circulating: 152_649_346, momChange: 13_799_606, momPct: 9.94 },
-    { date: 'Jun 2024', circulating: 164_668_960, momChange: 12_019_614, momPct: 7.87 },
-    { date: 'Jul 2024', circulating: 179_520_588, momChange: 14_851_628, momPct: 9.02 },
-    { date: 'Aug 2024', circulating: 195_597_426, momChange: 16_076_838, momPct: 8.96 },
-    { date: 'Sep 2024', circulating: 213_823_146, momChange: 18_225_720, momPct: 9.32 },
-    { date: 'Oct 2024', circulating: 241_858_282, momChange: 28_035_136, momPct: 13.11 },
-    { date: 'Nov 2024', circulating: 260_413_984, momChange: 18_555_702, momPct: 7.67 },
-    { date: 'Dec 2024', circulating: 270_517_390, momChange: 10_103_406, momPct: 3.88 },
-    { date: 'Jan 2025', circulating: 281_698_742, momChange: 11_181_352, momPct: 4.13 },
-    { date: 'Feb 2025', circulating: 286_498_154, momChange: 4_799_412, momPct: 1.70 },
-    { date: 'Mar 2025', circulating: 290_266_810, momChange: 3_768_656, momPct: 1.32 },
-    { date: 'Apr 2025', circulating: 296_832_454, momChange: 6_565_644, momPct: 2.26 },
-    { date: 'May 2025', circulating: 299_966_202, momChange: 3_133_748, momPct: 1.06 },
-    { date: 'Jun 2025', circulating: 301_434_244, momChange: 1_468_042, momPct: 0.49 },
-    { date: 'Jul 2025', circulating: 303_402_746, momChange: 1_968_502, momPct: 0.65 },
-    { date: 'Aug 2025', circulating: 306_367_994, momChange: 2_965_248, momPct: 0.98 },
-    { date: 'Sep 2025', circulating: 309_636_106, momChange: 3_268_112, momPct: 1.07 },
-    { date: 'Oct 2025', circulating: 314_995_038, momChange: 5_358_932, momPct: 1.73 },
-    { date: 'Nov 2025', circulating: 322_765_804, momChange: 7_770_766, momPct: 2.47 },
-    { date: 'Dec 2025', circulating: 327_985_505, momChange: 5_219_701, momPct: 1.62 },
+  // All figures normalized to 1B supply (historical data divided by 100)
+  quarterlyData: [
+    { date: 'Q2 2023', circulating: 180_000_000, qoqChange: null, qoqPct: null },
+    { date: 'Q3 2023', circulating: 190_591_233, qoqChange: 10_591_233, qoqPct: 5.88 },
+    { date: 'Q4 2023', circulating: 203_744_539, qoqChange: 13_153_306, qoqPct: 6.90 },
+    { date: 'Q1 2024', circulating: 220_063_396, qoqChange: 16_318_857, qoqPct: 8.01 },
+    { date: 'Q2 2024', circulating: 241_368_496, qoqChange: 21_305_100, qoqPct: 9.68 },
+    { date: 'Q3 2024', circulating: 260_413_984, qoqChange: 19_045_488, qoqPct: 7.89 },
+    { date: 'Q4 2024', circulating: 270_517_390, qoqChange: 10_103_406, qoqPct: 3.88 },
+    { date: 'Q1 2025', circulating: 290_266_810, qoqChange: 19_749_420, qoqPct: 7.30 },
+    { date: 'Q2 2025', circulating: 301_434_244, qoqChange: 11_167_434, qoqPct: 3.85 },
+    { date: 'Q3 2025', circulating: 309_636_106, qoqChange: 8_201_862, qoqPct: 2.72 },
+    { date: 'Q4 2025', circulating: 327_985_505, qoqChange: 18_349_399, qoqPct: 5.92 },
   ],
 
   inflationData: [
-    { period: 'H2 2023', annualized: 66.2, tokens: 45_926_158 },
-    { period: 'H1 2024', annualized: 46.0, tokens: 79_115_154 },
-    { period: 'H2 2024', annualized: 32.1, tokens: 105_848_430 },
-    { period: 'H1 2025', annualized: 11.6, tokens: 30_916_854 },
-    { period: 'H2 2025', annualized: 16.0, tokens: 26_551_261 },
+    { period: 'Q3 2023', annualized: 23.5, tokens: 10_591_233 },
+    { period: 'Q4 2023', annualized: 27.6, tokens: 13_153_306 },
+    { period: 'Q1 2024', annualized: 32.0, tokens: 16_318_857 },
+    { period: 'Q2 2024', annualized: 38.7, tokens: 21_305_100 },
+    { period: 'Q3 2024', annualized: 31.6, tokens: 19_045_488 },
+    { period: 'Q4 2024', annualized: 15.5, tokens: 10_103_406 },
+    { period: 'Q1 2025', annualized: 29.2, tokens: 19_749_420 },
+    { period: 'Q2 2025', annualized: 15.4, tokens: 11_167_434 },
+    { period: 'Q3 2025', annualized: 10.9, tokens: 8_201_862 },
+    { period: 'Q4 2025', annualized: 23.7, tokens: 18_349_399 },
   ],
 
   vestingProgress: [
@@ -67,11 +54,11 @@ const tokenData = {
   ],
 
   milestones: [
-    { date: 'Jun 2023', event: 'Token Launch (TGE)', circulating: '180M', description: '100M Liquidity + 80M Exchange Listings' },
-    { date: 'Jan 2024', event: '200M Circulating', circulating: '200M' },
-    { date: 'Oct 2024', event: '250M Circulating', circulating: '250M' },
-    { date: 'Feb 2025', event: 'Token Upgrade', circulating: '286.5M', description: '100:1 token migration' },
-    { date: 'Dec 2025', event: 'Current', circulating: '328.0M' },
+    { date: 'Q2 2023', event: 'Token Launch (TGE)', circulating: '180M', description: '100M Liquidity + 80M Exchange Listings' },
+    { date: 'Q1 2024', event: '220M Circulating', circulating: '220M' },
+    { date: 'Q3 2024', event: '260M Circulating', circulating: '260M' },
+    { date: 'Q2 2025', event: '300M Circulating', circulating: '301M' },
+    { date: 'Q4 2025', event: 'Current', circulating: '328M' },
   ],
 };
 
@@ -127,7 +114,7 @@ function DonutChart() {
 
 // ============ AREA CHART ============
 function AreaChart() {
-  const data = tokenData.monthlyData;
+  const data = tokenData.quarterlyData;
   const maxVal = Math.max(...data.map(d => d.circulating));
   const minVal = Math.min(...data.map(d => d.circulating));
   const range = maxVal - minVal;
@@ -156,11 +143,10 @@ function AreaChart() {
         <polyline points={points} fill="none" stroke="#40FB50" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#666', marginTop: '8px' }}>
-        <span>Jul 23</span>
-        <span>Jan 24</span>
-        <span>Jul 24</span>
-        <span>Jan 25</span>
-        <span>Dec 25</span>
+        <span>Q2 '23</span>
+        <span>Q2 '24</span>
+        <span>Q2 '25</span>
+        <span>Q4 '25</span>
       </div>
     </div>
   );
@@ -229,19 +215,19 @@ export default function TokenEmissions() {
       {/* Circulating Supply */}
       <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
         <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Circulating Supply</div>
-        <div style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>July 2023 - December 2025</div>
+        <div style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Q2 2023 - Q4 2025</div>
         <AreaChart />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', paddingTop: '16px', borderTop: '1px solid #E0E0E0' }}>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#122023' }}>{formatNumber(tokenData.monthlyData[0].circulating)}</div>
-            <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>Starting</div>
+            <div style={{ fontSize: '18px', fontWeight: 700, color: '#122023' }}>{formatNumber(tokenData.quarterlyData[0].circulating)}</div>
+            <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>Starting (TGE)</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#10B981' }}>+{formatNumber(tokenData.circulating - tokenData.monthlyData[0].circulating)}</div>
+            <div style={{ fontSize: '18px', fontWeight: 700, color: '#10B981' }}>+{formatNumber(tokenData.circulating - tokenData.quarterlyData[0].circulating)}</div>
             <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>Added</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#40FB50' }}>{formatNumber(tokenData.circulating)}</div>
+            <div style={{ fontSize: '18px', fontWeight: 700, color: '#10B981' }}>{formatNumber(tokenData.circulating)}</div>
             <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>Current</div>
           </div>
         </div>
@@ -367,13 +353,13 @@ export default function TokenEmissions() {
         <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Key Milestones</div>
         <div style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Token distribution journey</div>
         <div style={{ position: 'relative', paddingLeft: '20px' }}>
-          <div style={{ position: 'absolute', left: '5px', top: '6px', bottom: '6px', width: '2px', background: 'linear-gradient(to bottom, #40FB50, #3B82F6)', borderRadius: '1px' }} />
+          <div style={{ position: 'absolute', left: '5px', top: '6px', bottom: '6px', width: '2px', background: 'linear-gradient(to bottom, #10B981, #3B82F6)', borderRadius: '1px' }} />
           {tokenData.milestones.map((milestone, i) => (
             <div key={i} style={{ position: 'relative', paddingBottom: '16px' }}>
-              <div style={{ position: 'absolute', left: '-17px', top: '2px', width: '10px', height: '10px', borderRadius: '50%', background: '#40FB50', border: '2px solid #FFF', boxShadow: '0 0 0 2px #40FB50' }} />
+              <div style={{ position: 'absolute', left: '-17px', top: '2px', width: '10px', height: '10px', borderRadius: '50%', background: '#10B981', border: '2px solid #FFF', boxShadow: '0 0 0 2px #10B981' }} />
               <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>{milestone.event}</div>
               <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>
-                {milestone.date} &bull; <span style={{ color: '#40FB50', fontWeight: 600 }}>{milestone.circulating}</span> circulating
+                {milestone.date} &bull; <span style={{ color: '#10B981', fontWeight: 600 }}>{milestone.circulating}</span> circulating
               </div>
               {milestone.description && (
                 <div style={{ fontSize: '11px', color: '#888', marginTop: '2px' }}>{milestone.description}</div>
@@ -390,7 +376,7 @@ export default function TokenEmissions() {
           style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', padding: '16px 20px', background: '#FFF', borderRadius: '12px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}
         >
           <div>
-            <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023' }}>Monthly Supply Data</div>
+            <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023' }}>Quarterly Supply Data</div>
             <div style={{ fontSize: '12px', color: '#666' }}>Complete historical data</div>
           </div>
           <span style={{ fontSize: '14px', color: '#666', transform: expandedTable ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>&#9660;</span>
@@ -400,22 +386,22 @@ export default function TokenEmissions() {
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
               <thead>
                 <tr>
-                  <th style={{ textAlign: 'left', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>Date</th>
+                  <th style={{ textAlign: 'left', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>Quarter</th>
                   <th style={{ textAlign: 'right', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>Circulating</th>
-                  <th style={{ textAlign: 'right', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>MoM Change</th>
-                  <th style={{ textAlign: 'right', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>MoM %</th>
+                  <th style={{ textAlign: 'right', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>QoQ Change</th>
+                  <th style={{ textAlign: 'right', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>QoQ %</th>
                 </tr>
               </thead>
               <tbody>
-                {[...tokenData.monthlyData].reverse().map((row, i) => (
+                {[...tokenData.quarterlyData].reverse().map((row, i) => (
                   <tr key={i}>
                     <td style={{ padding: '10px 16px', borderBottom: '1px solid #E0E0E0', fontWeight: 500, color: '#122023' }}>{row.date}</td>
                     <td style={{ padding: '10px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', fontFamily: 'monospace', color: '#666' }}>{formatFullNumber(row.circulating)}</td>
-                    <td style={{ padding: '10px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', fontFamily: 'monospace', color: row.momChange ? '#10B981' : '#666' }}>
-                      {row.momChange ? `+${formatFullNumber(row.momChange)}` : '-'}
+                    <td style={{ padding: '10px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', fontFamily: 'monospace', color: row.qoqChange ? '#10B981' : '#666' }}>
+                      {row.qoqChange ? `+${formatFullNumber(row.qoqChange)}` : '-'}
                     </td>
                     <td style={{ padding: '10px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', color: '#666' }}>
-                      {row.momPct ? `+${row.momPct.toFixed(2)}%` : '-'}
+                      {row.qoqPct ? `+${row.qoqPct.toFixed(2)}%` : '-'}
                     </td>
                   </tr>
                 ))}
