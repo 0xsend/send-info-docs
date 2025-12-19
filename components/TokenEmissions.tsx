@@ -67,10 +67,10 @@ const tokenData = {
   ],
 
   milestones: [
-    { date: 'Jun 2023', event: 'Token Launch', circulating: '~40M' },
-    { date: 'Jan 2024', event: '100M Circulating', circulating: '103.8M' },
-    { date: 'Jul 2024', event: '175M Circulating', circulating: '179.5M' },
-    { date: 'Oct 2024', event: '240M Circulating', circulating: '241.9M' },
+    { date: 'Jun 2023', event: 'Token Launch (TGE)', circulating: '180M', description: '100M Liquidity + 80M Exchange Listings' },
+    { date: 'Jan 2024', event: '200M Circulating', circulating: '200M' },
+    { date: 'Oct 2024', event: '250M Circulating', circulating: '250M' },
+    { date: 'Feb 2025', event: 'Token Upgrade', circulating: '286.5M', description: '100:1 token migration' },
     { date: 'Dec 2025', event: 'Current', circulating: '328.0M' },
   ],
 };
@@ -375,6 +375,9 @@ export default function TokenEmissions() {
               <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>
                 {milestone.date} &bull; <span style={{ color: '#40FB50', fontWeight: 600 }}>{milestone.circulating}</span> circulating
               </div>
+              {milestone.description && (
+                <div style={{ fontSize: '11px', color: '#888', marginTop: '2px' }}>{milestone.description}</div>
+              )}
             </div>
           ))}
         </div>
