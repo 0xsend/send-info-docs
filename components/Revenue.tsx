@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 // ============ REVENUE DATA ============
 const sendAppRevenue = [
   {
@@ -91,7 +89,7 @@ const styles = {
   },
   metricsGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
     gap: '16px',
   },
   metricCard: {
@@ -99,14 +97,14 @@ const styles = {
     borderRadius: '12px',
     padding: '20px',
     border: '1px solid #E0E0E0',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
   },
   metricCardHighlight: {
-    backgroundColor: '#F8FFF8',
+    backgroundColor: '#E8FDE9',
     borderRadius: '12px',
     padding: '20px',
     border: '2px solid #40FB50',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
   },
   metricLabel: {
     fontSize: '13px',
@@ -119,11 +117,6 @@ const styles = {
     fontWeight: 700,
     color: '#122023',
   },
-  metricValueGreen: {
-    fontSize: '28px',
-    fontWeight: 700,
-    color: '#40FB50',
-  },
   metricSubtext: {
     fontSize: '12px',
     color: '#888',
@@ -134,7 +127,7 @@ const styles = {
     borderRadius: '12px',
     padding: '24px',
     border: '1px solid #E0E0E0',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
   },
   sectionTitle: {
     fontSize: '16px',
@@ -166,9 +159,9 @@ const styles = {
     color: '#122023',
   },
   link: {
-    color: '#40FB50',
+    color: '#2563EB',
     textDecoration: 'none',
-    fontWeight: 600,
+    fontWeight: 500,
     display: 'inline-flex',
     alignItems: 'center',
     gap: '4px',
@@ -178,8 +171,8 @@ const styles = {
     color: '#122023',
     fontSize: '11px',
     fontWeight: 600,
-    padding: '4px 8px',
-    borderRadius: '4px',
+    padding: '4px 10px',
+    borderRadius: '6px',
   },
   chartContainer: {
     marginTop: '8px',
@@ -191,114 +184,154 @@ function formatCurrency(value: number): string {
   return `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-function shortenTx(tx: string): string {
-  return `${tx.slice(0, 6)}...${tx.slice(-4)}`;
-}
-
 // ============ REVENUE CHART ============
 function RevenueChart() {
   const chartData = [...sendAppRevenue].reverse();
-  const chartHeight = 180;
-  const chartWidth = 600;
-  const padding = { top: 20, right: 20, bottom: 50, left: 60 };
-  const innerWidth = chartWidth - padding.left - padding.right;
-  const innerHeight = chartHeight - padding.top - padding.bottom;
+  const maxTotal = Math.max(...chartData.map(d => d.total));
 
-  const maxValue = Math.max(...chartData.map(d => d.total));
-  const barWidth = (innerWidth / chartData.length) - 12;
+  // SVG dimensions
+  const width = 580;
+  const height = 220;
+  const padding = { top: 20, right: 20, bottom: 36, left: 50 };
+  const innerWidth = width - padding.left - padding.right;
+  const innerHeight = height - padding.top - padding.bottom;
+
+  const barWidth = (innerWidth / chartData.length) - 10;
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   return (
-    <svg width="100%" height={chartHeight} viewBox={`0 0 ${chartWidth} ${chartHeight}`} style={{ maxWidth: '100%' }}>
-      {/* Y-axis grid */}
-      {[0, 0.5, 1].map((ratio, i) => {
-        const y = padding.top + innerHeight * (1 - ratio);
-        const value = maxValue * ratio;
-        return (
-          <g key={i}>
-            <line
-              x1={padding.left}
-              y1={y}
-              x2={chartWidth - padding.right}
-              y2={y}
-              stroke="#F0F0F0"
-              strokeDasharray="4,4"
-            />
-            <text
-              x={padding.left - 8}
-              y={y + 4}
-              textAnchor="end"
-              fontSize="10"
-              fill="#999"
-            >
-              {formatCurrency(value)}
-            </text>
-          </g>
-        );
-      })}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <svg width="100%" viewBox={`0 0 ${width} ${height}`} style={{ overflow: 'visible' }}>
+        {/* Y-axis labels and grid */}
+        {[0, 0.5, 1].map((ratio, i) => {
+          const y = padding.top + innerHeight * (1 - ratio);
+          const value = maxTotal * ratio;
+          return (
+            <g key={i}>
+              <line
+                x1={padding.left}
+                y1={y}
+                x2={width - padding.right}
+                y2={y}
+                stroke={ratio === 0 ? '#E0E0E0' : '#F0F0F0'}
+                strokeDasharray={ratio === 0 ? '0' : '3,3'}
+              />
+              <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888">
+                ${(value / 1000).toFixed(0)}k
+              </text>
+            </g>
+          );
+        })}
 
-      {/* Stacked bars */}
-      {chartData.map((d, i) => {
-        const x = padding.left + i * (innerWidth / chartData.length) + 6;
-        const sendtagsHeight = (d.sendtags?.amount || 0) / maxValue * innerHeight;
-        const tradesHeight = (d.trades?.amount || 0) / maxValue * innerHeight;
-        const transactionsHeight = (d.transactions?.amount || 0) / maxValue * innerHeight;
+        {/* Stacked bars */}
+        {chartData.map((d, i) => {
+          const x = padding.left + i * (innerWidth / chartData.length) + 5;
+          const totalHeight = (d.total / maxTotal) * innerHeight;
+          const sendtagsHeight = ((d.sendtags?.amount || 0) / d.total) * totalHeight;
+          const tradesHeight = ((d.trades?.amount || 0) / d.total) * totalHeight;
+          const transactionsHeight = ((d.transactions?.amount || 0) / d.total) * totalHeight;
+          const isPeak = d.total === maxTotal;
 
-        let yOffset = padding.top + innerHeight;
+          const [month] = d.date.split('/');
+          const monthLabel = monthNames[parseInt(month) - 1];
 
-        return (
-          <g key={d.date}>
-            {/* Sendtags */}
-            <rect
-              x={x}
-              y={yOffset - sendtagsHeight}
-              width={barWidth}
-              height={sendtagsHeight}
-              fill="#40FB50"
-              rx="2"
-            />
-            {/* Trades */}
-            <rect
-              x={x}
-              y={yOffset - sendtagsHeight - tradesHeight}
-              width={barWidth}
-              height={tradesHeight}
-              fill="#7CFC7C"
-              rx="2"
-            />
-            {/* Transactions */}
-            <rect
-              x={x}
-              y={yOffset - sendtagsHeight - tradesHeight - transactionsHeight}
-              width={barWidth}
-              height={transactionsHeight}
-              fill="#B8F5B8"
-              rx="2"
-            />
-            {/* Date label */}
-            <text
-              x={x + barWidth / 2}
-              y={chartHeight - 20}
-              textAnchor="middle"
-              fontSize="10"
-              fill="#666"
-              transform={`rotate(-45, ${x + barWidth / 2}, ${chartHeight - 20})`}
-            >
-              {d.date}
-            </text>
-          </g>
-        );
-      })}
+          let yOffset = padding.top + innerHeight;
+
+          return (
+            <g key={d.date}>
+              {/* Sendtags - bottom (purple) */}
+              <rect
+                x={x}
+                y={yOffset - sendtagsHeight}
+                width={barWidth}
+                height={sendtagsHeight}
+                fill="#7C4DFF"
+                rx="4"
+                ry="0"
+              />
+              {/* Trades - middle (orange) */}
+              <rect
+                x={x}
+                y={yOffset - sendtagsHeight - tradesHeight}
+                width={barWidth}
+                height={tradesHeight}
+                fill="#FF9800"
+              />
+              {/* Transactions - top (blue) */}
+              <rect
+                x={x}
+                y={yOffset - sendtagsHeight - tradesHeight - transactionsHeight}
+                width={barWidth}
+                height={transactionsHeight}
+                fill="#2196F3"
+                rx="4"
+                ry="0"
+              />
+
+              {/* Peak indicator */}
+              {isPeak && (
+                <g>
+                  <circle
+                    cx={x + barWidth / 2}
+                    cy={yOffset - totalHeight - 14}
+                    r="10"
+                    fill="#10B981"
+                  />
+                  <text
+                    x={x + barWidth / 2}
+                    y={yOffset - totalHeight - 10}
+                    textAnchor="middle"
+                    fontSize="8"
+                    fill="#FFF"
+                    fontWeight="600"
+                  >
+                    ★
+                  </text>
+                </g>
+              )}
+
+              {/* Month label */}
+              <text
+                x={x + barWidth / 2}
+                y={height - 12}
+                textAnchor="middle"
+                fontSize="11"
+                fill="#666"
+                fontWeight="500"
+              >
+                {monthLabel}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
 
       {/* Legend */}
-      <g transform={`translate(${chartWidth - 150}, 10)`}>
-        <rect x="0" y="0" width="12" height="12" fill="#40FB50" rx="2" />
-        <text x="16" y="10" fontSize="10" fill="#666">Sendtags</text>
-        <rect x="0" y="18" width="12" height="12" fill="#7CFC7C" rx="2" />
-        <text x="16" y="28" fontSize="10" fill="#666">Trades</text>
-        <rect x="0" y="36" width="12" height="12" fill="#B8F5B8" rx="2" />
-        <text x="16" y="46" fontSize="10" fill="#666">Transactions</text>
-      </g>
-    </svg>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '24px',
+        padding: '12px 16px',
+        background: '#FAFAFA',
+        borderRadius: '8px',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#7C4DFF' }} />
+          <span style={{ fontSize: '12px', color: '#666' }}>Sendtags</span>
+          <span style={{ fontSize: '12px', fontWeight: 600, color: '#122023' }}>${(totalSendtags / 1000).toFixed(1)}k</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#FF9800' }} />
+          <span style={{ fontSize: '12px', color: '#666' }}>Trades</span>
+          <span style={{ fontSize: '12px', fontWeight: 600, color: '#122023' }}>${(totalTrades / 1000).toFixed(1)}k</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#2196F3' }} />
+          <span style={{ fontSize: '12px', color: '#666' }}>Transactions</span>
+          <span style={{ fontSize: '12px', fontWeight: 600, color: '#122023' }}>${(totalTransactions / 1000).toFixed(1)}k</span>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -306,20 +339,20 @@ function RevenueChart() {
 function RevenueBreakdown() {
   const total = totalSendtags + totalTrades + totalTransactions;
   const data = [
-    { label: 'Sendtags', value: totalSendtags, color: '#40FB50' },
-    { label: 'Trades', value: totalTrades, color: '#7CFC7C' },
-    { label: 'Transactions', value: totalTransactions, color: '#B8F5B8' },
+    { label: 'Sendtags', value: totalSendtags, color: '#7C4DFF', icon: '🏷️' },
+    { label: 'Trades', value: totalTrades, color: '#FF9800', icon: '🔄' },
+    { label: 'Transactions', value: totalTransactions, color: '#2196F3', icon: '💸' },
   ];
 
   const size = 160;
-  const strokeWidth = 24;
+  const strokeWidth = 28;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 
   let currentOffset = 0;
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '32px', flexWrap: 'wrap' }}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {data.map((segment, i) => {
           const percentage = segment.value / total;
@@ -341,19 +374,35 @@ function RevenueBreakdown() {
             />
           );
         })}
-        <text x={size / 2} y={size / 2 - 8} textAnchor="middle" fontSize="11" fill="#666">Total</text>
-        <text x={size / 2} y={size / 2 + 12} textAnchor="middle" fontSize="16" fontWeight="700" fill="#122023">
+        <text x={size / 2} y={size / 2 - 6} textAnchor="middle" fontSize="11" fill="#888">Total</text>
+        <text x={size / 2} y={size / 2 + 14} textAnchor="middle" fontSize="16" fontWeight="700" fill="#122023">
           {formatCurrency(total)}
         </text>
       </svg>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {data.map((segment, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: segment.color }} />
-            <span style={{ fontSize: '13px', color: '#666' }}>{segment.label}:</span>
-            <span style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>
-              {formatCurrency(segment.value)} ({((segment.value / total) * 100).toFixed(1)}%)
-            </span>
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '8px',
+              backgroundColor: `${segment.color}15`,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '16px',
+            }}>
+              {segment.icon}
+            </div>
+            <div>
+              <div style={{ fontSize: '12px', color: '#888' }}>{segment.label}</div>
+              <div style={{ fontSize: '15px', fontWeight: 600, color: '#122023' }}>
+                {formatCurrency(segment.value)}
+                <span style={{ fontSize: '12px', fontWeight: 500, color: '#888', marginLeft: '6px' }}>
+                  ({((segment.value / total) * 100).toFixed(1)}%)
+                </span>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -369,7 +418,7 @@ export default function Revenue() {
       <div style={styles.metricsGrid}>
         <div style={styles.metricCardHighlight}>
           <div style={styles.metricLabel}>Total Revenue</div>
-          <div style={styles.metricValueGreen}>{formatCurrency(grandTotal)}</div>
+          <div style={styles.metricValue}>{formatCurrency(grandTotal)}</div>
           <div style={styles.metricSubtext}>All sources combined</div>
         </div>
         <div style={styles.metricCard}>
@@ -402,18 +451,14 @@ export default function Revenue() {
 
       {/* Revenue Breakdown */}
       <div style={styles.section}>
-        <div style={styles.sectionTitle}>Revenue Breakdown</div>
+        <div style={styles.sectionTitle}>Revenue by Source</div>
         <RevenueBreakdown />
       </div>
 
       {/* Send App Revenue Table */}
       <div style={styles.section}>
         <div style={styles.sectionTitle}>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <rect x="2" y="2" width="16" height="16" rx="4" stroke="#40FB50" strokeWidth="2"/>
-            <path d="M6 10L9 13L14 7" stroke="#40FB50" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Send App Revenue
+          Send App Revenue History
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={styles.table}>
@@ -423,7 +468,7 @@ export default function Revenue() {
                 <th style={styles.th}>Sendtags</th>
                 <th style={styles.th}>Trades</th>
                 <th style={styles.th}>Transactions</th>
-                <th style={styles.th}>Total</th>
+                <th style={{ ...styles.th, textAlign: 'right' as const }}>Total</th>
               </tr>
             </thead>
             <tbody>
@@ -440,10 +485,12 @@ export default function Revenue() {
                       >
                         {formatCurrency(row.sendtags.amount)}
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </a>
-                    ) : '—'}
+                    ) : (
+                      <span style={{ color: '#CCC' }}>—</span>
+                    )}
                   </td>
                   <td style={styles.td}>
                     {row.trades ? (
@@ -455,10 +502,12 @@ export default function Revenue() {
                       >
                         {formatCurrency(row.trades.amount)}
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </a>
-                    ) : '—'}
+                    ) : (
+                      <span style={{ color: '#CCC' }}>—</span>
+                    )}
                   </td>
                   <td style={styles.td}>
                     {row.transactions ? (
@@ -470,22 +519,33 @@ export default function Revenue() {
                       >
                         {formatCurrency(row.transactions.amount)}
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </a>
-                    ) : '—'}
+                    ) : (
+                      <span style={{ color: '#CCC' }}>—</span>
+                    )}
                   </td>
-                  <td style={{ ...styles.td, fontWeight: 700, color: '#40FB50' }}>
+                  <td style={{ ...styles.td, fontWeight: 700, textAlign: 'right' as const }}>
                     {formatCurrency(row.total)}
                   </td>
                 </tr>
               ))}
-              <tr style={{ backgroundColor: '#FAFAFA' }}>
-                <td style={{ ...styles.td, fontWeight: 700 }}>Total</td>
-                <td style={{ ...styles.td, fontWeight: 600 }}>{formatCurrency(totalSendtags)}</td>
-                <td style={{ ...styles.td, fontWeight: 600 }}>{formatCurrency(totalTrades)}</td>
-                <td style={{ ...styles.td, fontWeight: 600 }}>{formatCurrency(totalTransactions)}</td>
-                <td style={{ ...styles.td, fontWeight: 700, color: '#40FB50' }}>{formatCurrency(totalSendAppRevenue)}</td>
+              <tr style={{ backgroundColor: '#F8F9FA' }}>
+                <td style={{ ...styles.td, fontWeight: 700, borderBottom: 'none' }}>Total</td>
+                <td style={{ ...styles.td, fontWeight: 600, borderBottom: 'none' }}>{formatCurrency(totalSendtags)}</td>
+                <td style={{ ...styles.td, fontWeight: 600, borderBottom: 'none' }}>{formatCurrency(totalTrades)}</td>
+                <td style={{ ...styles.td, fontWeight: 600, borderBottom: 'none' }}>{formatCurrency(totalTransactions)}</td>
+                <td style={{ ...styles.td, fontWeight: 700, textAlign: 'right' as const, borderBottom: 'none' }}>
+                  <span style={{
+                    backgroundColor: '#E8FDE9',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    color: '#122023',
+                  }}>
+                    {formatCurrency(totalSendAppRevenue)}
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -495,10 +555,18 @@ export default function Revenue() {
       {/* CUSD Revenue Table */}
       <div style={styles.section}>
         <div style={styles.sectionTitle}>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <circle cx="10" cy="10" r="8" stroke="#1565C0" strokeWidth="2"/>
-            <path d="M10 6V10L13 12" stroke="#1565C0" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
+          <div style={{
+            width: '24px',
+            height: '24px',
+            borderRadius: '6px',
+            backgroundColor: '#E3F2FD',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '12px',
+          }}>
+            💵
+          </div>
           $CUSD Stablecoin Revenue
         </div>
         <div style={{ overflowX: 'auto' }}>
@@ -507,7 +575,7 @@ export default function Revenue() {
               <tr>
                 <th style={styles.th}>Date</th>
                 <th style={styles.th}>Yield</th>
-                <th style={styles.th}>Total</th>
+                <th style={{ ...styles.th, textAlign: 'right' as const }}>Total</th>
               </tr>
             </thead>
             <tbody>
@@ -515,9 +583,25 @@ export default function Revenue() {
                 <tr key={row.date}>
                   <td style={{ ...styles.td, fontWeight: 600 }}>{row.date}</td>
                   <td style={styles.td}>{formatCurrency(row.yield)}</td>
-                  <td style={{ ...styles.td, fontWeight: 700, color: '#40FB50' }}>{formatCurrency(row.total)}</td>
+                  <td style={{ ...styles.td, fontWeight: 700, textAlign: 'right' as const }}>
+                    {formatCurrency(row.total)}
+                  </td>
                 </tr>
               ))}
+              <tr style={{ backgroundColor: '#F8F9FA' }}>
+                <td style={{ ...styles.td, fontWeight: 700, borderBottom: 'none' }}>Total</td>
+                <td style={{ ...styles.td, fontWeight: 600, borderBottom: 'none' }}>{formatCurrency(totalCusdRevenue)}</td>
+                <td style={{ ...styles.td, fontWeight: 700, textAlign: 'right' as const, borderBottom: 'none' }}>
+                  <span style={{
+                    backgroundColor: '#E3F2FD',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    color: '#122023',
+                  }}>
+                    {formatCurrency(totalCusdRevenue)}
+                  </span>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

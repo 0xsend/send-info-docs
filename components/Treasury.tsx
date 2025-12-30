@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import { useState } from 'react';
 
 // ============ TREASURY DATA ============
 const treasuryData = [
@@ -37,187 +37,55 @@ const treasuryData = [
 
 const currentHoldings = treasuryData[0];
 
-// ============ STYLES ============
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    gap: '24px',
-    padding: '8px 0',
-  },
-  infoCallout: {
-    backgroundColor: '#E8F4FD',
-    border: '1px solid #B8DAFF',
-    borderRadius: '8px',
-    padding: '12px 16px',
-    fontSize: '14px',
-    color: '#004085',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-  },
-  metricsGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-    gap: '16px',
-  },
-  metricCard: {
-    backgroundColor: '#FFF',
-    borderRadius: '12px',
-    padding: '20px',
-    border: '1px solid #E0E0E0',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-  },
-  metricHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    marginBottom: '12px',
-  },
-  metricIcon: {
-    width: '32px',
-    height: '32px',
-    borderRadius: '8px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '14px',
-    fontWeight: 700,
-  },
-  metricLabel: {
-    fontSize: '13px',
-    color: '#666',
-    fontWeight: 500,
-  },
-  metricValue: {
-    fontSize: '24px',
-    fontWeight: 700,
-    color: '#122023',
-  },
-  metricSubtext: {
-    fontSize: '12px',
-    color: '#888',
-    marginTop: '4px',
-  },
-  section: {
-    backgroundColor: '#FFF',
-    borderRadius: '12px',
-    padding: '24px',
-    border: '1px solid #E0E0E0',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-  },
-  sectionTitle: {
-    fontSize: '16px',
-    fontWeight: 600,
-    color: '#122023',
-    marginBottom: '20px',
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse' as const,
-    fontSize: '13px',
-  },
-  th: {
-    textAlign: 'left' as const,
-    padding: '12px 10px',
-    borderBottom: '2px solid #E0E0E0',
-    color: '#666',
-    fontWeight: 600,
-    fontSize: '11px',
-    textTransform: 'uppercase' as const,
-    letterSpacing: '0.5px',
-    whiteSpace: 'nowrap' as const,
-  },
-  td: {
-    padding: '12px 10px',
-    borderBottom: '1px solid #F0F0F0',
-    color: '#122023',
-    whiteSpace: 'nowrap' as const,
-  },
-  latestRow: {
-    backgroundColor: '#F8FFF8',
-  },
-  tipCallout: {
-    backgroundColor: '#E8FDE9',
-    border: '1px solid #40FB50',
-    borderRadius: '8px',
-    padding: '12px 16px',
-    fontSize: '14px',
-    color: '#122023',
-    marginTop: '16px',
-  },
-  chartContainer: {
-    height: '200px',
-    marginTop: '8px',
-  },
-  toggleButton: {
-    backgroundColor: '#F5F5F5',
-    border: '1px solid #E0E0E0',
-    borderRadius: '8px',
-    padding: '10px 16px',
-    fontSize: '14px',
-    color: '#122023',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    fontWeight: 500,
-  },
-  badge: {
-    backgroundColor: '#40FB50',
-    color: '#122023',
-    fontSize: '10px',
-    fontWeight: 700,
-    padding: '2px 6px',
-    borderRadius: '4px',
-    marginLeft: '8px',
-  },
-};
+// Asset definitions with colors and icons
+const assets = [
+  { key: 'send', label: 'SEND', icon: '💎', color: '#40FB50', bgColor: '#E8FDE9' },
+  { key: 'cc', label: 'Canton Coin', icon: '🪙', color: '#FF9800', bgColor: '#FFF3E0' },
+  { key: 'cusd', label: 'CUSD', icon: '💵', color: '#2196F3', bgColor: '#E3F2FD' },
+  { key: 'usdc', label: 'USDC', icon: '💲', color: '#2775CA', bgColor: '#E8F4FD' },
+  { key: 'pol', label: 'POL', icon: '🔷', color: '#7C4DFF', bgColor: '#EDE7F6' },
+  { key: 'fiat', label: 'Fiat Bank', icon: '🏦', color: '#607D8B', bgColor: '#ECEFF1' },
+];
 
 // ============ UTILITY FUNCTIONS ============
 function formatNumber(value: number): string {
   if (value === 0) return '—';
-  if (value >= 1000000) {
-    return `${(value / 1000000).toFixed(2)}M`;
-  }
-  if (value >= 1000) {
-    return `${(value / 1000).toFixed(1)}K`;
-  }
+  if (value >= 1000000) return `${(value / 1000000).toFixed(2)}M`;
+  if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
   return value.toLocaleString(undefined, { maximumFractionDigits: 2 });
 }
 
 function formatCurrency(value: number): string {
   if (value === 0) return '—';
-  if (value >= 1000000) {
-    return `$${(value / 1000000).toFixed(2)}M`;
-  }
-  if (value >= 1000) {
-    return `$${(value / 1000).toFixed(1)}K`;
-  }
+  if (value >= 1000000) return `$${(value / 1000000).toFixed(2)}M`;
+  if (value >= 1000) return `$${(value / 1000).toFixed(1)}K`;
   return `$${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
 }
 
 // ============ STABLECOIN CHART ============
 function StablecoinChart() {
   const recentData = treasuryData.slice(0, 12).reverse();
-  const chartHeight = 160;
-  const chartWidth = 500;
-  const padding = { top: 20, right: 20, bottom: 40, left: 60 };
-  const innerWidth = chartWidth - padding.left - padding.right;
-  const innerHeight = chartHeight - padding.top - padding.bottom;
+  const width = 520;
+  const height = 180;
+  const padding = { top: 20, right: 20, bottom: 40, left: 55 };
+  const innerWidth = width - padding.left - padding.right;
+  const innerHeight = height - padding.top - padding.bottom;
 
-  // Calculate total stablecoins for each month
   const stablecoinData = recentData.map(d => ({
     date: d.date,
+    cusd: d.cusd,
+    usdc: d.usdc,
+    pol: d.pol,
     total: d.cusd + d.usdc + d.pol,
   }));
 
   const maxValue = Math.max(...stablecoinData.map(d => d.total));
-  const barWidth = innerWidth / stablecoinData.length - 8;
+  const barWidth = (innerWidth / stablecoinData.length) - 6;
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   return (
-    <svg width="100%" height={chartHeight} viewBox={`0 0 ${chartWidth} ${chartHeight}`} style={{ maxWidth: '100%' }}>
-      {/* Y-axis labels */}
+    <svg width="100%" viewBox={`0 0 ${width} ${height}`} style={{ overflow: 'visible' }}>
+      {/* Y-axis labels and grid */}
       {[0, 0.5, 1].map((ratio, i) => {
         const y = padding.top + innerHeight * (1 - ratio);
         const value = maxValue * ratio;
@@ -226,50 +94,164 @@ function StablecoinChart() {
             <line
               x1={padding.left}
               y1={y}
-              x2={chartWidth - padding.right}
+              x2={width - padding.right}
               y2={y}
-              stroke="#F0F0F0"
-              strokeDasharray="4,4"
+              stroke={ratio === 0 ? '#E0E0E0' : '#F0F0F0'}
+              strokeDasharray={ratio === 0 ? '0' : '3,3'}
             />
+            <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888">
+              ${(value / 1000000).toFixed(1)}M
+            </text>
+          </g>
+        );
+      })}
+
+      {/* Stacked bars */}
+      {stablecoinData.map((d, i) => {
+        const x = padding.left + i * (innerWidth / stablecoinData.length) + 3;
+        const totalHeight = maxValue > 0 ? (d.total / maxValue) * innerHeight : 0;
+        const cusdHeight = maxValue > 0 ? (d.cusd / maxValue) * innerHeight : 0;
+        const usdcHeight = maxValue > 0 ? (d.usdc / maxValue) * innerHeight : 0;
+        const polHeight = maxValue > 0 ? (d.pol / maxValue) * innerHeight : 0;
+        const isLatest = i === stablecoinData.length - 1;
+
+        const [month] = d.date.split('/');
+        const monthLabel = monthNames[parseInt(month) - 1];
+
+        let yOffset = padding.top + innerHeight;
+
+        return (
+          <g key={d.date}>
+            {/* CUSD - bottom */}
+            <rect
+              x={x}
+              y={yOffset - cusdHeight}
+              width={barWidth}
+              height={cusdHeight}
+              fill="#2196F3"
+              rx="3"
+            />
+            {/* USDC - middle */}
+            <rect
+              x={x}
+              y={yOffset - cusdHeight - usdcHeight}
+              width={barWidth}
+              height={usdcHeight}
+              fill="#2775CA"
+            />
+            {/* POL - top */}
+            <rect
+              x={x}
+              y={yOffset - cusdHeight - usdcHeight - polHeight}
+              width={barWidth}
+              height={polHeight}
+              fill="#7C4DFF"
+              rx="3"
+            />
+
+            {/* Latest indicator */}
+            {isLatest && totalHeight > 0 && (
+              <circle
+                cx={x + barWidth / 2}
+                cy={yOffset - totalHeight - 10}
+                r="6"
+                fill="#10B981"
+              />
+            )}
+
+            {/* Month label */}
             <text
-              x={padding.left - 8}
-              y={y + 4}
-              textAnchor="end"
+              x={x + barWidth / 2}
+              y={height - 12}
+              textAnchor="middle"
               fontSize="10"
-              fill="#999"
+              fill="#666"
             >
-              {formatCurrency(value)}
+              {monthLabel}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+// ============ CANTON COIN HOLDINGS CHART ============
+function CantonCoinChart() {
+  const recentData = treasuryData.slice(0, 12).reverse();
+  const width = 520;
+  const height = 200;
+  const padding = { top: 20, right: 20, bottom: 40, left: 55 };
+  const innerWidth = width - padding.left - padding.right;
+  const innerHeight = height - padding.top - padding.bottom;
+
+  const maxCC = Math.max(...recentData.map(d => d.cc));
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  const barWidth = (innerWidth / recentData.length) - 6;
+
+  return (
+    <svg width="100%" viewBox={`0 0 ${width} ${height}`} style={{ overflow: 'visible' }}>
+      {/* Y-axis labels and grid */}
+      {[0, 0.5, 1].map((ratio, i) => {
+        const y = padding.top + innerHeight * (1 - ratio);
+        const value = maxCC * ratio;
+        return (
+          <g key={i}>
+            <line
+              x1={padding.left}
+              y1={y}
+              x2={width - padding.right}
+              y2={y}
+              stroke={ratio === 0 ? '#E0E0E0' : '#F0F0F0'}
+              strokeDasharray={ratio === 0 ? '0' : '3,3'}
+            />
+            <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888">
+              {(value / 1000000).toFixed(0)}M
             </text>
           </g>
         );
       })}
 
       {/* Bars */}
-      {stablecoinData.map((d, i) => {
-        const barHeight = maxValue > 0 ? (d.total / maxValue) * innerHeight : 0;
-        const x = padding.left + i * (innerWidth / stablecoinData.length) + 4;
-        const y = padding.top + innerHeight - barHeight;
+      {recentData.map((d, i) => {
+        const x = padding.left + i * (innerWidth / recentData.length) + 3;
+        const barHeight = maxCC > 0 ? (d.cc / maxCC) * innerHeight : 0;
+        const isLatest = i === recentData.length - 1;
+
+        const [month] = d.date.split('/');
+        const monthLabel = monthNames[parseInt(month) - 1];
 
         return (
           <g key={d.date}>
             <rect
               x={x}
-              y={y}
+              y={padding.top + innerHeight - barHeight}
               width={barWidth}
               height={barHeight}
-              fill="#40FB50"
-              rx="3"
-              opacity={i === stablecoinData.length - 1 ? 1 : 0.7}
+              fill={isLatest ? '#FF9800' : '#FFB74D'}
+              rx="4"
             />
+            {/* Latest indicator */}
+            {isLatest && barHeight > 0 && (
+              <circle
+                cx={x + barWidth / 2}
+                cy={padding.top + innerHeight - barHeight - 12}
+                r="8"
+                fill="#FF9800"
+                stroke="#FFF"
+                strokeWidth="2"
+              />
+            )}
+            {/* Month label */}
             <text
               x={x + barWidth / 2}
-              y={chartHeight - 8}
+              y={height - 12}
               textAnchor="middle"
-              fontSize="9"
+              fontSize="10"
               fill="#666"
-              transform={`rotate(-45, ${x + barWidth / 2}, ${chartHeight - 8})`}
             >
-              {d.date.replace('/20', '/')}
+              {monthLabel}
             </text>
           </g>
         );
@@ -281,18 +263,20 @@ function StablecoinChart() {
 // ============ SEND HOLDINGS CHART ============
 function SendHoldingsChart() {
   const recentData = treasuryData.slice(0, 12).reverse();
-  const chartHeight = 140;
-  const chartWidth = 500;
-  const padding = { top: 20, right: 20, bottom: 30, left: 60 };
-  const innerWidth = chartWidth - padding.left - padding.right;
-  const innerHeight = chartHeight - padding.top - padding.bottom;
+  const width = 520;
+  const height = 180;
+  const padding = { top: 20, right: 20, bottom: 40, left: 55 };
+  const innerWidth = width - padding.left - padding.right;
+  const innerHeight = height - padding.top - padding.bottom;
 
   const maxSend = Math.max(...recentData.map(d => d.send));
   const minSend = Math.min(...recentData.map(d => d.send));
+  const range = maxSend - minSend;
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   const points = recentData.map((d, i) => {
     const x = padding.left + (i / (recentData.length - 1)) * innerWidth;
-    const y = padding.top + innerHeight - ((d.send - minSend) / (maxSend - minSend)) * innerHeight;
+    const y = padding.top + innerHeight - ((d.send - minSend) / range) * innerHeight;
     return { x, y, data: d };
   });
 
@@ -300,179 +284,298 @@ function SendHoldingsChart() {
   const areaPath = `${linePath} L ${points[points.length - 1].x} ${padding.top + innerHeight} L ${points[0].x} ${padding.top + innerHeight} Z`;
 
   return (
-    <svg width="100%" height={chartHeight} viewBox={`0 0 ${chartWidth} ${chartHeight}`} style={{ maxWidth: '100%' }}>
-      {/* Grid */}
+    <svg width="100%" viewBox={`0 0 ${width} ${height}`} style={{ overflow: 'visible' }}>
+      <defs>
+        <linearGradient id="sendGradient" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="#40FB50" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="#40FB50" stopOpacity="0.02" />
+        </linearGradient>
+      </defs>
+
+      {/* Y-axis labels and grid */}
       {[0, 0.5, 1].map((ratio, i) => {
         const y = padding.top + innerHeight * (1 - ratio);
-        const value = minSend + (maxSend - minSend) * ratio;
+        const value = minSend + range * ratio;
         return (
           <g key={i}>
             <line
               x1={padding.left}
               y1={y}
-              x2={chartWidth - padding.right}
+              x2={width - padding.right}
               y2={y}
-              stroke="#F0F0F0"
-              strokeDasharray="4,4"
+              stroke={ratio === 0 ? '#E0E0E0' : '#F0F0F0'}
+              strokeDasharray={ratio === 0 ? '0' : '3,3'}
             />
-            <text
-              x={padding.left - 8}
-              y={y + 4}
-              textAnchor="end"
-              fontSize="10"
-              fill="#999"
-            >
-              {formatNumber(value)}
+            <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888">
+              {(value / 1000000).toFixed(0)}M
             </text>
           </g>
         );
       })}
 
       {/* Area fill */}
-      <path d={areaPath} fill="#40FB50" opacity="0.15" />
+      <path d={areaPath} fill="url(#sendGradient)" />
 
       {/* Line */}
       <path
         d={linePath}
         fill="none"
         stroke="#40FB50"
-        strokeWidth="2"
+        strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
 
-      {/* Points */}
-      {points.map((p, i) => (
-        <circle
-          key={i}
-          cx={p.x}
-          cy={p.y}
-          r={i === points.length - 1 ? 5 : 3}
-          fill={i === points.length - 1 ? '#40FB50' : '#FFF'}
-          stroke="#40FB50"
-          strokeWidth="2"
-        />
-      ))}
+      {/* Data points */}
+      {points.map((p, i) => {
+        const isLatest = i === points.length - 1;
+        const [month] = p.data.date.split('/');
+        const monthLabel = monthNames[parseInt(month) - 1];
+
+        return (
+          <g key={i}>
+            <circle
+              cx={p.x}
+              cy={p.y}
+              r={isLatest ? 6 : 4}
+              fill={isLatest ? '#40FB50' : '#FFF'}
+              stroke="#40FB50"
+              strokeWidth="2"
+            />
+            {isLatest && (
+              <circle
+                cx={p.x}
+                cy={p.y}
+                r="12"
+                fill="none"
+                stroke="#40FB50"
+                strokeWidth="2"
+                opacity="0.3"
+              />
+            )}
+            {/* Month label */}
+            <text
+              x={p.x}
+              y={height - 12}
+              textAnchor="middle"
+              fontSize="10"
+              fill="#666"
+            >
+              {monthLabel}
+            </text>
+          </g>
+        );
+      })}
     </svg>
   );
 }
 
 // ============ MAIN COMPONENT ============
 export default function Treasury() {
-  const [showAllData, setShowAllData] = React.useState(false);
+  const [showAllData, setShowAllData] = useState(false);
   const displayData = showAllData ? treasuryData : treasuryData.slice(0, 12);
 
   const totalStablecoins = currentHoldings.cusd + currentHoldings.usdc + currentHoldings.pol + currentHoldings.fiat;
 
   return (
-    <div style={styles.container}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', padding: '8px 0' }}>
       {/* Info Callout */}
-      <div style={styles.infoCallout}>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <div style={{
+        backgroundColor: '#E8F4FD',
+        border: '1px solid #B8DAFF',
+        borderRadius: '8px',
+        padding: '14px 18px',
+        fontSize: '14px',
+        color: '#004085',
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: '12px',
+        lineHeight: 1.5,
+      }}>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: '2px' }}>
           <circle cx="10" cy="10" r="9" stroke="#004085" strokeWidth="2"/>
           <path d="M10 9V14M10 6V7" stroke="#004085" strokeWidth="2" strokeLinecap="round"/>
         </svg>
-        <span>Treasury balances are updated on the 1st of every month.</span>
+        <span>Treasury balances are updated on the <strong>1st of every month</strong>. All values reflect on-chain and off-chain holdings.</span>
       </div>
 
-      {/* Current Holdings */}
-      <div style={styles.metricsGrid}>
-        <div style={styles.metricCard}>
-          <div style={styles.metricHeader}>
-            <div style={{ ...styles.metricIcon, backgroundColor: '#E8FDE9', color: '#122023', fontSize: '11px' }}>$SEND</div>
-            <span style={styles.metricLabel}>SEND Token</span>
+      {/* Main Holdings Cards - All on same row, equal size */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+        {/* Stablecoin Holdings */}
+        <div style={{
+          backgroundColor: '#E3F2FD',
+          borderRadius: '12px',
+          padding: '20px',
+          border: '2px solid #2196F3',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#2196F3', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>💵</div>
+            <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>Stablecoins</div>
           </div>
-          <div style={styles.metricValue}>{formatNumber(currentHoldings.send)}</div>
-          <div style={styles.metricSubtext}>Treasury allocation</div>
+          <div style={{ fontSize: '28px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>{formatCurrency(totalStablecoins)}</div>
+          <div style={{ fontSize: '10px', color: '#666' }}>CUSD + USDC + POL + Fiat</div>
         </div>
 
-        <div style={styles.metricCard}>
-          <div style={styles.metricHeader}>
-            <div style={{ ...styles.metricIcon, backgroundColor: '#FFF3E0', color: '#E65100', fontSize: '12px' }}>$CC</div>
-            <span style={styles.metricLabel}>Canton Coin</span>
+        {/* Canton Coin */}
+        <div style={{
+          backgroundColor: '#FFF3E0',
+          borderRadius: '12px',
+          padding: '20px',
+          border: '2px solid #FF9800',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#FF9800', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>🪙</div>
+            <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>Canton Coin</div>
           </div>
-          <div style={styles.metricValue}>{formatNumber(currentHoldings.cc)}</div>
-          <div style={styles.metricSubtext}>$CC holdings</div>
+          <div style={{ fontSize: '28px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>{formatNumber(currentHoldings.cc)}</div>
+          <div style={{ fontSize: '10px', color: '#666' }}>Partner token holdings</div>
         </div>
 
-        <div style={styles.metricCard}>
-          <div style={styles.metricHeader}>
-            <div style={{ ...styles.metricIcon, backgroundColor: '#E3F2FD', color: '#1565C0', fontSize: '10px' }}>$CUSD</div>
-            <span style={styles.metricLabel}>CUSD</span>
+        {/* SEND Holdings */}
+        <div style={{
+          backgroundColor: '#E8FDE9',
+          borderRadius: '12px',
+          padding: '20px',
+          border: '2px solid #40FB50',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#40FB50', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>💎</div>
+            <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>SEND Token</div>
           </div>
-          <div style={styles.metricValue}>{formatNumber(currentHoldings.cusd)}</div>
-          <div style={styles.metricSubtext}>Stablecoin</div>
-        </div>
-
-        <div style={styles.metricCard}>
-          <div style={styles.metricHeader}>
-            <div style={{ ...styles.metricIcon, backgroundColor: '#E8F5E9', color: '#2E7D32', fontSize: '10px' }}>$USDC</div>
-            <span style={styles.metricLabel}>USDC</span>
-          </div>
-          <div style={styles.metricValue}>{formatCurrency(currentHoldings.usdc)}</div>
-          <div style={styles.metricSubtext}>Circle stablecoin</div>
-        </div>
-
-        <div style={styles.metricCard}>
-          <div style={styles.metricHeader}>
-            <div style={{ ...styles.metricIcon, backgroundColor: '#F3E5F5', color: '#7B1FA2' }}>POL</div>
-            <span style={styles.metricLabel}>Protocol Liquidity</span>
-          </div>
-          <div style={styles.metricValue}>{formatCurrency(currentHoldings.pol)}</div>
-          <div style={styles.metricSubtext}>POL (USDC)</div>
-        </div>
-
-        <div style={styles.metricCard}>
-          <div style={styles.metricHeader}>
-            <div style={{ ...styles.metricIcon, backgroundColor: '#ECEFF1', color: '#455A64' }}>🏦</div>
-            <span style={styles.metricLabel}>Fiat Bank</span>
-          </div>
-          <div style={styles.metricValue}>{formatCurrency(currentHoldings.fiat)}</div>
-          <div style={styles.metricSubtext}>USD in bank</div>
+          <div style={{ fontSize: '28px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>{formatNumber(currentHoldings.send)}</div>
+          <div style={{ fontSize: '10px', color: '#666' }}>21.4% of total supply</div>
         </div>
       </div>
 
-      {/* Summary Card */}
-      <div style={{ ...styles.section, backgroundColor: '#FAFAFA' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-          <div>
-            <div style={{ fontSize: '13px', color: '#666', marginBottom: '4px' }}>Total Stablecoin Position</div>
-            <div style={{ fontSize: '32px', fontWeight: 700, color: '#122023' }}>
-              {formatCurrency(totalStablecoins)}
-            </div>
-            <div style={{ fontSize: '12px', color: '#888' }}>CUSD + USDC + POL + Fiat</div>
+      {/* Asset Breakdown */}
+      <div style={{
+        backgroundColor: '#FFF',
+        borderRadius: '12px',
+        padding: '24px',
+        border: '1px solid #E0E0E0',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+      }}>
+        <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '20px' }}>Current Holdings Breakdown</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '16px' }}>
+          {assets.map((asset) => {
+            const value = currentHoldings[asset.key as keyof typeof currentHoldings] as number;
+            const isCurrency = ['usdc', 'pol', 'fiat'].includes(asset.key);
+            return (
+              <div key={asset.key} style={{
+                padding: '16px',
+                backgroundColor: '#FAFAFA',
+                borderRadius: '10px',
+                borderLeft: `4px solid ${asset.color}`,
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                  <span style={{ fontSize: '16px' }}>{asset.icon}</span>
+                  <span style={{ fontSize: '12px', color: '#666', fontWeight: 500 }}>{asset.label}</span>
+                </div>
+                <div style={{ fontSize: '18px', fontWeight: 700, color: '#122023' }}>
+                  {isCurrency ? formatCurrency(value) : formatNumber(value)}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Stablecoin Chart */}
+      <div style={{
+        backgroundColor: '#FFF',
+        borderRadius: '12px',
+        padding: '24px',
+        border: '1px solid #E0E0E0',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+          <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#E3F2FD', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>💵</div>
+          <div style={{ fontSize: '18px', fontWeight: 600, color: '#122023' }}>Stablecoin Position</div>
+        </div>
+        <div style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>CUSD + USDC + POL over 12 months</div>
+        <StablecoinChart />
+        {/* Legend */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginTop: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#2196F3' }} />
+            <span style={{ fontSize: '13px', color: '#666' }}>CUSD</span>
           </div>
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '13px', color: '#666', marginBottom: '4px' }}>As of</div>
-            <div style={{ fontSize: '18px', fontWeight: 600, color: '#122023' }}>December 2025</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#2775CA' }} />
+            <span style={{ fontSize: '13px', color: '#666' }}>USDC</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#7C4DFF' }} />
+            <span style={{ fontSize: '13px', color: '#666' }}>POL</span>
           </div>
         </div>
       </div>
 
-      {/* Charts */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
-        <div style={styles.section}>
-          <div style={styles.sectionTitle}>SEND Holdings (12 months)</div>
-          <SendHoldingsChart />
+      {/* Canton Coin Chart */}
+      <div style={{
+        backgroundColor: '#FFF',
+        borderRadius: '12px',
+        padding: '24px',
+        border: '1px solid #E0E0E0',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+          <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#FFF3E0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>🪙</div>
+          <div style={{ fontSize: '18px', fontWeight: 600, color: '#122023' }}>Canton Coin Holdings</div>
         </div>
-        <div style={styles.section}>
-          <div style={styles.sectionTitle}>Stablecoin Position (12 months)</div>
-          <StablecoinChart />
+        <div style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>12-month trend</div>
+        <CantonCoinChart />
+      </div>
+
+      {/* SEND Holdings Chart */}
+      <div style={{
+        backgroundColor: '#FFF',
+        borderRadius: '12px',
+        padding: '24px',
+        border: '1px solid #E0E0E0',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+          <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#E8FDE9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>💎</div>
+          <div style={{ fontSize: '18px', fontWeight: 600, color: '#122023' }}>SEND Holdings</div>
         </div>
+        <div style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>12-month trend</div>
+        <SendHoldingsChart />
       </div>
 
       {/* Historical Data Table */}
-      <div style={styles.section}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          <div style={styles.sectionTitle}>Historical Holdings</div>
+      <div style={{
+        backgroundColor: '#FFF',
+        borderRadius: '12px',
+        padding: '24px',
+        border: '1px solid #E0E0E0',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <div>
+            <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023' }}>Historical Holdings</div>
+            <div style={{ fontSize: '12px', color: '#888', marginTop: '2px' }}>Monthly treasury snapshots</div>
+          </div>
           <button
             onClick={() => setShowAllData(!showAllData)}
-            style={styles.toggleButton}
+            style={{
+              backgroundColor: '#F5F5F5',
+              border: '1px solid #E0E0E0',
+              borderRadius: '8px',
+              padding: '10px 16px',
+              fontSize: '13px',
+              color: '#122023',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontWeight: 500,
+            }}
           >
-            {showAllData ? 'Show Less' : 'Show All Data'}
+            {showAllData ? 'Show Less' : 'Show All'}
             <svg
-              width="16"
-              height="16"
+              width="14"
+              height="14"
               viewBox="0 0 16 16"
               fill="none"
               style={{ transform: showAllData ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}
@@ -482,44 +585,49 @@ export default function Treasury() {
           </button>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table style={styles.table}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
             <thead>
               <tr>
-                <th style={styles.th}>Date</th>
-                <th style={styles.th}>$SEND</th>
-                <th style={styles.th}>$CC</th>
-                <th style={styles.th}>$CUSD</th>
-                <th style={styles.th}>$USDC</th>
-                <th style={styles.th}>POL</th>
-                <th style={styles.th}>Fiat</th>
-                <th style={styles.th}>ETH</th>
+                <th style={{ textAlign: 'left', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Date</th>
+                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$SEND</th>
+                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$CC</th>
+                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$CUSD</th>
+                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$USDC</th>
+                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>POL</th>
+                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Fiat</th>
+                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>ETH</th>
               </tr>
             </thead>
             <tbody>
-              {displayData.map((row, index) => (
-                <tr key={row.date} style={row.isLatest ? styles.latestRow : {}}>
-                  <td style={styles.td}>
-                    <span style={{ fontWeight: row.isLatest ? 700 : 400 }}>
-                      {row.date}
-                    </span>
-                    {row.isLatest && <span style={styles.badge}>LATEST</span>}
+              {displayData.map((row) => (
+                <tr key={row.date} style={row.isLatest ? { backgroundColor: '#F8FFF8' } : {}}>
+                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', fontWeight: row.isLatest ? 700 : 500, color: '#122023' }}>
+                    {row.date}
+                    {row.isLatest && (
+                      <span style={{
+                        backgroundColor: '#40FB50',
+                        color: '#122023',
+                        fontSize: '9px',
+                        fontWeight: 700,
+                        padding: '2px 6px',
+                        borderRadius: '4px',
+                        marginLeft: '8px',
+                      }}>
+                        LATEST
+                      </span>
+                    )}
                   </td>
-                  <td style={{ ...styles.td, fontWeight: 600 }}>{formatNumber(row.send)}</td>
-                  <td style={styles.td}>{formatNumber(row.cc)}</td>
-                  <td style={styles.td}>{formatNumber(row.cusd)}</td>
-                  <td style={styles.td}>{formatCurrency(row.usdc)}</td>
-                  <td style={styles.td}>{formatCurrency(row.pol)}</td>
-                  <td style={styles.td}>{formatCurrency(row.fiat)}</td>
-                  <td style={styles.td}>{row.eth > 0 ? row.eth.toFixed(2) : '—'}</td>
+                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', fontWeight: 600, color: '#122023' }}>{formatNumber(row.send)}</td>
+                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatNumber(row.cc)}</td>
+                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatNumber(row.cusd)}</td>
+                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.usdc)}</td>
+                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.pol)}</td>
+                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.fiat)}</td>
+                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#888' }}>{row.eth > 0 ? row.eth.toFixed(2) : '—'}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-
-        {/* Tip */}
-        <div style={styles.tipCallout}>
-          <strong>Recent Changes:</strong> Notice the significant changes in SEND token holdings starting February 2025, reflecting the token upgrade. POL (Protocol Owned Liquidity) represents USDC in liquidity pools.
         </div>
       </div>
     </div>

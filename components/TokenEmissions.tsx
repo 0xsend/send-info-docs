@@ -8,57 +8,57 @@ const tokenData = {
   circulating: 327_985_505,
   nonCirculating: 672_014_495,
   circulationRate: 32.80,
-  avgAnnualInflation: 27.5,
+  avgAnnualInflation: 24.6,
 
   allocations: [
-    { name: 'Rewards', allocation: 300_000_000, remaining: 225_005_988, color: '#10B981', status: 'Active Distribution' },
+    { name: 'Rewards', allocation: 300_000_000, remaining: 225_019_521, color: '#10B981', status: 'Active Distribution' },
     { name: 'Treasury', allocation: 200_000_000, remaining: 214_371_974, color: '#3B82F6', status: 'Net Accumulation' },
-    { name: 'Exchange Listings', allocation: 200_000_000, remaining: 133_322_498, color: '#8B5CF6', status: 'Active Distribution' },
-    { name: 'Team', allocation: 100_000_000, remaining: 61_476_498, color: '#F59E0B', status: 'Vesting' },
-    { name: 'Contributors', allocation: 100_000_000, remaining: 60_618_502, color: '#EF4444', status: 'Vesting' },
+    { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#8B5CF6', status: 'Active Distribution' },
+    { name: 'Team', allocation: 100_000_000, remaining: 61_500_000, color: '#F59E0B', status: 'Vesting' },
+    { name: 'Contributors', allocation: 100_000_000, remaining: 60_633_000, color: '#EF4444', status: 'Vesting' },
     { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#06B6D4', status: 'Fully Distributed' },
   ],
 
-  // All figures normalized to 1B supply (historical data divided by 100)
+  // Quarterly data from end-of-quarter monthly figures
   quarterlyData: [
-    { date: 'Q2 2023', circulating: 180_000_000, qoqChange: null, qoqPct: null },
-    { date: 'Q3 2023', circulating: 190_591_233, qoqChange: 10_591_233, qoqPct: 5.88 },
-    { date: 'Q4 2023', circulating: 203_744_539, qoqChange: 13_153_306, qoqPct: 6.90 },
-    { date: 'Q1 2024', circulating: 220_063_396, qoqChange: 16_318_857, qoqPct: 8.01 },
-    { date: 'Q2 2024', circulating: 241_368_496, qoqChange: 21_305_100, qoqPct: 9.68 },
-    { date: 'Q3 2024', circulating: 260_413_984, qoqChange: 19_045_488, qoqPct: 7.89 },
-    { date: 'Q4 2024', circulating: 270_517_390, qoqChange: 10_103_406, qoqPct: 3.88 },
-    { date: 'Q1 2025', circulating: 290_266_810, qoqChange: 19_749_420, qoqPct: 7.30 },
-    { date: 'Q2 2025', circulating: 301_434_244, qoqChange: 11_167_434, qoqPct: 3.85 },
-    { date: 'Q3 2025', circulating: 309_636_106, qoqChange: 8_201_862, qoqPct: 2.72 },
-    { date: 'Q4 2025', circulating: 327_985_505, qoqChange: 18_349_399, qoqPct: 5.92 },
+    { date: 'Q2 2023', circulating: 182_449_794, qoqChange: null, qoqPct: null },
+    { date: 'Q3 2023', circulating: 189_880_233, qoqChange: 7_430_439, qoqPct: 4.07 },
+    { date: 'Q4 2023', circulating: 224_759_135, qoqChange: 34_878_902, qoqPct: 18.37 },
+    { date: 'Q1 2024', circulating: 236_713_673, qoqChange: 11_954_538, qoqPct: 5.32 },
+    { date: 'Q2 2024', circulating: 259_363_161, qoqChange: 22_649_488, qoqPct: 9.57 },
+    { date: 'Q3 2024', circulating: 267_327_217, qoqChange: 7_964_056, qoqPct: 3.07 },
+    { date: 'Q4 2024', circulating: 273_189_782, qoqChange: 5_862_565, qoqPct: 2.19 },
+    { date: 'Q1 2025', circulating: 293_206_750, qoqChange: 20_016_968, qoqPct: 7.33 },
+    { date: 'Q2 2025', circulating: 297_669_917, qoqChange: 4_463_167, qoqPct: 1.52 },
+    { date: 'Q3 2025', circulating: 315_544_897, qoqChange: 17_874_980, qoqPct: 6.00 },
+    { date: 'Q4 2025', circulating: 327_985_505, qoqChange: 12_440_608, qoqPct: 3.94 },
   ],
 
   inflationData: [
-    { period: 'Q3 2023', annualized: 23.5, tokens: 10_591_233 },
-    { period: 'Q4 2023', annualized: 27.6, tokens: 13_153_306 },
-    { period: 'Q1 2024', annualized: 32.0, tokens: 16_318_857 },
-    { period: 'Q2 2024', annualized: 38.7, tokens: 21_305_100 },
-    { period: 'Q3 2024', annualized: 31.6, tokens: 19_045_488 },
-    { period: 'Q4 2024', annualized: 15.5, tokens: 10_103_406 },
-    { period: 'Q1 2025', annualized: 29.2, tokens: 19_749_420 },
-    { period: 'Q2 2025', annualized: 15.4, tokens: 11_167_434 },
-    { period: 'Q3 2025', annualized: 10.9, tokens: 8_201_862 },
-    { period: 'Q4 2025', annualized: 23.7, tokens: 18_349_399 },
+    { period: 'Q3 2023', annualized: 16.3, tokens: 7_430_439 },
+    { period: 'Q4 2023', annualized: 73.5, tokens: 34_878_902 },
+    { period: 'Q1 2024', annualized: 21.3, tokens: 11_954_538 },
+    { period: 'Q2 2024', annualized: 38.3, tokens: 22_649_488 },
+    { period: 'Q3 2024', annualized: 12.3, tokens: 7_964_056 },
+    { period: 'Q4 2024', annualized: 8.8, tokens: 5_862_565 },
+    { period: 'Q1 2025', annualized: 29.3, tokens: 20_016_968 },
+    { period: 'Q2 2025', annualized: 6.1, tokens: 4_463_167 },
+    { period: 'Q3 2025', annualized: 24.0, tokens: 17_874_980 },
+    { period: 'Q4 2025', annualized: 15.8, tokens: 12_440_608 },
   ],
 
   vestingProgress: [
-    { name: 'Team', initial: 100_000_000, released: 38_523_502, pct: 38.5, color: '#F59E0B' },
-    { name: 'Contributors', initial: 100_000_000, released: 39_381_498, pct: 39.4, color: '#EF4444' },
-    { name: 'Rewards', initial: 300_000_000, released: 74_994_012, pct: 25.0, color: '#10B981' },
+    { name: 'Team', initial: 100_000_000, released: 38_500_000, pct: 38.5, color: '#F59E0B' },
+    { name: 'Contributors', initial: 100_000_000, released: 39_367_000, pct: 39.4, color: '#EF4444' },
+    { name: 'Rewards', initial: 300_000_000, released: 74_980_479, pct: 25.0, color: '#10B981' },
   ],
 
   milestones: [
-    { date: 'Q2 2023', event: 'Token Launch (TGE)', circulating: '180M', description: '100M Liquidity + 80M Exchange Listings' },
-    { date: 'Q1 2024', event: '220M Circulating', circulating: '220M' },
-    { date: 'Q3 2024', event: '260M Circulating', circulating: '260M' },
-    { date: 'Q2 2025', event: '300M Circulating', circulating: '301M' },
-    { date: 'Q4 2025', event: 'Current', circulating: '328M' },
+    { date: 'Q2 2023', event: 'Token Launch (TGE)', circulating: '182M', description: '100M Liquidity + 80M Exchange Listings' },
+    { date: 'Q4 2023', event: '225M Circulating', circulating: '225M' },
+    { date: 'Q2 2024', event: '259M Circulating', circulating: '259M' },
+    { date: 'Q1 2025', event: '293M Circulating', circulating: '293M' },
+    { date: 'Q4 2025', event: 'Current — 328M Circulating', circulating: '328M' },
   ],
 };
 
@@ -115,36 +115,133 @@ function DonutChart() {
 // ============ AREA CHART ============
 function AreaChart() {
   const data = tokenData.quarterlyData;
-  const maxVal = Math.max(...data.map(d => d.circulating));
-  const minVal = Math.min(...data.map(d => d.circulating));
+  const maxVal = 350_000_000; // Fixed scale for better context
+  const minVal = 150_000_000;
   const range = maxVal - minVal;
 
+  // Y-axis labels
+  const yLabels = ['350M', '300M', '250M', '200M', '150M'];
+  const yValues = [350_000_000, 300_000_000, 250_000_000, 200_000_000, 150_000_000];
+
+  // Calculate chart points (offset for y-axis space)
+  const chartLeft = 12; // percentage for y-axis
+  const chartWidth = 100 - chartLeft;
+
   const points = data.map((d, i) => {
-    const x = (i / (data.length - 1)) * 100;
-    const y = 100 - ((d.circulating - minVal) / range) * 80;
+    const x = chartLeft + (i / (data.length - 1)) * chartWidth;
+    const y = 8 + ((maxVal - d.circulating) / range) * 84;
     return `${x},${y}`;
   }).join(' ');
 
-  const areaPoints = `0,100 ${points} 100,100`;
+  // Create area polygon
+  const lastPoint = points.split(' ').pop();
+  const areaPoints = `${chartLeft},92 ${points} ${lastPoint?.split(',')[0]},92`;
+
+  // Data points for circles
+  const dataPoints = data.map((d, i) => ({
+    x: chartLeft + (i / (data.length - 1)) * chartWidth,
+    y: 8 + ((maxVal - d.circulating) / range) * 84,
+    value: d.circulating,
+    date: d.date,
+  }));
 
   return (
-    <div style={{ position: 'relative', height: '180px', marginBottom: '16px' }}>
+    <div style={{ position: 'relative', height: '220px', marginBottom: '16px' }}>
       <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
         <defs>
           <linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#40FB50" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#40FB50" stopOpacity="0.05" />
+            <stop offset="0%" stopColor="#40FB50" stopOpacity="0.4" />
+            <stop offset="50%" stopColor="#40FB50" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="#40FB50" stopOpacity="0.02" />
           </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
-        <line x1="0" y1="25" x2="100" y2="25" stroke="#E0E0E0" strokeWidth="0.3" />
-        <line x1="0" y1="50" x2="100" y2="50" stroke="#E0E0E0" strokeWidth="0.3" />
-        <line x1="0" y1="75" x2="100" y2="75" stroke="#E0E0E0" strokeWidth="0.3" />
+
+        {/* Horizontal grid lines */}
+        {yValues.map((val, i) => {
+          const y = 8 + ((maxVal - val) / range) * 84;
+          return (
+            <line
+              key={i}
+              x1={chartLeft}
+              y1={y}
+              x2="100"
+              y2={y}
+              stroke="#E8E8E8"
+              strokeWidth="0.2"
+              strokeDasharray="1,1"
+            />
+          );
+        })}
+
+        {/* Area fill */}
         <polygon points={areaPoints} fill="url(#areaFill)" />
-        <polyline points={points} fill="none" stroke="#40FB50" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+
+        {/* Main line */}
+        <polyline
+          points={points}
+          fill="none"
+          stroke="#40FB50"
+          strokeWidth="0.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          filter="url(#glow)"
+        />
+
+        {/* Data points */}
+        {dataPoints.map((point, i) => (
+          <g key={i}>
+            <circle
+              cx={point.x}
+              cy={point.y}
+              r="0.8"
+              fill="#FFF"
+              stroke="#40FB50"
+              strokeWidth="0.4"
+            />
+          </g>
+        ))}
       </svg>
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#666', marginTop: '8px' }}>
+
+      {/* Y-axis labels */}
+      <div style={{
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        paddingTop: '8px',
+        paddingBottom: '28px',
+      }}>
+        {yLabels.map((label, i) => (
+          <span key={i} style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>{label}</span>
+        ))}
+      </div>
+
+      {/* X-axis labels */}
+      <div style={{
+        position: 'absolute',
+        bottom: 0,
+        left: '12%',
+        right: 0,
+        display: 'flex',
+        justifyContent: 'space-between',
+        fontSize: '10px',
+        color: '#666',
+        fontWeight: 500,
+      }}>
         <span>Q2 '23</span>
+        <span>Q4 '23</span>
         <span>Q2 '24</span>
+        <span>Q4 '24</span>
         <span>Q2 '25</span>
         <span>Q4 '25</span>
       </div>
@@ -186,24 +283,37 @@ export default function TokenEmissions() {
       <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
         <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Token Allocation</div>
         <div style={{ fontSize: '13px', color: '#666', marginBottom: '20px' }}>Distribution across 6 categories</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
           <DonutChart />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '10px', width: '100%' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', width: '100%' }}>
             {tokenData.allocations.map((alloc) => {
               const distributed = alloc.allocation - alloc.remaining;
               const pctDistributed = (distributed / alloc.allocation) * 100;
               const pctOfTotal = (alloc.allocation / tokenData.totalSupply) * 100;
 
               return (
-                <div key={alloc.name} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', padding: '10px', background: '#F5F5F5', borderRadius: '8px' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: alloc.color, marginTop: '4px', flexShrink: 0 }} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: '12px', fontWeight: 600, color: '#122023', marginBottom: '2px' }}>{alloc.name}</div>
-                    <div style={{ fontSize: '11px', color: '#666' }}>{pctOfTotal}% ({formatNumber(alloc.allocation)})</div>
-                    <div style={{ height: '3px', background: '#E0E0E0', borderRadius: '2px', marginTop: '6px', overflow: 'hidden' }}>
-                      <div style={{ height: '100%', width: `${pctDistributed}%`, background: alloc.color, borderRadius: '2px' }} />
-                    </div>
-                    <div style={{ fontSize: '10px', color: '#666', marginTop: '4px' }}>{pctDistributed.toFixed(0)}% distributed</div>
+                <div
+                  key={alloc.name}
+                  style={{
+                    padding: '14px',
+                    background: '#FAFAFA',
+                    borderRadius: '10px',
+                    border: '1px solid #EBEBEB',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: alloc.color, flexShrink: 0 }} />
+                    <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>{alloc.name}</div>
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#666', marginBottom: '10px' }}>
+                    {pctOfTotal}% of supply ({formatNumber(alloc.allocation)})
+                  </div>
+                  <div style={{ height: '4px', background: '#E0E0E0', borderRadius: '2px', overflow: 'hidden', marginBottom: '8px' }}>
+                    <div style={{ height: '100%', width: `${pctDistributed}%`, background: alloc.color, borderRadius: '2px' }} />
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '10px', color: '#999' }}>{pctDistributed.toFixed(0)}% distributed</span>
+                    <span style={{ fontSize: '10px', fontWeight: 600, color: alloc.color }}>{formatNumber(distributed)}</span>
                   </div>
                 </div>
               );
@@ -235,41 +345,125 @@ export default function TokenEmissions() {
 
       {/* Inflation Trend */}
       <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
-        <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Inflation Trend</div>
-        <div style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Annualized rate by half-year period</div>
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '8px', height: '140px', marginBottom: '12px' }}>
-          {tokenData.inflationData.map((period, i) => {
-            const maxInflation = Math.max(...tokenData.inflationData.map(p => p.annualized));
-            const barHeight = (period.annualized / maxInflation) * 100;
-            const isHigh = period.annualized > 40;
-            const isMedium = period.annualized > 20 && period.annualized <= 40;
-            const barColor = isHigh ? '#EF4444' : isMedium ? '#F59E0B' : '#10B981';
-
-            return (
-              <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                <div style={{ width: '100%', height: '100px', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-                  <div style={{ width: '100%', maxWidth: '40px', height: `${barHeight}%`, background: barColor, borderRadius: '4px 4px 0 0' }} />
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#122023' }}>{period.annualized}%</div>
-                  <div style={{ fontSize: '10px', color: '#666' }}>{period.period}</div>
-                </div>
-              </div>
-            );
-          })}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+          <div>
+            <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Inflation Trend</div>
+            <div style={{ fontSize: '13px', color: '#666' }}>Annualized rate by quarter</div>
+          </div>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', color: '#666' }}>
+              <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#EF4444' }} />
+              <span>&gt;40%</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', color: '#666' }}>
+              <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#F59E0B' }} />
+              <span>20-40%</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', color: '#666' }}>
+              <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#10B981' }} />
+              <span>&lt;20%</span>
+            </div>
+          </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', paddingTop: '12px', borderTop: '1px solid #E0E0E0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#666' }}>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EF4444' }} />
-            <span>&gt;40% High</span>
+
+        {/* Chart with Y-axis */}
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {/* Y-axis labels */}
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '180px', paddingBottom: '24px' }}>
+            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>80%</span>
+            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>60%</span>
+            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>40%</span>
+            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>20%</span>
+            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>0%</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#666' }}>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#F59E0B' }} />
-            <span>20-40% Med</span>
+
+          {/* Bars */}
+          <div style={{ flex: 1, position: 'relative' }}>
+            {/* Grid lines */}
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '156px' }}>
+              {[0, 25, 50, 75, 100].map((pct, i) => (
+                <div
+                  key={i}
+                  style={{
+                    position: 'absolute',
+                    top: `${pct}%`,
+                    left: 0,
+                    right: 0,
+                    borderTop: '1px dashed #E8E8E8',
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Bar chart */}
+            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '4px', height: '156px', position: 'relative' }}>
+              {tokenData.inflationData.map((period, i) => {
+                const maxScale = 80; // Fixed scale to 80%
+                const barHeight = Math.min((period.annualized / maxScale) * 100, 100);
+                const isHigh = period.annualized > 40;
+                const isMedium = period.annualized > 20 && period.annualized <= 40;
+                const barColor = isHigh ? '#EF4444' : isMedium ? '#F59E0B' : '#10B981';
+
+                return (
+                  <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', justifyContent: 'flex-end' }}>
+                    <div
+                      style={{
+                        width: '100%',
+                        maxWidth: '32px',
+                        height: `${barHeight}%`,
+                        background: barColor,
+                        borderRadius: '4px 4px 0 0',
+                        position: 'relative',
+                        minHeight: '4px',
+                      }}
+                    >
+                      {/* Value label on top of bar */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '-20px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          fontSize: '10px',
+                          fontWeight: 700,
+                          color: barColor,
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {period.annualized}%
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* X-axis labels */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px' }}>
+              {tokenData.inflationData.map((period, i) => (
+                <div key={i} style={{ flex: 1, textAlign: 'center' }}>
+                  <div style={{ fontSize: '9px', color: '#666', fontWeight: 500 }}>
+                    {period.period.replace('Q', 'Q').replace(' 20', "'")}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#666' }}>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981' }} />
-            <span>&lt;20% Low</span>
+        </div>
+
+        {/* Summary stats */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #E0E0E0' }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '18px', fontWeight: 700, color: '#EF4444' }}>73.5%</div>
+            <div style={{ fontSize: '10px', color: '#666', marginTop: '2px' }}>Peak (Q4 '23)</div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '18px', fontWeight: 700, color: '#10B981' }}>6.1%</div>
+            <div style={{ fontSize: '10px', color: '#666', marginTop: '2px' }}>Low (Q2 '25)</div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '18px', fontWeight: 700, color: '#122023' }}>{tokenData.avgAnnualInflation}%</div>
+            <div style={{ fontSize: '10px', color: '#666', marginTop: '2px' }}>Average</div>
           </div>
         </div>
       </div>
@@ -351,21 +545,91 @@ export default function TokenEmissions() {
       {/* Key Milestones */}
       <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
         <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Key Milestones</div>
-        <div style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Token distribution journey</div>
-        <div style={{ position: 'relative', paddingLeft: '20px' }}>
-          <div style={{ position: 'absolute', left: '5px', top: '6px', bottom: '6px', width: '2px', background: 'linear-gradient(to bottom, #10B981, #3B82F6)', borderRadius: '1px' }} />
-          {tokenData.milestones.map((milestone, i) => (
-            <div key={i} style={{ position: 'relative', paddingBottom: '16px' }}>
-              <div style={{ position: 'absolute', left: '-17px', top: '2px', width: '10px', height: '10px', borderRadius: '50%', background: '#10B981', border: '2px solid #FFF', boxShadow: '0 0 0 2px #10B981' }} />
-              <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>{milestone.event}</div>
-              <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>
-                {milestone.date} &bull; <span style={{ color: '#10B981', fontWeight: 600 }}>{milestone.circulating}</span> circulating
+        <div style={{ fontSize: '13px', color: '#666', marginBottom: '24px' }}>Token distribution journey</div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+          {tokenData.milestones.map((milestone, i) => {
+            const isLast = i === tokenData.milestones.length - 1;
+            const isFirst = i === 0;
+            return (
+              <div
+                key={i}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '70px 24px 1fr',
+                  alignItems: 'center',
+                  gap: '0',
+                  minHeight: '48px',
+                }}
+              >
+                {/* Date column */}
+                <div style={{
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  color: '#999',
+                  textAlign: 'right',
+                  paddingRight: '16px',
+                }}>
+                  {milestone.date}
+                </div>
+
+                {/* Timeline column */}
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  alignSelf: 'stretch',
+                }}>
+                  {/* Top line segment */}
+                  <div style={{
+                    width: '2px',
+                    flex: 1,
+                    background: isFirst ? 'transparent' : '#10B981',
+                  }} />
+                  {/* Dot */}
+                  <div style={{
+                    width: isLast ? '14px' : '10px',
+                    height: isLast ? '14px' : '10px',
+                    borderRadius: '50%',
+                    background: isLast ? '#10B981' : '#FFF',
+                    border: `2px solid #10B981`,
+                    flexShrink: 0,
+                    boxShadow: isLast ? '0 0 0 4px rgba(16, 185, 129, 0.15)' : 'none',
+                  }} />
+                  {/* Bottom line segment */}
+                  <div style={{
+                    width: '2px',
+                    flex: 1,
+                    background: isLast ? 'transparent' : '#10B981',
+                  }} />
+                </div>
+
+                {/* Event name column */}
+                <div style={{
+                  paddingLeft: '16px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '2px',
+                }}>
+                  <div style={{
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    color: '#122023',
+                  }}>
+                    {milestone.event}
+                  </div>
+                  {milestone.description && (
+                    <div style={{
+                      fontSize: '11px',
+                      color: '#888',
+                    }}>
+                      {milestone.description}
+                    </div>
+                  )}
+                </div>
               </div>
-              {milestone.description && (
-                <div style={{ fontSize: '11px', color: '#888', marginTop: '2px' }}>{milestone.description}</div>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

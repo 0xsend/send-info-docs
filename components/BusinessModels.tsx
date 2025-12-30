@@ -231,7 +231,7 @@ export default function BusinessModels() {
           <path d="M10 9V14M10 6V7" stroke="#004085" strokeWidth="2" strokeLinecap="round"/>
         </svg>
         <span>
-          Revenue is transferred to the Treasury Multisig on the <strong>7th of each month</strong>.
+          Revenue is transferred to the Treasury Multisig on the <strong>1st of each month</strong>.
           By maintaining separate multisigs for each revenue-generating product, we gain clearer insights into our metrics.
         </span>
       </div>
@@ -255,7 +255,7 @@ export default function BusinessModels() {
           <div style={{ ...styles.flowBox, backgroundColor: '#E3F2FD', border: '2px solid #2196F3' }}>
             <div style={{ fontSize: '24px', marginBottom: '8px' }}>🏦</div>
             <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>Treasury</div>
-            <div style={{ fontSize: '12px', color: '#666' }}>7th of month</div>
+            <div style={{ fontSize: '12px', color: '#666' }}>1st of month</div>
           </div>
         </div>
       </div>
