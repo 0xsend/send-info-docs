@@ -6,7 +6,6 @@
 /.next
 
 # Generated files
-.docusaurus
 .cache-loader
 
 # Misc

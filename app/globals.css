@@ -246,6 +246,12 @@ body {
   object-fit: contain;
 }
 
+.sidebar-section-icon-image[src*="sendtoken"],
+.sidebar-section-icon-image[src*="cusdstablecoin"],
+.sidebar-section-icon-image[src*="cantonwallet"] {
+  border-radius: 50%;
+}
+
 .sidebar-section-title {
   font-size: 16px;
   font-weight: 600;
@@ -583,6 +589,8 @@ body {
   align-items: stretch;
   gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 960px;
+  width: 100%;
 }
 
 .nav-card {
@@ -637,6 +645,12 @@ body {
   object-fit: contain;
 }
 
+.nav-card-icon-image[src*="sendtoken"],
+.nav-card-icon-image[src*="cusdstablecoin"],
+.nav-card-icon-image[src*="cantonwallet"] {
+  border-radius: 50%;
+}
+
 .nav-card-initial {
   display: inline-flex;
   align-items: center;
@@ -666,7 +680,7 @@ body {
   justify-content: center;
   width: 32px;
   height: 32px;
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
   flex-shrink: 0;
 }
 
@@ -787,7 +801,7 @@ body {
 .apps-nav-card-arrow {
   width: 32px;
   height: 32px;
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -1002,6 +1016,8 @@ body {
   .hero-section {
     height: 240px;
     padding: 30px;
+    background-size: contain;
+    background-position: center;
   }
 
   .hero-title {
@@ -1035,6 +1051,8 @@ body {
   .hero-section {
     height: 200px;
     padding: 20px;
+    background-size: contain;
+    background-position: center;
   }
 
   .hero-title {
