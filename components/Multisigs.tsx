@@ -22,15 +22,15 @@ const revenueMultisigs = [
 const cantonMultisigs = [
   {
     name: 'Send Treasury',
-    address: 'cantonwallet-send_foundation::1220e2ed6a90ad1c3b5636d6af9f26b31d5e57c2b2c28fc52b12ddec0e8f6bdda97f',
-    shortAddress: 'send_foundation::1220...a97f',
-    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-send_foundation%3A%3A1220e2ed6a90ad1c3b5636d6af9f26b31d5e57c2b2c28fc52b12ddec0e8f6bdda97f',
+    address: 'cantonwallet-send-treasury::1220b2d1b1bf8dfff8f298207d0286a951d989580ddce88d5b59ecc72f03af9e13d8',
+    shortAddress: 'send-treasury::1220...13d8',
+    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-send-treasury%3A%3A1220b2d1b1bf8dfff8f298207d0286a951d989580ddce88d5b59ecc72f03af9e13d8',
   },
   {
     name: 'Send Rewards',
-    address: 'cantonwallet-send_rewards::12202185a41979ff30b91bc11031e6f07aea15dbf9b51a8c4d056658616e6447b69d',
-    shortAddress: 'send_rewards::1220...b69d',
-    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-send_rewards%3A%3A12202185a41979ff30b91bc11031e6f07aea15dbf9b51a8c4d056658616e6447b69d',
+    address: 'cantonwallet-send-rewards::1220b2d1b1bf8dfff8f298207d0286a951d989580ddce88d5b59ecc72f03af9e13d8',
+    shortAddress: 'send-rewards::1220...13d8',
+    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-send-rewards%3A%3A1220b2d1b1bf8dfff8f298207d0286a951d989580ddce88d5b59ecc72f03af9e13d8',
   },
 ];
 
