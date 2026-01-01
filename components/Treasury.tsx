@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 // ============ TREASURY DATA ============
 const treasuryData = [
-  { date: '12/2025', send: 214371974, cc: 55312796, cusd: 2752008, usdc: 36049.98, pol: 790976, fiat: 20783.78, eth: 0, isLatest: true },
+  { date: '1/2026', send: 212705811, cc: 64819991, cusd: 0, usdc: 2837000, pol: 949000, fiat: 183409, eth: 0, isLatest: true },
+  { date: '12/2025', send: 214371974, cc: 55312796, cusd: 2752008, usdc: 36049.98, pol: 790976, fiat: 20783.78, eth: 0 },
   { date: '11/2025', send: 215761675, cc: 31402896, cusd: 2225640, usdc: 506813.95, pol: 1199746, fiat: 62488.28, eth: 0 },
   { date: '10/2025', send: 208017123, cc: 5900000, cusd: 5000, usdc: 28432, pol: 1132537, fiat: 142835.65, eth: 0 },
   { date: '9/2025', send: 204768175, cc: 300000, cusd: 100000, usdc: 124962, pol: 283000, fiat: 120203.75, eth: 0 },
@@ -443,7 +444,7 @@ export default function Treasury() {
             <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>SEND Token</div>
           </div>
           <div style={{ fontSize: '28px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>{formatNumber(currentHoldings.send)}</div>
-          <div style={{ fontSize: '10px', color: '#666' }}>21.4% of total supply</div>
+          <div style={{ fontSize: '10px', color: '#666' }}>21.3% of total supply</div>
         </div>
       </div>
 
