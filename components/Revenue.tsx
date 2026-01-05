@@ -68,7 +68,10 @@ const sendAppRevenue = [
 ];
 
 const cusdRevenue = [
+  { date: '12/2025', yield: 8090.54, total: 8090.54 },
+  { date: '11/2025', yield: 8640.14, total: 8640.14 },
   { date: '10/2025', yield: 1523.76, total: 1523.76 },
+  { date: '9/2025', yield: 217.69, total: 217.69 },
 ];
 
 // Calculate totals
@@ -567,7 +570,7 @@ export default function Revenue() {
           }}>
             💵
           </div>
-          $CUSD Stablecoin Revenue
+          Stablecoin Revenue
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={styles.table}>
