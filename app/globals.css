@@ -661,6 +661,11 @@ body {
   border-radius: 6px;
 }
 
+.nav-card-icon-image[src*="cusdstablecoin"],
+.nav-card-icon-image[src*="sendtoken"] {
+  border-radius: 50%;
+}
+
 .nav-card-initial {
   display: inline-flex;
   align-items: center;
