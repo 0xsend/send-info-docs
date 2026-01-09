@@ -3,14 +3,10 @@ import Image from 'next/image';
 import WelcomeHero from './WelcomeHero';
 
 const sectionCards = [
-  { key: 'welcome', title: 'Welcome', href: '/docs/welcome' },
   { key: 'send-mobile-apps', title: 'Send App', href: '/docs/send-mobile-apps' },
-  { key: 'cusd-stablecoin', title: 'CUSD Stablecoin', href: '/docs/cusd-stablecoin' },
-  { key: 'send-token', title: 'Send Token', href: '/docs/send-token' },
   { key: 'canton-wallet', title: 'Canton Wallet', href: '/docs/canton-wallet' },
-  { key: 'finance', title: 'Finance', href: '/docs/finance' },
-  { key: 'miscellaneous', title: 'Miscellaneous', href: '/docs/miscellaneous' },
-  { key: 'legal', title: 'Legal', href: '/docs/legal' },
+  { key: 'send-token', title: 'Send Token', href: '/docs/send-token' },
+  { key: 'cusd-stablecoin', title: 'CUSD Stablecoin', href: '/docs/cusd-stablecoin' },
 ];
 
 const cardImages = {

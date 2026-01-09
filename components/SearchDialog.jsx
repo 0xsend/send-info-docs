@@ -162,7 +162,6 @@ export default function SearchDialog({ isOpen, onClose }) {
             onChange={(e) => setQuery(e.target.value)}
             disabled={loading}
           />
-          <kbd className="search-dialog-kbd">ESC</kbd>
         </div>
 
         <div className="search-dialog-results">
@@ -204,16 +203,7 @@ export default function SearchDialog({ isOpen, onClose }) {
           )}
         </div>
 
-        <div className="search-dialog-footer">
-          <div className="search-dialog-footer-hint">
-            <kbd>↑</kbd>
-            <kbd>↓</kbd>
-            <span>to navigate</span>
-            <kbd>↵</kbd>
-            <span>to select</span>
-          </div>
-        </div>
-      </div>
+              </div>
     </div>
   );
 

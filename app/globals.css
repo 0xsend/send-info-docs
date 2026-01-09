@@ -92,7 +92,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 24px;
+  margin-bottom: 16px;
 }
 
 .sidebar-close {
@@ -148,18 +149,18 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0;
-  width: 240px;
+  width: 100%;
 }
 
 .sidebar-section {
-  margin-bottom: 8px;
+  margin-bottom: 0;
   border-radius: var(--Corner-Radius-S);
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .sidebar-section.expanded {
-  background: #f3f5f6;
-  border: 1px solid var(--Border-Color);
+  background: transparent;
+  border: none;
   border-radius: var(--Corner-Radius-S);
   padding-bottom: 8px;
   overflow: hidden;
@@ -171,16 +172,24 @@ body {
   display: flex;
   align-items: center;
   gap: 0;
-  border-radius: var(--Corner-Radius-S);
+  border-radius: 12px;
   transition: background-color 0.2s ease;
+  overflow: visible;
 }
 
 .sidebar-section-header.active {
   background: var(--light-light_color3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-section.expanded .sidebar-section-header {
   background: transparent;
+  box-shadow: none;
+}
+
+.sidebar-section.expanded .sidebar-section-header.active {
+  background: var(--light-light_color3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-section.expanded .sidebar-section-header:hover {
@@ -196,7 +205,7 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px;
+  padding: 10px 12px;
   text-decoration: none;
   color: inherit;
 }
@@ -206,9 +215,9 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
+  width: 36px;
   height: 100%;
-  margin-right: 8px;
+  margin-right: 4px;
   border: 0;
   background: transparent;
   color: var(--Text-Secondary);
@@ -247,19 +256,23 @@ body {
 }
 
 .sidebar-section-icon-image[src*="sendtoken"],
-.sidebar-section-icon-image[src*="cusdstablecoin"],
-.sidebar-section-icon-image[src*="cantonwallet"] {
+.sidebar-section-icon-image[src*="cusdstablecoin"] {
   border-radius: 50%;
 }
 
+.sidebar-section-icon-image[src*="cantonwallet"] {
+  border-radius: 4px;
+}
+
 .sidebar-section-title {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 400;
   color: #666666;
   white-space: nowrap;
 }
 
 .sidebar-section-title.active {
+  font-weight: 700;
   color: #122023;
 }
 
@@ -365,12 +378,12 @@ body {
 
 .sidebar-link {
   display: flex;
-  padding: 8px 16px;
+  padding: 4px 16px;
   align-items: center;
   gap: 16px;
   border-radius: var(--Corner-Radius-S);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 400;
   color: #666666;
   transition: color 0.2s ease;
@@ -391,19 +404,18 @@ body {
   height: 32px;
   align-items: center;
   gap: 8px;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 
 .welcome-title {
-  color: var(--Content-Primary);
+  color: #808080;
   font-feature-settings: 'ss02' on, 'ss03' on, 'ss04' on, 'ss05' on, 'ss07' on;
   font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 36px;
+  font-size: 18px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 40px;
-  letter-spacing: -1.08px;
-  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: -0.3px;
 }
 
 .hero-section {
@@ -419,7 +431,7 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -486,18 +498,7 @@ body {
 }
 
 .article-toc {
-  min-width: 220px;
-  max-width: 260px;
-  position: sticky;
-  top: 120px;
-  padding: 20px;
-  border: 1px solid var(--Border-Color);
-  border-radius: var(--Corner-Radius-S);
-  background: var(--Content-Light);
-  color: var(--Text-Secondary);
-  font-size: 14px;
-  line-height: 1.6;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  display: none;
 }
 
 .toc-list {
@@ -549,19 +550,19 @@ body {
   text-decoration: none;
 }
 .breadcrumb-section {
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--Content-Primary);
-  font-size: 36px;
-  line-height: 1.1;
+  font-weight: 500;
+  color: #808080;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.3px;
 }
 .breadcrumb-link:hover {
   color: var(--Content-Primary);
 }
 .breadcrumb-separator {
   color: var(--Text-Secondary);
-  font-size: 19px;
-  line-height: 1.2;
+  font-size: 18px;
+  line-height: 22px;
 }
 .breadcrumb-subsection {
   color: var(--Text-Secondary);
@@ -571,14 +572,14 @@ body {
   text-transform: capitalize;
 }
 .breadcrumb-current {
-  color: var(--Content-Primary);
-  font-size: 19px;
-  line-height: 1.2;
+  color: #808080;
+  font-size: 18px;
+  line-height: 22px;
   font-weight: 500;
 }
 
 @media (max-width: 640px) {
-  .breadcrumb-section { font-size: 28px; }
+  .breadcrumb-section { font-size: 16px; }
   .breadcrumb-separator { font-size: 16px; }
   .breadcrumb-current { font-size: 16px; }
 }
@@ -588,9 +589,17 @@ body {
   display: grid;
   align-items: stretch;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   max-width: 960px;
   width: 100%;
+}
+
+.navigation-grid.grid-2-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.navigation-grid.grid-3-col {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .nav-card {
@@ -623,14 +632,20 @@ body {
 
 .nav-card-icon {
   display: flex;
-  padding: 8px;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
-  background: #F2F2F2;
   flex-shrink: 0;
+  border-radius: 8px;
+  background: #EDEDED;
+}
+
+/* Welcome page cards - no background, just the image icons */
+.grid-2-col .nav-card-icon {
+  background: transparent;
+  width: auto;
+  height: auto;
 }
 
 .nav-card-icon svg {
@@ -640,15 +655,10 @@ body {
 }
 
 .nav-card-icon-image {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
-}
-
-.nav-card-icon-image[src*="sendtoken"],
-.nav-card-icon-image[src*="cusdstablecoin"],
-.nav-card-icon-image[src*="cantonwallet"] {
-  border-radius: 50%;
+  border-radius: 6px;
 }
 
 .nav-card-initial {
@@ -665,9 +675,9 @@ body {
 .nav-card-title {
   color: var(--Content-Primary);
   font-family: 'DM Sans', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
   margin: 0;
   white-space: normal;
   flex: 1;
@@ -686,9 +696,8 @@ body {
 
 .nav-card-arrow-icon {
   width: 16px;
-  height: 10px;
+  height: 16px;
   display: block;
-  fill: #999999;
 }
 
 /* Send App Page Styles */
@@ -811,8 +820,12 @@ body {
 /* Mobile Responsive */
 @media (max-width: 1200px) {
   .navigation-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+  }
+
+  .navigation-grid.grid-3-col {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .apps-navigation-grid {
@@ -822,7 +835,11 @@ body {
 
 @media (max-width: 768px) {
   .navigation-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .navigation-grid.grid-3-col {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .apps-navigation-grid {
@@ -1025,7 +1042,7 @@ body {
   }
 
   .navigation-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .nav-card {
@@ -1033,8 +1050,8 @@ body {
   }
 
   .nav-card-icon {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -1206,38 +1223,38 @@ body {
 
 /* Legacy compatibility for other pages */
 .markdown h1 {
-  font-size: clamp(32px, 2.4rem + 0.4vw, 42px);
+  font-size: clamp(28px, 2rem + 0.3vw, 36px);
   font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
   color: var(--Content-Primary);
-  margin: 0 0 32px 0;
+  margin: 0 0 24px 0;
 }
 
 .markdown h2 {
-  font-size: clamp(26px, 1.8rem + 0.3vw, 32px);
+  font-size: clamp(22px, 1.5rem + 0.25vw, 28px);
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
   color: var(--Content-Primary);
-  margin: 48px 0 24px 0;
+  margin: 40px 0 16px 0;
 }
 
 .markdown h3 {
-  font-size: clamp(20px, 1.35rem + 0.2vw, 24px);
+  font-size: clamp(18px, 1.2rem + 0.15vw, 22px);
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
   color: var(--Content-Primary);
-  margin: 32px 0 16px 0;
+  margin: 32px 0 12px 0;
 }
 
 .markdown p {
-  font-size: clamp(16px, 1rem + 0.25vw, 18px);
+  font-size: clamp(15px, 0.9rem + 0.15vw, 16px);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--Text-Secondary);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   overflow-wrap: anywhere;
 }
 
@@ -1250,21 +1267,21 @@ body {
 }
 
 .markdown ul {
-  font-size: clamp(16px, 1rem + 0.25vw, 18px);
+  font-size: clamp(15px, 0.9rem + 0.15vw, 16px);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--Text-Secondary);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   padding-left: 1.5em;
   overflow-wrap: anywhere;
 }
 
 .markdown ol {
-  font-size: clamp(16px, 1rem + 0.25vw, 18px);
+  font-size: clamp(15px, 0.9rem + 0.15vw, 16px);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--Text-Secondary);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   padding-left: 1.5em;
   overflow-wrap: anywhere;
 }
@@ -1308,10 +1325,10 @@ body {
 .markdown th,
 .markdown td {
   border: 1px solid var(--Border-Color);
-  padding: 12px;
+  padding: 10px 12px;
   text-align: left;
-  font-size: clamp(15px, 0.95rem + 0.2vw, 17px);
-  line-height: 1.6;
+  font-size: clamp(14px, 0.85rem + 0.1vw, 15px);
+  line-height: 1.5;
   vertical-align: top;
 }
 .markdown tbody tr:nth-child(even) {
@@ -1332,16 +1349,16 @@ body {
   }
 
   .markdown h1 {
-    font-size: 28px;
-    line-height: 1.15;
+    font-size: 26px;
+    line-height: 1.25;
   }
 
   .markdown h2 {
-    font-size: 24px;
+    font-size: 21px;
   }
 
   .markdown h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .welcome-title {
@@ -1368,15 +1385,15 @@ body {
   }
 
   .markdown h1 {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .markdown h2 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .markdown h3 {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .breadcrumb-row {

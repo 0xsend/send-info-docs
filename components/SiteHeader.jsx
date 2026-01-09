@@ -23,7 +23,7 @@ export default function SiteHeader() {
       </svg>
       <div className="docs-badge-wrapper">
         <div className="docs-badge">
-          <span>docs</span>
+          <span>info</span>
         </div>
       </div>
     </Link>
