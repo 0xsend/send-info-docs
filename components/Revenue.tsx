@@ -3,6 +3,13 @@
 // ============ REVENUE DATA ============
 const sendAppRevenue = [
   {
+    date: '12/2025',
+    sendtags: { amount: 462, tx: '0x5045542ec9de6d918d868872117def5a772d28d990c27dd71dd575b3c33162fe' },
+    trades: { amount: 832.79, tx: '0x59bc0e2f1b84123b64f00028fae6837cc4674000170b207f8950b9aa66f08075' },
+    transactions: { amount: 433.97, tx: '0x536625d144d17f443a5c1abaf5846643f4a70a954a3c5d47feb880fffb6dd545' },
+    total: 1728.76,
+  },
+  {
     date: '11/2025',
     sendtags: { amount: 2510, tx: '0x50c83276e832c7ab8eb0fd38072ccc2e36a4c972ed73d16e2508a62b9c93f0d8' },
     trades: { amount: 5018.81, tx: '0x93751e93a48b37b19b726d63a30bcb86f1e47e5fbdddd0397615bf3b5431852e' },

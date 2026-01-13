@@ -1067,7 +1067,37 @@ body {
   }
 
   .nav-card {
-    padding: 18px 20px;
+    padding: 16px 18px;
+    gap: 12px;
+  }
+
+  .nav-card-content {
+    gap: 12px;
+  }
+
+  .nav-card-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-card-icon-image {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nav-card-title {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .nav-card-arrow {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-card-arrow-icon {
+    width: 12px;
+    height: 12px;
   }
 
   .hero-section {
@@ -1407,6 +1437,42 @@ body {
     gap: 6px;
   }
 
+  /* Navigation card styles for extra small screens */
+  .nav-card {
+    padding: 14px 16px;
+    gap: 10px;
+    border-radius: 12px;
+  }
+
+  .nav-card-content {
+    gap: 10px;
+  }
+
+  .nav-card-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-card-icon-image {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-card-title {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  .nav-card-arrow {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-card-arrow-icon {
+    width: 10px;
+    height: 10px;
+  }
+
   /* Send App specific mobile styles */
   .page-title {
     font-size: 22px;
@@ -1430,8 +1496,6 @@ body {
   .apps-nav-card {
     padding: 14px;
     border-radius: 12px;
-    min-height: 52px;
-    /* Ensure good touch target size */
     min-height: 48px;
   }
 
@@ -1453,8 +1517,7 @@ body {
 
   .apps-nav-card-title {
     font-size: 14px;
-    line-height: 16px;
-    font-weight: 600;
+    line-height: 1.25;
   }
 
   .apps-nav-card-arrow {
