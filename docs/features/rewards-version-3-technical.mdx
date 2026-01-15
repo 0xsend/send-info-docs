@@ -1,203 +1,445 @@
-# Send Rewards Technical Specification
+---
+id: rewards-technical
+title: Rewards (Technical Architecture)
+---
 
-This document provides technical implementation details for the Send rewards distribution system, covering database schemas, calculation logic, and referral verification mechanisms.
+# Rewards
 
-## Architecture Overview
+SEND rewards you for circulating value — not just holding it.
+When you send SEND to others, you're fueling the network and earning future SEND to spend again.
+Each part of the system exists to make that cycle sustainable and fair.
 
-The rewards system consists of three main components:
+---
 
-1. **Supabase Database** - Stores distributions, verifications, and shares
-2. **Distributor V2 Worker** - Calculates distribution shares (`apps/distributor/src/distributorv2.ts`)
-3. **Frontend UI** - Displays verification status and claim interface
+### 🪪 Get Verified First — *Who earns future SEND*
 
-## Database Schema
+Only verified users earn future SEND from what they spend.
+Verification confirms you're real, active, and funded — the foundation for fair rewards.
 
-### Core Tables
+To qualify, complete three trust steps:
+* Deposit **{{REWARDS_DEPOSIT_USDC}} USDC** into your savings vault
+* Claim your **Sendtag**
+* Hold at least **{{REWARDS_HOLD_SEND}} SEND**
 
-```sql
--- Distribution configuration
-distributions (
-  id, number, amount, qualification_start, qualification_end,
-  hodler_min_balance, earn_min_balance, merkle_drop_addr, tranche_id
-)
+```mermaid
+flowchart TB
+    subgraph EXTERNAL["External Systems"]
+        USDC_CONTRACT["USDC Contract"]
+        SEND_CONTRACT["SEND Token Contract"]
+        IDENTITY_REGISTRY["Sendtag Registry"]
+    end
 
--- Verification values per distribution
-distribution_verification_values (
-  type verification_type,
-  fixed_value numeric,
-  bips_value bigint,
-  multiplier_min numeric(10,4),
-  multiplier_max numeric(10,4),
-  multiplier_step numeric(10,4),
-  distribution_id integer
-)
+    subgraph VERIFICATION_ENGINE["Verification Engine"]
+        direction TB
+        SNAPSHOT["Monthly Snapshot Service"]
 
--- User verifications
-distribution_verifications (
-  distribution_id, user_id, type verification_type,
-  weight numeric DEFAULT 1, metadata jsonb
-)
+        subgraph CRITERIA_CHECKS["Criteria Validation Layer"]
+            CHECK_DEPOSIT["DepositValidator\n- vault_balance >= threshold\n- deposit_timestamp <= snapshot"]
+            CHECK_TAG["SendtagValidator\n- tag_exists(user_id)\n- tag_active = true"]
+            CHECK_HOLD["BalanceValidator\n- send_balance >= min_hold\n- balance_at_snapshot()"]
+        end
 
--- Final calculated shares
-distribution_shares (
-  distribution_id, user_id, address, amount,
-  hodler_pool_amount, bonus_pool_amount, fixed_pool_amount
-)
+        AGGREGATOR["Qualification Aggregator\nAND(deposit, tag, balance)"]
+        STATUS_STORE["Verified Users Table\nuser_id | epoch | status"]
+    end
+
+    subgraph DATA_FLOW["Verification Data Flow"]
+        USDC_CONTRACT -->|"balanceOf(vault)"| CHECK_DEPOSIT
+        IDENTITY_REGISTRY -->|"lookup(user)"| CHECK_TAG
+        SEND_CONTRACT -->|"balanceOf(user)"| CHECK_HOLD
+
+        CHECK_DEPOSIT -->|"bool"| AGGREGATOR
+        CHECK_TAG -->|"bool"| AGGREGATOR
+        CHECK_HOLD -->|"bool"| AGGREGATOR
+
+        SNAPSHOT -->|"trigger"| CRITERIA_CHECKS
+        AGGREGATOR -->|"qualified=true/false"| STATUS_STORE
+    end
+
+    STATUS_STORE -->|"qualified users"| REWARDS_ENGINE["Rewards Engine Input"]
 ```
 
-### Referral Tables
+Once verified, every SEND you move starts counting toward your next cycle of rewards. Your spending now begins generating its return.
 
-```sql
--- Referral relationships
-referrals (
-  referrer_id uuid,
-  referred_id uuid,
-  tag text,
-  created_at timestamp
-)
+---
+
+### 💰 Hold = Potential — *How much you can earn back*
+
+Your SEND balance defines your earning ceiling — how much future SEND you can unlock.
+Holding sets your upper limit; sending determines how much of it you realize.
+
+Holding alone doesn't pay rewards, but it decides the size of your monthly slice. The more SEND you hold, the more your sending activity can return to you as future SEND to spend again.
+
+```mermaid
+flowchart TB
+    subgraph INPUTS["Balance Inputs"]
+        CHAIN_STATE["On-chain State\nSEND Token Contract"]
+        SNAPSHOT_TIME["Snapshot Timestamp\nepoch_end - delta"]
+    end
+
+    subgraph CEILING_CALC["Ceiling Calculation Engine"]
+        direction TB
+
+        subgraph BALANCE_FETCH["Balance Resolution"]
+            HISTORICAL_QUERY["getBalanceAt(user, snapshot_time)"]
+            PREV_REWARD["previous_epoch_reward[user]"]
+        end
+
+        subgraph FORMULA["Ceiling Formula"]
+            BASE_CEILING["base_ceiling = \nmax(balance, prev_reward)"]
+            SCALED_CEILING["scaled_ceiling = \nbase_ceiling / (min_sends × scaling_divisor)"]
+            PER_RECIPIENT_CAP["per_recipient_cap = \nscaled_ceiling"]
+        end
+
+        HISTORICAL_QUERY --> BASE_CEILING
+        PREV_REWARD --> BASE_CEILING
+        BASE_CEILING --> SCALED_CEILING
+        SCALED_CEILING --> PER_RECIPIENT_CAP
+    end
+
+    subgraph OUTPUT["Ceiling Output"]
+        USER_CEILING_TABLE["User Ceiling Table\nuser_id | ceiling | epoch"]
+        MAX_CLAIMABLE["max_claimable_reward = \nf(ceiling, pool_share)"]
+    end
+
+    CHAIN_STATE --> HISTORICAL_QUERY
+    SNAPSHOT_TIME --> HISTORICAL_QUERY
+    PER_RECIPIENT_CAP --> USER_CEILING_TABLE
+    USER_CEILING_TABLE --> MAX_CLAIMABLE
 ```
 
-## Referral Marketing Implementation
+---
 
-### Verification Types
+### 💌 Send = Progress — *Why sending triggers rewards*
 
-Two verification types handle referral rewards:
+Sending SEND activates your rewards.
+Every verified send proves real circulation — real movement of value between people.
+As you send, your progress bar fills, showing how much of your potential you've unlocked.
 
-| Type | Purpose | Values (Distribution 14+) |
-|------|---------|---------------------------|
-| `tag_referral` | Monthly referrals in current distribution | min=1.1, max=2.0, step=0.1 |
-| `total_tag_referrals` | Cumulative lifetime referrals | min=1.02, max=2.0, step=0.02 |
+Each month, SEND pays back part of what you circulate — giving you future SEND to spend again.
 
-### Referral Qualification Logic
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as Sender Wallet
+    participant Contract as SEND Contract
+    participant Indexer as Transaction Indexer
+    participant Validator as Send Validator
+    participant Engine as Progress Engine
+    participant DB as Progress Store
 
-Referrals are qualified based on the referred user's participation in the **previous** distribution. The canonical implementation is in `update_referral_verifications`:
+    User->>Contract: transfer(recipient, amount)
+    Contract->>Contract: emit Transfer(from, to, amount)
 
-```sql
--- From supabase/schemas/distributions.sql
-CREATE OR REPLACE FUNCTION public.update_referral_verifications(
-    distribution_id INTEGER,
-    shares distribution_shares[]
-)
-...
--- Update tag_referral weights - check if in shares and amount > 0
-UPDATE distribution_verifications dv
-SET weight = CASE
-    WHEN ts.user_id IS NOT NULL AND ts.amount > 0 THEN 1
-    ELSE 0
-END
-...
+    Indexer->>Contract: subscribe(Transfer events)
+    Contract-->>Indexer: Transfer event data
+
+    Indexer->>Validator: validate_send(tx_hash, from, to, amount)
+
+    rect rgb(40, 40, 60)
+        Note over Validator: Validation Checks
+        Validator->>Validator: sender_verified?(from)
+        Validator->>Validator: recipient_has_deposit?(to)
+        Validator->>Validator: not_self_send?(from, to)
+        Validator->>Validator: within_epoch?(tx.timestamp)
+    end
+
+    alt All checks pass
+        Validator->>Engine: record_qualifying_send(from, to, amount)
+
+        Engine->>Engine: capped_amount = min(amount, user_ceiling[from])
+        Engine->>Engine: recipient_total[from][to] += capped_amount
+        Engine->>Engine: apply_per_recipient_cap(recipient_total)
+
+        Engine->>DB: UPDATE send_score SET\nscore = sum(capped_amounts)\nWHERE user = from
+
+        Engine->>Engine: progress = send_score / scaled_prev_reward
+        Engine->>DB: UPDATE progress SET\npct = min(progress, 1.0)\nWHERE user = from
+
+        DB-->>User: progress_updated webhook
+    else Validation fails
+        Validator-->>Indexer: send_not_qualifying(reason)
+    end
 ```
 
-Key qualification criteria:
-- Referred user must have a `distribution_share` record
-- Share `amount` must be greater than 0
-- Uses current distribution shares (recalculated during distribution processing)
+---
 
-### Initial Seeding vs. Recalculation
+### 🧩 Tasks & Multipliers — *What accelerates your return*
 
-Two functions handle referral verifications:
+Tasks are small challenges that keep the economy active — inviting friends, staying verified, sending regularly.
+Each task gives bonus rewards, and multipliers amplify those bonuses the longer you stay active.
 
-1. **`insert_tag_referral_verifications(distribution_num)`** - Seeds initial `tag_referral` records at distribution creation, using previous distribution shares
-2. **`update_referral_verifications(distribution_id, shares)`** - Recalculates weights during share calculation using current shares
+If your rewards stop increasing, you've hit your cap. You can raise it by **holding more SEND** or **sending SEND more often.**
+The more you contribute, the faster you earn back future SEND to spend again.
 
-The `update_referral_verifications` function is the authoritative source during final distribution calculation.
+```mermaid
+flowchart TB
+    subgraph TASK_REGISTRY["Task Registry"]
+        direction LR
+        T1["SENDTAG_CLAIM\nbase: 1000 SEND\nmultiplier: none"]
+        T2["BACKUP_PASSKEY\nbase: 500 SEND\nmultiplier: none"]
+        T3["SEND_STREAK\nbase: 200 SEND\nmultiplier: 1.0 + 0.1n"]
+        T4["REFERRAL\nbase: 100 SEND\nmultiplier: 1.0 + 0.02n"]
+    end
 
-### Weight Calculation
+    subgraph COMPLETION_TRACKER["Task Completion Tracker"]
+        EVENT_BUS["Event Bus"]
+        TASK_VALIDATOR["Task Validator"]
+        COMPLETION_STORE["Completion Store\nuser | task_id | count | epoch"]
+    end
 
-For `total_tag_referrals`, the weight equals the count of qualified referrals:
+    subgraph MULTIPLIER_ENGINE["Multiplier Calculation Engine"]
+        direction TB
 
-```sql
--- From insert_total_referral_verifications
-SELECT
-  COUNT(*) FILTER (WHERE EXISTS (
-    SELECT 1
-    FROM distribution_shares ds
-    WHERE ds.user_id = r.referred_id
-    AND ds.distribution_id = prev_dist_id
-    AND ds.amount > 0
-  )) AS qualified_referrals
-FROM referrals r
+        STREAK_CALC["streak_mult = \nmin(1.0 + (streak_days × 0.1), 2.0)"]
+        REF_MONTH_CALC["ref_month_mult = \nmin(1.0 + (monthly_refs × 0.1), 2.0)"]
+        REF_TOTAL_CALC["ref_total_mult = \nmin(1.0 + (total_refs × 0.02), 2.0)"]
+
+        COMBINED["combined_mult = \nstreak × ref_month × ref_total"]
+    end
+
+    subgraph REWARD_CALC["Fixed Reward Calculator"]
+        BASE_SUM["base_fixed = Σ(task.base × completed)"]
+        BOOSTED["boosted_fixed = base_fixed × combined_mult"]
+        CAP_CHECK["final_fixed = min(boosted_fixed, reward_cap)"]
+    end
+
+    EVENT_BUS -->|"task_completed"| TASK_VALIDATOR
+    TASK_VALIDATOR --> COMPLETION_STORE
+    COMPLETION_STORE --> STREAK_CALC
+    COMPLETION_STORE --> REF_MONTH_CALC
+    COMPLETION_STORE --> REF_TOTAL_CALC
+
+    STREAK_CALC --> COMBINED
+    REF_MONTH_CALC --> COMBINED
+    REF_TOTAL_CALC --> COMBINED
+
+    T1 & T2 & T3 & T4 --> BASE_SUM
+    COMBINED --> BOOSTED
+    BASE_SUM --> BOOSTED
+    BOOSTED --> CAP_CHECK
 ```
 
-## Multiplier Calculation (Distributor V2)
+---
 
-The distributor calculates multipliers in `apps/distributor/src/distributorv2.ts`:
+### ⚖️ Fairness & Balance — *Why it stays sustainable*
 
-```typescript
-interface Multiplier {
-  value: number | undefined
-  min: number
-  max: number
-  step: number
-}
+Big holders earn more, but with **diminishing returns.**
+Smaller verified users still earn meaningful rewards through consistent activity.
 
-// For each verification with multiplier config
-if (weight === 1) {
-  // Single qualification: start at min
-  if (multiplierInfo.value === undefined) {
-    multiplierInfo.value = multiplierInfo.min
-  } else if (multiplierInfo.value < multiplierInfo.max) {
-    // Additional qualifications: increment by step
-    multiplierInfo.value = Math.min(
-      multiplierInfo.value + multiplierInfo.step,
-      multiplierInfo.max
-    )
-  }
-} else {
-  // Weight-based: min + (weight - 1) * step
-  multiplierInfo.value = Math.min(
-    multiplierInfo.min + (weight - 1) * multiplierInfo.step,
-    multiplierInfo.max
-  )
-}
+SEND's fairness design ensures future SEND is distributed to real participants — not just large wallets — so the network remains healthy and rewards stays sustainable.
 
-// Final multiplier: product of all type multipliers
-const finalMultiplier = Object.values(multipliers).reduce(
-  (acc, info) => acc * (info.value ?? 1.0),
-  1.0
-)
+```mermaid
+flowchart TB
+    subgraph SYSTEM_VIEW["Fairness System Architecture"]
+        direction TB
+
+        subgraph INPUTS["Distribution Inputs"]
+            TOTAL_POOL["Total Monthly Pool\nP_total"]
+            USER_BALANCES["User Balances\n{user_i: balance_i}"]
+            ACTIVITY_SCORES["Activity Scores\n{user_i: activity_i}"]
+        end
+
+        subgraph WEIGHTING_LAYER["Diminishing Returns Layer"]
+            direction LR
+            LINEAR["Linear Weight\nw_lin = balance"]
+            SQRT["Sqrt Weight\nw_sqrt = √balance"]
+            LOG["Log Weight\nw_log = log(balance + 1)"]
+
+            WEIGHT_SELECT["Weight Selector\nconfig.weight_function"]
+        end
+
+        subgraph SHARE_CALC["Share Calculation"]
+            WEIGHTED_BALANCE["weighted_balance[i] = \nf(balance[i])"]
+            TOTAL_WEIGHT["total_weight = \nΣ weighted_balance[i]"]
+            RAW_SHARE["raw_share[i] = \nP_total × (weighted[i] / total_weight)"]
+        end
+
+        subgraph CONSTRAINTS["Fairness Constraints"]
+            MIN_REWARD["min_reward_threshold\nensures small holders get meaningful amount"]
+            MAX_SHARE["max_share_pct = 0.05\nno single user > 5% of pool"]
+            ACTIVITY_GATE["activity_multiplier\nreward × min(activity_score, 1.0)"]
+        end
+
+        subgraph OUTPUT["Final Distribution"]
+            CONSTRAINED_SHARE["constrained_share[i] = \napply_constraints(raw_share[i])"]
+            REDISTRIBUTION["excess_pool = \nΣ(capped_amounts)\nredistribute to uncapped users"]
+        end
+    end
+
+    USER_BALANCES --> WEIGHTED_BALANCE
+    WEIGHT_SELECT --> WEIGHTED_BALANCE
+    LINEAR & SQRT & LOG --> WEIGHT_SELECT
+
+    WEIGHTED_BALANCE --> TOTAL_WEIGHT
+    TOTAL_POOL --> RAW_SHARE
+    TOTAL_WEIGHT --> RAW_SHARE
+
+    RAW_SHARE --> CONSTRAINED_SHARE
+    MIN_REWARD --> CONSTRAINED_SHARE
+    MAX_SHARE --> CONSTRAINED_SHARE
+    ACTIVITY_SCORES --> ACTIVITY_GATE
+    ACTIVITY_GATE --> CONSTRAINED_SHARE
+
+    CONSTRAINED_SHARE --> REDISTRIBUTION
 ```
 
-### Multiplier Behavior
+---
 
-For `tag_referral` (monthly, weight=1 per referral):
-- First referral: `1.1`
-- Second referral: `min(1.1 + 0.1, 2.0) = 1.2`
-- Tenth referral: `min(1.1 + 0.1*9, 2.0) = 2.0` (capped)
+### 📈 Month-to-Month Growth — *How your effort compounds*
 
-For `total_tag_referrals` (cumulative, weight=count):
-- 1 referral: `min(1.02 + 0*0.02, 2.0) = 1.02`
-- 10 referrals: `min(1.02 + 9*0.02, 2.0) = 1.20`
-- 50 referrals: `min(1.02 + 49*0.02, 2.0) = 2.00` (capped)
+Each month builds on the last.
+Your verified activity, holding, and sending streaks carry forward, slowly raising your earning ceiling over time.
 
-### Multiplicative Stacking
+The longer you participate, the more predictable your rewards become — and the more future SEND you earn to spend again.
 
-All multipliers apply multiplicatively:
+---
 
-```typescript
-userFixedAmount = baseFixedAmount * finalMultiplier
-// where finalMultiplier = tag_referral_mult * total_tag_referrals_mult * send_streak_mult * ...
+### 🧘 Built for Spending — *Why SEND exists*
+
+SEND was created to make spending powerful.
+About one-third of all monthly rewards are reserved specifically for **spending SEND**.
+That means when you use SEND — not just hold it — the system literally gives you more to spend next month.
+
+Your money doesn't just move — it multiplies its reach.
+
+---
+
+### 🔁 The Loop — *What it all means*
+
+**Hold → Send → Progress → Earn → Repeat**
+
+You hold SEND to set your power.
+You send SEND to activate it.
+And each month, the network returns a portion as **future SEND to spend again.**
+
+That's the loop that keeps SEND alive — a self-sustaining cycle of participation and reward.
+
+```mermaid
+flowchart TB
+    subgraph SYSTEM_OVERVIEW["SEND Rewards System Architecture"]
+        direction TB
+
+        subgraph BLOCKCHAIN_LAYER["Blockchain Layer"]
+            SEND_TOKEN["SEND Token\nERC-20"]
+            USDC_TOKEN["USDC Token"]
+            VAULT_CONTRACT["Savings Vault\nDeposit Tracking"]
+        end
+
+        subgraph INDEXING_LAYER["Data Indexing Layer"]
+            TX_INDEXER["Transaction Indexer\nReal-time event processing"]
+            BALANCE_INDEXER["Balance Indexer\nHistorical snapshots"]
+            EVENT_STORE["Event Store\nImmutable audit log"]
+        end
+
+        subgraph APPLICATION_LAYER["Application Layer"]
+            VERIFICATION_SVC["Verification Service"]
+            PROGRESS_SVC["Progress Service"]
+            TASK_SVC["Task Service"]
+            MULTIPLIER_SVC["Multiplier Service"]
+        end
+
+        subgraph REWARDS_ENGINE["Rewards Calculation Engine"]
+            SNAPSHOT_MGR["Snapshot Manager\nepoch boundaries"]
+            POOL_ALLOCATOR["Pool Allocator\nfixed vs hodler split"]
+            SHARE_CALCULATOR["Share Calculator\nper-user amounts"]
+            DISTRIBUTION_QUEUE["Distribution Queue\npending payouts"]
+        end
+
+        subgraph DISTRIBUTION_LAYER["Distribution Layer"]
+            MERKLE_BUILDER["Merkle Tree Builder\nclaim proofs"]
+            DISTRIBUTOR_CONTRACT["Distributor Contract\non-chain claims"]
+        end
+    end
+
+    %% Data flows
+    SEND_TOKEN -->|"Transfer events"| TX_INDEXER
+    SEND_TOKEN -->|"balanceOf queries"| BALANCE_INDEXER
+    USDC_TOKEN -->|"Deposit events"| VAULT_CONTRACT
+    VAULT_CONTRACT -->|"vault balances"| BALANCE_INDEXER
+
+    TX_INDEXER --> EVENT_STORE
+    BALANCE_INDEXER --> EVENT_STORE
+
+    EVENT_STORE -->|"verified sends"| PROGRESS_SVC
+    EVENT_STORE -->|"balance snapshots"| VERIFICATION_SVC
+
+    VERIFICATION_SVC -->|"qualified users"| SNAPSHOT_MGR
+    PROGRESS_SVC -->|"send scores"| SHARE_CALCULATOR
+    TASK_SVC -->|"completed tasks"| SHARE_CALCULATOR
+    MULTIPLIER_SVC -->|"boost factors"| SHARE_CALCULATOR
+
+    SNAPSHOT_MGR -->|"epoch data"| POOL_ALLOCATOR
+    POOL_ALLOCATOR -->|"pool amounts"| SHARE_CALCULATOR
+    SHARE_CALCULATOR -->|"user shares"| DISTRIBUTION_QUEUE
+
+    DISTRIBUTION_QUEUE -->|"payout list"| MERKLE_BUILDER
+    MERKLE_BUILDER -->|"merkle root"| DISTRIBUTOR_CONTRACT
+    DISTRIBUTOR_CONTRACT -->|"claimed SEND"| SEND_TOKEN
 ```
 
-## Key Files
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Chain as Blockchain
+    participant Indexer as Data Layer
+    participant Engine as Rewards Engine
+    participant User as User Wallet
 
-| File | Purpose |
-|------|---------|
-| `apps/distributor/src/distributorv2.ts` | Distribution calculation logic |
-| `supabase/schemas/distributions.sql` | Schema and functions for distributions |
-| `supabase/schemas/referrals.sql` | Referral relationship schema |
-| `supabase/migrations/20250401044154_insert_distribution_fourteen.sql` | Distribution 14 with referral multiplier values |
-| `supabase/migrations/20250502220725_create_functions_for_distribution_inserts.sql` | Reusable insert functions |
-| `packages/app/features/rewards/activity/screen.tsx` | Rewards UI |
+    rect rgb(30, 50, 30)
+        Note over Chain,User: Epoch N - Active Period
 
-## Testing
+        loop Daily Activity
+            User->>Chain: transfer SEND
+            Chain-->>Indexer: Transfer event
+            Indexer->>Engine: update_send_score(user, amount)
 
-Referral verification logic is tested in:
-- `apps/distributor/src/distributorv2.test.ts` - Distribution calculation tests
-- `supabase/tests/` - pgTAP database function tests
+            User->>Chain: complete_task()
+            Chain-->>Indexer: Task event
+            Indexer->>Engine: record_task_completion(user, task_id)
+        end
+    end
 
-## Notes
+    rect rgb(50, 30, 30)
+        Note over Chain,User: Epoch N - Snapshot & Calculation
 
-1. **UI Display**: The UI uses `weight` from `distribution_verifications` for `total_tag_referrals` display, not `metadata.value`
-2. **Value Inheritance**: New distributions inherit multiplier values from the previous distribution via `insert_verification_value`
-3. **Recalculation**: Referral weights are recalculated during each distribution run to reflect current share states
+        Engine->>Indexer: get_balances_at(snapshot_time)
+        Indexer-->>Engine: balance_map
+
+        Engine->>Engine: calculate_verification_status()
+        Engine->>Engine: calculate_ceilings()
+        Engine->>Engine: calculate_progress_scores()
+        Engine->>Engine: calculate_multipliers()
+
+        Engine->>Engine: allocate_fixed_pool()
+        Engine->>Engine: allocate_hodler_pool()
+        Engine->>Engine: apply_fairness_constraints()
+
+        Engine->>Engine: build_merkle_tree(distributions)
+    end
+
+    rect rgb(30, 30, 50)
+        Note over Chain,User: Epoch N+1 - Distribution
+
+        Engine->>Chain: publish_merkle_root()
+
+        User->>Chain: claim(proof, amount)
+        Chain->>Chain: verify_merkle_proof()
+        Chain->>User: transfer SEND rewards
+
+        Note over User: Rewards become new balance\nfor Epoch N+1 ceiling
+    end
+```
+
+---
+
+### 💚 In One Line
+
+> **SEND rewards you for spending.**
+> Every send today fuels the cash flow you'll use tomorrow.
+> The more you circulate SEND, the more future SEND you earn to spend again.
+
+:::tip Roadmap Alignment
+SEND's rewards framework will evolve alongside new product launches and future staking programs.
+We'll update this page with any changes to qualification or payout mix before new products go live.
+:::
