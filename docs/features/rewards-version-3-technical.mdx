@@ -1,317 +1,203 @@
-# SEND Rewards: Technical Specification
+# Send Rewards Technical Specification
 
-This document provides a technical reference for the SEND distribution system (V2), covering qualification logic, pool calculations, and the send score mechanism.
+This document provides technical implementation details for the Send rewards distribution system, covering database schemas, calculation logic, and referral verification mechanisms.
 
----
+## Architecture Overview
 
-## System Architecture
+The rewards system consists of three main components:
 
-```
-┌──────────────────────────────────────────────────────────────────────────┐
-│                          DISTRIBUTION FLOW                                │
-│                                                                           │
-│  ┌─────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────┐ │
-│  │   Hourly    │───▶│  Fetch       │───▶│  Calculate   │───▶│  Store   │ │
-│  │   Trigger   │    │  Snapshots   │    │  Shares      │    │  Shares  │ │
-│  └─────────────┘    └──────────────┘    └──────────────┘    └──────────┘ │
-│                            │                   │                          │
-│                            ▼                   ▼                          │
-│                     ┌─────────────────────────────────────┐               │
-│                     │  Data Sources:                      │               │
-│                     │  • distribution_verifications       │               │
-│                     │  • send_accounts + balances         │               │
-│                     │  • send_earn_balances_timeline      │               │
-│                     │  • send_scores (view)               │               │
-│                     │  • previous distribution_shares     │               │
-│                     └─────────────────────────────────────┘               │
-└──────────────────────────────────────────────────────────────────────────┘
-```
+1. **Supabase Database** - Stores distributions, verifications, and shares
+2. **Distributor V2 Worker** - Calculates distribution shares (`apps/distributor/src/distributorv2.ts`)
+3. **Frontend UI** - Displays verification status and claim interface
 
-Source: `apps/distributor/src/distributorv2.ts`
+## Database Schema
 
----
+### Core Tables
 
-## Qualification Criteria
+```sql
+-- Distribution configuration
+distributions (
+  id, number, amount, qualification_start, qualification_end,
+  hodler_min_balance, earn_min_balance, merkle_drop_addr, tranche_id
+)
 
-A user qualifies when all three conditions are met at snapshot:
+-- Verification values per distribution
+distribution_verification_values (
+  type verification_type,
+  fixed_value numeric,
+  bips_value bigint,
+  multiplier_min numeric(10,4),
+  multiplier_max numeric(10,4),
+  multiplier_step numeric(10,4),
+  distribution_id integer
+)
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                      QUALIFICATION CHECK                                 │
-│                                                                          │
-│  qualifyingUserIds = minBalanceAddresses.filter(({ address, user_id })  │
-│    =>                                                                    │
-│      minEarnBalancesByAddress[address]           // earn_min_balance     │
-│      && hodlerUserIdByAddress[address]           // valid send_account   │
-│      && verificationsByUserId[user_id].some(                            │
-│           v => v.type === 'tag_registration' && v.weight > 0            │
-│         )                                        // sendtag verified     │
-│  )                                                                       │
-│                                                                          │
-│  Parameters (from distributions table):                                  │
-│  • hodler_min_balance: minimum SEND token balance                       │
-│  • earn_min_balance: minimum Send Earn USDC balance                     │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+-- User verifications
+distribution_verifications (
+  distribution_id, user_id, type verification_type,
+  weight numeric DEFAULT 1, metadata jsonb
+)
+
+-- Final calculated shares
+distribution_shares (
+  distribution_id, user_id, address, amount,
+  hodler_pool_amount, bonus_pool_amount, fixed_pool_amount
+)
 ```
 
----
+### Referral Tables
 
-## Send Score Calculation
-
-### SQL Implementation
-
-The send ceiling and score are computed in `supabase/schemas/send_scores.sql`:
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    SEND CEILING FORMULA                                  │
-│                                                                          │
-│  send_ceiling = ROUND(                                                   │
-│    COALESCE(                                                            │
-│      previous_distribution_share,                                        │
-│      hodler_min_balance                                                  │
-│    ) / (minimum_sends * scaling_divisor)                                │
-│  )                                                                       │
-│                                                                          │
-│  Source: send_slash table provides minimum_sends, scaling_divisor        │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+```sql
+-- Referral relationships
+referrals (
+  referrer_id uuid,
+  referred_id uuid,
+  tag text,
+  created_at timestamp
+)
 ```
 
-### Score Aggregation
+## Referral Marketing Implementation
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    SCORE CALCULATION                                     │
-│                                                                          │
-│  score = SUM(                                                            │
-│    LEAST(transfer_sum_per_recipient, send_ceiling)                       │
-│  )                                                                       │
-│                                                                          │
-│  WHERE:                                                                  │
-│  • transfer includes: send_token_transfers + send_token_v0_transfers     │
-│                       + send_check_claimed (SEND token, redeemer≠sender) │
-│  • recipient must have earn_min_balance in send_earn_balances_timeline   │
-│  • block_time within qualification_start..qualification_end              │
-│                                                                          │
-│  unique_sends = COUNT(DISTINCT recipient)                                │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+### Verification Types
 
----
+Two verification types handle referral rewards:
 
-## Pool Allocation Algorithm
+| Type | Purpose | Values (Distribution 14+) |
+|------|---------|---------------------------|
+| `tag_referral` | Monthly referrals in current distribution | min=1.1, max=2.0, step=0.1 |
+| `total_tag_referrals` | Cumulative lifetime referrals | min=1.02, max=2.0, step=0.02 |
 
-### V2 Changes from V1
+### Referral Qualification Logic
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    V2 KEY DIFFERENCES                                    │
-│                                                                          │
-│  • Fixed pool calculated FIRST from total distribution amount            │
-│  • Hodler pool = distAmt - fixedPoolAllocatedAmount                      │
-│  • bonus_pool_amount ALWAYS set to 0                                     │
-│  • No holder_bips or bonus_bips calculations                             │
-│  • Send slash system: non-senders get 0 rewards                          │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+Referrals are qualified based on the referred user's participation in the **previous** distribution. The canonical implementation is in `update_referral_verifications`:
+
+```sql
+-- From supabase/schemas/distributions.sql
+CREATE OR REPLACE FUNCTION public.update_referral_verifications(
+    distribution_id INTEGER,
+    shares distribution_shares[]
+)
+...
+-- Update tag_referral weights - check if in shares and amount > 0
+UPDATE distribution_verifications dv
+SET weight = CASE
+    WHEN ts.user_id IS NOT NULL AND ts.amount > 0 THEN 1
+    ELSE 0
+END
+...
 ```
 
-### Fixed Pool Calculation
+Key qualification criteria:
+- Referred user must have a `distribution_share` record
+- Share `amount` must be greater than 0
+- Uses current distribution shares (recalculated during distribution processing)
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    FIXED POOL ALGORITHM                                  │
-│                                                                          │
-│  FOR each qualifying user:                                               │
-│                                                                          │
-│    1. Sum fixed_value * weight for each verification                     │
-│                                                                          │
-│    2. Calculate multipliers:                                             │
-│       - Initial: multiplier_min                                          │
-│       - Per completion: += multiplier_step (capped at multiplier_max)    │
-│       - Final: product of all applicable multipliers                     │
-│                                                                          │
-│    3. Apply multiplier: userFixedAmount * finalMultiplier                │
-│                                                                          │
-│    4. Apply slash:                                                       │
-│       scaled_prev = previousReward / scaling_divisor                     │
-│       capped = min(sendCeilingWeight, scaled_prev)                       │
-│       slashPct = capped / scaled_prev                                    │
-│       amount *= slashPct                                                 │
-│       (if sendCeilingWeight = 0, amount = 0)                             │
-│                                                                          │
-│    5. Apply cap:                                                         │
-│       amount = min(amount, hodlerAmt + sendScore + ticketValue)          │
-│                                                                          │
-│  fixedPoolAllocatedAmount = Σ(user amounts)                              │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+### Initial Seeding vs. Recalculation
 
-### Hodler Pool Calculation
+Two functions handle referral verifications:
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    HODLER POOL ALGORITHM                                 │
-│                                                                          │
-│  hodlerPoolAvailableAmount = distAmt - fixedPoolAllocatedAmount          │
-│                                                                          │
-│  IF hodlerPoolAvailableAmount > 0:                                       │
-│                                                                          │
-│    1. Time adjustment (hourly accrual):                                  │
-│       hourlyAmount = hodlerPool / hoursInMonth                           │
-│       timeAdjusted = min(hourlyAmount * (currentHour+1), hodlerPool)     │
-│                                                                          │
-│    2. Calculate slashed balances for each user:                          │
-│       slashPct = (capped_send_weight / scaled_prev_reward)               │
-│       slashedBalance = balance * slashPct                                │
-│                                                                          │
-│    3. Distribute via sigmoid weighting:                                  │
-│       calculateWeights(slashedBalances, timeAdjusted, Mode.Sigmoid)      │
-│                                                                          │
-│  Final share = hodlerPoolAmount + fixedPoolAmount                        │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+1. **`insert_tag_referral_verifications(distribution_num)`** - Seeds initial `tag_referral` records at distribution creation, using previous distribution shares
+2. **`update_referral_verifications(distribution_id, shares)`** - Recalculates weights during share calculation using current shares
+
+The `update_referral_verifications` function is the authoritative source during final distribution calculation.
+
+### Weight Calculation
+
+For `total_tag_referrals`, the weight equals the count of qualified referrals:
+
+```sql
+-- From insert_total_referral_verifications
+SELECT
+  COUNT(*) FILTER (WHERE EXISTS (
+    SELECT 1
+    FROM distribution_shares ds
+    WHERE ds.user_id = r.referred_id
+    AND ds.distribution_id = prev_dist_id
+    AND ds.amount > 0
+  )) AS qualified_referrals
+FROM referrals r
 ```
 
----
+## Multiplier Calculation (Distributor V2)
 
-## Verification Types
+The distributor calculates multipliers in `apps/distributor/src/distributorv2.ts`:
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    VERIFICATION TYPES                                    │
-│                                                                          │
-│  Type                      │ fixed_value │ multiplier │ Notes            │
-│  ─────────────────────────────────────────────────────────────────────  │
-│  tag_registration          │    Yes      │    No      │ Required         │
-│  create_passkey            │    Yes      │    No      │ Task             │
-│  send_ten                  │    Yes      │    No      │ Task             │
-│  send_one_hundred          │    Yes      │    No      │ Task             │
-│  send_streak               │    Yes      │    No      │ Daily task       │
-│  sendpot_ticket_purchase   │    Yes      │    No      │ metadata.value   │
-│  tag_referral              │    Yes      │    Yes     │ Per-dist mult    │
-│  total_tag_referrals       │    Yes      │    Yes     │ Cumulative       │
-│  send_ceiling              │    No       │    No      │ Weight = score   │
-│                                                                          │
-│  Source: distribution_verification_values table                          │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+```typescript
+interface Multiplier {
+  value: number | undefined
+  min: number
+  max: number
+  step: number
+}
 
----
+// For each verification with multiplier config
+if (weight === 1) {
+  // Single qualification: start at min
+  if (multiplierInfo.value === undefined) {
+    multiplierInfo.value = multiplierInfo.min
+  } else if (multiplierInfo.value < multiplierInfo.max) {
+    // Additional qualifications: increment by step
+    multiplierInfo.value = Math.min(
+      multiplierInfo.value + multiplierInfo.step,
+      multiplierInfo.max
+    )
+  }
+} else {
+  // Weight-based: min + (weight - 1) * step
+  multiplierInfo.value = Math.min(
+    multiplierInfo.min + (weight - 1) * multiplierInfo.step,
+    multiplierInfo.max
+  )
+}
 
-## UI Progress Calculation
-
-From `packages/app/features/rewards/activity/screen.tsx`:
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    PROGRESS BAR LOGIC                                    │
-│                                                                          │
-│  previousReward = distribution_shares[prev].amount                       │
-│                   || hodler_min_balance                                  │
-│                                                                          │
-│  scaledPreviousReward = previousReward / scaling_divisor                 │
-│                                                                          │
-│  sendCeilingWeight = verification.weight WHERE type='send_ceiling'       │
-│                                                                          │
-│  progress = (                                                            │
-│    min(sendCeilingWeight, scaledPreviousReward) * 10000n                 │
-│    / scaledPreviousReward                                                │
-│  ) / 100                                                                 │
-│                                                                          │
-│  Display: progress.toFixed(1) + '%'                                      │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+// Final multiplier: product of all type multipliers
+const finalMultiplier = Object.values(multipliers).reduce(
+  (acc, info) => acc * (info.value ?? 1.0),
+  1.0
+)
 ```
 
-**Note:** Progress represents send_ceiling_weight / scaled_previous_reward, not raw SEND transferred.
+### Multiplier Behavior
 
----
+For `tag_referral` (monthly, weight=1 per referral):
+- First referral: `1.1`
+- Second referral: `min(1.1 + 0.1, 2.0) = 1.2`
+- Tenth referral: `min(1.1 + 0.1*9, 2.0) = 2.0` (capped)
 
-## Key Invariants
+For `total_tag_referrals` (cumulative, weight=count):
+- 1 referral: `min(1.02 + 0*0.02, 2.0) = 1.02`
+- 10 referrals: `min(1.02 + 9*0.02, 2.0) = 1.20`
+- 50 referrals: `min(1.02 + 49*0.02, 2.0) = 2.00` (capped)
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    SYSTEM INVARIANTS                                     │
-│                                                                          │
-│  1. totalShareAmounts ≤ distAmt                                         │
-│     (enforced: throws if exceeded)                                       │
-│                                                                          │
-│  2. bonus_pool_amount = 0 for all shares                                │
-│     (hardcoded in V2)                                                    │
-│                                                                          │
-│  3. sendCeilingWeight = 0 → slashPercentage = 0                         │
-│     → fixedPoolAmount = 0 AND hodlerPoolAmount = 0                       │
-│                                                                          │
-│  4. Recipient without earn_min_balance → transfer not counted            │
-│                                                                          │
-│  5. Verifications/multipliers per-distribution only                     │
-│     (no cross-month accumulation)                                        │
-│                                                                          │
-│  6. Fixed reward capped by: initialHodlerAmt + sendScore + ticketValue  │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+### Multiplicative Stacking
+
+All multipliers apply multiplicatively:
+
+```typescript
+userFixedAmount = baseFixedAmount * finalMultiplier
+// where finalMultiplier = tag_referral_mult * total_tag_referrals_mult * send_streak_mult * ...
 ```
 
----
+## Key Files
 
-## Database Schema References
+| File | Purpose |
+|------|---------|
+| `apps/distributor/src/distributorv2.ts` | Distribution calculation logic |
+| `supabase/schemas/distributions.sql` | Schema and functions for distributions |
+| `supabase/schemas/referrals.sql` | Referral relationship schema |
+| `supabase/migrations/20250401044154_insert_distribution_fourteen.sql` | Distribution 14 with referral multiplier values |
+| `supabase/migrations/20250502220725_create_functions_for_distribution_inserts.sql` | Reusable insert functions |
+| `packages/app/features/rewards/activity/screen.tsx` | Rewards UI |
 
-| Table/View | Purpose |
-|------------|---------|
-| `distributions` | Distribution parameters (dates, amounts, min balances) |
-| `distribution_verifications` | User verification records per distribution |
-| `distribution_verification_values` | Task fixed_value, multiplier config |
-| `distribution_shares` | Calculated user shares |
-| `send_slash` | minimum_sends, scaling_divisor per distribution |
-| `send_scores` (view) | Unified current + historical send scores |
-| `send_scores_current` (view) | Real-time score calculation |
-| `send_scores_history` (mat view) | Historical scores (refreshed) |
-| `send_accounts` | User addresses linked to user_id |
-| `send_earn_balances_timeline` | Earn balance snapshots |
-| `send_token_transfers` | SEND token transfer events |
+## Testing
 
----
+Referral verification logic is tested in:
+- `apps/distributor/src/distributorv2.test.ts` - Distribution calculation tests
+- `supabase/tests/` - pgTAP database function tests
 
-## API Endpoints
+## Notes
 
-| Endpoint | Returns |
-|----------|---------|
-| `get_send_score(addr)` | (distribution_id, score, unique_sends, send_ceiling) |
-| `get_send_scores_history()` | Historical scores (auth-scoped) |
-
----
-
-## Error Conditions
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    ERROR HANDLING                                        │
-│                                                                          │
-│  Condition                        │ Behavior                             │
-│  ────────────────────────────────────────────────────────────────────── │
-│  Tranche active                   │ Throws, no recalculation             │
-│  No verifications                 │ Skip distribution                    │
-│  No earn balances                 │ Return early                         │
-│  No previous shares               │ Uses hodler_min_balance              │
-│  No send scores                   │ Throws                               │
-│  Share amounts > distAmt          │ Throws                               │
-│  Share missing amount             │ Throws                               │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## Code References
-
-- Distribution calculation: `apps/distributor/src/distributorv2.ts`
-- Send score SQL: `supabase/schemas/send_scores.sql`
-- Send score views: `supabase/schemas/views/send_scores.sql`
-- Activity UI: `packages/app/features/rewards/activity/screen.tsx`
-- Distribution hooks: `packages/app/utils/distributions.ts`
+1. **UI Display**: The UI uses `weight` from `distribution_verifications` for `total_tag_referrals` display, not `metadata.value`
+2. **Value Inheritance**: New distributions inherit multiplier values from the previous distribution via `insert_verification_value`
+3. **Recalculation**: Referral weights are recalculated during each distribution run to reflect current share states
