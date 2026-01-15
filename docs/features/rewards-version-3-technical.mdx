@@ -1,274 +1,317 @@
+# SEND Rewards: Technical Specification
+
+This document provides a technical reference for the SEND distribution system (V2), covering qualification logic, pool calculations, and the send score mechanism.
+
 ---
-id: rewards-version-3-technical
-title: Rewards - Technical Specification
+
+## System Architecture
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│                          DISTRIBUTION FLOW                                │
+│                                                                           │
+│  ┌─────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────┐ │
+│  │   Hourly    │───▶│  Fetch       │───▶│  Calculate   │───▶│  Store   │ │
+│  │   Trigger   │    │  Snapshots   │    │  Shares      │    │  Shares  │ │
+│  └─────────────┘    └──────────────┘    └──────────────┘    └──────────┘ │
+│                            │                   │                          │
+│                            ▼                   ▼                          │
+│                     ┌─────────────────────────────────────┐               │
+│                     │  Data Sources:                      │               │
+│                     │  • distribution_verifications       │               │
+│                     │  • send_accounts + balances         │               │
+│                     │  • send_earn_balances_timeline      │               │
+│                     │  • send_scores (view)               │               │
+│                     │  • previous distribution_shares     │               │
+│                     └─────────────────────────────────────┘               │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+Source: `apps/distributor/src/distributorv2.ts`
+
 ---
 
-# SEND Rewards Technical Specification
+## Qualification Criteria
 
-This document provides the technical implementation details of the SEND rewards distribution system, including state transitions, calculation algorithms, and system interactions.
-
-## System State Machine
-
-```mermaid
-stateDiagram-v2
-    [*] --> Unverified
-    Unverified --> Pending: initiate_verification()
-    Pending --> Verified: complete_verification()
-    Pending --> Unverified: verification_timeout()
-    Verified --> Active: first_send()
-    Active --> Active: send_transaction()
-    Active --> Capped: cap_reached()
-    Capped --> Active: new_cycle()
-    Active --> Suspended: verification_lapsed()
-    Suspended --> Active: re_verify()
-```
-
-## Verification State Transitions
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Contract
-    participant Oracle
-    participant RewardsEngine
-
-    User->>Contract: deposit(USDC, amount)
-    Contract->>Oracle: verifyDeposit(user, amount)
-    Oracle-->>Contract: depositConfirmed
-
-    User->>Contract: claimSendtag(tag)
-    Contract->>Contract: validateUniqueness(tag)
-    Contract-->>User: sendtagAssigned
-
-    User->>Contract: holdSEND(amount)
-    Contract->>Oracle: verifySENDBalance(user)
-    Oracle-->>Contract: balanceConfirmed
-
-    Contract->>RewardsEngine: setVerified(user, true)
-    RewardsEngine-->>User: qualificationComplete
-```
-
-## Rewards Calculation Engine
-
-### Core Algorithm
-
-```mermaid
-flowchart TD
-    subgraph Input Processing
-        H[holdings_balance] --> N[normalize_holdings]
-        S[send_volume] --> V[calculate_velocity]
-        T[task_completions] --> M[compute_multipliers]
-    end
-
-    subgraph Cap Calculation
-        N --> C[base_cap = log2_holdings * SCALE_FACTOR]
-        C --> A[adjusted_cap = base_cap * diminishing_factor]
-    end
-
-    subgraph Progress Calculation
-        V --> P[progress = min_send_volume / adjusted_cap, 1.0]
-        P --> R[unlocked_rewards = adjusted_cap * progress]
-    end
-
-    subgraph Multiplier Application
-        M --> F[final_rewards = unlocked_rewards * multiplier_sum]
-        R --> F
-    end
-
-    F --> O[distribute_rewards]
-```
-
-### Diminishing Returns Formula
+A user qualifies when all three conditions are met at snapshot:
 
 ```
-effective_cap = BASE_CAP * ln(1 + holdings / SCALE) / ln(2)
-
-where:
-  BASE_CAP = 10000 SEND (per cycle)
-  SCALE = 1000 SEND
-  holdings = user's SEND balance
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      QUALIFICATION CHECK                                 │
+│                                                                          │
+│  qualifyingUserIds = minBalanceAddresses.filter(({ address, user_id })  │
+│    =>                                                                    │
+│      minEarnBalancesByAddress[address]           // earn_min_balance     │
+│      && hodlerUserIdByAddress[address]           // valid send_account   │
+│      && verificationsByUserId[user_id].some(                            │
+│           v => v.type === 'tag_registration' && v.weight > 0            │
+│         )                                        // sendtag verified     │
+│  )                                                                       │
+│                                                                          │
+│  Parameters (from distributions table):                                  │
+│  • hodler_min_balance: minimum SEND token balance                       │
+│  • earn_min_balance: minimum Send Earn USDC balance                     │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
-```mermaid
-graph LR
-    subgraph Formula Components
-        A[BASE_CAP] --> D[effective_cap]
-        B[ln_1_plus_holdings_over_SCALE] --> D
-        C[ln_2] --> D
-    end
+---
+
+## Send Score Calculation
+
+### SQL Implementation
+
+The send ceiling and score are computed in `supabase/schemas/send_scores.sql`:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    SEND CEILING FORMULA                                  │
+│                                                                          │
+│  send_ceiling = ROUND(                                                   │
+│    COALESCE(                                                            │
+│      previous_distribution_share,                                        │
+│      hodler_min_balance                                                  │
+│    ) / (minimum_sends * scaling_divisor)                                │
+│  )                                                                       │
+│                                                                          │
+│  Source: send_slash table provides minimum_sends, scaling_divisor        │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Database Schema
+### Score Aggregation
 
-```mermaid
-erDiagram
-    USER ||--o{ VERIFICATION : has
-    USER ||--o{ REWARD_CYCLE : participates
-    USER ||--o{ TRANSACTION : sends
-
-    VERIFICATION {
-        uuid id PK
-        uuid user_id FK
-        boolean usdc_verified
-        boolean sendtag_verified
-        boolean send_verified
-        timestamp verified_at
-    }
-
-    REWARD_CYCLE {
-        uuid id PK
-        uuid user_id FK
-        int cycle_number
-        decimal holdings_cap
-        decimal progress
-        decimal earned_rewards
-        timestamp cycle_start
-        timestamp cycle_end
-    }
-
-    TRANSACTION {
-        uuid id PK
-        uuid sender_id FK
-        uuid recipient_id FK
-        decimal amount
-        boolean reward_eligible
-        timestamp created_at
-    }
-
-    TASK ||--o{ TASK_COMPLETION : generates
-    USER ||--o{ TASK_COMPLETION : completes
-
-    TASK {
-        uuid id PK
-        string task_type
-        decimal base_reward
-        decimal multiplier_bonus
-    }
-
-    TASK_COMPLETION {
-        uuid id PK
-        uuid user_id FK
-        uuid task_id FK
-        int streak_count
-        decimal applied_multiplier
-        timestamp completed_at
-    }
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    SCORE CALCULATION                                     │
+│                                                                          │
+│  score = SUM(                                                            │
+│    LEAST(transfer_sum_per_recipient, send_ceiling)                       │
+│  )                                                                       │
+│                                                                          │
+│  WHERE:                                                                  │
+│  • transfer includes: send_token_transfers + send_token_v0_transfers     │
+│                       + send_check_claimed (SEND token, redeemer≠sender) │
+│  • recipient must have earn_min_balance in send_earn_balances_timeline   │
+│  • block_time within qualification_start..qualification_end              │
+│                                                                          │
+│  unique_sends = COUNT(DISTINCT recipient)                                │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Event Flow Architecture
+---
 
-```mermaid
-flowchart TB
-    subgraph Event Sources
-        TX[Transaction Events]
-        VE[Verification Events]
-        TE[Task Events]
-    end
+## Pool Allocation Algorithm
 
-    subgraph Event Bus
-        TX --> Q[Event Queue]
-        VE --> Q
-        TE --> Q
-    end
+### V2 Changes from V1
 
-    subgraph Processors
-        Q --> RP[Rewards Processor]
-        Q --> VP[Verification Processor]
-        Q --> TP[Task Processor]
-    end
-
-    subgraph State Updates
-        RP --> DB[(Database)]
-        VP --> DB
-        TP --> DB
-    end
-
-    subgraph Notifications
-        DB --> WS[WebSocket Push]
-        DB --> EM[Email Service]
-    end
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    V2 KEY DIFFERENCES                                    │
+│                                                                          │
+│  • Fixed pool calculated FIRST from total distribution amount            │
+│  • Hodler pool = distAmt - fixedPoolAllocatedAmount                      │
+│  • bonus_pool_amount ALWAYS set to 0                                     │
+│  • No holder_bips or bonus_bips calculations                             │
+│  • Send slash system: non-senders get 0 rewards                          │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Monthly Distribution Process
+### Fixed Pool Calculation
 
-```mermaid
-sequenceDiagram
-    participant Scheduler
-    participant Calculator
-    participant Distributor
-    participant Blockchain
-    participant User
-
-    Scheduler->>Calculator: triggerCycleEnd()
-    loop For each qualified user
-        Calculator->>Calculator: computeFinalRewards(user)
-        Calculator->>Distributor: queueDistribution(user, amount)
-    end
-
-    Distributor->>Blockchain: batchTransfer(distributions)
-    Blockchain-->>Distributor: txConfirmed
-
-    loop For each distribution
-        Distributor->>User: notifyRewardReceived(amount)
-    end
-
-    Scheduler->>Calculator: initNewCycle()
 ```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    FIXED POOL ALGORITHM                                  │
+│                                                                          │
+│  FOR each qualifying user:                                               │
+│                                                                          │
+│    1. Sum fixed_value * weight for each verification                     │
+│                                                                          │
+│    2. Calculate multipliers:                                             │
+│       - Initial: multiplier_min                                          │
+│       - Per completion: += multiplier_step (capped at multiplier_max)    │
+│       - Final: product of all applicable multipliers                     │
+│                                                                          │
+│    3. Apply multiplier: userFixedAmount * finalMultiplier                │
+│                                                                          │
+│    4. Apply slash:                                                       │
+│       scaled_prev = previousReward / scaling_divisor                     │
+│       capped = min(sendCeilingWeight, scaled_prev)                       │
+│       slashPct = capped / scaled_prev                                    │
+│       amount *= slashPct                                                 │
+│       (if sendCeilingWeight = 0, amount = 0)                             │
+│                                                                          │
+│    5. Apply cap:                                                         │
+│       amount = min(amount, hodlerAmt + sendScore + ticketValue)          │
+│                                                                          │
+│  fixedPoolAllocatedAmount = Σ(user amounts)                              │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### Hodler Pool Calculation
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    HODLER POOL ALGORITHM                                 │
+│                                                                          │
+│  hodlerPoolAvailableAmount = distAmt - fixedPoolAllocatedAmount          │
+│                                                                          │
+│  IF hodlerPoolAvailableAmount > 0:                                       │
+│                                                                          │
+│    1. Time adjustment (hourly accrual):                                  │
+│       hourlyAmount = hodlerPool / hoursInMonth                           │
+│       timeAdjusted = min(hourlyAmount * (currentHour+1), hodlerPool)     │
+│                                                                          │
+│    2. Calculate slashed balances for each user:                          │
+│       slashPct = (capped_send_weight / scaled_prev_reward)               │
+│       slashedBalance = balance * slashPct                                │
+│                                                                          │
+│    3. Distribute via sigmoid weighting:                                  │
+│       calculateWeights(slashedBalances, timeAdjusted, Mode.Sigmoid)      │
+│                                                                          │
+│  Final share = hodlerPoolAmount + fixedPoolAmount                        │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Verification Types
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    VERIFICATION TYPES                                    │
+│                                                                          │
+│  Type                      │ fixed_value │ multiplier │ Notes            │
+│  ─────────────────────────────────────────────────────────────────────  │
+│  tag_registration          │    Yes      │    No      │ Required         │
+│  create_passkey            │    Yes      │    No      │ Task             │
+│  send_ten                  │    Yes      │    No      │ Task             │
+│  send_one_hundred          │    Yes      │    No      │ Task             │
+│  send_streak               │    Yes      │    No      │ Daily task       │
+│  sendpot_ticket_purchase   │    Yes      │    No      │ metadata.value   │
+│  tag_referral              │    Yes      │    Yes     │ Per-dist mult    │
+│  total_tag_referrals       │    Yes      │    Yes     │ Cumulative       │
+│  send_ceiling              │    No       │    No      │ Weight = score   │
+│                                                                          │
+│  Source: distribution_verification_values table                          │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## UI Progress Calculation
+
+From `packages/app/features/rewards/activity/screen.tsx`:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    PROGRESS BAR LOGIC                                    │
+│                                                                          │
+│  previousReward = distribution_shares[prev].amount                       │
+│                   || hodler_min_balance                                  │
+│                                                                          │
+│  scaledPreviousReward = previousReward / scaling_divisor                 │
+│                                                                          │
+│  sendCeilingWeight = verification.weight WHERE type='send_ceiling'       │
+│                                                                          │
+│  progress = (                                                            │
+│    min(sendCeilingWeight, scaledPreviousReward) * 10000n                 │
+│    / scaledPreviousReward                                                │
+│  ) / 100                                                                 │
+│                                                                          │
+│  Display: progress.toFixed(1) + '%'                                      │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**Note:** Progress represents send_ceiling_weight / scaled_previous_reward, not raw SEND transferred.
+
+---
+
+## Key Invariants
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    SYSTEM INVARIANTS                                     │
+│                                                                          │
+│  1. totalShareAmounts ≤ distAmt                                         │
+│     (enforced: throws if exceeded)                                       │
+│                                                                          │
+│  2. bonus_pool_amount = 0 for all shares                                │
+│     (hardcoded in V2)                                                    │
+│                                                                          │
+│  3. sendCeilingWeight = 0 → slashPercentage = 0                         │
+│     → fixedPoolAmount = 0 AND hodlerPoolAmount = 0                       │
+│                                                                          │
+│  4. Recipient without earn_min_balance → transfer not counted            │
+│                                                                          │
+│  5. Verifications/multipliers per-distribution only                     │
+│     (no cross-month accumulation)                                        │
+│                                                                          │
+│  6. Fixed reward capped by: initialHodlerAmt + sendScore + ticketValue  │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Database Schema References
+
+| Table/View | Purpose |
+|------------|---------|
+| `distributions` | Distribution parameters (dates, amounts, min balances) |
+| `distribution_verifications` | User verification records per distribution |
+| `distribution_verification_values` | Task fixed_value, multiplier config |
+| `distribution_shares` | Calculated user shares |
+| `send_slash` | minimum_sends, scaling_divisor per distribution |
+| `send_scores` (view) | Unified current + historical send scores |
+| `send_scores_current` (view) | Real-time score calculation |
+| `send_scores_history` (mat view) | Historical scores (refreshed) |
+| `send_accounts` | User addresses linked to user_id |
+| `send_earn_balances_timeline` | Earn balance snapshots |
+| `send_token_transfers` | SEND token transfer events |
+
+---
 
 ## API Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/rewards/status` | GET | Current cycle status |
-| `/rewards/history` | GET | Historical rewards |
-| `/rewards/progress` | GET | Current progress |
-| `/rewards/tasks` | GET | Available tasks |
-| `/rewards/tasks/:id/complete` | POST | Complete task |
+| Endpoint | Returns |
+|----------|---------|
+| `get_send_score(addr)` | (distribution_id, score, unique_sends, send_ceiling) |
+| `get_send_scores_history()` | Historical scores (auth-scoped) |
 
-## Configuration Parameters
+---
 
-```mermaid
-mindmap
-    root((Rewards Config))
-        Verification
-            USDC Threshold
-            SEND Threshold
-            Timeout Period
-        Caps
-            Base Cap
-            Scale Factor
-            Diminishing Rate
-        Tasks
-            Base Rewards
-            Multiplier Caps
-            Streak Bonuses
-        Distribution
-            Cycle Length
-            Batch Size
-            Gas Limits
+## Error Conditions
+
 ```
-
-## Error Handling
-
-```mermaid
-flowchart TD
-    E[Error Detected] --> T{Error Type}
-    T -->|Verification| V[Retry with backoff]
-    T -->|Calculation| C[Log and skip user]
-    T -->|Distribution| D{Retryable?}
-    D -->|Yes| R[Queue for retry]
-    D -->|No| M[Manual intervention]
-    V --> S[Update status]
-    C --> S
-    R --> S
-    M --> A[Alert ops team]
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    ERROR HANDLING                                        │
+│                                                                          │
+│  Condition                        │ Behavior                             │
+│  ────────────────────────────────────────────────────────────────────── │
+│  Tranche active                   │ Throws, no recalculation             │
+│  No verifications                 │ Skip distribution                    │
+│  No earn balances                 │ Return early                         │
+│  No previous shares               │ Uses hodler_min_balance              │
+│  No send scores                   │ Throws                               │
+│  Share amounts > distAmt          │ Throws                               │
+│  Share missing amount             │ Throws                               │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-:::warning Implementation Notes
-- All timestamps are stored in UTC
-- Decimal precision: 18 places for SEND amounts
-- Event processing uses at-least-once delivery semantics
-- Distribution batches limited to 100 transactions per block
-:::
+## Code References
+
+- Distribution calculation: `apps/distributor/src/distributorv2.ts`
+- Send score SQL: `supabase/schemas/send_scores.sql`
+- Send score views: `supabase/schemas/views/send_scores.sql`
+- Activity UI: `packages/app/features/rewards/activity/screen.tsx`
+- Distribution hooks: `packages/app/utils/distributions.ts`

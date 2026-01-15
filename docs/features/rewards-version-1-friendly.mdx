@@ -1,90 +1,161 @@
+# SEND Rewards: How You Earn
+
+SEND rewards you for sending tokens, not just holding them. The more you send SEND to others, the more you earn back next month.
+
 ---
-id: rewards-version-1-friendly
-title: Rewards - Friendly Guide
----
 
-# Rewards - How It Works
+## Getting Started: Three Things You Need
 
-Welcome! This guide explains how SEND rewards work in simple terms. Think of it like a loyalty program that pays you back for using your money.
+Before you can earn rewards, you need to complete three steps:
 
-## The Big Picture
-
-```mermaid
-flowchart LR
-    A[You Hold SEND] --> B[You Send SEND]
-    B --> C[You Earn Rewards]
-    C --> D[More SEND to Spend!]
-    D --> A
+```
+┌─────────────────────────────────────────────────────────┐
+│                   QUALIFICATION                          │
+│                                                          │
+│   1. Claim a Sendtag        ──────▶  Your identity       │
+│   2. Hold minimum SEND      ──────▶  Your stake          │
+│   3. Deposit in Send Earn   ──────▶  Your commitment     │
+│                                                          │
+│   All three required to earn rewards this month          │
+└─────────────────────────────────────────────────────────┘
 ```
 
-SEND rewards you for actually using your money, not just sitting on it. The more you send to friends and family, the more you earn back!
+These requirements are checked at the monthly snapshot. Miss one, and you won't qualify for that month's distribution.
 
 ---
 
-## Step 1: Get Verified
+## How Your Reward Gets Calculated
 
-Before you can earn rewards, you need to prove you're a real person. Here's what you need:
+Your monthly reward comes from two pools:
 
-```mermaid
-flowchart TD
-    A[Start Here] --> B[Deposit {{REWARDS_DEPOSIT_USDC}} USDC]
-    B --> C[Claim Your Sendtag]
-    C --> D[Hold {{REWARDS_HOLD_SEND}} SEND]
-    D --> E[You're Verified!]
+```
+┌───────────────────────────────────────────────────────────┐
+│                  MONTHLY DISTRIBUTION                      │
+│                                                            │
+│   Total Pool                                               │
+│       │                                                    │
+│       ├──▶ Fixed Pool (tasks & bonuses)                   │
+│       │        Earned by completing tasks                  │
+│       │                                                    │
+│       └──▶ Hodler Pool (what remains)                     │
+│                Shared based on your balance                │
+│                                                            │
+└───────────────────────────────────────────────────────────┘
 ```
 
-Once verified, you're in the rewards club!
+The fixed pool gets calculated first from your completed tasks. Whatever's left goes to the hodler pool, split among all qualified users based on their SEND balance.
 
 ---
 
-## Step 2: Hold to Set Your Limit
+## Your Send Ceiling: The Key to Unlocking Rewards
 
-Your SEND balance decides how much you can earn. Think of it like a bucket - the more SEND you hold, the bigger your bucket can fill with rewards.
+Here's the important part: **you must send SEND to unlock your rewards**.
 
-```mermaid
-pie title Your Earning Potential
-    "Based on Holdings" : 60
-    "Based on Activity" : 40
+Your "send ceiling" is the maximum you can earn, based on what you received last month (or the minimum balance if you're new). Every time you send SEND to someone who also has Send Earn deposits, it counts toward your progress.
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                    SEND CEILING                             │
+│                                                             │
+│   Previous Reward (or min balance)                          │
+│            │                                                │
+│            ÷ (minimum_sends × scaling_divisor)              │
+│            │                                                │
+│            ▼                                                │
+│   ┌─────────────────┐                                       │
+│   │  Your Ceiling   │◀── Max you can send per recipient     │
+│   └─────────────────┘                                       │
+│                                                             │
+│   Send to 5 people  ──▶  5 × ceiling = total send score     │
+│                                                             │
+│   Progress bar shows: send score ÷ scaled previous reward   │
+│                                                             │
+└────────────────────────────────────────────────────────────┘
 ```
 
+**Key points:**
+- Sends only count to recipients who have Send Earn deposits
+- Each recipient is capped at your ceiling amount
+- Your progress = how much of your potential you've activated
+
 ---
 
-## Step 3: Send to Earn
+## Tasks: Earn Fixed Bonuses
 
-This is the fun part! Every time you send SEND to someone:
+Tasks give you fixed token amounts for completing specific activities:
 
-- Your progress bar fills up
-- You get closer to your monthly rewards
-- The more you send, the more you earn
+- **Claim a Sendtag** – Required for qualification
+- **Create a backup passkey** – Secure your account
+- **Send streak** – Send SEND on the day of the task
+- **Buy Sendpot tickets** – Participate in the lottery
+- **Invite friends** – Refer others to earn bonuses
 
-```mermaid
-flowchart LR
-    subgraph Monthly Cycle
-        A[Send SEND] --> B[Progress Increases]
-        B --> C[Earn Rewards]
-        C --> A
-    end
+Each task has a fixed SEND value. Complete it, and that amount gets added to your reward.
+
+**Remember:** Tasks must be completed each month. Your progress doesn't carry over to the next distribution.
+
+---
+
+## Multipliers: Boost Your Fixed Rewards
+
+Some tasks have multipliers that increase your fixed pool earnings:
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                     MULTIPLIERS                             │
+│                                                             │
+│   Task with multiplier                                      │
+│        │                                                    │
+│        ├──▶ First completion: 1.0×                         │
+│        ├──▶ Second: 1.0× + step                            │
+│        ├──▶ Third: 1.0× + (2 × step)                       │
+│        └──▶ Capped at max multiplier                       │
+│                                                             │
+│   Final Fixed Reward = base × (all multipliers combined)    │
+│                                                             │
+└────────────────────────────────────────────────────────────┘
 ```
 
----
-
-## Bonus: Tasks & Multipliers
-
-Want to earn even faster? Complete simple tasks:
-
-- Invite friends
-- Stay verified
-- Send regularly
-
-Each task gives you bonus rewards, and streaks make them even bigger!
+Multipliers are calculated per-distribution. They don't accumulate across months.
 
 ---
 
-## The Bottom Line
+## The Reward Cap
 
-> **Your money works harder when you use it.**
-> Hold SEND, send SEND, earn more SEND. It's that simple!
+Your fixed pool reward can never exceed:
 
-:::tip Remember
-The more active you are, the more you earn. SEND rewards spending, not just saving!
-:::
+```
+  Initial Hodler Amount + Send Score + Sendpot Ticket Value
+```
+
+This prevents gaming the system by completing tasks without actually participating in the economy.
+
+---
+
+## Progress Bar: What It Really Shows
+
+The progress bar in the app shows how much of your send ceiling you've filled:
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                                                            │
+│   ████████████░░░░░░░░░░░░░░░░  45.2%                     │
+│                                                            │
+│   = min(send_ceiling_weight, scaled_previous_reward)       │
+│     ÷ scaled_previous_reward                               │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+It doesn't show total SEND sent—it shows how much of your earning potential you've unlocked through qualifying sends.
+
+---
+
+## Quick Summary
+
+1. **Qualify** – Sendtag + minimum SEND + Send Earn deposit
+2. **Send** – Move SEND to eligible recipients to build your send score
+3. **Complete tasks** – Earn fixed bonuses and multipliers
+4. **Receive** – At month-end, claim your share from fixed + hodler pools
+
+The more you participate, the more you earn. But remember: everything resets each month. Stay active to keep earning.
