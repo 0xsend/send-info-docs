@@ -9,15 +9,15 @@ SEND rewards you for sending tokens, not just holding them. The more you send SE
 Before you can earn rewards, you need to complete three steps:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                   QUALIFICATION                          │
-│                                                          │
-│   1. Claim a Sendtag        ──────▶  Your identity       │
-│   2. Hold minimum SEND      ──────▶  Your stake          │
-│   3. Deposit in Send Earn   ──────▶  Your commitment     │
-│                                                          │
-│   All three required to earn rewards this month          │
-└─────────────────────────────────────────────────────────┘
+╔══════════════════════════════════════════════════════════╗
+║                   QUALIFICATION                          ║
+║                                                          ║
+║   ● Claim a Sendtag        ═════⇒  Your identity         ║
+║   ● Hold minimum SEND      ═════⇒  Your stake            ║
+║   ● Deposit in Send Earn   ═════⇒  Your commitment       ║
+║                                                          ║
+║   All three required to earn rewards this month          ║
+╚══════════════════════════════════════════════════════════╝
 ```
 
 These requirements are checked at the monthly snapshot. Miss one, and you won't qualify for that month's distribution.
@@ -29,18 +29,18 @@ These requirements are checked at the monthly snapshot. Miss one, and you won't 
 Your monthly reward comes from two pools:
 
 ```
-┌───────────────────────────────────────────────────────────┐
-│                  MONTHLY DISTRIBUTION                      │
-│                                                            │
-│   Total Pool                                               │
-│       │                                                    │
-│       ├──▶ Fixed Pool (tasks & bonuses)                   │
-│       │        Earned by completing tasks                  │
-│       │                                                    │
-│       └──▶ Hodler Pool (what remains)                     │
-│                Shared based on your balance                │
-│                                                            │
-└───────────────────────────────────────────────────────────┘
+╔════════════════════════════════════════════════════════════╗
+║                  MONTHLY DISTRIBUTION                      ║
+║                                                            ║
+║   Total Pool                                               ║
+║       │                                                    ║
+║       ├───▶ Fixed Pool (tasks & bonuses)                   ║
+║       │        Earned by completing tasks                  ║
+║       │                                                    ║
+║       └───▶ Hodler Pool (what remains)                     ║
+║                Shared based on your balance                ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
 ```
 
 The fixed pool gets calculated first from your completed tasks. Whatever's left goes to the hodler pool, split among all qualified users based on their SEND balance.
@@ -54,23 +54,23 @@ Here's the important part: **you must send SEND to unlock your rewards**.
 Your "send ceiling" is the maximum you can earn, based on what you received last month (or the minimum balance if you're new). Every time you send SEND to someone who also has Send Earn deposits, it counts toward your progress.
 
 ```
-┌────────────────────────────────────────────────────────────┐
-│                    SEND CEILING                             │
-│                                                             │
-│   Previous Reward (or min balance)                          │
-│            │                                                │
-│            ÷ (minimum_sends × scaling_divisor)              │
-│            │                                                │
-│            ▼                                                │
-│   ┌─────────────────┐                                       │
-│   │  Your Ceiling   │◀── Max you can send per recipient     │
-│   └─────────────────┘                                       │
-│                                                             │
-│   Send to 5 people  ──▶  5 × ceiling = total send score     │
-│                                                             │
-│   Progress bar shows: send score ÷ scaled previous reward   │
-│                                                             │
-└────────────────────────────────────────────────────────────┘
+╔═════════════════════════════════════════════════════════════╗
+║                    SEND CEILING                             ║
+║                                                             ║
+║   Previous Reward (or min balance)                          ║
+║            │                                                ║
+║            ÷ (minimum_sends × scaling_divisor)              ║
+║            │                                                ║
+║            ▼                                                ║
+║   ┌─────────────────┐                                       ║
+║   │  Your Ceiling   │◀── Max you can send per recipient     ║
+║   └─────────────────┘                                       ║
+║                                                             ║
+║   Send to 5 people  ═══▶  5 × ceiling = total send score    ║
+║                                                             ║
+║   Progress bar shows: send score ÷ scaled previous reward   ║
+║                                                             ║
+╚═════════════════════════════════════════════════════════════╝
 ```
 
 **Key points:**
@@ -85,7 +85,6 @@ Your "send ceiling" is the maximum you can earn, based on what you received last
 Tasks give you fixed token amounts for completing specific activities:
 
 - **Claim a Sendtag** – Required for qualification
-- **Create a backup passkey** – Secure your account
 - **Send streak** – Send SEND on the day of the task
 - **Buy Sendpot tickets** – Participate in the lottery
 - **Invite friends** – Refer others to earn bonuses
@@ -134,19 +133,19 @@ If you refer 3 friends this month who all qualify, and you have 10 total lifetim
 Some tasks have multipliers that increase your fixed pool earnings:
 
 ```
-┌────────────────────────────────────────────────────────────┐
-│                     MULTIPLIERS                             │
-│                                                             │
-│   Task with multiplier                                      │
-│        │                                                    │
-│        ├──▶ First completion: 1.0×                         │
-│        ├──▶ Second: 1.0× + step                            │
-│        ├──▶ Third: 1.0× + (2 × step)                       │
-│        └──▶ Capped at max multiplier                       │
-│                                                             │
-│   Final Fixed Reward = base × (all multipliers combined)    │
-│                                                             │
-└────────────────────────────────────────────────────────────┘
+╔═════════════════════════════════════════════════════════════╗
+║                     MULTIPLIERS                             ║
+║                                                             ║
+║   Task with multiplier                                      ║
+║        │                                                    ║
+║        ├───▶ First completion: 1.0×                         ║
+║        ├───▶ Second: 1.0× + step                            ║
+║        ├───▶ Third: 1.0× + (2 × step)                       ║
+║        └───▶ Capped at max multiplier                       ║
+║                                                             ║
+║   Final Fixed Reward = base × (all multipliers combined)    ║
+║                                                             ║
+╚═════════════════════════════════════════════════════════════╝
 ```
 
 Multipliers are calculated per-distribution. They don't accumulate across months.
@@ -172,7 +171,7 @@ The progress bar in the app shows how much of your send ceiling you've filled:
 ```
 ┌────────────────────────────────────────────────────────────┐
 │                                                            │
-│   ████████████░░░░░░░░░░░░░░░░  45.2%                     │
+│   ████████████░░░░░░░░░░░░░░░░  45.2%                      │
 │                                                            │
 │   = min(send_ceiling_weight, scaled_previous_reward)       │
 │     ÷ scaled_previous_reward                               │
