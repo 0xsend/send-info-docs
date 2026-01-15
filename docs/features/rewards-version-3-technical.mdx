@@ -1,0 +1,274 @@
+---
+id: rewards-version-3-technical
+title: Rewards - Technical Specification
+---
+
+# SEND Rewards Technical Specification
+
+This document provides the technical implementation details of the SEND rewards distribution system, including state transitions, calculation algorithms, and system interactions.
+
+## System State Machine
+
+```mermaid
+stateDiagram-v2
+    [*] --> Unverified
+    Unverified --> Pending: initiate_verification()
+    Pending --> Verified: complete_verification()
+    Pending --> Unverified: verification_timeout()
+    Verified --> Active: first_send()
+    Active --> Active: send_transaction()
+    Active --> Capped: cap_reached()
+    Capped --> Active: new_cycle()
+    Active --> Suspended: verification_lapsed()
+    Suspended --> Active: re_verify()
+```
+
+## Verification State Transitions
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Contract
+    participant Oracle
+    participant RewardsEngine
+
+    User->>Contract: deposit(USDC, amount)
+    Contract->>Oracle: verifyDeposit(user, amount)
+    Oracle-->>Contract: depositConfirmed
+
+    User->>Contract: claimSendtag(tag)
+    Contract->>Contract: validateUniqueness(tag)
+    Contract-->>User: sendtagAssigned
+
+    User->>Contract: holdSEND(amount)
+    Contract->>Oracle: verifySENDBalance(user)
+    Oracle-->>Contract: balanceConfirmed
+
+    Contract->>RewardsEngine: setVerified(user, true)
+    RewardsEngine-->>User: qualificationComplete
+```
+
+## Rewards Calculation Engine
+
+### Core Algorithm
+
+```mermaid
+flowchart TD
+    subgraph Input Processing
+        H[holdings_balance] --> N[normalize_holdings]
+        S[send_volume] --> V[calculate_velocity]
+        T[task_completions] --> M[compute_multipliers]
+    end
+
+    subgraph Cap Calculation
+        N --> C[base_cap = log2_holdings * SCALE_FACTOR]
+        C --> A[adjusted_cap = base_cap * diminishing_factor]
+    end
+
+    subgraph Progress Calculation
+        V --> P[progress = min_send_volume / adjusted_cap, 1.0]
+        P --> R[unlocked_rewards = adjusted_cap * progress]
+    end
+
+    subgraph Multiplier Application
+        M --> F[final_rewards = unlocked_rewards * multiplier_sum]
+        R --> F
+    end
+
+    F --> O[distribute_rewards]
+```
+
+### Diminishing Returns Formula
+
+```
+effective_cap = BASE_CAP * ln(1 + holdings / SCALE) / ln(2)
+
+where:
+  BASE_CAP = 10000 SEND (per cycle)
+  SCALE = 1000 SEND
+  holdings = user's SEND balance
+```
+
+```mermaid
+graph LR
+    subgraph Formula Components
+        A[BASE_CAP] --> D[effective_cap]
+        B[ln_1_plus_holdings_over_SCALE] --> D
+        C[ln_2] --> D
+    end
+```
+
+## Database Schema
+
+```mermaid
+erDiagram
+    USER ||--o{ VERIFICATION : has
+    USER ||--o{ REWARD_CYCLE : participates
+    USER ||--o{ TRANSACTION : sends
+
+    VERIFICATION {
+        uuid id PK
+        uuid user_id FK
+        boolean usdc_verified
+        boolean sendtag_verified
+        boolean send_verified
+        timestamp verified_at
+    }
+
+    REWARD_CYCLE {
+        uuid id PK
+        uuid user_id FK
+        int cycle_number
+        decimal holdings_cap
+        decimal progress
+        decimal earned_rewards
+        timestamp cycle_start
+        timestamp cycle_end
+    }
+
+    TRANSACTION {
+        uuid id PK
+        uuid sender_id FK
+        uuid recipient_id FK
+        decimal amount
+        boolean reward_eligible
+        timestamp created_at
+    }
+
+    TASK ||--o{ TASK_COMPLETION : generates
+    USER ||--o{ TASK_COMPLETION : completes
+
+    TASK {
+        uuid id PK
+        string task_type
+        decimal base_reward
+        decimal multiplier_bonus
+    }
+
+    TASK_COMPLETION {
+        uuid id PK
+        uuid user_id FK
+        uuid task_id FK
+        int streak_count
+        decimal applied_multiplier
+        timestamp completed_at
+    }
+```
+
+## Event Flow Architecture
+
+```mermaid
+flowchart TB
+    subgraph Event Sources
+        TX[Transaction Events]
+        VE[Verification Events]
+        TE[Task Events]
+    end
+
+    subgraph Event Bus
+        TX --> Q[Event Queue]
+        VE --> Q
+        TE --> Q
+    end
+
+    subgraph Processors
+        Q --> RP[Rewards Processor]
+        Q --> VP[Verification Processor]
+        Q --> TP[Task Processor]
+    end
+
+    subgraph State Updates
+        RP --> DB[(Database)]
+        VP --> DB
+        TP --> DB
+    end
+
+    subgraph Notifications
+        DB --> WS[WebSocket Push]
+        DB --> EM[Email Service]
+    end
+```
+
+## Monthly Distribution Process
+
+```mermaid
+sequenceDiagram
+    participant Scheduler
+    participant Calculator
+    participant Distributor
+    participant Blockchain
+    participant User
+
+    Scheduler->>Calculator: triggerCycleEnd()
+    loop For each qualified user
+        Calculator->>Calculator: computeFinalRewards(user)
+        Calculator->>Distributor: queueDistribution(user, amount)
+    end
+
+    Distributor->>Blockchain: batchTransfer(distributions)
+    Blockchain-->>Distributor: txConfirmed
+
+    loop For each distribution
+        Distributor->>User: notifyRewardReceived(amount)
+    end
+
+    Scheduler->>Calculator: initNewCycle()
+```
+
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/rewards/status` | GET | Current cycle status |
+| `/rewards/history` | GET | Historical rewards |
+| `/rewards/progress` | GET | Current progress |
+| `/rewards/tasks` | GET | Available tasks |
+| `/rewards/tasks/:id/complete` | POST | Complete task |
+
+## Configuration Parameters
+
+```mermaid
+mindmap
+    root((Rewards Config))
+        Verification
+            USDC Threshold
+            SEND Threshold
+            Timeout Period
+        Caps
+            Base Cap
+            Scale Factor
+            Diminishing Rate
+        Tasks
+            Base Rewards
+            Multiplier Caps
+            Streak Bonuses
+        Distribution
+            Cycle Length
+            Batch Size
+            Gas Limits
+```
+
+## Error Handling
+
+```mermaid
+flowchart TD
+    E[Error Detected] --> T{Error Type}
+    T -->|Verification| V[Retry with backoff]
+    T -->|Calculation| C[Log and skip user]
+    T -->|Distribution| D{Retryable?}
+    D -->|Yes| R[Queue for retry]
+    D -->|No| M[Manual intervention]
+    V --> S[Update status]
+    C --> S
+    R --> S
+    M --> A[Alert ops team]
+```
+
+---
+
+:::warning Implementation Notes
+- All timestamps are stored in UTC
+- Decimal precision: 18 places for SEND amounts
+- Event processing uses at-least-once delivery semantics
+- Distribution batches limited to 100 transactions per block
+:::

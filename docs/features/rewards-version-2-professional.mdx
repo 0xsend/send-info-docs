@@ -1,0 +1,142 @@
+---
+id: rewards-version-2-professional
+title: Rewards - Professional Overview
+---
+
+# SEND Rewards System
+
+The SEND rewards framework incentivizes active participation in the network. This document provides a comprehensive overview of the qualification criteria, earning mechanics, and distribution model.
+
+## System Architecture
+
+```mermaid
+flowchart TB
+    subgraph Qualification
+        V[Verification] --> Q{Qualified?}
+        Q -->|Yes| E[Earnings Pool]
+        Q -->|No| X[No Rewards]
+    end
+
+    subgraph Earning
+        E --> H[Holdings Cap]
+        E --> S[Send Activity]
+        H & S --> R[Reward Calculation]
+    end
+
+    subgraph Distribution
+        R --> M[Monthly Payout]
+        M --> B[Balance Update]
+    end
+```
+
+## Verification Requirements
+
+Users must complete three verification steps to qualify for rewards:
+
+| Requirement | Threshold | Purpose |
+|------------|-----------|---------|
+| USDC Deposit | {{REWARDS_DEPOSIT_USDC}} USDC | Proof of funds |
+| Sendtag | 1 claimed | Identity verification |
+| SEND Holdings | {{REWARDS_HOLD_SEND}} SEND | Network commitment |
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant S as System
+    participant R as Rewards Engine
+
+    U->>S: Deposit USDC
+    S->>S: Verify deposit
+    U->>S: Claim Sendtag
+    S->>S: Verify identity
+    U->>S: Hold SEND
+    S->>R: Mark as qualified
+    R->>U: Enable rewards tracking
+```
+
+## Earning Mechanics
+
+### Holdings-Based Cap
+
+Your SEND holdings determine your maximum earning potential each cycle:
+
+```mermaid
+graph LR
+    A[SEND Holdings] --> B[Earning Cap]
+    B --> C[Monthly Maximum]
+
+    style A fill:#e1f5fe
+    style B fill:#b3e5fc
+    style C fill:#81d4fa
+```
+
+### Activity-Based Progress
+
+Sending activity fills your progress toward the earning cap:
+
+```mermaid
+flowchart LR
+    subgraph Progress Calculation
+        S[Send Transaction] --> P[Progress +%]
+        P --> C{Cap Reached?}
+        C -->|No| S
+        C -->|Yes| M[Max Rewards Unlocked]
+    end
+```
+
+## Reward Distribution Model
+
+```mermaid
+pie title Monthly Reward Allocation
+    "Spending Rewards" : 33
+    "Holding Rewards" : 33
+    "Activity Bonuses" : 20
+    "Task Multipliers" : 14
+```
+
+### Distribution Timeline
+
+| Phase | Timing | Action |
+|-------|--------|--------|
+| Tracking | Ongoing | Activity recorded |
+| Calculation | Month end | Rewards computed |
+| Distribution | 1st of month | SEND distributed |
+
+## Task & Multiplier System
+
+```mermaid
+flowchart TD
+    T[Complete Task] --> B[Base Bonus]
+    B --> S{Streak Active?}
+    S -->|Yes| M[Apply Multiplier]
+    S -->|No| R[Standard Reward]
+    M --> R
+    R --> A[Add to Account]
+```
+
+### Available Tasks
+
+- Referral completions
+- Verification maintenance
+- Consistent sending activity
+- Special promotional tasks
+
+## Fairness Considerations
+
+The system implements diminishing returns for large holders:
+
+```mermaid
+graph TD
+    subgraph Diminishing Returns
+        A[Small Holder] --> |Linear Growth| B[Proportional Rewards]
+        C[Large Holder] --> |Logarithmic Growth| D[Capped Rewards]
+    end
+```
+
+This ensures sustainable distribution while maintaining incentives for all participation levels.
+
+---
+
+:::info Key Takeaway
+The SEND rewards system balances holding incentives with activity requirements, ensuring sustainable growth through verified participation.
+:::
