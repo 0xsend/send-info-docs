@@ -1,262 +1,142 @@
 ---
-id: rewards-professional
-title: Rewards (Professional)
+id: rewards-version-2-professional
+title: Rewards - Professional Overview
 ---
 
-# Rewards
+# SEND Rewards System
 
-SEND rewards you for circulating value — not just holding it.
-When you send SEND to others, you're fueling the network and earning future SEND to spend again.
-Each part of the system exists to make that cycle sustainable and fair.
+The SEND rewards framework incentivizes active participation in the network. This document provides a comprehensive overview of the qualification criteria, earning mechanics, and distribution model.
 
----
+## System Architecture
 
-### 🪪 Get Verified First — *Who earns future SEND*
+```mermaid
+flowchart TB
+    subgraph Qualification
+        V[Verification] --> Q{Qualified?}
+        Q -->|Yes| E[Earnings Pool]
+        Q -->|No| X[No Rewards]
+    end
 
-Only verified users earn future SEND from what they spend.
-Verification confirms you're real, active, and funded — the foundation for fair rewards.
+    subgraph Earning
+        E --> H[Holdings Cap]
+        E --> S[Send Activity]
+        H & S --> R[Reward Calculation]
+    end
 
-To qualify, complete three trust steps:
-* Deposit **{{REWARDS_DEPOSIT_USDC}} USDC** into your savings vault
-* Claim your **Sendtag**
-* Hold at least **{{REWARDS_HOLD_SEND}} SEND**
+    subgraph Distribution
+        R --> M[Monthly Payout]
+        M --> B[Balance Update]
+    end
+```
+
+## Verification Requirements
+
+Users must complete three verification steps to qualify for rewards:
+
+| Requirement | Threshold | Purpose |
+|------------|-----------|---------|
+| USDC Deposit | {{REWARDS_DEPOSIT_USDC}} USDC | Proof of funds |
+| Sendtag | 1 claimed | Identity verification |
+| SEND Holdings | {{REWARDS_HOLD_SEND}} SEND | Network commitment |
 
 ```mermaid
 sequenceDiagram
     participant U as User
     participant S as System
-    participant V as Verification Engine
+    participant R as Rewards Engine
 
-    U->>S: Deposit USDC to savings vault
-    S->>V: Check deposit status
-    V-->>S: Deposit confirmed
-
+    U->>S: Deposit USDC
+    S->>S: Verify deposit
     U->>S: Claim Sendtag
-    S->>V: Validate Sendtag claim
-    V-->>S: Sendtag registered
-
-    U->>S: Acquire minimum SEND
-    S->>V: Check SEND balance
-    V-->>S: Balance verified
-
-    V->>V: All three criteria met?
-    V-->>U: Verification status: QUALIFIED
+    S->>S: Verify identity
+    U->>S: Hold SEND
+    S->>R: Mark as qualified
+    R->>U: Enable rewards tracking
 ```
 
-Once verified, every SEND you move starts counting toward your next cycle of rewards. Your spending now begins generating its return.
+## Earning Mechanics
 
----
+### Holdings-Based Cap
 
-### 💰 Hold = Potential — *How much you can earn back*
-
-Your SEND balance defines your earning ceiling — how much future SEND you can unlock.
-Holding sets your upper limit; sending determines how much of it you realize.
-
-Holding alone doesn't pay rewards, but it decides the size of your monthly slice. The more SEND you hold, the more your sending activity can return to you as future SEND to spend again.
+Your SEND holdings determine your maximum earning potential each cycle:
 
 ```mermaid
-flowchart TD
-    subgraph POTENTIAL["Earning Potential Calculation"]
-        A["SEND Balance"] --> B["Base Ceiling"]
-        B --> C["Monthly Pool Share"]
-        C --> D["Maximum Claimable Reward"]
-    end
+graph LR
+    A[SEND Holdings] --> B[Earning Cap]
+    B --> C[Monthly Maximum]
 
-    subgraph UNLOCK["Unlock Mechanism"]
-        E["Ceiling Amount"] --> F{"Send Activity?"}
-        F -->|Yes| G["Progress Toward Ceiling"]
-        F -->|No| H["0% Unlocked"]
-        G --> I["Actual Reward = Progress × Ceiling"]
-    end
-
-    D --> E
+    style A fill:#e1f5fe
+    style B fill:#b3e5fc
+    style C fill:#81d4fa
 ```
 
----
+### Activity-Based Progress
 
-### 💌 Send = Progress — *Why sending triggers rewards*
-
-Sending SEND activates your rewards.
-Every verified send proves real circulation — real movement of value between people.
-As you send, your progress bar fills, showing how much of your potential you've unlocked.
-
-Each month, SEND pays back part of what you circulate — giving you future SEND to spend again.
-
-```mermaid
-sequenceDiagram
-    participant Sender as Verified Sender
-    participant Network as SEND Network
-    participant Recipient as Eligible Recipient
-    participant Rewards as Rewards Engine
-
-    Sender->>Network: Initiate SEND transfer
-    Network->>Network: Validate sender verification
-    Network->>Recipient: Deliver SEND tokens
-    Network->>Rewards: Log qualifying send
-
-    Rewards->>Rewards: Calculate send weight
-    Note over Rewards: weight = min(amount, ceiling)
-
-    Rewards->>Rewards: Update progress score
-    Rewards-->>Sender: Progress bar updated
-
-    Note over Sender,Rewards: At month end
-    Rewards->>Sender: Distribute earned rewards
-```
-
----
-
-### 🧩 Tasks & Multipliers — *What accelerates your return*
-
-Tasks are small challenges that keep the economy active — inviting friends, staying verified, sending regularly.
-Each task gives bonus rewards, and multipliers amplify those bonuses the longer you stay active.
-
-If your rewards stop increasing, you've hit your cap. You can raise it by **holding more SEND** or **sending SEND more often.**
-The more you contribute, the faster you earn back future SEND to spend again.
-
-```mermaid
-flowchart TD
-    subgraph TASKS["Task Categories"]
-        T1["Sendtag Claim"] --> R1["Fixed Reward"]
-        T2["Backup Passkey"] --> R2["Fixed Reward"]
-        T3["Send Streak"] --> R3["Fixed Reward + Multiplier"]
-        T4["Referrals"] --> R4["Fixed Reward + Multiplier"]
-    end
-
-    subgraph CALCULATION["Multiplier Calculation"]
-        M1["Base Reward"] --> M2["× Streak Multiplier"]
-        M2 --> M3["× Referral Multiplier"]
-        M3 --> M4["= Boosted Fixed Reward"]
-    end
-
-    subgraph CAP["Reward Cap Check"]
-        M4 --> C1{"Exceeds Cap?"}
-        C1 -->|Yes| C2["Capped at Maximum"]
-        C1 -->|No| C3["Full Amount Applied"]
-    end
-
-    R1 & R2 & R3 & R4 --> M1
-```
-
----
-
-### ⚖️ Fairness & Balance — *Why it stays sustainable*
-
-Big holders earn more, but with **diminishing returns.**
-Smaller verified users still earn meaningful rewards through consistent activity.
-
-SEND's fairness design ensures future SEND is distributed to real participants — not just large wallets — so the network remains healthy and rewards stay sustainable.
+Sending activity fills your progress toward the earning cap:
 
 ```mermaid
 flowchart LR
-    subgraph DIMINISHING["Diminishing Returns Model"]
-        direction TB
-        A["Small Holder: 1,000 SEND"] --> A1["High % Return per SEND"]
-        B["Medium Holder: 10,000 SEND"] --> B1["Moderate % Return per SEND"]
-        C["Large Holder: 100,000 SEND"] --> C1["Lower % Return per SEND"]
-    end
-
-    subgraph DISTRIBUTION["Fair Distribution"]
-        D["Total Monthly Pool"] --> E["Hodler Pool Share"]
-        E --> F["Weighted by Balance"]
-        F --> G["Adjusted for Diminishing Returns"]
-        G --> H["Final Share per User"]
+    subgraph Progress Calculation
+        S[Send Transaction] --> P[Progress +%]
+        P --> C{Cap Reached?}
+        C -->|No| S
+        C -->|Yes| M[Max Rewards Unlocked]
     end
 ```
+
+## Reward Distribution Model
 
 ```mermaid
-graph TD
-    subgraph FORMULA["Balance Impact Formula"]
-        X["Reward Share"] --> Y["= f(balance)"]
-        Y --> Z["where f grows sublinearly"]
-        Z --> W["Example: sqrt(balance) weighting"]
-    end
+pie title Monthly Reward Allocation
+    "Spending Rewards" : 33
+    "Holding Rewards" : 33
+    "Activity Bonuses" : 20
+    "Task Multipliers" : 14
 ```
 
----
+### Distribution Timeline
 
-### 📈 Month-to-Month Growth — *How your effort compounds*
+| Phase | Timing | Action |
+|-------|--------|--------|
+| Tracking | Ongoing | Activity recorded |
+| Calculation | Month end | Rewards computed |
+| Distribution | 1st of month | SEND distributed |
 
-Each month builds on the last.
-Your verified activity, holding, and sending streaks carry forward, slowly raising your earning ceiling over time.
-
-The longer you participate, the more predictable your rewards become — and the more future SEND you earn to spend again.
-
----
-
-### 🧘 Built for Spending — *Why SEND exists*
-
-SEND was created to make spending powerful.
-About one-third of all monthly rewards are reserved specifically for **spending SEND**.
-That means when you use SEND — not just hold it — the system literally gives you more to spend next month.
-
-Your money doesn't just move — it multiplies its reach.
-
----
-
-### 🔁 The Loop — *What it all means*
-
-**Hold → Send → Progress → Earn → Repeat**
-
-You hold SEND to set your power.
-You send SEND to activate it.
-And each month, the network returns a portion as **future SEND to spend again.**
-
-That's the loop that keeps SEND alive — a self-sustaining cycle of participation and reward.
+## Task & Multiplier System
 
 ```mermaid
 flowchart TD
-    subgraph LOOP["The SEND Rewards Loop"]
-        H["HOLD SEND"] --> |"Sets earning ceiling"| S["SEND SEND"]
-        S --> |"Activates progress"| P["PROGRESS"]
-        P --> |"Unlocks rewards"| E["EARN"]
-        E --> |"Receive future SEND"| H
-    end
-
-    subgraph CYCLE["Monthly Cycle"]
-        C1["Month Start"] --> C2["Snapshot Verification"]
-        C2 --> C3["Track Sends & Tasks"]
-        C3 --> C4["Calculate Rewards"]
-        C4 --> C5["Distribute"]
-        C5 --> C6["Month End"]
-        C6 --> C1
-    end
-
-    E -.-> C4
+    T[Complete Task] --> B[Base Bonus]
+    B --> S{Streak Active?}
+    S -->|Yes| M[Apply Multiplier]
+    S -->|No| R[Standard Reward]
+    M --> R
+    R --> A[Add to Account]
 ```
+
+### Available Tasks
+
+- Referral completions
+- Verification maintenance
+- Consistent sending activity
+- Special promotional tasks
+
+## Fairness Considerations
+
+The system implements diminishing returns for large holders:
 
 ```mermaid
-sequenceDiagram
-    participant User
-    participant Wallet as SEND Wallet
-    participant Engine as Rewards Engine
-    participant Pool as Distribution Pool
-
-    Note over User,Pool: Monthly Cycle
-
-    User->>Wallet: Hold SEND tokens
-    Wallet->>Engine: Report balance at snapshot
-
-    loop Throughout Month
-        User->>Wallet: Send SEND to others
-        Wallet->>Engine: Log qualifying sends
-        Engine->>Engine: Update progress score
+graph TD
+    subgraph Diminishing Returns
+        A[Small Holder] --> |Linear Growth| B[Proportional Rewards]
+        C[Large Holder] --> |Logarithmic Growth| D[Capped Rewards]
     end
-
-    Engine->>Pool: Calculate user share
-    Pool->>User: Distribute rewards
-    Note over User: Rewards become new SEND to hold/send
 ```
+
+This ensures sustainable distribution while maintaining incentives for all participation levels.
 
 ---
 
-### 💚 In One Line
-
-> **SEND rewards you for spending.**
-> Every send today fuels the cash flow you'll use tomorrow.
-> The more you circulate SEND, the more future SEND you earn to spend again.
-
-:::tip Roadmap Alignment
-SEND's rewards framework will evolve alongside new product launches and future staking programs.
-We'll update this page with any changes to qualification or payout mix before new products go live.
+:::info Key Takeaway
+The SEND rewards system balances holding incentives with activity requirements, ensuring sustainable growth through verified participation.
 :::

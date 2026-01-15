@@ -1,174 +1,90 @@
-# SEND Rewards: How You Earn
-
-SEND rewards you for sending tokens, not just holding them. The more you send SEND to others, the more you earn back next month.
-
+---
+id: rewards-version-1-friendly
+title: Rewards - Friendly Guide
 ---
 
-## Getting Started: Three Things You Need
+# Rewards - How It Works
 
-Before you can earn rewards, you need to complete three steps:
+Welcome! This guide explains how SEND rewards work in simple terms. Think of it like a loyalty program that pays you back for using your money.
 
-```mermaid
-flowchart TD
-    subgraph QUALIFICATION["Qualification Requirements"]
-        A["1. Claim a Sendtag"] --> A1["Your identity"]
-        B["2. Hold minimum SEND"] --> B1["Your stake"]
-        C["3. Deposit in Send Earn"] --> C1["Your commitment"]
-    end
-
-    A1 & B1 & C1 --> D["All three required to earn rewards this month"]
-```
-
-These requirements are checked at the monthly snapshot. Miss one, and you won't qualify for that month's distribution.
-
----
-
-## How Your Reward Gets Calculated
-
-Your monthly reward comes from two pools:
-
-```mermaid
-flowchart TD
-    subgraph MONTHLY["Monthly Distribution"]
-        A["Total Pool"] --> B["Fixed Pool"]
-        A --> C["Hodler Pool"]
-        B --> B1["Earned by completing tasks"]
-        C --> C1["Shared based on your balance"]
-    end
-```
-
-The fixed pool gets calculated first from your completed tasks. Whatever's left goes to the hodler pool, split among all qualified users based on their SEND balance.
-
----
-
-## Your Send Ceiling: The Key to Unlocking Rewards
-
-Here's the important part: **you must send SEND to unlock your rewards**.
-
-Your "send ceiling" is the maximum you can earn, based on what you received last month (or the minimum balance if you're new). Every time you send SEND to someone who also has Send Earn deposits, it counts toward your progress.
-
-```mermaid
-flowchart TD
-    subgraph CEILING["Send Ceiling Calculation"]
-        A["Previous Reward<br/>(or min balance)"] --> B["÷ minimum_sends × scaling_divisor"]
-        B --> C["Your Ceiling<br/>(max per recipient)"]
-        C --> D["Send to 5 people"]
-        D --> E["5 × ceiling = total send score"]
-        E --> F["Progress = send score ÷ scaled previous reward"]
-    end
-```
-
-**Key points:**
-- Sends only count to recipients who have Send Earn deposits
-- Each recipient is capped at your ceiling amount
-- Your progress = how much of your potential you've activated
-
----
-
-## Referral Marketing
-
-One of the best ways to boost your rewards is through referrals. When you invite friends to Send and they become active users, you earn bonus multipliers on your rewards.
-
-**How Referrals Work:**
-
-1. Share your Sendtag with friends
-2. When they sign up using your referral, you're connected as their referrer
-3. Once your friend qualifies for rewards (by earning a share in a distribution), your referral counts
-
-**Boosting Your Rewards with Referrals:**
-
-Your referrals multiply your base rewards in two ways:
-
-1. **Monthly Referral Multiplier**: For each friend who joins and qualifies in the current month, you get a 10% boost (1.1x, 1.2x, 1.3x...) up to 2x total
-
-2. **Total Referral Multiplier**: Your lifetime qualified referrals give you an ongoing 2% boost per referral (1.02x, 1.04x, 1.06x...) up to 2x total
-
-**Example:**
-If you refer 3 friends this month who all qualify, and you have 10 total lifetime referrals:
-- Monthly boost: 1.3x (3 referrals x 0.1 each)
-- Total boost: 1.20x (10 referrals x 0.02 each)
-- Combined multiplier: 1.3 x 1.2 = 1.56x your base rewards!
-
-**Tips to Maximize Referrals:**
-
-- Share your Sendtag on social media
-- Invite friends who will actively use Send
-- Help your referrals complete their first transactions so they qualify for rewards
-- The more friends who qualify, the bigger your multiplier grows
-
----
-
-## Tasks: Earn Fixed Bonuses
-
-Tasks give you fixed token amounts for completing specific activities:
-
-- **Claim a Sendtag** – Required for qualification
-- **Create a backup passkey** – Secure your account
-- **Send streak** – Send SEND on the day of the task
-- **Buy Sendpot tickets** – Participate in the lottery
-
-Each task has a fixed SEND value. Complete it, and that amount gets added to your reward.
-
-**Remember:** Tasks must be completed each month. Your progress doesn't carry over to the next distribution.
-
----
-
-## Multipliers: Boost Your Fixed Rewards
-
-Some tasks have multipliers that increase your fixed pool earnings:
-
-```mermaid
-flowchart TD
-    subgraph MULTIPLIERS["How Multipliers Work"]
-        A["Task with multiplier"] --> B["First completion: 1.0×"]
-        B --> C["Second: 1.0× + step"]
-        C --> D["Third: 1.0× + 2 × step"]
-        D --> E["Capped at max multiplier"]
-        E --> F["Final Fixed Reward = base × all multipliers combined"]
-    end
-```
-
-Multipliers are calculated per-distribution. They don't accumulate across months.
-
----
-
-## The Reward Cap
-
-Your fixed pool reward can never exceed:
+## The Big Picture
 
 ```mermaid
 flowchart LR
-    A["Initial Hodler Amount"] --> D["Reward Cap"]
-    B["Send Score"] --> D
-    C["Sendpot Ticket Value"] --> D
+    A[You Hold SEND] --> B[You Send SEND]
+    B --> C[You Earn Rewards]
+    C --> D[More SEND to Spend!]
+    D --> A
 ```
 
-This prevents gaming the system by completing tasks without actually participating in the economy.
+SEND rewards you for actually using your money, not just sitting on it. The more you send to friends and family, the more you earn back!
 
 ---
 
-## Progress Bar: What It Really Shows
+## Step 1: Get Verified
 
-The progress bar in the app shows how much of your send ceiling you've filled:
+Before you can earn rewards, you need to prove you're a real person. Here's what you need:
+
+```mermaid
+flowchart TD
+    A[Start Here] --> B[Deposit {{REWARDS_DEPOSIT_USDC}} USDC]
+    B --> C[Claim Your Sendtag]
+    C --> D[Hold {{REWARDS_HOLD_SEND}} SEND]
+    D --> E[You're Verified!]
+```
+
+Once verified, you're in the rewards club!
+
+---
+
+## Step 2: Hold to Set Your Limit
+
+Your SEND balance decides how much you can earn. Think of it like a bucket - the more SEND you hold, the bigger your bucket can fill with rewards.
+
+```mermaid
+pie title Your Earning Potential
+    "Based on Holdings" : 60
+    "Based on Activity" : 40
+```
+
+---
+
+## Step 3: Send to Earn
+
+This is the fun part! Every time you send SEND to someone:
+
+- Your progress bar fills up
+- You get closer to your monthly rewards
+- The more you send, the more you earn
 
 ```mermaid
 flowchart LR
-    subgraph PROGRESS["Progress Bar Calculation"]
-        A["min(send_ceiling_weight, scaled_previous_reward)"] --> B["÷ scaled_previous_reward"]
-        B --> C["Progress %"]
+    subgraph Monthly Cycle
+        A[Send SEND] --> B[Progress Increases]
+        B --> C[Earn Rewards]
+        C --> A
     end
 ```
 
-It doesn't show total SEND sent—it shows how much of your earning potential you've unlocked through qualifying sends.
+---
+
+## Bonus: Tasks & Multipliers
+
+Want to earn even faster? Complete simple tasks:
+
+- Invite friends
+- Stay verified
+- Send regularly
+
+Each task gives you bonus rewards, and streaks make them even bigger!
 
 ---
 
-## Quick Summary
+## The Bottom Line
 
-1. **Qualify** – Sendtag + minimum SEND + Send Earn deposit
-2. **Send** – Move SEND to eligible recipients to build your send score
-3. **Complete tasks** – Earn fixed bonuses and multipliers
-4. **Refer friends** – Boost your rewards with referral multipliers
-5. **Receive** – At month-end, claim your share from fixed + hodler pools
+> **Your money works harder when you use it.**
+> Hold SEND, send SEND, earn more SEND. It's that simple!
 
-The more you participate, the more you earn. But remember: everything resets each month. Stay active to keep earning.
+:::tip Remember
+The more active you are, the more you earn. SEND rewards spending, not just saving!
+:::
