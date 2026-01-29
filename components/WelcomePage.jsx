@@ -4,7 +4,7 @@ import WelcomeHero from './WelcomeHero';
 
 const sectionCards = [
   { key: 'send-mobile-apps', title: 'Send App', href: '/docs/send-mobile-apps' },
-  { key: 'canton-wallet', title: 'Canton Wallet', href: '/docs/canton-wallet' },
+  { key: 'send-safe', title: 'Send Safe', href: '/docs/send-safe' },
   { key: 'send-token', title: 'Send Token', href: '/docs/send-token' },
   { key: 'cusd-stablecoin', title: 'CUSD Stablecoin', href: '/docs/cusd-stablecoin' },
 ];
@@ -13,7 +13,7 @@ const cardImages = {
   'welcome': { src: '/img/sendwelcome.png', alt: 'Welcome' },
   'send-token': { src: '/img/sendtoken.png', alt: 'Send Token' },
   'send-mobile-apps': { src: '/img/sendapps.png', alt: 'Send App' },
-  'canton-wallet': { src: '/img/cantonwallet.png', alt: 'Canton Wallet' },
+  'send-safe': { src: '/img/cantonwallet.png', alt: 'Send Safe' },
   'cusd-stablecoin': { src: '/img/cusdstablecoin.jpg', alt: 'CUSD Stablecoin' }
 };
 

@@ -1,25 +1,25 @@
 ---
-id: canton-wallet-passkeys
+id: send-safe-passkeys
 title: Passkeys & Security
 ---
 
-# Canton Wallet Passkeys
+# Send Safe Passkeys
 
-Passkeys let Canton Wallet owners authenticate with platform biometrics or hardware security keys instead of seed phrases. Only devices that you explicitly enroll can authorize transactions.
+Passkeys let Send Safe owners authenticate with platform biometrics or hardware security keys instead of seed phrases. Only devices that you explicitly enroll can authorize transactions.
 
 ## How Passkeys Work
 
-- Canton Wallet uses WebAuthn to bind a cryptographic credential to each trusted device.  
+- Send Safe uses WebAuthn to bind a cryptographic credential to each trusted device.  
 - The credential never leaves the device; authentication is completed locally before a signed request is sent to Canton's private settlement network.  
 - You can enroll multiple devices (e.g., primary phone plus a hardware key) so you have a recovery option if a device is lost.
 
 ## Non-Custodial Control
 
-Canton Wallet is non-custodial. Your passkeys and devices are the only way to authorize movements of $SEND, $CC, or other supported assets. Send cannot access, freeze, or transfer funds on your behalf.
+Send Safe is non-custodial. Your passkeys and devices are the only way to authorize movements of $SEND, $CC, or other supported assets. Send cannot access, freeze, or transfer funds on your behalf.
 
 ## Responsibility & Risk
 
 - Keep at least one backup passkey (hardware key or secondary device) stored separately from your primary device.  
 - If you lose every enrolled credential, Send cannot recover the wallet for you and any assets inside remain inaccessible.  
-- Review [Canton Wallet Overview](./overview) for setup guidance before enrolling devices.  
+- Review [Send Safe Overview](./overview) for setup guidance before enrolling devices.  
 - All balances are under your sole control. Send is not responsible for losses arising from misplaced devices, compromised hardware, or unauthorized access that results from weak local security controls.

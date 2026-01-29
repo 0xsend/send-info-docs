@@ -28,9 +28,13 @@ export async function generateMetadata({ params }) {
       title: 'Send App Info Docs – Your global wallet',
       description: 'Learn how the Send App delivers fast, private peer-to-peer transfers.'
     },
-    'canton-wallet': {
-      title: 'Canton Wallet Info Docs – Secure account access for Canton',
-      description: 'Understand passkeys, privacy, and workflows for the Canton Wallet.'
+    'send-safe': {
+      title: 'Send Safe Info Docs – Secure account access for Canton',
+      description: 'Understand passkeys, privacy, and workflows for Send Safe.'
+    },
+    'pool-party': {
+      title: 'Pool Party Exchange Info Docs – Privacy-First DEX',
+      description: 'Learn about Pool Party Exchange, the privacy-first AMM on Canton Network.'
     },
     'cusd-stablecoin': {
       image: '/img/cusd-opengraph.png',
@@ -56,7 +60,8 @@ export async function generateMetadata({ params }) {
       'welcome': 'Welcome',
       'send-token': 'Send Token',
       'send-mobile-apps': 'Send App',
-      'canton-wallet': 'Canton Wallet',
+      'send-safe': 'Send Safe',
+      'pool-party': 'Pool Party Exchange',
       'cusd-stablecoin': 'CUSD Stablecoin',
       'finance': 'Finance',
       'miscellaneous': 'Miscellaneous',
@@ -113,7 +118,8 @@ export default async function DocPage({ params }) {
       'welcome': 'Welcome',
       'send-token': 'Send Token',
       'send-mobile-apps': 'Send App',
-      'canton-wallet': 'Canton Wallet',
+      'send-safe': 'Send Safe',
+      'pool-party': 'Pool Party Exchange',
       'cusd-stablecoin': 'CUSD Stablecoin',
       'finance': 'Finance',
       'miscellaneous': 'Miscellaneous',

@@ -1,0 +1,38 @@
+---
+id: send-safe-multisig
+title: Multisig
+sidebar_position: 5
+---
+
+# Send Safe Multisig
+
+Multisig is built for Canton teams that want passkey-grade security with treasury-level controls. It lets you require multiple approvers on any transfer while keeping the biometric UX that already secures Send Safe.
+
+## What Multisig Provides
+
+- **Shared ownership:** Any asset inside Multisig requires a quorum before it can move.
+- **Device-level security:** Every signer authenticates with their Send Safe passkeys removing the need to manage seed phrases or browser extensions.
+- **Policy transparency:** Thresholds, roles, and pending transactions are always visible to every signer in the safe dashboard.
+- **Private settlement:** Transactions execute on Canton Network, so counterparties and amounts stay confidential even when multiple signers participate.
+
+## Create a Multisig
+
+1. Open Send Safe, navigate to **Send Safe → Multisig**, and select **Create Multisig**.
+2. Name the multisig and pick a unique name.
+3. Define the multisig's signing threshhold: `m-of-n` (default to majority)
+4. Add signer party ids or Send Safe usernames. Invitations stay pending until each signer accepts from their wallet.
+5. Fund the multisig by transferring assets from an existing Send Safe or importing an onchain balance using the provided deposit address.
+
+Multisig stays in a draft state until the final signer joins and the funding transaction finalizes. Draft multisigs cannot hold assets.
+
+## Using a Multisig
+
+We designed Multisig to feel like using your traditional primary account. Once your multisig is active, swap to your Multisig account in the party selector in the navigation bar. From there, you will be able to propose transactions and send out transactions as you normally would using the app.
+
+## Managing a Multisig
+
+- **Add signer:** Requires an existing quorum to approve and new signers must accept the invite.
+- **Remove signer:** Requires existing quorum to approve.
+- **Modify threshhold:** Requires existing quorum to approve.
+
+Need help onboarding? Reach the Send Safe team at <a href="mailto:support@send.app" className="multisig-token-link">support@send.app</a>.

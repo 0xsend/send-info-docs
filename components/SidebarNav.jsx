@@ -32,7 +32,7 @@ const sectionIcons = {
       className="sidebar-section-icon-image"
     />
   ),
-  'canton-wallet': (
+  'send-safe': (
     <Image
       src="/img/cantonwallet.png"
       alt=""
@@ -40,6 +40,11 @@ const sectionIcons = {
       height={20}
       className="sidebar-section-icon-image"
     />
+  ),
+  'pool-party': (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2,15C2,15 2,9 8,9C14,9 14,15 14,15L16,15C16,15 16,7 22,7L22,5C14,5 14,13 14,13L2,13L2,15M22,17L2,17L2,19L22,19L22,17M22,21L2,21L2,23L22,23L22,21Z" fill="currentColor"/>
+    </svg>
   ),
   'cusd-stablecoin': (
     <Image
@@ -72,7 +77,8 @@ const sectionLabels = {
   'send-token': 'Send Token',
   'send-mobile-apps': 'Send App',
   'features': 'Features',
-  'canton-wallet': 'Canton Wallet',
+  'send-safe': 'Send Safe',
+  'pool-party': 'Pool Party Exchange',
   'cusd-stablecoin': 'CUSD Stablecoin',
   'finance': 'Finance',
   'miscellaneous': 'Miscellaneous',
@@ -101,7 +107,8 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
     'welcome',
     'send-mobile-apps',
     'send-token',
-    'canton-wallet',
+    'send-safe',
+    'pool-party',
     'cusd-stablecoin',
     'finance',
     'miscellaneous',
