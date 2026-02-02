@@ -5,7 +5,7 @@ const sendAppRevenue = [
   {
     date: '1/2026',
     sendtags: { amount: 519, tx: '0x48c4c1bb06e1d77be740e9dae6498de0d61d5d6785d15cb68642554dba189f2b' },
-    trades: { amount: 780.38, tx: '' },
+    trades: { amount: 780.38, tx: '0x734ff71ddafbea76db4c351414b07b5e03a5909b5c389e5a6e04827aaa1fa165' },
     transactions: { amount: 436.30, tx: '0xceef226bafd76675730e4b3e53bab806e1210475005271df9ed761da8972c4e4' },
     total: 1735.68,
   },
