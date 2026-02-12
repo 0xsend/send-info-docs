@@ -1,36 +1,51 @@
-# Send Info Documentation
+# send-info-docs
 
-Comprehensive information about the Send ecosystem, token, and platform.
+The public knowledge base for the [Send](https://send.app) ecosystem. Built with Next.js 15 + MDX.
 
-## Live Site
+**Live at** [info.send.it](https://info.send.it)
 
-[info.send.it](https://info.send.it)
+## Quickstart
+
+```bash
+git clone https://github.com/<org>/send-info-docs.git
+cd send-info-docs
+npm install
+npm run dev
+```
 
 ## Documentation
 
-### Welcome
-Introduction to Send, mission, vision, team, and contact information.
+| Section | What's Inside |
+|---------|---------------|
+| **Welcome** | Intro, mission, vision, team, contact |
+| **Send App** | Overview, features, FAQs — Sendtags, rewards, referrals, savings |
+| **Send Token** | $SEND tokenomics, bridge, upgrade |
+| **Send Canton Wallet** | Pool Party Exchange, passkeys, multisig, Canton Coin |
+| **CUSD Stablecoin** | Overview, reserves, FAQs |
+| **Send Verified** | Verification requirements, access & rewards |
+| **Finance** | Revenue, treasury, multisigs, emissions, funding rounds |
+| **Miscellaneous** | Roadmap, metrics, contracts, brand assets, glossary |
+| **Legal** | Terms, privacy, disclaimers, licenses |
 
-### Send App
-Overview, FAQs, and features including Sendtags, rewards, referrals, savings, invest, passkeys, and verified profiles.
+## Project Structure
 
-### CUSD Stablecoin
-Overview, reserves report, and FAQs for the CUSD stablecoin.
+```
+docs/          # MDX content
+components/    # React components (Treasury, Revenue, PoolParty, SendVerified, etc.)
+lib/           # Utilities, MDX config, data helpers
+app/           # Next.js App Router
+```
 
-### Send Token
-$SEND token overview, tokenomics, bridge, upgrade, and FAQs.
+Custom components live in `components/` and are registered in `lib/md.js` for use in MDX files.
 
-### Send Safe
-Overview, passkeys, multisig, wallet maintenance, and Canton Coin rewards.
+## Scripts
 
-### Pool Party Exchange
-Coming soon - privacy-first AMM on Canton Network.
+```bash
+npm run dev     # local dev server
+npm run build   # production build
+npm run start   # serve production build
+```
 
-### Finance
-Revenue, treasury, multisigs, funding rounds, token emissions, and business models.
+---
 
-### Miscellaneous
-Roadmap, metrics, contract addresses, brand assets, glossary, and intellectual property.
-
-### Legal
-Terms of service, privacy policy, disclaimer, licenses, and affiliate marketing disclaimer.
+[send.app](https://send.app) · [info.send.it](https://info.send.it) · [@send](https://x.com/send)
