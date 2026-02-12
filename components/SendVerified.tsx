@@ -61,7 +61,7 @@ export default function SendVerified() {
             Get Verified. Get Access.
           </div>
           <div style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', maxWidth: '460px', lineHeight: 1.7 }}>
-            Complete four steps to unlock access to Send products, rewards programs, and earn your trust badge in the community.
+            Complete three steps to unlock access to Send products, rewards programs, and earn your trust badge in the community.
           </div>
         </div>
       </div>
@@ -102,7 +102,7 @@ export default function SendVerified() {
           textTransform: 'uppercase', color: b.bayLeaf,
           marginBottom: '16px', paddingLeft: '2px',
         }}>
-          4 Steps to Verification
+          3 Steps to Verification
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
@@ -126,12 +126,6 @@ export default function SendVerified() {
               title: 'Deposit 25 USDC to Savings',
               desc: 'Move at least 25 USDC into your Send savings vault to confirm you have an active balance.',
             },
-            {
-              step: '4',
-              icon: '📤',
-              title: 'Send to a Verified User',
-              desc: 'Send to one verified /send user to complete the trust chain.',
-            },
           ].map((item, idx) => (
             <div key={item.step} style={{ display: 'flex', gap: '0px' }}>
               {/* Timeline column */}
@@ -146,7 +140,7 @@ export default function SendVerified() {
                   fontSize: '14px', fontWeight: 800, flexShrink: 0,
                   boxShadow: '0 2px 8px rgba(64,251,80,0.25)',
                 }}>{item.step}</div>
-                {idx < 3 && (
+                {idx < 2 && (
                   <div style={{
                     width: '2px', flex: 1, minHeight: '20px',
                     background: `linear-gradient(to bottom, ${b.neonGreen}, ${b.lightGrey})`,
@@ -161,7 +155,7 @@ export default function SendVerified() {
                 borderRadius: '14px',
                 padding: '20px',
                 border: `1px solid ${b.lightGrey}`,
-                marginBottom: idx < 3 ? '12px' : '0px',
+                marginBottom: idx < 2 ? '12px' : '0px',
                 marginLeft: '8px',
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
@@ -217,9 +211,57 @@ export default function SendVerified() {
         <div style={{ position: 'relative' }}>
           <div style={{ fontSize: '15px', fontWeight: 700, color: b.white, marginBottom: '6px' }}>Your Badge is Dynamic</div>
           <div style={{ fontSize: '13px', color: b.grey, lineHeight: 1.65 }}>
-            Meet all four requirements and the badge turns on instantly. Drop below any threshold — withdraw from savings, sell SEND — and it turns off until you qualify again.
+            Meet all three requirements and the verified badge activates at the top of the next hour. Drop below any threshold — withdraw from savings, sell SEND — and it turns off until you qualify again.
           </div>
         </div>
+      </div>
+
+      {/* ── Canton Wallet Access ── */}
+      <div style={{
+        marginTop: '28px',
+        background: `linear-gradient(135deg, ${b.mint} 0%, #eef7ec 100%)`,
+        borderRadius: '16px',
+        padding: '24px',
+        border: `1px solid ${b.bayLeaf}40`,
+        position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute', top: '-30px', right: '-10px',
+          width: '140px', height: '140px', borderRadius: '50%',
+          background: `radial-gradient(circle, rgba(64,251,80,0.1) 0%, transparent 70%)`,
+        }} />
+        <div style={{
+          fontSize: '11px', fontWeight: 700, letterSpacing: '2px',
+          textTransform: 'uppercase', color: b.bayLeaf,
+          marginBottom: '14px',
+        }}>
+          What You Unlock
+        </div>
+        <a href="https://send.app/canton-wallet" target="_blank" rel="noopener noreferrer" style={{
+          backgroundColor: b.white,
+          borderRadius: '14px',
+          padding: '20px',
+          border: `1px solid ${b.lightGrey}`,
+          textDecoration: 'none',
+          display: 'flex', alignItems: 'center', gap: '16px',
+          position: 'relative',
+        }}>
+          <div style={{
+            width: '46px', height: '46px', borderRadius: '12px',
+            background: `linear-gradient(135deg, ${b.blackGreen}, ${b.lunarGreen})`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '22px', flexShrink: 0,
+          }}>🏊</div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: '15px', fontWeight: 700, color: b.blackGreen, marginBottom: '4px' }}>
+              Pool Party on Send Canton Wallet
+            </div>
+            <div style={{ fontSize: '13px', color: b.darkGrey, lineHeight: 1.55 }}>
+              Once verified, a link to Pool Party appears in <strong style={{ color: b.blackGreen }}>Explore → Canton Wallet</strong>. Access is exclusive to Send Verified users.
+            </div>
+          </div>
+          <span style={{ color: b.neonGreen, fontSize: '20px', flexShrink: 0 }}>→</span>
+        </a>
       </div>
 
       {/* ── Download CTA ── */}
