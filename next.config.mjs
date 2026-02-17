@@ -2,6 +2,15 @@ import path from 'path';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/docs/features/send-checks',
+        destination: '/docs/features/send-links',
+        permanent: true,
+      },
+    ];
+  },
   reactStrictMode: true,
   images: {
     unoptimized: true
