@@ -3,6 +3,13 @@
 // ============ REVENUE DATA ============
 const sendAppRevenue = [
   {
+    date: '2/2026',
+    sendtags: { amount: 1935, tx: '0x890613d5ca57fd8ada76a8d14c4c42801c808a774eb8c6fc99a1fc7c7c6a43d7' },
+    trades: { amount: 987.63, tx: '0x434cb0328e114fed0d74430822e4552fd2d21f4e13caca5a195b3ffbc5aa7353' },
+    transactions: { amount: 507.23, tx: '0x979ea140321b370a2058fbaa5c5d62d383464b5fbf9dce83ed01c15f0f29c8a6' },
+    total: 3429.86,
+  },
+  {
     date: '1/2026',
     sendtags: { amount: 519, tx: '0x48c4c1bb06e1d77be740e9dae6498de0d61d5d6785d15cb68642554dba189f2b' },
     trades: { amount: 780.38, tx: '0x734ff71ddafbea76db4c351414b07b5e03a5909b5c389e5a6e04827aaa1fa165' },
@@ -82,7 +89,7 @@ const sendAppRevenue = [
 ];
 
 const cusdRevenue = [
-  { date: '1/2026', yield: 12628.6, total: 12628.6 },
+  { date: '1/2026', yield: 14900.96, total: 14900.96 },
   { date: '12/2025', yield: 12499.02, total: 12499.02 },
   { date: '11/2025', yield: 8640.14, total: 8640.14 },
   { date: '10/2025', yield: 1523.76, total: 1523.76 },
