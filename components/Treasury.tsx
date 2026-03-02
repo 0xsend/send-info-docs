@@ -4,46 +4,53 @@ import { useState } from 'react';
 
 // ============ TREASURY DATA ============
 const treasuryData = [
-  { date: '2/2026', send: 209277768, cc: 68750000, cusd: 0, usdc: 3764350, pol: 776000, fiat: 132500, eth: 0, isLatest: true },
-  { date: '1/2026', send: 212705811, cc: 64819991, cusd: 0, usdc: 2837000, pol: 949000, fiat: 183409, eth: 0 },
-  { date: '12/2025', send: 214371974, cc: 55312796, cusd: 2752008, usdc: 36049.98, pol: 790976, fiat: 20783.78, eth: 0 },
-  { date: '11/2025', send: 215761675, cc: 31402896, cusd: 2225640, usdc: 506813.95, pol: 1199746, fiat: 62488.28, eth: 0 },
-  { date: '10/2025', send: 208017123, cc: 5900000, cusd: 5000, usdc: 28432, pol: 1132537, fiat: 142835.65, eth: 0 },
-  { date: '9/2025', send: 204768175, cc: 300000, cusd: 100000, usdc: 124962, pol: 283000, fiat: 120203.75, eth: 0 },
-  { date: '8/2025', send: 207586872, cc: 300000, cusd: 0, usdc: 3317, pol: 187000, fiat: 1008.14, eth: 0 },
-  { date: '7/2025', send: 208047690, cc: 250000, cusd: 0, usdc: 3177, pol: 187000, fiat: 3006.96, eth: 0 },
-  { date: '6/2025', send: 208612155, cc: 1062920, cusd: 0, usdc: 32405, pol: 176000, fiat: 9953.74, eth: 0 },
-  { date: '5/2025', send: 209215508, cc: 0, cusd: 0, usdc: 36127, pol: 192000, fiat: 445.13, eth: 0 },
-  { date: '4/2025', send: 197633733, cc: 0, cusd: 0, usdc: 15059, pol: 325000, fiat: 2742.66, eth: 0 },
-  { date: '3/2025', send: 198183422, cc: 0, cusd: 0, usdc: 25364, pol: 340000, fiat: 4117.16, eth: 0 },
-  { date: '2/2025', send: 199278650, cc: 0, cusd: 0, usdc: 76454, pol: 400000, fiat: 6743.21, eth: 0 },
-  { date: '1/2025', send: 200000000, cc: 0, cusd: 0, usdc: 84452, pol: 0, fiat: 2306.94, eth: 1.21 },
-  { date: '12/2024', send: 200735941, cc: 0, cusd: 0, usdc: 4496, pol: 0, fiat: 4457.07, eth: 3.53 },
-  { date: '11/2024', send: 198370253, cc: 0, cusd: 0, usdc: 31927, pol: 0, fiat: 2447.68, eth: 0 },
-  { date: '10/2024', send: 194993853, cc: 0, cusd: 0, usdc: 22122, pol: 0, fiat: 10743.50, eth: 0 },
-  { date: '9/2024', send: 188158506, cc: 0, cusd: 0, usdc: 5237, pol: 0, fiat: 3090.93, eth: 1.18 },
-  { date: '8/2024', send: 188264852, cc: 0, cusd: 0, usdc: 19833, pol: 0, fiat: 3594.71, eth: 11.24 },
-  { date: '7/2024', send: 188291500, cc: 0, cusd: 0, usdc: 63955, pol: 0, fiat: 10712.49, eth: 10.75 },
-  { date: '6/2024', send: 188637562, cc: 0, cusd: 0, usdc: 133444, pol: 0, fiat: 2854.24, eth: 12.14 },
-  { date: '5/2024', send: 192435807, cc: 0, cusd: 0, usdc: 8271, pol: 0, fiat: 13209.79, eth: 4.49 },
-  { date: '4/2024', send: 193601786, cc: 0, cusd: 0, usdc: 56056, pol: 0, fiat: 19898.67, eth: 11.94 },
-  { date: '3/2024', send: 193133959, cc: 0, cusd: 0, usdc: 108831, pol: 0, fiat: 2760.79, eth: 3.05 },
-  { date: '2/2024', send: 186850340, cc: 0, cusd: 0, usdc: 4729, pol: 0, fiat: 846.19, eth: 6.38 },
-  { date: '1/2024', send: 186369603, cc: 0, cusd: 0, usdc: 170, pol: 0, fiat: 7838.94, eth: 1.25 },
-  { date: '12/2023', send: 186255465, cc: 0, cusd: 0, usdc: 24794, pol: 0, fiat: 11161.41, eth: 1.48 },
-  { date: '11/2023', send: 188071891, cc: 0, cusd: 0, usdc: 4616, pol: 0, fiat: 9338.04, eth: 25.95 },
-  { date: '10/2023', send: 199279218, cc: 0, cusd: 0, usdc: 5921, pol: 0, fiat: 13204.87, eth: 32.94 },
-  { date: '9/2023', send: 199059767, cc: 0, cusd: 0, usdc: 14600, pol: 0, fiat: 15041.81, eth: 42.32 },
-  { date: '8/2023', send: 200686621, cc: 0, cusd: 0, usdc: 14568, pol: 0, fiat: 0, eth: 7.08 },
+  { date: '2/2026', send: 208879479, cc: 62113382, cusd: 185000, usdcx: 165000, usdc: 3200000, pol: 2128330, fiat: 34963, eth: 0, isLatest: true },
+  { date: '1/2026', send: 212705811, cc: 64819991, cusd: 0, usdcx: 0, usdc: 2837000, pol: 949000, fiat: 183409, eth: 0 },
+  { date: '12/2025', send: 214371974, cc: 55312796, cusd: 2752008, usdcx: 0, usdc: 36049.98, pol: 790976, fiat: 20783.78, eth: 0 },
+  { date: '11/2025', send: 215761675, cc: 31402896, cusd: 2225640, usdcx: 0, usdc: 506813.95, pol: 1199746, fiat: 62488.28, eth: 0 },
+  { date: '10/2025', send: 208017123, cc: 5900000, cusd: 5000, usdcx: 0, usdc: 28432, pol: 1132537, fiat: 142835.65, eth: 0 },
+  { date: '9/2025', send: 204768175, cc: 300000, cusd: 100000, usdcx: 0, usdc: 124962, pol: 283000, fiat: 120203.75, eth: 0 },
+  { date: '8/2025', send: 207586872, cc: 300000, cusd: 0, usdcx: 0, usdc: 3317, pol: 187000, fiat: 1008.14, eth: 0 },
+  { date: '7/2025', send: 208047690, cc: 250000, cusd: 0, usdcx: 0, usdc: 3177, pol: 187000, fiat: 3006.96, eth: 0 },
+  { date: '6/2025', send: 208612155, cc: 1062920, cusd: 0, usdcx: 0, usdc: 32405, pol: 176000, fiat: 9953.74, eth: 0 },
+  { date: '5/2025', send: 209215508, cc: 0, cusd: 0, usdcx: 0, usdc: 36127, pol: 192000, fiat: 445.13, eth: 0 },
+  { date: '4/2025', send: 197633733, cc: 0, cusd: 0, usdcx: 0, usdc: 15059, pol: 325000, fiat: 2742.66, eth: 0 },
+  { date: '3/2025', send: 198183422, cc: 0, cusd: 0, usdcx: 0, usdc: 25364, pol: 340000, fiat: 4117.16, eth: 0 },
+  { date: '2/2025', send: 199278650, cc: 0, cusd: 0, usdcx: 0, usdc: 76454, pol: 400000, fiat: 6743.21, eth: 0 },
+  { date: '1/2025', send: 200000000, cc: 0, cusd: 0, usdcx: 0, usdc: 84452, pol: 0, fiat: 2306.94, eth: 1.21 },
+  { date: '12/2024', send: 200735941, cc: 0, cusd: 0, usdcx: 0, usdc: 4496, pol: 0, fiat: 4457.07, eth: 3.53 },
+  { date: '11/2024', send: 198370253, cc: 0, cusd: 0, usdcx: 0, usdc: 31927, pol: 0, fiat: 2447.68, eth: 0 },
+  { date: '10/2024', send: 194993853, cc: 0, cusd: 0, usdcx: 0, usdc: 22122, pol: 0, fiat: 10743.50, eth: 0 },
+  { date: '9/2024', send: 188158506, cc: 0, cusd: 0, usdcx: 0, usdc: 5237, pol: 0, fiat: 3090.93, eth: 1.18 },
+  { date: '8/2024', send: 188264852, cc: 0, cusd: 0, usdcx: 0, usdc: 19833, pol: 0, fiat: 3594.71, eth: 11.24 },
+  { date: '7/2024', send: 188291500, cc: 0, cusd: 0, usdcx: 0, usdc: 63955, pol: 0, fiat: 10712.49, eth: 10.75 },
+  { date: '6/2024', send: 188637562, cc: 0, cusd: 0, usdcx: 0, usdc: 133444, pol: 0, fiat: 2854.24, eth: 12.14 },
+  { date: '5/2024', send: 192435807, cc: 0, cusd: 0, usdcx: 0, usdc: 8271, pol: 0, fiat: 13209.79, eth: 4.49 },
+  { date: '4/2024', send: 193601786, cc: 0, cusd: 0, usdcx: 0, usdc: 56056, pol: 0, fiat: 19898.67, eth: 11.94 },
+  { date: '3/2024', send: 193133959, cc: 0, cusd: 0, usdcx: 0, usdc: 108831, pol: 0, fiat: 2760.79, eth: 3.05 },
+  { date: '2/2024', send: 186850340, cc: 0, cusd: 0, usdcx: 0, usdc: 4729, pol: 0, fiat: 846.19, eth: 6.38 },
+  { date: '1/2024', send: 186369603, cc: 0, cusd: 0, usdcx: 0, usdc: 170, pol: 0, fiat: 7838.94, eth: 1.25 },
+  { date: '12/2023', send: 186255465, cc: 0, cusd: 0, usdcx: 0, usdc: 24794, pol: 0, fiat: 11161.41, eth: 1.48 },
+  { date: '11/2023', send: 188071891, cc: 0, cusd: 0, usdcx: 0, usdc: 4616, pol: 0, fiat: 9338.04, eth: 25.95 },
+  { date: '10/2023', send: 199279218, cc: 0, cusd: 0, usdcx: 0, usdc: 5921, pol: 0, fiat: 13204.87, eth: 32.94 },
+  { date: '9/2023', send: 199059767, cc: 0, cusd: 0, usdcx: 0, usdc: 14600, pol: 0, fiat: 15041.81, eth: 42.32 },
+  { date: '8/2023', send: 200686621, cc: 0, cusd: 0, usdcx: 0, usdc: 14568, pol: 0, fiat: 0, eth: 7.08 },
 ];
 
 const currentHoldings = treasuryData[0];
+
+// Token prices (updated monthly alongside treasury data)
+const tokenPrices = {
+  send: 0.025,   // SEND price in USD
+  cc: 0.16,      // Canton Coin price in USD
+};
 
 // Asset definitions with colors and icons
 const assets = [
   { key: 'send', label: 'SEND', icon: '💎', color: '#40FB50', bgColor: '#E8FDE9' },
   { key: 'cc', label: 'Canton Coin', icon: '🪙', color: '#FF9800', bgColor: '#FFF3E0' },
   { key: 'cusd', label: 'CUSD', icon: '💵', color: '#2196F3', bgColor: '#E3F2FD' },
+  { key: 'usdcx', label: 'USDCx', icon: '💵', color: '#1976D2', bgColor: '#E3F2FD' },
   { key: 'usdc', label: 'USDC', icon: '💲', color: '#2775CA', bgColor: '#E8F4FD' },
   { key: 'pol', label: 'POL', icon: '🔷', color: '#7C4DFF', bgColor: '#EDE7F6' },
   { key: 'fiat', label: 'Fiat Bank', icon: '🏦', color: '#607D8B', bgColor: '#ECEFF1' },
@@ -66,20 +73,26 @@ function formatCurrency(value: number): string {
 
 // ============ STABLECOIN CHART ============
 function StablecoinChart() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const recentData = treasuryData.slice(0, 12).reverse();
   const width = 520;
-  const height = 180;
-  const padding = { top: 20, right: 20, bottom: 40, left: 55 };
+  const height = 200;
+  const padding = { top: 30, right: 20, bottom: 40, left: 55 };
   const innerWidth = width - padding.left - padding.right;
   const innerHeight = height - padding.top - padding.bottom;
 
-  const stablecoinData = recentData.map(d => ({
-    date: d.date,
-    cusd: d.cusd,
-    usdc: d.usdc,
-    pol: d.pol,
-    total: d.cusd + d.usdc + d.pol,
-  }));
+  // Add Aerodrome USDC (polStablecoins) to the latest month's USDC bar
+  const polStablecoins = 782845;
+  const stablecoinData = recentData.map(d => {
+    const extraUsdc = d.isLatest ? polStablecoins : 0;
+    return {
+      date: d.date,
+      cusd: d.cusd,
+      usdcx: d.usdcx,
+      usdc: d.usdc + extraUsdc,
+      total: d.cusd + d.usdcx + d.usdc + extraUsdc,
+    };
+  });
 
   const maxValue = Math.max(...stablecoinData.map(d => d.total));
   const barWidth = (innerWidth / stablecoinData.length) - 6;
@@ -113,9 +126,8 @@ function StablecoinChart() {
         const x = padding.left + i * (innerWidth / stablecoinData.length) + 3;
         const totalHeight = maxValue > 0 ? (d.total / maxValue) * innerHeight : 0;
         const cusdHeight = maxValue > 0 ? (d.cusd / maxValue) * innerHeight : 0;
+        const usdcxHeight = maxValue > 0 ? (d.usdcx / maxValue) * innerHeight : 0;
         const usdcHeight = maxValue > 0 ? (d.usdc / maxValue) * innerHeight : 0;
-        const polHeight = maxValue > 0 ? (d.pol / maxValue) * innerHeight : 0;
-        const isLatest = i === stablecoinData.length - 1;
 
         const [month] = d.date.split('/');
         const monthLabel = monthNames[parseInt(month) - 1];
@@ -123,7 +135,9 @@ function StablecoinChart() {
         let yOffset = padding.top + innerHeight;
 
         return (
-          <g key={d.date}>
+          <g key={d.date} onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)} style={{ cursor: 'pointer' }}>
+            {/* Invisible hit area */}
+            <rect x={x} y={padding.top} width={barWidth} height={innerHeight} fill="transparent" />
             {/* CUSD - bottom */}
             <rect
               x={x}
@@ -132,33 +146,50 @@ function StablecoinChart() {
               height={cusdHeight}
               fill="#2196F3"
               rx="3"
+              opacity={hoveredIndex !== null && hoveredIndex !== i ? 0.4 : 1}
             />
-            {/* USDC - middle */}
+            {/* USDCx - middle */}
             <rect
               x={x}
-              y={yOffset - cusdHeight - usdcHeight}
+              y={yOffset - cusdHeight - usdcxHeight}
+              width={barWidth}
+              height={usdcxHeight}
+              fill="#1976D2"
+              opacity={hoveredIndex !== null && hoveredIndex !== i ? 0.4 : 1}
+            />
+            {/* USDC - top */}
+            <rect
+              x={x}
+              y={yOffset - cusdHeight - usdcxHeight - usdcHeight}
               width={barWidth}
               height={usdcHeight}
               fill="#2775CA"
-            />
-            {/* POL - top */}
-            <rect
-              x={x}
-              y={yOffset - cusdHeight - usdcHeight - polHeight}
-              width={barWidth}
-              height={polHeight}
-              fill="#7C4DFF"
               rx="3"
+              opacity={hoveredIndex !== null && hoveredIndex !== i ? 0.4 : 1}
             />
 
-            {/* Latest indicator */}
-            {isLatest && totalHeight > 0 && (
-              <circle
-                cx={x + barWidth / 2}
-                cy={yOffset - totalHeight - 10}
-                r="6"
-                fill="#10B981"
-              />
+            {/* Tooltip */}
+            {hoveredIndex === i && totalHeight > 0 && (
+              <g>
+                <rect
+                  x={Math.min(x + barWidth / 2 - 50, width - 120)}
+                  y={yOffset - totalHeight - 50}
+                  width="100"
+                  height="32"
+                  rx="6"
+                  fill="#122023"
+                />
+                <text
+                  x={Math.min(x + barWidth / 2, width - 70)}
+                  y={yOffset - totalHeight - 30}
+                  textAnchor="middle"
+                  fontSize="11"
+                  fontWeight="700"
+                  fill="#FFF"
+                >
+                  {formatCurrency(d.total)}
+                </text>
+              </g>
             )}
 
             {/* Month label */}
@@ -167,7 +198,8 @@ function StablecoinChart() {
               y={height - 12}
               textAnchor="middle"
               fontSize="10"
-              fill="#666"
+              fill={hoveredIndex === i ? '#122023' : '#666'}
+              fontWeight={hoveredIndex === i ? 600 : 400}
             >
               {monthLabel}
             </text>
@@ -180,10 +212,11 @@ function StablecoinChart() {
 
 // ============ CANTON COIN HOLDINGS CHART ============
 function CantonCoinChart() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const recentData = treasuryData.slice(0, 12).reverse();
   const width = 520;
-  const height = 200;
-  const padding = { top: 20, right: 20, bottom: 40, left: 55 };
+  const height = 220;
+  const padding = { top: 30, right: 20, bottom: 40, left: 55 };
   const innerWidth = width - padding.left - padding.right;
   const innerHeight = height - padding.top - padding.bottom;
 
@@ -225,33 +258,51 @@ function CantonCoinChart() {
         const monthLabel = monthNames[parseInt(month) - 1];
 
         return (
-          <g key={d.date}>
+          <g key={d.date} onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)} style={{ cursor: 'pointer' }}>
+            {/* Invisible hit area */}
+            <rect x={x} y={padding.top} width={barWidth} height={innerHeight} fill="transparent" />
             <rect
               x={x}
               y={padding.top + innerHeight - barHeight}
               width={barWidth}
               height={barHeight}
-              fill={isLatest ? '#FF9800' : '#FFB74D'}
+              fill={hoveredIndex === i ? '#FF9800' : (isLatest ? '#FF9800' : '#FFB74D')}
               rx="4"
+              opacity={hoveredIndex !== null && hoveredIndex !== i ? 0.4 : 1}
             />
-            {/* Latest indicator */}
-            {isLatest && barHeight > 0 && (
-              <circle
-                cx={x + barWidth / 2}
-                cy={padding.top + innerHeight - barHeight - 12}
-                r="8"
-                fill="#FF9800"
-                stroke="#FFF"
-                strokeWidth="2"
-              />
+
+            {/* Tooltip */}
+            {hoveredIndex === i && barHeight > 0 && (
+              <g>
+                <rect
+                  x={Math.min(x + barWidth / 2 - 50, width - 120)}
+                  y={padding.top + innerHeight - barHeight - 42}
+                  width="100"
+                  height="32"
+                  rx="6"
+                  fill="#122023"
+                />
+                <text
+                  x={Math.min(x + barWidth / 2, width - 70)}
+                  y={padding.top + innerHeight - barHeight - 22}
+                  textAnchor="middle"
+                  fontSize="11"
+                  fontWeight="700"
+                  fill="#FFF"
+                >
+                  {formatNumber(d.cc)}
+                </text>
+              </g>
             )}
+
             {/* Month label */}
             <text
               x={x + barWidth / 2}
               y={height - 12}
               textAnchor="middle"
               fontSize="10"
-              fill="#666"
+              fill={hoveredIndex === i ? '#122023' : '#666'}
+              fontWeight={hoveredIndex === i ? 600 : 400}
             >
               {monthLabel}
             </text>
@@ -264,10 +315,11 @@ function CantonCoinChart() {
 
 // ============ SEND HOLDINGS CHART ============
 function SendHoldingsChart() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const recentData = treasuryData.slice(0, 12).reverse();
   const width = 520;
-  const height = 180;
-  const padding = { top: 20, right: 20, bottom: 40, left: 55 };
+  const height = 200;
+  const padding = { top: 30, right: 20, bottom: 40, left: 55 };
   const innerWidth = width - padding.left - padding.right;
   const innerHeight = height - padding.top - padding.bottom;
 
@@ -328,23 +380,46 @@ function SendHoldingsChart() {
         strokeLinejoin="round"
       />
 
+      {/* Hover vertical line */}
+      {hoveredIndex !== null && (
+        <line
+          x1={points[hoveredIndex].x}
+          y1={padding.top}
+          x2={points[hoveredIndex].x}
+          y2={padding.top + innerHeight}
+          stroke="#40FB50"
+          strokeWidth="1"
+          strokeDasharray="4,4"
+          opacity="0.5"
+        />
+      )}
+
       {/* Data points */}
       {points.map((p, i) => {
         const isLatest = i === points.length - 1;
+        const isHovered = hoveredIndex === i;
         const [month] = p.data.date.split('/');
         const monthLabel = monthNames[parseInt(month) - 1];
 
         return (
-          <g key={i}>
+          <g key={i} onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)} style={{ cursor: 'pointer' }}>
+            {/* Invisible hit area */}
+            <rect
+              x={p.x - (innerWidth / recentData.length) / 2}
+              y={padding.top}
+              width={innerWidth / recentData.length}
+              height={innerHeight}
+              fill="transparent"
+            />
             <circle
               cx={p.x}
               cy={p.y}
-              r={isLatest ? 6 : 4}
-              fill={isLatest ? '#40FB50' : '#FFF'}
+              r={isHovered ? 7 : (isLatest ? 6 : 4)}
+              fill={isHovered || isLatest ? '#40FB50' : '#FFF'}
               stroke="#40FB50"
               strokeWidth="2"
             />
-            {isLatest && (
+            {(isLatest || isHovered) && (
               <circle
                 cx={p.x}
                 cy={p.y}
@@ -355,13 +430,39 @@ function SendHoldingsChart() {
                 opacity="0.3"
               />
             )}
+
+            {/* Tooltip */}
+            {isHovered && (
+              <g>
+                <rect
+                  x={Math.max(padding.left, Math.min(p.x - 50, width - padding.right - 100))}
+                  y={p.y - 42}
+                  width="100"
+                  height="32"
+                  rx="6"
+                  fill="#122023"
+                />
+                <text
+                  x={Math.max(padding.left + 50, Math.min(p.x, width - padding.right - 50))}
+                  y={p.y - 22}
+                  textAnchor="middle"
+                  fontSize="11"
+                  fontWeight="700"
+                  fill="#FFF"
+                >
+                  {formatNumber(p.data.send)}
+                </text>
+              </g>
+            )}
+
             {/* Month label */}
             <text
               x={p.x}
               y={height - 12}
               textAnchor="middle"
               fontSize="10"
-              fill="#666"
+              fill={isHovered ? '#122023' : '#666'}
+              fontWeight={isHovered ? 600 : 400}
             >
               {monthLabel}
             </text>
@@ -377,7 +478,15 @@ export default function Treasury() {
   const [showAllData, setShowAllData] = useState(false);
   const displayData = showAllData ? treasuryData : treasuryData.slice(0, 12);
 
-  const totalStablecoins = currentHoldings.cusd + currentHoldings.usdc + currentHoldings.pol + currentHoldings.fiat;
+  // Stablecoins includes wallet holdings + stablecoin side of LP positions (Aerodrome USDC: 782,845)
+  const polStablecoins = 782845;
+  const totalStablecoins = currentHoldings.cusd + currentHoldings.usdcx + currentHoldings.usdc + currentHoldings.fiat + polStablecoins;
+
+  // Total treasury value (tokens at market price + stablecoins + POL)
+  const sendValue = currentHoldings.send * tokenPrices.send;
+  const ccValue = currentHoldings.cc * tokenPrices.cc;
+  const stablecoinValue = currentHoldings.cusd + currentHoldings.usdcx + currentHoldings.usdc + currentHoldings.fiat;
+  const totalTreasuryValue = sendValue + ccValue + stablecoinValue + currentHoldings.pol;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', padding: '8px 0' }}>
@@ -401,6 +510,40 @@ export default function Treasury() {
         <span>Treasury balances are updated on the <strong>1st of every month</strong>. All values reflect on-chain and off-chain holdings.</span>
       </div>
 
+      {/* Total Treasury Value */}
+      <div style={{
+        background: 'linear-gradient(135deg, #122023 0%, #1a3a3f 100%)',
+        borderRadius: '12px',
+        padding: '24px',
+        border: '2px solid #40FB50',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 600, color: '#40FB50', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Total Treasury Value</div>
+            <div style={{ fontSize: '36px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(totalTreasuryValue)}</div>
+            <div style={{ fontSize: '11px', color: '#8ab4b8', marginTop: '6px' }}>As of 3/1 &middot; SEND @ ${tokenPrices.send} &middot; CC @ ${tokenPrices.cc}</div>
+          </div>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '10px', color: '#8ab4b8', marginBottom: '2px' }}>SEND</div>
+              <div style={{ fontSize: '16px', fontWeight: 600, color: '#40FB50' }}>{formatCurrency(sendValue)}</div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '10px', color: '#8ab4b8', marginBottom: '2px' }}>CC</div>
+              <div style={{ fontSize: '16px', fontWeight: 600, color: '#FF9800' }}>{formatCurrency(ccValue)}</div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '10px', color: '#8ab4b8', marginBottom: '2px' }}>Stablecoins</div>
+              <div style={{ fontSize: '16px', fontWeight: 600, color: '#2196F3' }}>{formatCurrency(totalStablecoins)}</div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '10px', color: '#8ab4b8', marginBottom: '2px' }}>POL</div>
+              <div style={{ fontSize: '16px', fontWeight: 600, color: '#7C4DFF' }}>{formatCurrency(currentHoldings.pol - polStablecoins)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main Holdings Cards - All on same row, equal size */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
         {/* Stablecoin Holdings */}
@@ -415,7 +558,7 @@ export default function Treasury() {
             <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>Stablecoins</div>
           </div>
           <div style={{ fontSize: '28px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>{formatCurrency(totalStablecoins)}</div>
-          <div style={{ fontSize: '10px', color: '#666' }}>CUSD + USDC + POL + Fiat</div>
+          <div style={{ fontSize: '10px', color: '#666' }}>CUSD + USDC + USDCx + Fiat</div>
         </div>
 
         {/* Canton Coin */}
@@ -461,7 +604,7 @@ export default function Treasury() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '16px' }}>
           {assets.map((asset) => {
             const value = currentHoldings[asset.key as keyof typeof currentHoldings] as number;
-            const isCurrency = ['usdc', 'pol', 'fiat'].includes(asset.key);
+            const isCurrency = ['usdcx', 'usdc', 'pol', 'fiat'].includes(asset.key);
             return (
               <div key={asset.key} style={{
                 padding: '16px',
@@ -494,7 +637,7 @@ export default function Treasury() {
           <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#E3F2FD', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>💵</div>
           <div style={{ fontSize: '18px', fontWeight: 600, color: '#122023' }}>Stablecoin Position</div>
         </div>
-        <div style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>CUSD + USDC + POL over 12 months</div>
+        <div style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>CUSD + USDCx + USDC over 12 months</div>
         <StablecoinChart />
         {/* Legend */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginTop: '16px' }}>
@@ -503,12 +646,12 @@ export default function Treasury() {
             <span style={{ fontSize: '13px', color: '#666' }}>CUSD</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#2775CA' }} />
-            <span style={{ fontSize: '13px', color: '#666' }}>USDC</span>
+            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#1976D2' }} />
+            <span style={{ fontSize: '13px', color: '#666' }}>USDCx</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#7C4DFF' }} />
-            <span style={{ fontSize: '13px', color: '#666' }}>POL</span>
+            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#2775CA' }} />
+            <span style={{ fontSize: '13px', color: '#666' }}>USDC</span>
           </div>
         </div>
       </div>
@@ -594,6 +737,7 @@ export default function Treasury() {
                 <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$SEND</th>
                 <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$CC</th>
                 <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$CUSD</th>
+                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>USDCx</th>
                 <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$USDC</th>
                 <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>POL</th>
                 <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Fiat</th>
@@ -622,6 +766,7 @@ export default function Treasury() {
                   <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', fontWeight: 600, color: '#122023' }}>{formatNumber(row.send)}</td>
                   <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatNumber(row.cc)}</td>
                   <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatNumber(row.cusd)}</td>
+                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.usdcx)}</td>
                   <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.usdc)}</td>
                   <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.pol)}</td>
                   <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.fiat)}</td>
