@@ -5,17 +5,17 @@ import React from 'react';
 // ============ TOKEN DATA ============
 const tokenData = {
   totalSupply: 1_000_000_000,
-  circulating: 327_985_505,
-  nonCirculating: 672_014_495,
-  circulationRate: 32.80,
+  circulating: 341_041_000,
+  nonCirculating: 658_959_000,
+  circulationRate: 34.10,
   avgAnnualInflation: 24.6,
 
   allocations: [
-    { name: 'Rewards', allocation: 300_000_000, remaining: 225_019_521, color: '#10B981', status: 'Active Distribution' },
-    { name: 'Treasury', allocation: 200_000_000, remaining: 214_371_974, color: '#3B82F6', status: 'Net Accumulation' },
+    { name: 'Rewards', allocation: 300_000_000, remaining: 222_019_521, color: '#10B981', status: 'Active Distribution' },
+    { name: 'Treasury', allocation: 200_000_000, remaining: 208_879_479, color: '#3B82F6', status: 'Net Accumulation' },
     { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#8B5CF6', status: 'Active Distribution' },
-    { name: 'Team', allocation: 100_000_000, remaining: 61_500_000, color: '#F59E0B', status: 'Vesting' },
-    { name: 'Contributors', allocation: 100_000_000, remaining: 60_633_000, color: '#EF4444', status: 'Vesting' },
+    { name: 'Team', allocation: 100_000_000, remaining: 58_400_000, color: '#F59E0B', status: 'Vesting' },
+    { name: 'Contributors', allocation: 100_000_000, remaining: 58_660_000, color: '#EF4444', status: 'Vesting' },
     { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#06B6D4', status: 'Fully Distributed' },
   ],
 
@@ -32,6 +32,7 @@ const tokenData = {
     { date: 'Q2 2025', circulating: 297_669_917, qoqChange: 4_463_167, qoqPct: 1.52 },
     { date: 'Q3 2025', circulating: 315_544_897, qoqChange: 17_874_980, qoqPct: 6.00 },
     { date: 'Q4 2025', circulating: 327_985_505, qoqChange: 12_440_608, qoqPct: 3.94 },
+    { date: 'Q1 2026', circulating: 341_041_000, qoqChange: 13_055_495, qoqPct: 3.98 },
   ],
 
   inflationData: [
@@ -45,12 +46,13 @@ const tokenData = {
     { period: 'Q2 2025', annualized: 6.1, tokens: 4_463_167 },
     { period: 'Q3 2025', annualized: 24.0, tokens: 17_874_980 },
     { period: 'Q4 2025', annualized: 15.8, tokens: 12_440_608 },
+    { period: 'Q1 2026', annualized: 15.9, tokens: 13_055_495 },
   ],
 
   vestingProgress: [
-    { name: 'Team', initial: 100_000_000, released: 38_500_000, pct: 38.5, color: '#F59E0B' },
-    { name: 'Contributors', initial: 100_000_000, released: 39_367_000, pct: 39.4, color: '#EF4444' },
-    { name: 'Rewards', initial: 300_000_000, released: 74_980_479, pct: 25.0, color: '#10B981' },
+    { name: 'Team', initial: 100_000_000, released: 41_600_000, pct: 41.6, color: '#F59E0B' },
+    { name: 'Contributors', initial: 100_000_000, released: 41_340_000, pct: 41.3, color: '#EF4444' },
+    { name: 'Rewards', initial: 300_000_000, released: 77_980_479, pct: 26.0, color: '#10B981' },
   ],
 
   milestones: [
@@ -58,7 +60,8 @@ const tokenData = {
     { date: 'Q4 2023', event: '225M Circulating', circulating: '225M' },
     { date: 'Q2 2024', event: '259M Circulating', circulating: '259M' },
     { date: 'Q1 2025', event: '293M Circulating', circulating: '293M' },
-    { date: 'Q4 2025', event: 'Current — 328M Circulating', circulating: '328M' },
+    { date: 'Q4 2025', event: '328M Circulating', circulating: '328M' },
+    { date: 'Q1 2026', event: 'Current — 341M Circulating', circulating: '341M' },
   ],
 };
 
@@ -243,7 +246,7 @@ function AreaChart() {
         <span>Q2 '24</span>
         <span>Q4 '24</span>
         <span>Q2 '25</span>
-        <span>Q4 '25</span>
+        <span>Q1 '26</span>
       </div>
     </div>
   );
@@ -325,7 +328,7 @@ export default function TokenEmissions() {
       {/* Circulating Supply */}
       <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
         <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Circulating Supply</div>
-        <div style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Q2 2023 - Q4 2025</div>
+        <div style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Q2 2023 - Q1 2026</div>
         <AreaChart />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', paddingTop: '16px', borderTop: '1px solid #E0E0E0' }}>
           <div style={{ textAlign: 'center' }}>
