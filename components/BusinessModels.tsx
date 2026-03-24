@@ -20,7 +20,7 @@ const businessModels = [
   {
     type: 'Sendtags',
     description: 'Human-readable usernames for easy crypto transfers',
-    fee: '1.5-16',
+    fee: '4-32',
     feeType: 'USDC flat fee',
     multisig: {
       name: 'Sendtag Revenue',

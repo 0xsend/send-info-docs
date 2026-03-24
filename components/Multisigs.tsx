@@ -32,6 +32,12 @@ const cantonMultisigs = [
     shortAddress: 'send-rewards::1220...13d8',
     url: 'https://lighthouse.fivenorth.io/party/cantonwallet-send-rewards%3A%3A1220b2d1b1bf8dfff8f298207d0286a951d989580ddce88d5b59ecc72f03af9e13d8',
   },
+  {
+    name: 'Send Inc',
+    address: 'cantonwallet-send-inc::122095917f4981dff943c18a63cdfae1aa036c885f026b7f6ccf44fe5da52e60f561',
+    shortAddress: 'send-inc::1220...f561',
+    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-send-inc%3A%3A122095917f4981dff943c18a63cdfae1aa036c885f026b7f6ccf44fe5da52e60f561',
+  },
 ];
 
 // ============ STYLES ============
