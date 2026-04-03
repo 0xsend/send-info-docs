@@ -3,6 +3,13 @@
 // ============ REVENUE DATA ============
 const sendAppRevenue = [
   {
+    date: '3/2026',
+    sendtags: { amount: 872, tx: '0xfde6bd33c1c9a5ce376536e0093b04bb89c1aa309c2cc8de7273d06f24da3eb9' },
+    trades: { amount: 690.69, tx: '0x054ea0135e7554ebc4f09d0f4ea07dbcfefb149b9c493ad90e9243adceaf23da' },
+    transactions: { amount: 641.48, tx: '0x75afc4ddffc40dc1ca72162d9e648a6d49237adde0b23b109725b52b290f31f7' },
+    total: 2204.17,
+  },
+  {
     date: '2/2026',
     sendtags: { amount: 1935, tx: '0x890613d5ca57fd8ada76a8d14c4c42801c808a774eb8c6fc99a1fc7c7c6a43d7' },
     trades: { amount: 987.63, tx: '0x434cb0328e114fed0d74430822e4552fd2d21f4e13caca5a195b3ffbc5aa7353' },
@@ -89,7 +96,8 @@ const sendAppRevenue = [
 ];
 
 const cusdRevenue = [
-  { date: '2/2026', yield: 8901.97, total: 8901.97 },
+  { date: '3/2026', yield: 9584.59, total: 9584.59 },
+  { date: '2/2026', yield: 10798.35, total: 10798.35 },
   { date: '1/2026', yield: 14900.96, total: 14900.96 },
   { date: '12/2025', yield: 12499.02, total: 12499.02 },
   { date: '11/2025', yield: 8640.14, total: 8640.14 },
@@ -453,7 +461,7 @@ export default function Revenue() {
           <div style={styles.metricSubtext}>{sendAppRevenue.length} months tracked</div>
         </div>
         <div style={styles.metricCard}>
-          <div style={styles.metricLabel}>$CUSD Yield</div>
+          <div style={styles.metricLabel}>Stablecoin Revenue</div>
           <div style={styles.metricValue}>{formatCurrency(totalCusdRevenue)}</div>
           <div style={styles.metricSubtext}>Stablecoin yield</div>
         </div>
