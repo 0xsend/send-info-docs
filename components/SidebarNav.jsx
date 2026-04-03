@@ -3,10 +3,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import SiteHeader from './SiteHeader';
 import SearchDialog from './SearchDialog';
-import React from 'react';
 
 const SidebarIcon = ({ name }) => (
   <span className="material-symbols-outlined" style={{ fontSize: '20px' }} aria-hidden="true">{name}</span>
@@ -108,7 +107,8 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
   ];
 
   // Filter existing keys to desired order and drop "links" section
-  const sections = desiredOrder.filter((key) => tree[key]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const sections = useMemo(() => desiredOrder.filter((key) => tree[key]), [tree]);
 
   const pathSegments = pathname.split('/').filter(Boolean);
   const currentSection =
