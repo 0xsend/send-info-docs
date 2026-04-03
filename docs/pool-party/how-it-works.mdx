@@ -1,0 +1,81 @@
+---
+id: pool-party-how-it-works
+title: How It Works
+---
+
+# How It Works
+
+Pool Party is a decentralized exchange (DEX) built on Canton Network using an Automated Market Maker (AMM) model. Instead of matching buyers and sellers through an order book, trades execute against liquidity pools funded by users.
+
+## Swapping Tokens
+
+When you swap on Pool Party, you're trading against a pool of tokens rather than another user. The price is determined algorithmically based on the ratio of assets in the pool.
+
+### How to Swap
+
+1. Open Pool Party from your Canton Wallet
+2. Select the token you want to swap **from** and the token you want to swap **to**
+3. Enter the amount
+4. Review the quoted price and estimated slippage
+5. Confirm the swap
+
+Swaps settle on Canton Network and are typically confirmed within seconds.
+
+### Slippage
+
+Slippage is the difference between the expected price and the actual execution price. Larger trades relative to pool size will experience more slippage. Pool Party shows estimated slippage before you confirm.
+
+## Bridging USDC
+
+Pool Party includes a built-in bridge to move USDC from Ethereum to Canton Network as USDCx — no external bridge or third-party tool required.
+
+### How to Bridge
+
+1. Open Pool Party and select the Bridge tab
+2. Connect your Ethereum wallet
+3. Enter the amount of USDC to bridge
+4. Confirm the transaction on Ethereum
+5. USDCx arrives in your Canton Wallet once the transaction finalizes
+
+USDCx is a 1:1 representation of USDC on Canton Network and can be swapped for CUSD or $CC on Pool Party.
+
+## Providing Liquidity
+
+Liquidity providers (LPs) deposit pairs of tokens into pools and earn a share of trading fees proportional to their contribution.
+
+### How to Add Liquidity
+
+1. Open Pool Party and select the Liquidity tab
+2. Choose the pool you want to provide liquidity to
+3. Deposit both tokens in the required ratio
+4. Receive LP tokens representing your share of the pool
+5. Earn fees as trades execute against your pool
+
+### How to Remove Liquidity
+
+1. Open Pool Party and select the Liquidity tab
+2. Select your active LP position
+3. Choose the amount to withdraw (partial or full)
+4. Confirm the withdrawal
+5. Receive your proportional share of both tokens plus accumulated fees
+
+### Fee Structure
+
+Trading fees are collected on each swap and distributed to liquidity providers. The fee rate varies by pool. Check each pool's details in the app for the current fee tier.
+
+## Key Concepts
+
+| Concept | Description |
+|---------|-------------|
+| **AMM** | Automated Market Maker — prices are set by an algorithm based on pool ratios, not an order book |
+| **Liquidity Pool** | A smart contract holding paired token reserves that traders swap against |
+| **LP Tokens** | Tokens you receive when providing liquidity, representing your share of the pool |
+| **Slippage** | The price difference between your quoted and executed trade |
+| **Impermanent Loss** | Potential loss from price divergence between paired assets vs. simply holding them |
+| **USDCx** | USDC bridged from Ethereum to Canton Network via Pool Party |
+
+## Requirements
+
+- A Canton Wallet with a passkey set up
+- Tokens to trade (CC, CUSD, or USDCx)
+- For bridging: an Ethereum wallet with USDC

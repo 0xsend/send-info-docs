@@ -34,7 +34,16 @@ const sectionIcons = {
   ),
   'send-safe': (
     <Image
-      src="/img/cantonwallet.png"
+      src="/img/sendapps.png"
+      alt=""
+      width={20}
+      height={20}
+      className="sidebar-section-icon-image"
+    />
+  ),
+  'pool-party': (
+    <Image
+      src="/img/PoolParty_Icon.png"
       alt=""
       width={20}
       height={20}
@@ -61,6 +70,7 @@ const sectionLabels = {
   'send-mobile-apps': 'Send App',
   'features': 'Features',
   'send-safe': 'Send Canton Wallet',
+  'pool-party': 'Pool Party',
   'cusd-stablecoin': 'CUSD Stablecoin',
   'finance': 'Finance',
   'miscellaneous': 'Miscellaneous',
@@ -87,9 +97,10 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
   // Desired order
   const desiredOrder = [
     'welcome',
-    'send-mobile-apps',
     'send-token',
+    'send-mobile-apps',
     'send-safe',
+    'pool-party',
     'cusd-stablecoin',
     'finance',
     'miscellaneous',

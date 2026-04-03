@@ -36,7 +36,9 @@ const heroItemIcons = {
   'send-safe/wallet-maintenance': <HeroIcon name="build" />,
   'send-safe/safe': <HeroIcon name="shield" />,
   'send-safe/canton-coin-rewards': <HeroIcon name="star" />,
-  'send-safe/pool-party-exchange': <HeroIcon name="pool" />,
+  'pool-party/overview': <HeroIcon name="pool" />,
+  'pool-party/how-it-works': <HeroIcon name="swap_horiz" />,
+  'pool-party/liquidity-pairs': <HeroIcon name="water_drop" />,
   'finance/multisigs': <HeroIcon name="key" />,
   'finance/token-emissions': <HeroIcon name="swap_horiz" />,
   'finance/treasury': <HeroIcon name="account_balance" />,
@@ -77,12 +79,13 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
     'send-token': 'Send Token',
     'send-mobile-apps': 'Send App',
     'send-safe': 'Send Canton Wallet',
+    'pool-party': 'Pool Party',
     'cusd-stablecoin': 'CUSD Stablecoin',
     'finance': 'Finance',
     'miscellaneous': 'Miscellaneous',
     'legal': 'Legal'
   };
-  
+
   const pageLabels = {
     'send-overview': 'Overview',
     'problem-statement': 'Problem Statement',
@@ -106,6 +109,7 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
     'send-token': { image: '/img/send-token-banner.png', aria: 'Send Token documentation banner' },
     'send-mobile-apps': { image: '/img/globalbynature.png', aria: 'Global by nature - Send App' },
     'send-safe': { image: '/img/theprivacyfirstwallet.png', aria: 'The privacy first wallet - Send Canton Wallet' },
+    'pool-party': { image: '/img/PoolParty_Icon.png', aria: 'Pool Party - Confidential AMM on Canton' },
     'cusd-stablecoin': { image: '/img/cusd-banner.png', aria: 'CUSD stablecoin overview banner' },
     finance: { image: '/img/futurecash.png', aria: 'Future cash - Finance' },
     miscellaneous: { image: '/img/thefutureofmoney.png', aria: 'The future of money - Miscellaneous' },

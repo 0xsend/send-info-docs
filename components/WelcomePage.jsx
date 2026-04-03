@@ -3,9 +3,10 @@ import Image from 'next/image';
 import WelcomeHero from './WelcomeHero';
 
 const sectionCards = [
+  { key: 'send-token', title: 'Send Token', href: '/docs/send-token' },
   { key: 'send-mobile-apps', title: 'Send App', href: '/docs/send-mobile-apps' },
   { key: 'send-safe', title: 'Send Canton Wallet', href: '/docs/send-safe' },
-  { key: 'send-token', title: 'Send Token', href: '/docs/send-token' },
+  { key: 'pool-party', title: 'Pool Party', href: '/docs/pool-party' },
   { key: 'cusd-stablecoin', title: 'CUSD Stablecoin', href: '/docs/cusd-stablecoin' },
 ];
 
@@ -13,7 +14,8 @@ const cardImages = {
   'welcome': { src: '/img/sendwelcome.png', alt: 'Welcome' },
   'send-token': { src: '/img/sendtoken.png', alt: 'Send Token' },
   'send-mobile-apps': { src: '/img/sendapps.png', alt: 'Send App' },
-  'send-safe': { src: '/img/cantonwallet.png', alt: 'Send Canton Wallet' },
+  'send-safe': { src: '/img/sendapps.png', alt: 'Send Canton Wallet' },
+  'pool-party': { src: '/img/PoolParty_Icon.png', alt: 'Pool Party' },
   'cusd-stablecoin': { src: '/img/cusdstablecoin.jpg', alt: 'CUSD Stablecoin' }
 };
 

@@ -1,0 +1,53 @@
+---
+id: pool-party-liquidity-pairs
+title: Liquidity Pairs
+---
+
+# Liquidity Pairs
+
+Pool Party currently supports three active trading pairs on Canton Network. All pairs are live and tradeable directly from your Canton Wallet.
+
+## Active Pairs
+
+| Pair | Base Asset | Quote Asset | Type | Status |
+|------|-----------|-------------|------|--------|
+| CC / CUSD | Canton Coin ($CC) | CUSD Stablecoin | Volatile / Stable | Live |
+| CC / USDCx | Canton Coin ($CC) | Bridged USDC (USDCx) | Volatile / Stable | Live |
+| USDCx / CUSD | Bridged USDC (USDCx) | CUSD Stablecoin | Stable / Stable | Live |
+
+## Pair Details
+
+### CC / CUSD
+
+The primary trading pair for Canton Coin. This pair allows you to swap between $CC and Send's native privacy-first stablecoin. As the most actively traded pair, it typically has the deepest liquidity.
+
+- **Use case**: Buy or sell $CC using CUSD
+- **LP opportunity**: Earn fees from $CC trading volume
+
+### CC / USDCx
+
+An alternative route for $CC trading using bridged USDC. USDCx is USDC bridged from Ethereum to Canton Network via Pool Party's built-in bridge.
+
+- **Use case**: Trade $CC without converting to CUSD first
+- **LP opportunity**: Earn fees from traders bridging and swapping in one flow
+
+### USDCx / CUSD
+
+A stablecoin-to-stablecoin pair for converting between bridged USDC and Send's native CUSD. Because both assets target a $1 peg, this pair typically has low slippage.
+
+- **Use case**: Convert between USDC (bridged) and CUSD
+- **LP opportunity**: Lower risk LP position with stable assets on both sides
+
+## Adding New Pairs
+
+Pool Party is an AMM (Automated Market Maker) on Canton Network. New pairs will be added as the ecosystem grows and demand warrants. This page will be updated as new pairs go live.
+
+## Risks
+
+Providing liquidity involves risk, including but not limited to:
+
+- **Impermanent loss**: If the relative price of paired assets changes significantly, your LP position may be worth less than simply holding the assets.
+- **Smart contract risk**: LP funds are held in smart contracts that may contain undiscovered vulnerabilities.
+- **Low liquidity risk**: Thinly traded pairs may experience higher slippage for larger trades.
+
+Evaluate these risks before providing liquidity. See the [Pool Party Overview](./overview) for more information.

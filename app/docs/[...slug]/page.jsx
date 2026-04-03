@@ -32,6 +32,10 @@ export async function generateMetadata({ params }) {
       title: 'Send Canton Wallet Info Docs – Secure account access for Canton',
       description: 'Understand passkeys, privacy, and workflows for the Send Canton Wallet.'
     },
+    'pool-party': {
+      title: 'Pool Party Info Docs – Confidential AMM on Canton',
+      description: 'Explore Pool Party, the confidential automated market maker on Canton Network.'
+    },
     'cusd-stablecoin': {
       image: '/img/cusd-opengraph.png',
       title: 'CUSD Info Docs – Privacy-Native Stablecoin',
@@ -57,6 +61,7 @@ export async function generateMetadata({ params }) {
       'send-token': 'Send Token',
       'send-mobile-apps': 'Send App',
       'send-safe': 'Send Canton Wallet',
+      'pool-party': 'Pool Party',
       'cusd-stablecoin': 'CUSD Stablecoin',
       'finance': 'Finance',
       'miscellaneous': 'Miscellaneous',
@@ -114,6 +119,7 @@ export default async function DocPage({ params }) {
       'send-token': 'Send Token',
       'send-mobile-apps': 'Send App',
       'send-safe': 'Send Canton Wallet',
+      'pool-party': 'Pool Party',
       'cusd-stablecoin': 'CUSD Stablecoin',
       'finance': 'Finance',
       'miscellaneous': 'Miscellaneous',
