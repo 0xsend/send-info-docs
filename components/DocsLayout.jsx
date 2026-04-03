@@ -109,7 +109,7 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
     'send-token': { image: '/img/send-token-banner.png', aria: 'Send Token documentation banner' },
     'send-mobile-apps': { image: '/img/globalbynature.png', aria: 'Global by nature - Send App' },
     'send-safe': { image: '/img/theprivacyfirstwallet.png', aria: 'The privacy first wallet - Send Canton Wallet' },
-    'pool-party': { image: '/img/PoolParty_Icon.png', aria: 'Pool Party - Confidential AMM on Canton' },
+    'pool-party': { image: '/img/pool_party_banner.jpeg', aria: 'Pool Party - Confidential AMM on Canton' },
     'cusd-stablecoin': { image: '/img/cusd-banner.png', aria: 'CUSD stablecoin overview banner' },
     finance: { image: '/img/futurecash.png', aria: 'Future cash - Finance' },
     miscellaneous: { image: '/img/thefutureofmoney.png', aria: 'The future of money - Miscellaneous' },
