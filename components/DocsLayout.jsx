@@ -30,6 +30,7 @@ const heroItemIcons = {
   'send-mobile-apps/overview': <HeroIcon name="dashboard" />,
   'send-safe/overview': <HeroIcon name="dashboard" />,
   'cusd-stablecoin/overview': <HeroIcon name="dashboard" />,
+  'cusd-stablecoin/buybacks': <HeroIcon name="rocket_launch" />,
   'cusd-stablecoin/reserves-report': <HeroIcon name="description" />,
   'cusd-stablecoin/faqs': <HeroIcon name="help" />,
   'send-safe/passkeys': <HeroIcon name="fingerprint" />,

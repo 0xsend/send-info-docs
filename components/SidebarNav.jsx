@@ -69,7 +69,7 @@ const sectionLabels = {
   'send-mobile-apps': 'Send App',
   'features': 'Features',
   'send-safe': 'Send Canton Wallet',
-  'pool-party': 'Pool Party',
+  'pool-party': 'Pool Party Exchange',
   'cusd-stablecoin': 'CUSD Stablecoin',
   'finance': 'Finance',
   'miscellaneous': 'Miscellaneous',

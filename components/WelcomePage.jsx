@@ -6,7 +6,7 @@ const sectionCards = [
   { key: 'send-token', title: 'Send Token', href: '/docs/send-token' },
   { key: 'send-mobile-apps', title: 'Send App', href: '/docs/send-mobile-apps' },
   { key: 'send-safe', title: 'Send Canton Wallet', href: '/docs/send-safe' },
-  { key: 'pool-party', title: 'Pool Party', href: '/docs/pool-party' },
+  { key: 'pool-party', title: 'Pool Party Exchange', href: '/docs/pool-party' },
   { key: 'cusd-stablecoin', title: 'CUSD Stablecoin', href: '/docs/cusd-stablecoin' },
 ];
 
