@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 // ============ REVENUE DATA ============
 const sendAppRevenue = [
   {
@@ -113,532 +115,345 @@ const totalTransactions = sendAppRevenue.reduce((sum, r) => sum + (r.transaction
 const totalCusdRevenue = cusdRevenue.reduce((sum, r) => sum + r.total, 0);
 const grandTotal = totalSendAppRevenue + totalCusdRevenue;
 
-// ============ STYLES ============
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    gap: '24px',
-    padding: '8px 0',
-  },
-  metricsGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '16px',
-  },
-  metricCard: {
-    backgroundColor: '#FFF',
-    borderRadius: '12px',
-    padding: '20px',
-    border: '1px solid #E0E0E0',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-  },
-  metricCardHighlight: {
-    backgroundColor: '#E8FDE9',
-    borderRadius: '12px',
-    padding: '20px',
-    border: '2px solid #40FB50',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-  },
-  metricLabel: {
-    fontSize: '13px',
-    color: '#666',
-    marginBottom: '8px',
-    fontWeight: 500,
-  },
-  metricValue: {
-    fontSize: '28px',
-    fontWeight: 700,
-    color: '#122023',
-  },
-  metricSubtext: {
-    fontSize: '12px',
-    color: '#888',
-    marginTop: '4px',
-  },
-  section: {
-    backgroundColor: '#FFF',
-    borderRadius: '12px',
-    padding: '24px',
-    border: '1px solid #E0E0E0',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-  },
-  sectionTitle: {
-    fontSize: '16px',
-    fontWeight: 600,
-    color: '#122023',
-    marginBottom: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse' as const,
-    fontSize: '14px',
-  },
-  th: {
-    textAlign: 'left' as const,
-    padding: '12px 12px',
-    borderBottom: '2px solid #E0E0E0',
-    color: '#666',
-    fontWeight: 600,
-    fontSize: '12px',
-    textTransform: 'uppercase' as const,
-    letterSpacing: '0.5px',
-  },
-  td: {
-    padding: '14px 12px',
-    borderBottom: '1px solid #F0F0F0',
-    color: '#122023',
-  },
-  link: {
-    color: '#2563EB',
-    textDecoration: 'none',
-    fontWeight: 500,
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '4px',
-  },
-  badge: {
-    backgroundColor: '#E8FDE9',
-    color: '#122023',
-    fontSize: '11px',
-    fontWeight: 600,
-    padding: '4px 10px',
-    borderRadius: '6px',
-  },
-  chartContainer: {
-    marginTop: '8px',
-  },
-};
+// ============ FORMATTERS ============
+const fmt = (n: number) => `$${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+const fmtK = (n: number) => n >= 1000 ? `$${(n / 1000).toFixed(1)}k` : fmt(n);
+const pct = (n: number, total: number) => `${((n / total) * 100).toFixed(1)}%`;
 
-// ============ UTILITY FUNCTIONS ============
-function formatCurrency(value: number): string {
-  return `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-}
+// ============ LINK ICON ============
+const ExtLink = () => (
+  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
+    <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
 
 // ============ REVENUE CHART ============
 function RevenueChart() {
+  const [hovered, setHovered] = useState<number | null>(null);
   const chartData = [...sendAppRevenue].reverse();
   const maxTotal = Math.max(...chartData.map(d => d.total));
-
-  // SVG dimensions
-  const width = 580;
-  const height = 220;
-  const padding = { top: 20, right: 20, bottom: 36, left: 50 };
-  const innerWidth = width - padding.left - padding.right;
-  const innerHeight = height - padding.top - padding.bottom;
-
-  const barWidth = (innerWidth / chartData.length) - 10;
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <svg width="100%" viewBox={`0 0 ${width} ${height}`} style={{ overflow: 'visible' }}>
-        {/* Y-axis labels and grid */}
-        {[0, 0.5, 1].map((ratio, i) => {
-          const y = padding.top + innerHeight * (1 - ratio);
-          const value = maxTotal * ratio;
-          return (
-            <g key={i}>
-              <line
-                x1={padding.left}
-                y1={y}
-                x2={width - padding.right}
-                y2={y}
-                stroke={ratio === 0 ? '#E0E0E0' : '#F0F0F0'}
-                strokeDasharray={ratio === 0 ? '0' : '3,3'}
-              />
-              <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888">
-                ${(value / 1000).toFixed(0)}k
-              </text>
-            </g>
-          );
-        })}
-
-        {/* Stacked bars */}
-        {chartData.map((d, i) => {
-          const x = padding.left + i * (innerWidth / chartData.length) + 5;
-          const totalHeight = (d.total / maxTotal) * innerHeight;
-          const sendtagsHeight = ((d.sendtags?.amount || 0) / d.total) * totalHeight;
-          const tradesHeight = ((d.trades?.amount || 0) / d.total) * totalHeight;
-          const transactionsHeight = ((d.transactions?.amount || 0) / d.total) * totalHeight;
-          const isPeak = d.total === maxTotal;
-
-          const [month] = d.date.split('/');
-          const monthLabel = monthNames[parseInt(month) - 1];
-
-          let yOffset = padding.top + innerHeight;
-
-          return (
-            <g key={d.date}>
-              {/* Sendtags - bottom (purple) */}
-              <rect
-                x={x}
-                y={yOffset - sendtagsHeight}
-                width={barWidth}
-                height={sendtagsHeight}
-                fill="#7C4DFF"
-                rx="4"
-                ry="0"
-              />
-              {/* Trades - middle (orange) */}
-              <rect
-                x={x}
-                y={yOffset - sendtagsHeight - tradesHeight}
-                width={barWidth}
-                height={tradesHeight}
-                fill="#FF9800"
-              />
-              {/* Transactions - top (blue) */}
-              <rect
-                x={x}
-                y={yOffset - sendtagsHeight - tradesHeight - transactionsHeight}
-                width={barWidth}
-                height={transactionsHeight}
-                fill="#2196F3"
-                rx="4"
-                ry="0"
-              />
-
-              {/* Peak indicator */}
-              {isPeak && (
-                <g>
-                  <circle
-                    cx={x + barWidth / 2}
-                    cy={yOffset - totalHeight - 14}
-                    r="10"
-                    fill="#10B981"
-                  />
-                  <text
-                    x={x + barWidth / 2}
-                    y={yOffset - totalHeight - 10}
-                    textAnchor="middle"
-                    fontSize="8"
-                    fill="#FFF"
-                    fontWeight="600"
-                  >
-                    ★
-                  </text>
-                </g>
-              )}
-
-              {/* Month label */}
-              <text
-                x={x + barWidth / 2}
-                y={height - 12}
-                textAnchor="middle"
-                fontSize="11"
-                fill="#666"
-                fontWeight="500"
-              >
-                {monthLabel}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
-
-      {/* Legend */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '24px',
-        padding: '12px 16px',
-        background: '#FAFAFA',
-        borderRadius: '8px',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#7C4DFF' }} />
-          <span style={{ fontSize: '12px', color: '#666' }}>Sendtags</span>
-          <span style={{ fontSize: '12px', fontWeight: 600, color: '#122023' }}>${(totalSendtags / 1000).toFixed(1)}k</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#FF9800' }} />
-          <span style={{ fontSize: '12px', color: '#666' }}>Trades</span>
-          <span style={{ fontSize: '12px', fontWeight: 600, color: '#122023' }}>${(totalTrades / 1000).toFixed(1)}k</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#2196F3' }} />
-          <span style={{ fontSize: '12px', color: '#666' }}>Transactions</span>
-          <span style={{ fontSize: '12px', fontWeight: 600, color: '#122023' }}>${(totalTransactions / 1000).toFixed(1)}k</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ============ BREAKDOWN DONUT ============
-function RevenueBreakdown() {
-  const total = totalSendtags + totalTrades + totalTransactions;
-  const data = [
-    { label: 'Sendtags', value: totalSendtags, color: '#7C4DFF', icon: '🏷️' },
-    { label: 'Trades', value: totalTrades, color: '#FF9800', icon: '🔄' },
-    { label: 'Transactions', value: totalTransactions, color: '#2196F3', icon: '💸' },
-  ];
-
-  const size = 160;
-  const strokeWidth = 28;
-  const radius = (size - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
-
-  let currentOffset = 0;
+  const w = 580, h = 200;
+  const pad = { top: 24, right: 16, bottom: 32, left: 48 };
+  const iw = w - pad.left - pad.right;
+  const ih = h - pad.top - pad.bottom;
+  const barW = (iw / chartData.length) - 6;
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '32px', flexWrap: 'wrap' }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        {data.map((segment, i) => {
-          const percentage = segment.value / total;
-          const strokeDasharray = `${percentage * circumference} ${circumference}`;
-          const rotation = currentOffset * 360 - 90;
-          currentOffset += percentage;
+    <svg width="100%" viewBox={`0 0 ${w} ${h}`} style={{ overflow: 'visible' }}>
+      {/* Grid */}
+      {[0, 0.25, 0.5, 0.75, 1].map((ratio, i) => {
+        const y = pad.top + ih * (1 - ratio);
+        return (
+          <g key={i}>
+            <line x1={pad.left} y1={y} x2={w - pad.right} y2={y} stroke={ratio === 0 ? '#ddd' : '#f0f0f0'} />
+            {ratio > 0 && (
+              <text x={pad.left - 6} y={y + 3} textAnchor="end" fontSize="9" fill="#999" fontFamily="monospace">
+                {fmtK(maxTotal * ratio)}
+              </text>
+            )}
+          </g>
+        );
+      })}
 
-          return (
-            <circle
-              key={i}
-              cx={size / 2}
-              cy={size / 2}
-              r={radius}
-              fill="none"
-              stroke={segment.color}
-              strokeWidth={strokeWidth}
-              strokeDasharray={strokeDasharray}
-              transform={`rotate(${rotation} ${size / 2} ${size / 2})`}
-            />
-          );
-        })}
-        <text x={size / 2} y={size / 2 - 6} textAnchor="middle" fontSize="11" fill="#888">Total</text>
-        <text x={size / 2} y={size / 2 + 14} textAnchor="middle" fontSize="16" fontWeight="700" fill="#122023">
-          {formatCurrency(total)}
-        </text>
-      </svg>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {data.map((segment, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '8px',
-              backgroundColor: `${segment.color}15`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '16px',
-            }}>
-              {segment.icon}
-            </div>
-            <div>
-              <div style={{ fontSize: '12px', color: '#888' }}>{segment.label}</div>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#122023' }}>
-                {formatCurrency(segment.value)}
-                <span style={{ fontSize: '12px', fontWeight: 500, color: '#888', marginLeft: '6px' }}>
-                  ({((segment.value / total) * 100).toFixed(1)}%)
-                </span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+      {/* Bars */}
+      {chartData.map((d, i) => {
+        const x = pad.left + i * (iw / chartData.length) + 3;
+        const totalH = (d.total / maxTotal) * ih;
+        const stH = ((d.sendtags?.amount || 0) / maxTotal) * ih;
+        const trH = ((d.trades?.amount || 0) / maxTotal) * ih;
+        const txH = ((d.transactions?.amount || 0) / maxTotal) * ih;
+        const isHov = hovered === i;
+        const dim = hovered !== null && !isHov;
+        const [month] = d.date.split('/');
+
+        return (
+          <g key={d.date} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ cursor: 'pointer' }}>
+            <rect x={x} y={pad.top} width={barW} height={ih} fill="transparent" />
+            {/* Sendtags */}
+            <rect x={x} y={pad.top + ih - stH} width={barW} height={stH} fill="#7C4DFF" opacity={dim ? 0.2 : 1} />
+            {/* Trades */}
+            <rect x={x} y={pad.top + ih - stH - trH} width={barW} height={trH} fill="#FF9800" opacity={dim ? 0.2 : 1} />
+            {/* Transactions */}
+            <rect x={x} y={pad.top + ih - stH - trH - txH} width={barW} height={txH} fill="#2196F3" rx="2" opacity={dim ? 0.2 : 1} />
+
+            {/* Tooltip */}
+            {isHov && (
+              <g>
+                <rect
+                  x={Math.min(x + barW / 2 - 40, w - 100)}
+                  y={pad.top + ih - totalH - 36}
+                  width="80" height="26" rx="4" fill="#122023"
+                />
+                <text
+                  x={Math.min(x + barW / 2, w - 60)}
+                  y={pad.top + ih - totalH - 19}
+                  textAnchor="middle" fontSize="11" fontWeight="700" fill="#FFF" fontFamily="monospace"
+                >
+                  {fmt(d.total)}
+                </text>
+              </g>
+            )}
+
+            <text x={x + barW / 2} y={h - 8} textAnchor="middle" fontSize="9" fill={isHov ? '#122023' : '#999'} fontWeight={isHov ? 700 : 400} fontFamily="monospace">
+              {monthNames[parseInt(month) - 1]}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
   );
 }
 
 // ============ MAIN COMPONENT ============
 export default function Revenue() {
+  const [activeTab, setActiveTab] = useState<'app' | 'stablecoin'>('app');
+  const bestMonth = sendAppRevenue.reduce((best, r) => r.total > best.total ? r : best, sendAppRevenue[0]);
+
+  const sources = [
+    { label: 'Sendtags', value: totalSendtags, color: '#7C4DFF' },
+    { label: 'Trades', value: totalTrades, color: '#FF9800' },
+    { label: 'Transactions', value: totalTransactions, color: '#2196F3' },
+  ];
+
   return (
-    <div style={styles.container}>
-      {/* Key Metrics */}
-      <div style={styles.metricsGrid}>
-        <div style={styles.metricCardHighlight}>
-          <div style={styles.metricLabel}>Total Revenue</div>
-          <div style={styles.metricValue}>{formatCurrency(grandTotal)}</div>
-          <div style={styles.metricSubtext}>All sources combined</div>
-        </div>
-        <div style={styles.metricCard}>
-          <div style={styles.metricLabel}>Send App Revenue</div>
-          <div style={styles.metricValue}>{formatCurrency(totalSendAppRevenue)}</div>
-          <div style={styles.metricSubtext}>{sendAppRevenue.length} months tracked</div>
-        </div>
-        <div style={styles.metricCard}>
-          <div style={styles.metricLabel}>Stablecoin Revenue</div>
-          <div style={styles.metricValue}>{formatCurrency(totalCusdRevenue)}</div>
-          <div style={styles.metricSubtext}>Stablecoin yield</div>
-        </div>
-        <div style={styles.metricCard}>
-          <div style={styles.metricLabel}>Best Month</div>
-          <div style={styles.metricValue}>{formatCurrency(Math.max(...sendAppRevenue.map(r => r.total)))}</div>
-          <div style={styles.metricSubtext}>October 2025</div>
-        </div>
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
 
-      {/* Revenue Chart */}
-      <div style={styles.section}>
-        <div style={styles.sectionTitle}>
-          Monthly Revenue Trend
-          <span style={styles.badge}>Send App</span>
-        </div>
-        <div style={styles.chartContainer}>
-          <RevenueChart />
-        </div>
-      </div>
-
-      {/* Revenue Breakdown */}
-      <div style={styles.section}>
-        <div style={styles.sectionTitle}>Revenue by Source</div>
-        <RevenueBreakdown />
-      </div>
-
-      {/* Send App Revenue Table */}
-      <div style={styles.section}>
-        <div style={styles.sectionTitle}>
-          Send App Revenue History
-        </div>
-        <div style={{ overflowX: 'auto' }}>
-          <table style={styles.table}>
-            <thead>
-              <tr>
-                <th style={styles.th}>Date</th>
-                <th style={styles.th}>Sendtags</th>
-                <th style={styles.th}>Trades</th>
-                <th style={styles.th}>Transactions</th>
-                <th style={{ ...styles.th, textAlign: 'right' as const }}>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sendAppRevenue.map((row) => (
-                <tr key={row.date}>
-                  <td style={{ ...styles.td, fontWeight: 600 }}>{row.date}</td>
-                  <td style={styles.td}>
-                    {row.sendtags ? (
-                      <a
-                        href={`https://basescan.org/tx/${row.sendtags.tx}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={styles.link}
-                      >
-                        {formatCurrency(row.sendtags.amount)}
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </a>
-                    ) : (
-                      <span style={{ color: '#CCC' }}>—</span>
-                    )}
-                  </td>
-                  <td style={styles.td}>
-                    {row.trades ? (
-                      <a
-                        href={`https://basescan.org/tx/${row.trades.tx}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={styles.link}
-                      >
-                        {formatCurrency(row.trades.amount)}
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </a>
-                    ) : (
-                      <span style={{ color: '#CCC' }}>—</span>
-                    )}
-                  </td>
-                  <td style={styles.td}>
-                    {row.transactions ? (
-                      <a
-                        href={`https://basescan.org/tx/${row.transactions.tx}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={styles.link}
-                      >
-                        {formatCurrency(row.transactions.amount)}
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </a>
-                    ) : (
-                      <span style={{ color: '#CCC' }}>—</span>
-                    )}
-                  </td>
-                  <td style={{ ...styles.td, fontWeight: 700, textAlign: 'right' as const }}>
-                    {formatCurrency(row.total)}
-                  </td>
-                </tr>
-              ))}
-              <tr style={{ backgroundColor: '#F8F9FA' }}>
-                <td style={{ ...styles.td, fontWeight: 700, borderBottom: 'none' }}>Total</td>
-                <td style={{ ...styles.td, fontWeight: 600, borderBottom: 'none' }}>{formatCurrency(totalSendtags)}</td>
-                <td style={{ ...styles.td, fontWeight: 600, borderBottom: 'none' }}>{formatCurrency(totalTrades)}</td>
-                <td style={{ ...styles.td, fontWeight: 600, borderBottom: 'none' }}>{formatCurrency(totalTransactions)}</td>
-                <td style={{ ...styles.td, fontWeight: 700, textAlign: 'right' as const, borderBottom: 'none' }}>
-                  <span style={{
-                    backgroundColor: '#E8FDE9',
-                    padding: '4px 10px',
-                    borderRadius: '6px',
-                    color: '#122023',
-                  }}>
-                    {formatCurrency(totalSendAppRevenue)}
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* CUSD Revenue Table */}
-      <div style={styles.section}>
-        <div style={styles.sectionTitle}>
-          <div style={{
-            width: '24px',
-            height: '24px',
-            borderRadius: '6px',
-            backgroundColor: '#E3F2FD',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px',
-          }}>
-            💵
+      {/* ── HERO BENTO ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gridTemplateRows: 'auto auto', gap: '2px' }}>
+        {/* Grand total */}
+        <div style={{
+          gridRow: '1 / 3',
+          background: '#122023',
+          padding: '48px 40px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          minHeight: '200px',
+        }}>
+          <div>
+            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '8px' }}>
+              Total Revenue
+            </div>
+            <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6 }}>
+              All sources combined · {sendAppRevenue.length} months tracked
+            </div>
           </div>
-          Stablecoin Revenue
+          <div>
+            <div style={{ fontFamily: '"SF Mono", "Fira Code", monospace', fontSize: '52px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+              {fmt(grandTotal)}
+            </div>
+          </div>
         </div>
-        <div style={{ overflowX: 'auto' }}>
-          <table style={styles.table}>
-            <thead>
-              <tr>
-                <th style={styles.th}>Date</th>
-                <th style={styles.th}>Yield</th>
-                <th style={{ ...styles.th, textAlign: 'right' as const }}>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cusdRevenue.map((row) => (
-                <tr key={row.date}>
-                  <td style={{ ...styles.td, fontWeight: 600 }}>{row.date}</td>
-                  <td style={styles.td}>{formatCurrency(row.yield)}</td>
-                  <td style={{ ...styles.td, fontWeight: 700, textAlign: 'right' as const }}>
-                    {formatCurrency(row.total)}
-                  </td>
+
+        {/* Send App */}
+        <div style={{ background: '#171f22', padding: '28px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '12px' }}>
+            Send App
+          </div>
+          <div style={{ fontFamily: 'monospace', fontSize: '28px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
+            {fmt(totalSendAppRevenue)}
+          </div>
+          <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>Sendtags · Trades · Transactions</div>
+        </div>
+
+        {/* Stablecoin */}
+        <div style={{ background: '#171f22', padding: '28px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '12px' }}>
+            Stablecoin Revenue
+          </div>
+          <div style={{ fontFamily: 'monospace', fontSize: '28px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
+            {fmt(totalCusdRevenue)}
+          </div>
+          <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>via DeFi vaults · monthly</div>
+        </div>
+      </div>
+
+      {/* ── SOURCE BREAKDOWN: proportional bar + legend ── */}
+      <div style={{ background: '#FFF', border: '1px solid #e8eaeb', padding: '24px 32px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '16px' }}>
+          Send App Breakdown
+        </div>
+        {/* Bar */}
+        <div style={{ display: 'flex', height: '6px', overflow: 'hidden', marginBottom: '16px' }}>
+          {sources.map((s) => (
+            <div key={s.label} style={{ width: pct(s.value, totalSendAppRevenue), background: s.color }} />
+          ))}
+        </div>
+        {/* Legend */}
+        <div style={{ display: 'flex', gap: '32px' }}>
+          {sources.map((s) => (
+            <div key={s.label} style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+              <div style={{ width: '8px', height: '8px', background: s.color, flexShrink: 0, marginTop: '2px' }} />
+              <div>
+                <div style={{ fontSize: '12px', color: '#999' }}>{s.label}</div>
+                <div style={{ fontFamily: 'monospace', fontSize: '15px', fontWeight: 600, color: '#122023' }}>
+                  {fmt(s.value)}
+                  <span style={{ fontSize: '11px', fontWeight: 400, color: '#aaa', marginLeft: '6px' }}>{pct(s.value, totalSendAppRevenue)}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── CHART ── */}
+      <div style={{ background: '#FFF', border: '1px solid #e8eaeb', padding: '28px 32px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '20px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999' }}>
+            Monthly Trend
+          </div>
+          <div style={{ fontSize: '12px', color: '#999' }}>
+            Best: <span style={{ fontFamily: 'monospace', fontWeight: 600, color: '#122023' }}>{fmt(bestMonth.total)}</span>
+            <span style={{ color: '#ccc', margin: '0 6px' }}>·</span>
+            {bestMonth.date}
+          </div>
+        </div>
+        <RevenueChart />
+      </div>
+
+      {/* ── DATA TABLES: tabbed ── */}
+      <div style={{ background: '#FFF', border: '1px solid #e8eaeb' }}>
+        {/* Tab bar */}
+        <div style={{ display: 'flex', borderBottom: '1px solid #e8eaeb' }}>
+          {[
+            { key: 'app' as const, label: 'Send App History' },
+            { key: 'stablecoin' as const, label: 'Stablecoin History' },
+          ].map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              style={{
+                flex: 1,
+                padding: '14px 20px',
+                background: 'none',
+                border: 'none',
+                borderBottom: activeTab === tab.key ? '2px solid #122023' : '2px solid transparent',
+                fontSize: '12px',
+                fontWeight: activeTab === tab.key ? 700 : 500,
+                color: activeTab === tab.key ? '#122023' : '#999',
+                cursor: 'pointer',
+                letterSpacing: '0.5px',
+                textTransform: 'uppercase',
+                transition: 'all 0.15s',
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Send App table */}
+        {activeTab === 'app' && (
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr>
+                  {['Date', 'Sendtags', 'Trades', 'Transactions', 'Total'].map((h, i) => (
+                    <th key={h} style={{
+                      textAlign: i === 4 ? 'right' : 'left',
+                      padding: '10px 16px',
+                      fontSize: '10px',
+                      fontWeight: 600,
+                      color: '#999',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                      borderBottom: '1px solid #e8eaeb',
+                      fontFamily: 'monospace',
+                    }}>
+                      {h}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-              <tr style={{ backgroundColor: '#F8F9FA' }}>
-                <td style={{ ...styles.td, fontWeight: 700, borderBottom: 'none' }}>Total</td>
-                <td style={{ ...styles.td, fontWeight: 600, borderBottom: 'none' }}>{formatCurrency(totalCusdRevenue)}</td>
-                <td style={{ ...styles.td, fontWeight: 700, textAlign: 'right' as const, borderBottom: 'none' }}>
-                  <span style={{
-                    backgroundColor: '#E3F2FD',
-                    padding: '4px 10px',
-                    borderRadius: '6px',
-                    color: '#122023',
-                  }}>
-                    {formatCurrency(totalCusdRevenue)}
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {sendAppRevenue.map((row, ri) => (
+                  <tr key={row.date} style={{ background: ri % 2 === 0 ? '#fafafa' : '#FFF' }}>
+                    <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: 'monospace', borderBottom: '1px solid #f0f1f2' }}>
+                      {row.date}
+                    </td>
+                    {[row.sendtags, row.trades, row.transactions].map((item, ci) => (
+                      <td key={ci} style={{ padding: '12px 16px', fontSize: '13px', borderBottom: '1px solid #f0f1f2' }}>
+                        {item ? (
+                          <a
+                            href={`https://basescan.org/tx/${item.tx}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: '#122023', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', fontFamily: 'monospace' }}
+                          >
+                            {fmt(item.amount)}
+                            <ExtLink />
+                          </a>
+                        ) : (
+                          <span style={{ color: '#ddd' }}>—</span>
+                        )}
+                      </td>
+                    ))}
+                    <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: '#122023', textAlign: 'right', fontFamily: 'monospace', borderBottom: '1px solid #f0f1f2' }}>
+                      {fmt(row.total)}
+                    </td>
+                  </tr>
+                ))}
+                {/* Total row */}
+                <tr style={{ background: '#122023' }}>
+                  <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: 'monospace' }}>TOTAL</td>
+                  <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: 'monospace' }}>{fmt(totalSendtags)}</td>
+                  <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: 'monospace' }}>{fmt(totalTrades)}</td>
+                  <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: 'monospace' }}>{fmt(totalTransactions)}</td>
+                  <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: 'monospace' }}>{fmt(totalSendAppRevenue)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Stablecoin table */}
+        {activeTab === 'stablecoin' && (
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr>
+                  {['Date', 'Yield', 'Total'].map((h, i) => (
+                    <th key={h} style={{
+                      textAlign: i === 2 ? 'right' : 'left',
+                      padding: '10px 16px',
+                      fontSize: '10px',
+                      fontWeight: 600,
+                      color: '#999',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                      borderBottom: '1px solid #e8eaeb',
+                      fontFamily: 'monospace',
+                    }}>
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {cusdRevenue.map((row, ri) => (
+                  <tr key={row.date} style={{ background: ri % 2 === 0 ? '#fafafa' : '#FFF' }}>
+                    <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: 'monospace', borderBottom: '1px solid #f0f1f2' }}>
+                      {row.date}
+                    </td>
+                    <td style={{ padding: '12px 16px', fontSize: '13px', color: '#122023', fontFamily: 'monospace', borderBottom: '1px solid #f0f1f2' }}>
+                      {fmt(row.yield)}
+                    </td>
+                    <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: '#122023', textAlign: 'right', fontFamily: 'monospace', borderBottom: '1px solid #f0f1f2' }}>
+                      {fmt(row.total)}
+                    </td>
+                  </tr>
+                ))}
+                <tr style={{ background: '#122023' }}>
+                  <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: 'monospace' }}>TOTAL</td>
+                  <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: 'monospace' }}>{fmt(totalCusdRevenue)}</td>
+                  <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: 'monospace' }}>{fmt(totalCusdRevenue)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
