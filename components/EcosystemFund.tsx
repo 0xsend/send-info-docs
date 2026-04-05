@@ -39,7 +39,7 @@ export default function EcosystemFund() {
   const [hoveredAlloc, setHoveredAlloc] = useState<number | null>(null);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
       {/* ── HERO: Bento grid ── */}
       <div style={{
@@ -47,20 +47,21 @@ export default function EcosystemFund() {
         gridTemplateColumns: '1.6fr 1fr',
         gridTemplateRows: 'auto auto',
         gap: '2px',
-        marginBottom: '2px',
+        borderRadius: '14px',
+        overflow: 'hidden',
       }}>
         {/* Total — large cell */}
         <div style={{
           gridRow: '1 / 3',
           background: '#122023',
-          padding: '48px 40px',
+          padding: '44px 36px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          minHeight: '220px',
+          minHeight: '200px',
         }}>
           <div>
-            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '8px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '6px' }}>
               CUSD Ecosystem Fund
             </div>
             <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6, maxWidth: '380px' }}>
@@ -68,28 +69,22 @@ export default function EcosystemFund() {
             </div>
           </div>
           <div>
-            <div style={{ fontFamily: '"SF Mono", "Fira Code", "Cascadia Code", monospace', fontSize: '52px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+            <div style={{ fontFamily: '"SF Mono", "Fira Code", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
               {fmt(fundData.total)}
             </div>
-            <div style={{ fontSize: '12px', color: '#4a5c5f', marginTop: '12px', fontWeight: 500 }}>
+            <div style={{ fontSize: '12px', color: '#4a5c5f', marginTop: '10px', fontWeight: 500 }}>
               Total revenue collected · as of {fundData.lastUpdated}
             </div>
           </div>
         </div>
 
         {/* CUSD Reserve Yield */}
-        <div style={{
-          background: '#171f22',
-          padding: '28px 28px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}>
+        <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>
             CUSD Reserve Yield
           </div>
           <div>
-            <div style={{ fontFamily: 'monospace', fontSize: '28px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
+            <div style={{ fontFamily: 'monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
               {fmt(fundData.cusdYield)}
             </div>
             <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>via Brale · 90% revenue share</div>
@@ -97,18 +92,12 @@ export default function EcosystemFund() {
         </div>
 
         {/* Stablecoin Revenue */}
-        <div style={{
-          background: '#171f22',
-          padding: '28px 28px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}>
+        <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>
             Stablecoin Revenue
           </div>
           <div>
-            <div style={{ fontFamily: 'monospace', fontSize: '28px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
+            <div style={{ fontFamily: 'monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
               {fmt(fundData.defiVaultYield)}
             </div>
             <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>via DeFi vaults · monthly</div>
@@ -117,22 +106,20 @@ export default function EcosystemFund() {
       </div>
 
       {/* ── HOW IT WORKS: 3-step strip ── */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '2px',
-        marginBottom: '2px',
-      }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
         {steps.map((step) => (
           <div key={step.num} style={{
-            background: '#f7f8f8',
-            padding: '28px 24px',
+            background: '#FFF',
+            borderRadius: '12px',
+            padding: '24px 22px',
+            border: '1px solid #E0E0E0',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
             position: 'relative',
           }}>
-            <div style={{ fontFamily: 'monospace', fontSize: '32px', fontWeight: 800, color: '#e0e4e4', position: 'absolute', top: '16px', right: '20px', lineHeight: 1 }}>
+            <div style={{ fontFamily: 'monospace', fontSize: '28px', fontWeight: 800, color: '#e8eaeb', position: 'absolute', top: '14px', right: '18px', lineHeight: 1 }}>
               {step.num}
             </div>
-            <div style={{ fontSize: '16px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>
+            <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>
               {step.title}
             </div>
             <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.5, maxWidth: '240px' }}>
@@ -142,46 +129,47 @@ export default function EcosystemFund() {
         ))}
       </div>
 
-      {/* ── ALLOCATION: Proportional bar + details ── */}
-      <div style={{
-        background: '#FFF',
-        border: '1px solid #e8eaeb',
-        padding: '32px',
-        marginBottom: '2px',
-      }}>
-        <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '20px' }}>
-          Allocation Framework
-        </div>
+      {/* ── ALLOCATION + CUSD side by side ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        {/* Allocation */}
+        <div style={{
+          background: '#FFF',
+          borderRadius: '12px',
+          padding: '24px',
+          border: '1px solid #E0E0E0',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+        }}>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '16px' }}>
+            Allocation Framework
+          </div>
 
-        {/* Proportional bar */}
-        <div style={{ display: 'flex', height: '8px', borderRadius: '4px', overflow: 'hidden', marginBottom: '24px' }}>
-          {allocations.map((a, i) => (
-            <div
-              key={a.label}
-              style={{
-                width: `${a.pct}%`,
-                background: a.color,
-                opacity: hoveredAlloc !== null && hoveredAlloc !== i ? 0.25 : 1,
-                transition: 'opacity 0.2s',
-                cursor: 'pointer',
-              }}
-              onMouseEnter={() => setHoveredAlloc(i)}
-              onMouseLeave={() => setHoveredAlloc(null)}
-            />
-          ))}
-        </div>
+          {/* Proportional bar */}
+          <div style={{ display: 'flex', height: '6px', borderRadius: '3px', overflow: 'hidden', marginBottom: '20px' }}>
+            {allocations.map((a, i) => (
+              <div
+                key={a.label}
+                style={{
+                  width: `${a.pct}%`,
+                  background: a.color,
+                  opacity: hoveredAlloc !== null && hoveredAlloc !== i ? 0.25 : 1,
+                  transition: 'opacity 0.2s',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={() => setHoveredAlloc(i)}
+                onMouseLeave={() => setHoveredAlloc(null)}
+              />
+            ))}
+          </div>
 
-        {/* Detail rows */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
           {allocations.map((a, i) => (
             <div
               key={a.label}
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '16px',
-                padding: '14px 0',
-                borderTop: i === 0 ? 'none' : '1px solid #f0f1f2',
+                gap: '12px',
+                padding: '12px 0',
+                borderTop: i === 0 ? 'none' : '1px solid #f0f0f0',
                 opacity: hoveredAlloc !== null && hoveredAlloc !== i ? 0.4 : 1,
                 transition: 'opacity 0.2s',
                 cursor: 'pointer',
@@ -189,81 +177,70 @@ export default function EcosystemFund() {
               onMouseEnter={() => setHoveredAlloc(i)}
               onMouseLeave={() => setHoveredAlloc(null)}
             >
-              <div style={{
-                fontFamily: 'monospace',
-                fontSize: '18px',
-                fontWeight: 700,
-                color: a.color,
-                width: '48px',
-                flexShrink: 0,
-              }}>
+              <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: a.color, width: '44px', flexShrink: 0 }}>
                 {a.pct}%
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>{a.label}</div>
-                <div style={{ fontSize: '12px', color: '#888', marginTop: '2px' }}>{a.desc}</div>
+                <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>{a.label}</div>
+                <div style={{ fontSize: '11px', color: '#888', marginTop: '2px' }}>{a.desc}</div>
               </div>
             </div>
           ))}
+
+          <div style={{ fontSize: '11px', color: '#aaa', marginTop: '12px' }}>
+            Allocations are targets and may be adjusted based on ecosystem needs.
+          </div>
         </div>
 
-        <div style={{ fontSize: '11px', color: '#aaa', marginTop: '16px' }}>
-          Allocations are targets and may be adjusted based on ecosystem needs.
-        </div>
-      </div>
-
-      {/* ── CUSD: Feature list — editorial style ── */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1.4fr',
-        gap: '2px',
-        marginBottom: '2px',
-      }}>
+        {/* Why CUSD */}
         <div style={{
-          background: '#122023',
-          padding: '32px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
+          background: '#FFF',
+          borderRadius: '12px',
+          border: '1px solid #E0E0E0',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+          overflow: 'hidden',
         }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '12px' }}>
-            Why CUSD
-          </div>
-          <div style={{ fontSize: '20px', fontWeight: 700, color: '#FFF', lineHeight: 1.4 }}>
-            Privacy-first stablecoin for Canton Network
-          </div>
-          <div style={{ fontSize: '13px', color: '#6b7c7f', marginTop: '12px', lineHeight: 1.6 }}>
-            Issued by Brale with KYC/AML compliance, backed 1:1 with USD-denominated reserves.
-          </div>
-        </div>
-        <div style={{ background: '#f7f8f8', padding: '24px 28px' }}>
-          {cusdFeatures.map((f, i) => (
-            <div key={f.label} style={{
-              display: 'flex',
-              gap: '16px',
-              padding: '12px 0',
-              borderTop: i === 0 ? 'none' : '1px solid #e8eaeb',
-              alignItems: 'baseline',
-            }}>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', width: '180px', flexShrink: 0 }}>{f.label}</div>
-              <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.5 }}>{f.detail}</div>
+          <div style={{
+            background: '#122023',
+            padding: '24px',
+          }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '10px' }}>
+              Why CUSD
             </div>
-          ))}
+            <div style={{ fontSize: '17px', fontWeight: 700, color: '#FFF', lineHeight: 1.4 }}>
+              Privacy-first stablecoin for Canton Network
+            </div>
+            <div style={{ fontSize: '12px', color: '#6b7c7f', marginTop: '8px', lineHeight: 1.6 }}>
+              Issued by Brale with KYC/AML compliance, backed 1:1 with USD-denominated reserves.
+            </div>
+          </div>
+          <div style={{ padding: '16px 24px' }}>
+            {cusdFeatures.map((f, i) => (
+              <div key={f.label} style={{
+                display: 'flex',
+                gap: '12px',
+                padding: '10px 0',
+                borderTop: i === 0 ? 'none' : '1px solid #f0f0f0',
+                alignItems: 'baseline',
+              }}>
+                <div style={{ fontSize: '12px', fontWeight: 600, color: '#122023', width: '140px', flexShrink: 0 }}>{f.label}</div>
+                <div style={{ fontSize: '12px', color: '#888', lineHeight: 1.5 }}>{f.detail}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* ── PARTNERS ── */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '2px',
-        marginBottom: '2px',
-      }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
         <div style={{
-          background: '#f7f8f8',
-          padding: '32px',
+          background: '#FFF',
+          borderRadius: '12px',
+          padding: '24px',
+          border: '1px solid #E0E0E0',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
         }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '16px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '14px' }}>
             Integration Grants
           </div>
           <div style={{ fontSize: '15px', fontWeight: 600, color: '#122023', marginBottom: '8px' }}>
@@ -274,10 +251,13 @@ export default function EcosystemFund() {
           </div>
         </div>
         <div style={{
-          background: '#f7f8f8',
-          padding: '32px',
+          background: '#FFF',
+          borderRadius: '12px',
+          padding: '24px',
+          border: '1px solid #E0E0E0',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
         }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '16px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '14px' }}>
             Early Access
           </div>
           <div style={{ fontSize: '15px', fontWeight: 600, color: '#122023', marginBottom: '8px' }}>
@@ -292,15 +272,16 @@ export default function EcosystemFund() {
       {/* ── TRANSPARENCY ── */}
       <div style={{
         background: '#FFF',
-        border: '1px solid #e8eaeb',
-        padding: '32px',
-        marginBottom: '2px',
+        borderRadius: '12px',
+        padding: '24px',
+        border: '1px solid #E0E0E0',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
       }}>
         <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '20px' }}>
           Fund Transparency
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '28px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '24px' }}>
           <div>
             <div style={{ fontSize: '12px', color: '#999', marginBottom: '4px' }}>Multisig</div>
             <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>CUSD Ecosystem Fund</div>
@@ -315,47 +296,45 @@ export default function EcosystemFund() {
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid #f0f1f2', paddingTop: '20px' }}>
-          <div style={{ fontSize: '12px', fontWeight: 600, color: '#122023', marginBottom: '12px' }}>Acquisition History</div>
+        <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '20px' }}>
+          <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', marginBottom: '12px' }}>Acquisition History</div>
           <div style={{
             fontFamily: 'monospace',
             fontSize: '12px',
             color: '#999',
             padding: '20px',
             background: '#fafafa',
-            borderRadius: '4px',
+            borderRadius: '8px',
             textAlign: 'center',
           }}>
             First acquisition pending
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid #f0f1f2', paddingTop: '20px', marginTop: '20px' }}>
-          <div style={{ fontSize: '12px', fontWeight: 600, color: '#122023', marginBottom: '12px' }}>Revenue Sources</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            {[
-              { source: 'CUSD Reserve Yield', detail: '90% of reserve economics from CUSD outstanding', via: 'Brale', freq: 'Monthly' },
-              { source: 'Stablecoin Revenue', detail: 'Revenue from stablecoin operations', via: 'DeFi vaults', freq: 'Monthly' },
-            ].map((r, i) => (
-              <div key={r.source} style={{
-                display: 'flex',
-                alignItems: 'center',
-                padding: '10px 0',
-                borderTop: i === 0 ? 'none' : '1px solid #f0f1f2',
-                gap: '16px',
-              }}>
-                <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', width: '160px', flexShrink: 0 }}>{r.source}</div>
-                <div style={{ fontSize: '12px', color: '#888', flex: 1 }}>{r.detail}</div>
-                <div style={{ fontSize: '11px', color: '#aaa', fontFamily: 'monospace', flexShrink: 0 }}>{r.freq}</div>
-              </div>
-            ))}
-          </div>
+        <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '20px', marginTop: '20px' }}>
+          <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', marginBottom: '12px' }}>Revenue Sources</div>
+          {[
+            { source: 'CUSD Reserve Yield', detail: '90% of reserve economics from CUSD outstanding', via: 'Brale', freq: 'Monthly' },
+            { source: 'Stablecoin Revenue', detail: 'Revenue from stablecoin operations', via: 'DeFi vaults', freq: 'Monthly' },
+          ].map((r, i) => (
+            <div key={r.source} style={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: '10px 0',
+              borderTop: i === 0 ? 'none' : '1px solid #f0f0f0',
+              gap: '16px',
+            }}>
+              <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', width: '160px', flexShrink: 0 }}>{r.source}</div>
+              <div style={{ fontSize: '12px', color: '#888', flex: 1 }}>{r.detail}</div>
+              <div style={{ fontSize: '11px', color: '#aaa', fontFamily: 'monospace', flexShrink: 0 }}>{r.freq}</div>
+            </div>
+          ))}
           <div style={{ fontSize: '12px', color: '#888', marginTop: '12px' }}>
             For monthly breakdowns, see the <a href="/docs/cusd-stablecoin/reserves-report" style={{ color: '#40FB50', textDecoration: 'none', fontWeight: 500 }}>Reserves Report</a> and <a href="/docs/finance/revenue" style={{ color: '#40FB50', textDecoration: 'none', fontWeight: 500 }}>Revenue</a> pages.
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid #f0f1f2', paddingTop: '16px', marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+        <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '16px', marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
           {[
             'All fund transactions are executed on-chain and publicly verifiable',
             'Monthly revenue reports from Brale are published on the Reserves Report page',
@@ -373,6 +352,7 @@ export default function EcosystemFund() {
       {/* ── DISCLAIMER ── */}
       <div style={{
         background: '#fafafa',
+        borderRadius: '12px',
         padding: '20px 24px',
         fontSize: '11px',
         color: '#999',
