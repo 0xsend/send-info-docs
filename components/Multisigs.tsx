@@ -38,6 +38,12 @@ const cantonMultisigs = [
     shortAddress: 'send-inc::1220...f561',
     url: 'https://lighthouse.fivenorth.io/party/cantonwallet-send-inc%3A%3A122095917f4981dff943c18a63cdfae1aa036c885f026b7f6ccf44fe5da52e60f561',
   },
+  {
+    name: 'Pool Party Rewards',
+    address: 'cantonwallet-pool-party-rewards::1220062050fd57a71014715bd517203a464fd3eb1ee1e6c5f69ce51bbe055e5cf197',
+    shortAddress: 'pool-party-rewards::1220...f197',
+    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-pool-party-rewards%3A%3A1220062050fd57a71014715bd517203a464fd3eb1ee1e6c5f69ce51bbe055e5cf197',
+  },
 ];
 
 // ============ STYLES ============
@@ -164,6 +170,22 @@ export default function Multisigs() {
         </span>
       </div>
 
+      {/* Canton Network */}
+      <div style={styles.section}>
+        <div style={styles.sectionHeader}>
+          <div style={styles.sectionTitle}>Canton Network</div>
+          <div style={styles.sectionSubtitle}>Treasury, rewards, and operations</div>
+        </div>
+        {cantonMultisigs.map((multisig) => (
+          <MultisigRow
+            key={multisig.address}
+            name={multisig.name}
+            address={multisig.shortAddress || multisig.address}
+            url={multisig.url}
+          />
+        ))}
+      </div>
+
       {/* Base Network */}
       <div style={styles.section}>
         <div style={styles.sectionHeader}>
@@ -182,30 +204,14 @@ export default function Multisigs() {
       {/* Revenue Collection */}
       <div style={styles.section}>
         <div style={styles.sectionHeader}>
-          <div style={styles.sectionTitle}>Revenue Collection</div>
-          <div style={styles.sectionSubtitle}>Product-specific revenue tracking</div>
+          <div style={styles.sectionTitle}>Revenue Collection (Base)</div>
+          <div style={styles.sectionSubtitle}>Product-specific revenue tracking on Base Network</div>
         </div>
         {revenueMultisigs.map((multisig) => (
           <MultisigRow
             key={multisig.address}
             name={multisig.name}
             address={multisig.address}
-          />
-        ))}
-      </div>
-
-      {/* Canton Network */}
-      <div style={styles.section}>
-        <div style={styles.sectionHeader}>
-          <div style={styles.sectionTitle}>Canton Network</div>
-          <div style={styles.sectionSubtitle}>Cross-chain treasury and rewards</div>
-        </div>
-        {cantonMultisigs.map((multisig) => (
-          <MultisigRow
-            key={multisig.address}
-            name={multisig.name}
-            address={multisig.shortAddress || multisig.address}
-            url={multisig.url}
           />
         ))}
       </div>
