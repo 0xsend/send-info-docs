@@ -378,7 +378,7 @@ export default function BusinessModels() {
                 <span
                   style={{
                     marginLeft: 'auto',
-                    color: '#40FB50',
+                    color: '#1a8a2e',
                     fontWeight: 600,
                     fontSize: '11px',
                     letterSpacing: '0.5px',
@@ -517,7 +517,7 @@ export default function BusinessModels() {
                       </span>
                       <span
                         style={{
-                          color: '#40FB50',
+                          color: '#1a8a2e',
                           fontWeight: 600,
                           fontSize: '12px',
                         }}

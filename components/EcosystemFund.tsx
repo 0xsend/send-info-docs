@@ -330,7 +330,7 @@ export default function EcosystemFund() {
             </div>
           ))}
           <div style={{ fontSize: '12px', color: '#888', marginTop: '12px' }}>
-            For monthly breakdowns, see the <a href="/docs/cusd-stablecoin/reserves-report" style={{ color: '#40FB50', textDecoration: 'none', fontWeight: 500 }}>Reserves Report</a> and <a href="/docs/finance/revenue" style={{ color: '#40FB50', textDecoration: 'none', fontWeight: 500 }}>Revenue</a> pages.
+            For monthly breakdowns, see the <a href="/docs/cusd-stablecoin/reserves-report" style={{ color: '#1a8a2e', textDecoration: 'none', fontWeight: 500 }}>Reserves Report</a> and <a href="/docs/finance/revenue" style={{ color: '#1a8a2e', textDecoration: 'none', fontWeight: 500 }}>Revenue</a> pages.
           </div>
         </div>
 

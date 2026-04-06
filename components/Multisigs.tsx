@@ -129,7 +129,7 @@ const styles = {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '4px',
-    color: '#40FB50',
+    color: '#1a8a2e',
     fontSize: '12px',
     fontWeight: 600,
     textDecoration: 'none',
