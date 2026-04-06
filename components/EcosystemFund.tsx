@@ -53,7 +53,7 @@ export default function EcosystemFund() {
         {/* Total — large cell */}
         <div style={{
           gridRow: '1 / 3',
-          background: '#122023',
+          background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
           padding: '44px 36px',
           display: 'flex',
           flexDirection: 'column',
@@ -69,7 +69,7 @@ export default function EcosystemFund() {
             </div>
           </div>
           <div>
-            <div style={{ fontFamily: '"SF Mono", "Fira Code", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
               {fmt(fundData.total)}
             </div>
             <div style={{ fontSize: '12px', color: '#4a5c5f', marginTop: '10px', fontWeight: 500 }}>
@@ -201,7 +201,7 @@ export default function EcosystemFund() {
           overflow: 'hidden',
         }}>
           <div style={{
-            background: '#122023',
+            background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 100%)',
             padding: '24px',
           }}>
             <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '10px' }}>

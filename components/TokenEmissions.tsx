@@ -67,7 +67,7 @@ const tokenData = {
 const fmt = (num: number) => num.toLocaleString();
 const fmtM = (num: number) => `${(num / 1_000_000).toFixed(1)}M`;
 const fmtPct = (num: number) => `${num.toFixed(1)}%`;
-const MONO = '"SF Mono", "Fira Code", monospace';
+const MONO = '"DM Mono", monospace';
 const LABEL: React.CSSProperties = { fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: '#6b7c7f' };
 const CARD: React.CSSProperties = { background: '#FFF', borderRadius: '12px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' };
 
@@ -206,7 +206,7 @@ export default function TokenEmissions() {
       {/* ── HERO ── */}
       <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gridTemplateRows: 'auto auto', gap: '2px', borderRadius: '14px', overflow: 'hidden' }}>
         {/* Total supply */}
-        <div style={{ gridRow: '1 / 3', background: '#122023', padding: '44px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
+        <div style={{ gridRow: '1 / 3', background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)', padding: '44px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
           <div>
             <div style={{ ...LABEL, color: '#40FB50', letterSpacing: '3px', marginBottom: '6px' }}>Total Supply</div>
             <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6 }}>Fixed cap · no inflation beyond allocation</div>

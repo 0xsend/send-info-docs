@@ -488,8 +488,8 @@ export default function Treasury() {
   const stablecoinValue = currentHoldings.cusd + currentHoldings.usdcx + currentHoldings.usdc + currentHoldings.fiat;
   const totalTreasuryValue = sendValue + ccValue + stablecoinValue + currentHoldings.pol;
 
-  const thStyle = { textAlign: 'right' as const, padding: '10px 12px', fontSize: '10px', fontWeight: 600, color: '#999', textTransform: 'uppercase' as const, letterSpacing: '1px', borderBottom: '2px solid #E0E0E0', fontFamily: 'monospace' };
-  const tdStyle = { padding: '12px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right' as const, color: '#122023', fontFamily: 'monospace', fontSize: '13px' };
+  const thStyle = { textAlign: 'right' as const, padding: '10px 12px', fontSize: '10px', fontWeight: 600, color: '#999', textTransform: 'uppercase' as const, letterSpacing: '1px', borderBottom: '2px solid #E0E0E0', fontFamily: '"DM Mono", monospace' };
+  const tdStyle = { padding: '12px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right' as const, color: '#122023', fontFamily: '"DM Mono", monospace', fontSize: '13px' };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -499,7 +499,7 @@ export default function Treasury() {
         {/* Total value — large cell */}
         <div style={{
           gridRow: '1 / 3',
-          background: '#122023',
+          background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
           padding: '44px 36px',
           display: 'flex',
           flexDirection: 'column',
@@ -514,7 +514,7 @@ export default function Treasury() {
               As of 3/1 · SEND @ ${tokenPrices.send} · CC @ ${tokenPrices.cc}
             </div>
           </div>
-          <div style={{ fontFamily: '"SF Mono", "Fira Code", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+          <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
             {formatCurrency(totalTreasuryValue)}
           </div>
         </div>
@@ -523,9 +523,9 @@ export default function Treasury() {
         <div style={{ background: '#171f22', padding: '20px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
             <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>SEND</div>
-            <div style={{ fontFamily: 'monospace', fontSize: '11px', color: '#40FB50' }}>{formatCurrency(sendValue)}</div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '11px', color: '#40FB50' }}>{formatCurrency(sendValue)}</div>
           </div>
-          <div style={{ fontFamily: 'monospace', fontSize: '22px', fontWeight: 700, color: '#FFF', letterSpacing: '-0.5px' }}>
+          <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '22px', fontWeight: 700, color: '#FFF', letterSpacing: '-0.5px' }}>
             {formatNumber(currentHoldings.send)}
           </div>
         </div>
@@ -534,15 +534,15 @@ export default function Treasury() {
         <div style={{ background: '#171f22', padding: '20px 28px', display: 'flex', gap: '20px' }}>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>CC</div>
-            <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#FF9800' }}>{formatCurrency(ccValue)}</div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(ccValue)}</div>
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>Stablecoins</div>
-            <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#2196F3' }}>{formatCurrency(totalStablecoins)}</div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(totalStablecoins)}</div>
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>POL</div>
-            <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#7C4DFF' }}>{formatCurrency(currentHoldings.pol - polStablecoins)}</div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(currentHoldings.pol - polStablecoins)}</div>
           </div>
         </div>
       </div>
@@ -564,7 +564,7 @@ export default function Treasury() {
                 borderLeft: `3px solid ${asset.color}`,
               }}>
                 <div style={{ fontSize: '11px', color: '#999', fontWeight: 500, marginBottom: '6px' }}>{asset.label}</div>
-                <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#122023' }}>
+                <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 700, color: '#122023' }}>
                   {isCurrency ? formatCurrency(value) : formatNumber(value)}
                 </div>
               </div>

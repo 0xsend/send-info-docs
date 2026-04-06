@@ -208,7 +208,7 @@ export default function Revenue() {
         {/* Grand total */}
         <div style={{
           gridRow: '1 / 3',
-          background: '#122023',
+          background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
           padding: '44px 36px',
           display: 'flex',
           flexDirection: 'column',
@@ -223,7 +223,7 @@ export default function Revenue() {
               All sources · {sendAppRevenue.length} months tracked
             </div>
           </div>
-          <div style={{ fontFamily: '"SF Mono", "Fira Code", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+          <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
             {fmt(grandTotal)}
           </div>
         </div>
@@ -232,7 +232,7 @@ export default function Revenue() {
         <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>Send App</div>
           <div>
-            <div style={{ fontFamily: 'monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>{fmt(totalSendAppRevenue)}</div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>{fmt(totalSendAppRevenue)}</div>
             <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>Sendtags · Trades · Transactions</div>
           </div>
         </div>
@@ -241,7 +241,7 @@ export default function Revenue() {
         <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>Stablecoin Revenue</div>
           <div>
-            <div style={{ fontFamily: 'monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>{fmt(totalCusdRevenue)}</div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>{fmt(totalCusdRevenue)}</div>
             <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>via DeFi vaults · monthly</div>
           </div>
         </div>
@@ -286,7 +286,7 @@ export default function Revenue() {
                 </div>
                 <span style={{ fontSize: '11px', color: '#aaa' }}>{pct(s.value, totalSendAppRevenue)}</span>
               </div>
-              <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 600, color: '#122023', paddingLeft: '16px' }}>
+              <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 600, color: '#122023', paddingLeft: '16px' }}>
                 {fmt(s.value)}
               </div>
             </div>
@@ -313,7 +313,7 @@ export default function Revenue() {
                     textTransform: 'uppercase',
                     letterSpacing: '1px',
                     borderBottom: '2px solid #E0E0E0',
-                    fontFamily: 'monospace',
+                    fontFamily: '"DM Mono", monospace',
                   }}>
                     {h}
                   </th>
@@ -323,7 +323,7 @@ export default function Revenue() {
             <tbody>
               {sendAppRevenue.map((row) => (
                 <tr key={row.date}>
-                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: 'monospace', borderBottom: '1px solid #F0F0F0' }}>
+                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>
                     {row.date}
                   </td>
                   {[row.sendtags, row.trades, row.transactions].map((item, ci) => (
@@ -333,7 +333,7 @@ export default function Revenue() {
                           href={`https://basescan.org/tx/${item.tx}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ color: '#122023', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', fontFamily: 'monospace' }}
+                          style={{ color: '#122023', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', fontFamily: '"DM Mono", monospace' }}
                         >
                           {fmt(item.amount)}
                           <ExtLink />
@@ -343,17 +343,17 @@ export default function Revenue() {
                       )}
                     </td>
                   ))}
-                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: '#122023', textAlign: 'right', fontFamily: 'monospace', borderBottom: '1px solid #F0F0F0' }}>
+                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: '#122023', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>
                     {fmt(row.total)}
                   </td>
                 </tr>
               ))}
               <tr style={{ background: '#122023' }}>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: 'monospace', borderRadius: '0 0 0 12px' }}>TOTAL</td>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: 'monospace' }}>{fmt(totalSendtags)}</td>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: 'monospace' }}>{fmt(totalTrades)}</td>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: 'monospace' }}>{fmt(totalTransactions)}</td>
-                <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: 'monospace', borderRadius: '0 0 12px 0' }}>{fmt(totalSendAppRevenue)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace', borderRadius: '0 0 0 12px' }}>TOTAL</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalSendtags)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalTrades)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalTransactions)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderRadius: '0 0 12px 0' }}>{fmt(totalSendAppRevenue)}</td>
               </tr>
             </tbody>
           </table>
@@ -380,7 +380,7 @@ export default function Revenue() {
                     textTransform: 'uppercase',
                     letterSpacing: '1px',
                     borderBottom: '2px solid #E0E0E0',
-                    fontFamily: 'monospace',
+                    fontFamily: '"DM Mono", monospace',
                   }}>
                     {h}
                   </th>
@@ -390,15 +390,15 @@ export default function Revenue() {
             <tbody>
               {cusdRevenue.map((row) => (
                 <tr key={row.date}>
-                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: 'monospace', borderBottom: '1px solid #F0F0F0' }}>{row.date}</td>
-                  <td style={{ padding: '12px 16px', fontSize: '13px', color: '#122023', fontFamily: 'monospace', borderBottom: '1px solid #F0F0F0' }}>{fmt(row.yield)}</td>
-                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: '#122023', textAlign: 'right', fontFamily: 'monospace', borderBottom: '1px solid #F0F0F0' }}>{fmt(row.total)}</td>
+                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>{row.date}</td>
+                  <td style={{ padding: '12px 16px', fontSize: '13px', color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>{fmt(row.yield)}</td>
+                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: '#122023', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>{fmt(row.total)}</td>
                 </tr>
               ))}
               <tr style={{ background: '#122023' }}>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: 'monospace', borderRadius: '0 0 0 12px' }}>TOTAL</td>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: 'monospace' }}>{fmt(totalCusdRevenue)}</td>
-                <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: 'monospace', borderRadius: '0 0 12px 0' }}>{fmt(totalCusdRevenue)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace', borderRadius: '0 0 0 12px' }}>TOTAL</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalCusdRevenue)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderRadius: '0 0 12px 0' }}>{fmt(totalCusdRevenue)}</td>
               </tr>
             </tbody>
           </table>

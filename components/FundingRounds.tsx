@@ -20,7 +20,7 @@ const fmt = (n: number) => `$${n.toLocaleString()}`;
 const fmtM = (n: number) => n >= 1000000 ? `$${(n / 1000000).toFixed(1)}M` : fmt(n);
 const fmtNum = (n: number) => n >= 1000000 ? `${(n / 1000000).toFixed(1)}M` : n >= 1000 ? `${(n / 1000).toFixed(0)}K` : n.toLocaleString();
 const fmtPrice = (n: number) => `$${n.toFixed(4)}`;
-const MONO = '"SF Mono", "Fira Code", monospace';
+const MONO = '"DM Mono", monospace';
 const LABEL: React.CSSProperties = { fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: '#6b7c7f' };
 const CARD: React.CSSProperties = { background: '#FFF', borderRadius: '12px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' };
 
@@ -133,7 +133,7 @@ export default function FundingRounds() {
       {/* ── HERO ── */}
       <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gridTemplateRows: 'auto auto', gap: '2px', borderRadius: '14px', overflow: 'hidden' }}>
         {/* Total raised */}
-        <div style={{ gridRow: '1 / 3', background: '#122023', padding: '44px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
+        <div style={{ gridRow: '1 / 3', background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)', padding: '44px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
           <div>
             <div style={{ ...LABEL, color: '#40FB50', letterSpacing: '3px', marginBottom: '6px' }}>Total Raised</div>
             <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6 }}>

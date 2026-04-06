@@ -1,6 +1,5 @@
 'use client';
 
-const MONO = '"SF Mono", "Fira Code", monospace';
 const LABEL: React.CSSProperties = { fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: '#6b7c7f' };
 const CARD: React.CSSProperties = { background: '#FFF', borderRadius: '12px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' };
 
@@ -9,7 +8,7 @@ export default function PoolParty() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
       {/* ── HERO ── */}
-      <div style={{ background: '#122023', borderRadius: '14px', padding: '44px 36px' }}>
+      <div style={{ background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)', borderRadius: '14px', padding: '44px 36px' }}>
         <div style={{ ...LABEL, color: '#40FB50', letterSpacing: '3px', marginBottom: '10px' }}>Pool Party</div>
         <div style={{ fontSize: '26px', fontWeight: 700, color: '#FFF', lineHeight: 1.3, marginBottom: '12px' }}>
           Send's Decentralized Exchange<br />on Canton Network
