@@ -70,12 +70,13 @@ function FundingChart() {
               style={{ transition: 'opacity 0.15s' }}
             />
 
-            {/* Tooltip */}
+            {/* Tooltip — shows both valuation and price */}
             {isHov && (
               <g>
-                <rect x={x + barW / 2 - 60} y={pad.top + ih - barH - 52} width="120" height="42" rx="6" fill="#122023" />
-                <text x={x + barW / 2} y={pad.top + ih - barH - 36} textAnchor="middle" fontSize="10" fill="#6b7c7f" fontFamily={MONO}>Valuation</text>
-                <text x={x + barW / 2} y={pad.top + ih - barH - 20} textAnchor="middle" fontSize="13" fontWeight="700" fill="#FFF" fontFamily={MONO}>{fmtM(r.valuation)}</text>
+                <rect x={x + barW / 2 - 65} y={pad.top + ih - barH - 68} width="130" height="58" rx="6" fill="#122023" />
+                <text x={x + barW / 2} y={pad.top + ih - barH - 52} textAnchor="middle" fontSize="10" fill="#6b7c7f" fontFamily={MONO}>Valuation</text>
+                <text x={x + barW / 2} y={pad.top + ih - barH - 38} textAnchor="middle" fontSize="13" fontWeight="700" fill="#FFF" fontFamily={MONO}>{fmtM(r.valuation)}</text>
+                <text x={x + barW / 2} y={pad.top + ih - barH - 20} textAnchor="middle" fontSize="10" fill="#40FB50" fontFamily={MONO}>Price: {fmtPrice(r.price)}</text>
               </g>
             )}
 
@@ -108,11 +109,6 @@ function FundingChart() {
               return (
                 <g key={i}>
                   <circle cx={p.x} cy={p.y} r={isHov ? 6 : (isPeak ? 5 : 4)} fill={isPeak || isHov ? '#40FB50' : '#FFF'} stroke="#40FB50" strokeWidth="2" />
-                  {(isHov || isPeak) && (
-                    <text x={p.x} y={p.y - 12} textAnchor="middle" fontSize="10" fontWeight="700" fill="#1a8a2e" fontFamily={MONO}>
-                      {fmtPrice(p.price)}
-                    </text>
-                  )}
                 </g>
               );
             })}
