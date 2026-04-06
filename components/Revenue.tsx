@@ -148,7 +148,7 @@ function RevenueChart() {
           <g key={i}>
             <line x1={pad.left} y1={y} x2={w - pad.right} y2={y} stroke={ratio === 0 ? '#ddd' : '#f0f0f0'} />
             {ratio > 0 && (
-              <text x={pad.left - 6} y={y + 3} textAnchor="end" fontSize="9" fill="#999" fontFamily="monospace">
+              <text x={pad.left - 6} y={y + 3} textAnchor="end" fontSize="9" fill="#999" fontFamily='"DM Mono", monospace'>
                 {fmtK(maxTotal * ratio)}
               </text>
             )}
@@ -169,20 +169,20 @@ function RevenueChart() {
         return (
           <g key={d.date} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ cursor: 'pointer' }}>
             <rect x={x} y={pad.top} width={barW} height={ih} fill="transparent" />
-            <rect x={x} y={pad.top + ih - stH} width={barW} height={stH} fill="#7C4DFF" rx="0" opacity={dim ? 0.2 : 1} />
-            <rect x={x} y={pad.top + ih - stH - trH} width={barW} height={trH} fill="#FF9800" opacity={dim ? 0.2 : 1} />
-            <rect x={x} y={pad.top + ih - stH - trH - txH} width={barW} height={txH} fill="#2196F3" rx="2" opacity={dim ? 0.2 : 1} />
+            <rect x={x} y={pad.top + ih - stH} width={barW} height={stH} fill="#122023" rx="0" opacity={dim ? 0.2 : 1} />
+            <rect x={x} y={pad.top + ih - stH - trH} width={barW} height={trH} fill="#1a8a2e" opacity={dim ? 0.2 : 1} />
+            <rect x={x} y={pad.top + ih - stH - trH - txH} width={barW} height={txH} fill="#2aaa3e" rx="2" opacity={dim ? 0.2 : 1} />
 
             {isHov && (
               <g>
                 <rect x={Math.min(x + barW / 2 - 40, w - 100)} y={pad.top + ih - totalH - 36} width="80" height="26" rx="6" fill="#122023" />
-                <text x={Math.min(x + barW / 2, w - 60)} y={pad.top + ih - totalH - 19} textAnchor="middle" fontSize="11" fontWeight="700" fill="#FFF" fontFamily="monospace">
+                <text x={Math.min(x + barW / 2, w - 60)} y={pad.top + ih - totalH - 19} textAnchor="middle" fontSize="11" fontWeight="700" fill="#FFF" fontFamily='"DM Mono", monospace'>
                   {fmt(d.total)}
                 </text>
               </g>
             )}
 
-            <text x={x + barW / 2} y={h - 8} textAnchor="middle" fontSize="9" fill={isHov ? '#122023' : '#999'} fontWeight={isHov ? 700 : 400} fontFamily="monospace">
+            <text x={x + barW / 2} y={h - 8} textAnchor="middle" fontSize="9" fill={isHov ? '#122023' : '#999'} fontWeight={isHov ? 700 : 400} fontFamily='"DM Mono", monospace'>
               {monthNames[parseInt(month) - 1]}
             </text>
           </g>
@@ -195,9 +195,9 @@ function RevenueChart() {
 // ============ MAIN COMPONENT ============
 export default function Revenue() {
   const sources = [
-    { label: 'Sendtags', value: totalSendtags, color: '#7C4DFF' },
-    { label: 'Trades', value: totalTrades, color: '#FF9800' },
-    { label: 'Transactions', value: totalTransactions, color: '#2196F3' },
+    { label: 'Sendtags', value: totalSendtags, color: '#122023' },
+    { label: 'Trades', value: totalTrades, color: '#1a8a2e' },
+    { label: 'Transactions', value: totalTransactions, color: '#2aaa3e' },
   ];
 
   return (

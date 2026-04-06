@@ -45,15 +45,15 @@ const tokenPrices = {
   cc: 0.16,      // Canton Coin price in USD
 };
 
-// Asset definitions with colors and icons
+// Asset definitions with Send brand colors and colored left-border styling
 const assets = [
-  { key: 'send', label: 'SEND', icon: '💎', color: '#40FB50', bgColor: '#E8FDE9' },
-  { key: 'cc', label: 'Canton Coin', icon: '🪙', color: '#FF9800', bgColor: '#FFF3E0' },
-  { key: 'cusd', label: 'CUSD', icon: '💵', color: '#2196F3', bgColor: '#E3F2FD' },
-  { key: 'usdcx', label: 'USDCx', icon: '💵', color: '#1976D2', bgColor: '#E3F2FD' },
-  { key: 'usdc', label: 'USDC', icon: '💲', color: '#2775CA', bgColor: '#E8F4FD' },
-  { key: 'pol', label: 'POL', icon: '🔷', color: '#7C4DFF', bgColor: '#EDE7F6' },
-  { key: 'fiat', label: 'Fiat Bank', icon: '🏦', color: '#607D8B', bgColor: '#ECEFF1' },
+  { key: 'send', label: 'SEND', color: '#40FB50' },
+  { key: 'cc', label: 'Canton Coin', color: '#1a8a2e' },
+  { key: 'cusd', label: 'CUSD', color: '#122023' },
+  { key: 'usdcx', label: 'USDCx', color: '#2aaa3e' },
+  { key: 'usdc', label: 'USDC', color: '#1a8a2e' },
+  { key: 'pol', label: 'POL', color: '#4a5c5f' },
+  { key: 'fiat', label: 'Fiat Bank', color: '#6b7c7f' },
 ];
 
 // ============ UTILITY FUNCTIONS ============
@@ -114,7 +114,7 @@ function StablecoinChart() {
               stroke={ratio === 0 ? '#E0E0E0' : '#F0F0F0'}
               strokeDasharray={ratio === 0 ? '0' : '3,3'}
             />
-            <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888">
+            <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888" fontFamily='"DM Mono", monospace'>
               ${(value / 1000000).toFixed(1)}M
             </text>
           </g>
@@ -144,7 +144,7 @@ function StablecoinChart() {
               y={yOffset - cusdHeight}
               width={barWidth}
               height={cusdHeight}
-              fill="#2196F3"
+              fill="#122023"
               rx="3"
               opacity={hoveredIndex !== null && hoveredIndex !== i ? 0.4 : 1}
             />
@@ -154,7 +154,7 @@ function StablecoinChart() {
               y={yOffset - cusdHeight - usdcxHeight}
               width={barWidth}
               height={usdcxHeight}
-              fill="#1976D2"
+              fill="#2aaa3e"
               opacity={hoveredIndex !== null && hoveredIndex !== i ? 0.4 : 1}
             />
             {/* USDC - top */}
@@ -163,7 +163,7 @@ function StablecoinChart() {
               y={yOffset - cusdHeight - usdcxHeight - usdcHeight}
               width={barWidth}
               height={usdcHeight}
-              fill="#2775CA"
+              fill="#1a8a2e"
               rx="3"
               opacity={hoveredIndex !== null && hoveredIndex !== i ? 0.4 : 1}
             />
@@ -186,6 +186,7 @@ function StablecoinChart() {
                   fontSize="11"
                   fontWeight="700"
                   fill="#FFF"
+                  fontFamily='"DM Mono", monospace'
                 >
                   {formatCurrency(d.total)}
                 </text>
@@ -200,6 +201,7 @@ function StablecoinChart() {
               fontSize="10"
               fill={hoveredIndex === i ? '#122023' : '#666'}
               fontWeight={hoveredIndex === i ? 600 : 400}
+              fontFamily='"DM Mono", monospace'
             >
               {monthLabel}
             </text>
@@ -241,7 +243,7 @@ function CantonCoinChart() {
               stroke={ratio === 0 ? '#E0E0E0' : '#F0F0F0'}
               strokeDasharray={ratio === 0 ? '0' : '3,3'}
             />
-            <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888">
+            <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888" fontFamily='"DM Mono", monospace'>
               {(value / 1000000).toFixed(0)}M
             </text>
           </g>
@@ -266,7 +268,7 @@ function CantonCoinChart() {
               y={padding.top + innerHeight - barHeight}
               width={barWidth}
               height={barHeight}
-              fill={hoveredIndex === i ? '#FF9800' : (isLatest ? '#FF9800' : '#FFB74D')}
+              fill={hoveredIndex === i ? '#1a8a2e' : (isLatest ? '#1a8a2e' : '#2aaa3e')}
               rx="4"
               opacity={hoveredIndex !== null && hoveredIndex !== i ? 0.4 : 1}
             />
@@ -289,6 +291,7 @@ function CantonCoinChart() {
                   fontSize="11"
                   fontWeight="700"
                   fill="#FFF"
+                  fontFamily='"DM Mono", monospace'
                 >
                   {formatNumber(d.cc)}
                 </text>
@@ -303,6 +306,7 @@ function CantonCoinChart() {
               fontSize="10"
               fill={hoveredIndex === i ? '#122023' : '#666'}
               fontWeight={hoveredIndex === i ? 600 : 400}
+              fontFamily='"DM Mono", monospace'
             >
               {monthLabel}
             </text>
@@ -360,7 +364,7 @@ function SendHoldingsChart() {
               stroke={ratio === 0 ? '#E0E0E0' : '#F0F0F0'}
               strokeDasharray={ratio === 0 ? '0' : '3,3'}
             />
-            <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888">
+            <text x={padding.left - 8} y={y + 4} textAnchor="end" fontSize="10" fill="#888" fontFamily='"DM Mono", monospace'>
               {(value / 1000000).toFixed(0)}M
             </text>
           </g>
@@ -449,6 +453,7 @@ function SendHoldingsChart() {
                   fontSize="11"
                   fontWeight="700"
                   fill="#FFF"
+                  fontFamily='"DM Mono", monospace'
                 >
                   {formatNumber(p.data.send)}
                 </text>
@@ -463,6 +468,7 @@ function SendHoldingsChart() {
               fontSize="10"
               fill={isHovered ? '#122023' : '#666'}
               fontWeight={isHovered ? 600 : 400}
+              fontFamily='"DM Mono", monospace'
             >
               {monthLabel}
             </text>
@@ -584,13 +590,13 @@ export default function Treasury() {
           <StablecoinChart />
           <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '12px' }}>
             {[
-              { label: 'CUSD', color: '#2196F3' },
-              { label: 'USDCx', color: '#1976D2' },
-              { label: 'USDC', color: '#2775CA' },
+              { label: 'CUSD', color: '#122023' },
+              { label: 'USDCx', color: '#2aaa3e' },
+              { label: 'USDC', color: '#1a8a2e' },
             ].map((l) => (
               <div key={l.label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <div style={{ width: '10px', height: '10px', borderRadius: '2px', background: l.color }} />
-                <span style={{ fontSize: '11px', color: '#888' }}>{l.label}</span>
+                <span style={{ fontSize: '11px', color: '#888', fontFamily: '"DM Mono", monospace' }}>{l.label}</span>
               </div>
             ))}
           </div>
@@ -636,6 +642,7 @@ export default function Treasury() {
               alignItems: 'center',
               gap: '6px',
               fontWeight: 500,
+              fontFamily: '"DM Mono", monospace',
             }}
           >
             {showAllData ? 'Show Less' : 'Show All'}
@@ -684,7 +691,7 @@ export default function Treasury() {
       </div>
 
       {/* Info */}
-      <div style={{ fontSize: '11px', color: '#999', lineHeight: 1.6, padding: '0 4px' }}>
+      <div style={{ fontSize: '11px', color: '#999', lineHeight: 1.6, padding: '0 4px', fontFamily: '"DM Mono", monospace' }}>
         Treasury balances are updated on the 1st of every month. All values reflect on-chain and off-chain holdings.
       </div>
     </div>
