@@ -519,23 +519,20 @@ export default function Treasury() {
           </div>
         </div>
 
-        {/* SEND value */}
-        <div style={{ background: '#171f22', padding: '20px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>SEND</div>
-            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '11px', color: '#40FB50' }}>{formatCurrency(sendValue)}</div>
-          </div>
-          <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '22px', fontWeight: 700, color: '#FFF', letterSpacing: '-0.5px' }}>
-            {formatNumber(currentHoldings.send)}
-          </div>
-        </div>
-
-        {/* CC + Stablecoins + POL */}
+        {/* SEND + CC */}
         <div style={{ background: '#171f22', padding: '20px 28px', display: 'flex', gap: '20px' }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>SEND</div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(sendValue)}</div>
+          </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>CC</div>
             <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(ccValue)}</div>
           </div>
+        </div>
+
+        {/* Stablecoins + POL */}
+        <div style={{ background: '#171f22', padding: '20px 28px', display: 'flex', gap: '20px' }}>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>Stablecoins</div>
             <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(totalStablecoins)}</div>
