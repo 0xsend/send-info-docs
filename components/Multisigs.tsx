@@ -51,20 +51,24 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column' as const,
-    gap: '24px',
+    gap: '16px',
     padding: '8px 0',
   },
   infoCallout: {
-    backgroundColor: '#E8F4FD',
-    border: '1px solid #B8DAFF',
-    borderRadius: '8px',
-    padding: '14px 18px',
-    fontSize: '14px',
-    color: '#004085',
     display: 'flex',
-    alignItems: 'flex-start',
-    gap: '12px',
+    alignItems: 'center',
+    gap: '10px',
+    padding: '10px 14px',
+    backgroundColor: '#F7F7F7',
+    border: '1px solid #E0E0E0',
+    borderRadius: '12px',
+    fontSize: '13px',
+    color: '#666',
     lineHeight: 1.5,
+  },
+  infoIcon: {
+    flexShrink: 0,
+    color: '#999',
   },
   section: {
     backgroundColor: '#FFF',
@@ -74,47 +78,63 @@ const styles = {
     overflow: 'hidden',
   },
   sectionHeader: {
-    padding: '16px 20px',
-    borderBottom: '1px solid #E0E0E0',
-    backgroundColor: '#FAFAFA',
+    padding: '14px 20px',
+    backgroundColor: '#122023',
+    display: 'flex',
+    alignItems: 'baseline',
+    gap: '12px',
   },
   sectionTitle: {
-    fontSize: '16px',
+    fontSize: '14px',
     fontWeight: 600,
-    color: '#122023',
+    color: '#FFFFFF',
+    letterSpacing: '0.01em',
+  },
+  sectionLabel: {
+    fontSize: '11px',
+    fontWeight: 600,
+    letterSpacing: '2px',
+    textTransform: 'uppercase' as const,
+    color: '#999',
   },
   sectionSubtitle: {
-    fontSize: '12px',
-    color: '#666',
-    marginTop: '2px',
+    fontSize: '11px',
+    fontWeight: 600,
+    letterSpacing: '1.5px',
+    textTransform: 'uppercase' as const,
+    color: 'rgba(255,255,255,0.45)',
   },
-  row: {
+  row: (isEven: boolean): React.CSSProperties => ({
     display: 'flex',
     alignItems: 'center',
-    padding: '14px 20px',
+    padding: '12px 20px',
     borderBottom: '1px solid #F0F0F0',
     gap: '16px',
-  },
+    backgroundColor: isEven ? '#FAFAFA' : '#FFFFFF',
+  }),
   rowName: {
-    fontSize: '14px',
+    fontSize: '13px',
     fontWeight: 500,
     color: '#122023',
-    minWidth: '140px',
+    minWidth: '160px',
   },
   rowAddress: {
     fontFamily: 'monospace',
-    fontSize: '13px',
-    color: '#666',
+    fontSize: '12px',
+    color: '#888',
     flex: 1,
+    letterSpacing: '0.02em',
   },
   viewLink: {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '4px',
-    color: '#10B981',
-    fontSize: '13px',
-    fontWeight: 500,
+    color: '#40FB50',
+    fontSize: '12px',
+    fontWeight: 600,
     textDecoration: 'none',
+    letterSpacing: '0.5px',
+    flexShrink: 0,
   },
 };
 
@@ -131,12 +151,23 @@ function getBasescanUrl(address: string): string {
 }
 
 // ============ COMPONENTS ============
-function MultisigRow({ name, address, url }: { name: string; address: string; url?: string }) {
+function MultisigRow({
+  name,
+  address,
+  url,
+  index,
+}: {
+  name: string;
+  address: string;
+  url?: string;
+  index: number;
+}) {
   const displayAddress = address.startsWith('0x') ? shortenAddress(address) : address;
   const linkUrl = url || getBasescanUrl(address);
+  const isEven = index % 2 === 0;
 
   return (
-    <div style={styles.row}>
+    <div style={styles.row(isEven)}>
       <div style={styles.rowName}>{name}</div>
       <div style={styles.rowAddress}>{displayAddress}</div>
       <a
@@ -146,10 +177,34 @@ function MultisigRow({ name, address, url }: { name: string; address: string; ur
         style={styles.viewLink}
       >
         View
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+          <path
+            d="M3 9L9 3M9 3H4M9 3V8"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </a>
+    </div>
+  );
+}
+
+interface SectionProps {
+  title: string;
+  subtitle: string;
+  children: React.ReactNode;
+}
+
+function Section({ title, subtitle, children }: SectionProps) {
+  return (
+    <div style={styles.section}>
+      <div style={styles.sectionHeader}>
+        <span style={styles.sectionTitle}>{title}</span>
+        <span style={styles.sectionSubtitle}>{subtitle}</span>
+      </div>
+      {children}
     </div>
   );
 }
@@ -160,61 +215,59 @@ export default function Multisigs() {
     <div style={styles.container}>
       {/* Info Callout */}
       <div style={styles.infoCallout}>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: '2px' }}>
-          <circle cx="10" cy="10" r="9" stroke="#004085" strokeWidth="2"/>
-          <path d="M10 9V14M10 6V7" stroke="#004085" strokeWidth="2" strokeLinecap="round"/>
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 20 20"
+          fill="none"
+          style={styles.infoIcon}
+        >
+          <circle cx="10" cy="10" r="9" stroke="#AAAAAA" strokeWidth="2" />
+          <path d="M10 9V14M10 6V7" stroke="#AAAAAA" strokeWidth="2" strokeLinecap="round" />
         </svg>
         <span>
-          All multisigs require <strong>3 of 5 signatures</strong> for transaction execution.
-          Revenue is consolidated to the Treasury on the <strong>1st of each month</strong>.
+          All multisigs require <strong style={{ color: '#444', fontWeight: 600 }}>3 of 5 signatures</strong> for
+          transaction execution. Revenue consolidates to Treasury on the{' '}
+          <strong style={{ color: '#444', fontWeight: 600 }}>1st of each month</strong>.
         </span>
       </div>
 
       {/* Canton Network */}
-      <div style={styles.section}>
-        <div style={styles.sectionHeader}>
-          <div style={styles.sectionTitle}>Canton Network</div>
-          <div style={styles.sectionSubtitle}>Treasury, rewards, and operations</div>
-        </div>
-        {cantonMultisigs.map((multisig) => (
+      <Section title="Canton Network" subtitle="Treasury, rewards &amp; operations">
+        {cantonMultisigs.map((multisig, i) => (
           <MultisigRow
             key={multisig.address}
             name={multisig.name}
             address={multisig.shortAddress || multisig.address}
             url={multisig.url}
+            index={i}
           />
         ))}
-      </div>
+      </Section>
 
       {/* Base Network */}
-      <div style={styles.section}>
-        <div style={styles.sectionHeader}>
-          <div style={styles.sectionTitle}>Base Network</div>
-          <div style={styles.sectionSubtitle}>Token allocation and operational wallets</div>
-        </div>
+      <Section title="Base Network" subtitle="Token allocation &amp; operational wallets">
         {baseMultisigs.map((multisig, i) => (
           <MultisigRow
             key={multisig.address}
             name={multisig.name}
             address={multisig.address}
+            index={i}
           />
         ))}
-      </div>
+      </Section>
 
       {/* Revenue Collection */}
-      <div style={styles.section}>
-        <div style={styles.sectionHeader}>
-          <div style={styles.sectionTitle}>Revenue Collection (Base)</div>
-          <div style={styles.sectionSubtitle}>Product-specific revenue tracking on Base Network</div>
-        </div>
-        {revenueMultisigs.map((multisig) => (
+      <Section title="Revenue Collection (Base)" subtitle="Product revenue wallets">
+        {revenueMultisigs.map((multisig, i) => (
           <MultisigRow
             key={multisig.address}
             name={multisig.name}
             address={multisig.address}
+            index={i}
           />
         ))}
-      </div>
+      </Section>
     </div>
   );
 }

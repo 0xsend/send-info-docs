@@ -76,9 +76,9 @@ const formatNumber = (num: number) => {
 const formatFullNumber = (num: number) => num.toLocaleString();
 
 // ============ DONUT CHART ============
-function DonutChart() {
+function DonutChart({ hoveredIndex, onHover }: { hoveredIndex: number | null; onHover: (i: number | null) => void }) {
   const size = 160;
-  const strokeWidth = 24;
+  const strokeWidth = 22;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   let cumulativePercent = 0;
@@ -91,6 +91,7 @@ function DonutChart() {
           const strokeDasharray = `${(percent / 100) * circumference} ${circumference}`;
           const strokeDashoffset = -((cumulativePercent / 100) * circumference);
           cumulativePercent += percent;
+          const dimmed = hoveredIndex !== null && hoveredIndex !== i;
 
           return (
             <circle
@@ -103,13 +104,16 @@ function DonutChart() {
               strokeWidth={strokeWidth}
               strokeDasharray={strokeDasharray}
               strokeDashoffset={strokeDashoffset}
+              style={{ opacity: dimmed ? 0.2 : 1, transition: 'opacity 0.2s', cursor: 'pointer' }}
+              onMouseEnter={() => onHover(i)}
+              onMouseLeave={() => onHover(null)}
             />
           );
         })}
       </svg>
       <div style={{ position: 'absolute', textAlign: 'center' }}>
-        <div style={{ fontSize: '24px', fontWeight: 700, color: '#122023' }}>1B</div>
-        <div style={{ fontSize: '10px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Total</div>
+        <div style={{ fontFamily: '"SF Mono", "Fira Code", monospace', fontSize: '22px', fontWeight: 700, color: '#122023', lineHeight: 1 }}>1B</div>
+        <div style={{ fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '2px' }}>Total</div>
       </div>
     </div>
   );
@@ -118,16 +122,14 @@ function DonutChart() {
 // ============ AREA CHART ============
 function AreaChart() {
   const data = tokenData.quarterlyData;
-  const maxVal = 350_000_000; // Fixed scale for better context
+  const maxVal = 350_000_000;
   const minVal = 150_000_000;
   const range = maxVal - minVal;
 
-  // Y-axis labels
   const yLabels = ['350M', '300M', '250M', '200M', '150M'];
   const yValues = [350_000_000, 300_000_000, 250_000_000, 200_000_000, 150_000_000];
 
-  // Calculate chart points (offset for y-axis space)
-  const chartLeft = 12; // percentage for y-axis
+  const chartLeft = 12;
   const chartWidth = 100 - chartLeft;
 
   const points = data.map((d, i) => {
@@ -136,11 +138,9 @@ function AreaChart() {
     return `${x},${y}`;
   }).join(' ');
 
-  // Create area polygon
   const lastPoint = points.split(' ').pop();
   const areaPoints = `${chartLeft},92 ${points} ${lastPoint?.split(',')[0]},92`;
 
-  // Data points for circles
   const dataPoints = data.map((d, i) => ({
     x: chartLeft + (i / (data.length - 1)) * chartWidth,
     y: 8 + ((maxVal - d.circulating) / range) * 84,
@@ -153,8 +153,8 @@ function AreaChart() {
       <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
         <defs>
           <linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#40FB50" stopOpacity="0.4" />
-            <stop offset="50%" stopColor="#40FB50" stopOpacity="0.15" />
+            <stop offset="0%" stopColor="#40FB50" stopOpacity="0.35" />
+            <stop offset="50%" stopColor="#40FB50" stopOpacity="0.12" />
             <stop offset="100%" stopColor="#40FB50" stopOpacity="0.02" />
           </linearGradient>
           <filter id="glow">
@@ -166,7 +166,6 @@ function AreaChart() {
           </filter>
         </defs>
 
-        {/* Horizontal grid lines */}
         {yValues.map((val, i) => {
           const y = 8 + ((maxVal - val) / range) * 84;
           return (
@@ -176,17 +175,15 @@ function AreaChart() {
               y1={y}
               x2="100"
               y2={y}
-              stroke="#E8E8E8"
+              stroke="#EBEBEB"
               strokeWidth="0.2"
               strokeDasharray="1,1"
             />
           );
         })}
 
-        {/* Area fill */}
         <polygon points={areaPoints} fill="url(#areaFill)" />
 
-        {/* Main line */}
         <polyline
           points={points}
           fill="none"
@@ -197,7 +194,6 @@ function AreaChart() {
           filter="url(#glow)"
         />
 
-        {/* Data points */}
         {dataPoints.map((point, i) => (
           <g key={i}>
             <circle
@@ -225,7 +221,7 @@ function AreaChart() {
         paddingBottom: '28px',
       }}>
         {yLabels.map((label, i) => (
-          <span key={i} style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>{label}</span>
+          <span key={i} style={{ fontFamily: '"SF Mono", "Fira Code", monospace', fontSize: '10px', color: '#999', fontWeight: 500 }}>{label}</span>
         ))}
       </div>
 
@@ -237,8 +233,9 @@ function AreaChart() {
         right: 0,
         display: 'flex',
         justifyContent: 'space-between',
+        fontFamily: '"SF Mono", "Fira Code", monospace',
         fontSize: '10px',
-        color: '#666',
+        color: '#999',
         fontWeight: 500,
       }}>
         <span>Q2 '23</span>
@@ -255,68 +252,155 @@ function AreaChart() {
 // ============ MAIN COMPONENT ============
 export default function TokenEmissions() {
   const [expandedTable, setExpandedTable] = React.useState(false);
+  const [hoveredAlloc, setHoveredAlloc] = React.useState<number | null>(null);
+  const [hoveredBar, setHoveredBar] = React.useState<number | null>(null);
+
+  const cardStyle: React.CSSProperties = {
+    background: '#FFF',
+    borderRadius: '12px',
+    border: '1px solid #E0E0E0',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+  };
+
+  const labelStyle: React.CSSProperties = {
+    fontSize: '11px',
+    fontWeight: 600,
+    letterSpacing: '2px',
+    textTransform: 'uppercase',
+    color: '#999',
+  };
+
+  const monoStyle: React.CSSProperties = {
+    fontFamily: '"SF Mono", "Fira Code", monospace',
+  };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', padding: '8px 0' }}>
-      {/* Key Metrics */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px' }}>
-        <div style={{ background: '#FFF', borderRadius: '12px', padding: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#666', marginBottom: '4px' }}>Total Supply</div>
-          <div style={{ fontSize: '22px', fontWeight: 700, color: '#122023', lineHeight: 1.2 }}>{formatNumber(tokenData.totalSupply)}</div>
-          <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>Fixed cap</div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '8px 0' }}>
+
+      {/* ── HERO: Bento grid ── */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1.6fr 1fr',
+        gridTemplateRows: 'auto auto',
+        gap: '2px',
+        borderRadius: '14px',
+        overflow: 'hidden',
+      }}>
+        {/* Total Supply — large left cell */}
+        <div style={{
+          gridRow: '1 / 3',
+          background: '#122023',
+          padding: '44px 36px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          minHeight: '200px',
+        }}>
+          <div>
+            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '6px' }}>
+              $CC Token Supply
+            </div>
+            <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6, maxWidth: '380px' }}>
+              Fixed supply of 1 billion tokens. {tokenData.circulationRate}% currently circulating across the Canton Network ecosystem.
+            </div>
+          </div>
+          <div>
+            <div style={{ ...monoStyle, fontSize: '52px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+              1,000,000,000
+            </div>
+            <div style={{ fontSize: '12px', color: '#4a5c5f', marginTop: '10px', fontWeight: 500 }}>
+              Total supply · fixed cap · no additional issuance
+            </div>
+          </div>
         </div>
-        <div style={{ background: 'linear-gradient(135deg, #40FB50 0%, #32d946 100%)', borderRadius: '12px', padding: '16px', color: '#122023' }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#122023', marginBottom: '4px' }}>Circulating</div>
-          <div style={{ fontSize: '22px', fontWeight: 700, color: '#122023', lineHeight: 1.2 }}>{formatNumber(tokenData.circulating)}</div>
-          <div style={{ fontSize: '12px', color: '#122023', marginTop: '2px' }}>{tokenData.circulationRate}% of supply</div>
+
+        {/* Circulating top-right */}
+        <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>
+            Circulating
+          </div>
+          <div>
+            <div style={{ ...monoStyle, fontSize: '26px', fontWeight: 700, color: '#40FB50', letterSpacing: '-1px' }}>
+              {formatNumber(tokenData.circulating)}
+            </div>
+            <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>{tokenData.circulationRate}% of total supply</div>
+          </div>
         </div>
-        <div style={{ background: '#FFF', borderRadius: '12px', padding: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#666', marginBottom: '4px' }}>Non-Circulating</div>
-          <div style={{ fontSize: '22px', fontWeight: 700, color: '#122023', lineHeight: 1.2 }}>{formatNumber(tokenData.nonCirculating)}</div>
-          <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>In wallets</div>
-        </div>
-        <div style={{ background: '#FFF', borderRadius: '12px', padding: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', color: '#666', marginBottom: '4px' }}>Avg Inflation</div>
-          <div style={{ fontSize: '22px', fontWeight: 700, color: '#122023', lineHeight: 1.2 }}>{tokenData.avgAnnualInflation}%</div>
-          <div style={{ fontSize: '12px', color: '#666', marginTop: '2px' }}>Annualized</div>
+
+        {/* Non-Circulating + Avg Inflation bottom-right */}
+        <div style={{ background: '#171f22', padding: '24px 28px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>
+              Non-Circulating
+            </div>
+            <div>
+              <div style={{ ...monoStyle, fontSize: '20px', fontWeight: 700, color: '#FFF', letterSpacing: '-0.5px' }}>
+                {formatNumber(tokenData.nonCirculating)}
+              </div>
+              <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>in wallets</div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderLeft: '1px solid #263a3e', paddingLeft: '16px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>
+              Avg Inflation
+            </div>
+            <div>
+              <div style={{ ...monoStyle, fontSize: '20px', fontWeight: 700, color: '#FFF', letterSpacing: '-0.5px' }}>
+                {tokenData.avgAnnualInflation}%
+              </div>
+              <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>annualized</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Token Allocation */}
-      <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
-        <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Token Allocation</div>
-        <div style={{ fontSize: '13px', color: '#666', marginBottom: '20px' }}>Distribution across 6 categories</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
-          <DonutChart />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', width: '100%' }}>
-            {tokenData.allocations.map((alloc) => {
+      {/* ── TOKEN ALLOCATION ── */}
+      <div style={{ ...cardStyle, padding: '24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+          <div>
+            <div style={{ ...labelStyle, marginBottom: '6px' }}>Token Allocation</div>
+            <div style={{ fontSize: '20px', fontWeight: 700, color: '#122023' }}>Distribution across 6 categories</div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'center' }}>
+          <DonutChart hoveredIndex={hoveredAlloc} onHover={setHoveredAlloc} />
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', width: '100%' }}>
+            {tokenData.allocations.map((alloc, i) => {
               const distributed = alloc.allocation - alloc.remaining;
               const pctDistributed = (distributed / alloc.allocation) * 100;
               const pctOfTotal = (alloc.allocation / tokenData.totalSupply) * 100;
+              const dimmed = hoveredAlloc !== null && hoveredAlloc !== i;
 
               return (
                 <div
                   key={alloc.name}
+                  onMouseEnter={() => setHoveredAlloc(i)}
+                  onMouseLeave={() => setHoveredAlloc(null)}
                   style={{
                     padding: '14px',
                     background: '#FAFAFA',
                     borderRadius: '10px',
                     border: '1px solid #EBEBEB',
+                    opacity: dimmed ? 0.35 : 1,
+                    transition: 'opacity 0.2s',
+                    cursor: 'default',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: alloc.color, flexShrink: 0 }} />
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: alloc.color, flexShrink: 0 }} />
                     <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>{alloc.name}</div>
                   </div>
-                  <div style={{ fontSize: '11px', color: '#666', marginBottom: '10px' }}>
-                    {pctOfTotal}% of supply ({formatNumber(alloc.allocation)})
+                  <div style={{ ...monoStyle, fontSize: '11px', color: '#666', marginBottom: '10px' }}>
+                    {pctOfTotal}% · {formatNumber(alloc.allocation)}
                   </div>
-                  <div style={{ height: '4px', background: '#E0E0E0', borderRadius: '2px', overflow: 'hidden', marginBottom: '8px' }}>
+                  <div style={{ height: '4px', background: '#E8E8E8', borderRadius: '2px', overflow: 'hidden', marginBottom: '8px' }}>
                     <div style={{ height: '100%', width: `${pctDistributed}%`, background: alloc.color, borderRadius: '2px' }} />
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '10px', color: '#999' }}>{pctDistributed.toFixed(0)}% distributed</span>
-                    <span style={{ fontSize: '10px', fontWeight: 600, color: alloc.color }}>{formatNumber(distributed)}</span>
+                    <span style={{ ...monoStyle, fontSize: '10px', fontWeight: 600, color: alloc.color }}>{formatNumber(distributed)}</span>
                   </div>
                 </div>
               );
@@ -325,59 +409,60 @@ export default function TokenEmissions() {
         </div>
       </div>
 
-      {/* Circulating Supply */}
-      <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
-        <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Circulating Supply</div>
-        <div style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Q2 2023 - Q1 2026</div>
+      {/* ── CIRCULATING SUPPLY CHART ── */}
+      <div style={{ ...cardStyle, padding: '24px' }}>
+        <div style={{ marginBottom: '20px' }}>
+          <div style={{ ...labelStyle, marginBottom: '6px' }}>Circulating Supply</div>
+          <div style={{ fontSize: '20px', fontWeight: 700, color: '#122023' }}>Q2 2023 — Q1 2026</div>
+        </div>
+
         <AreaChart />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', paddingTop: '16px', borderTop: '1px solid #E0E0E0' }}>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', paddingTop: '16px', borderTop: '1px solid #EBEBEB' }}>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#122023' }}>{formatNumber(tokenData.quarterlyData[0].circulating)}</div>
-            <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>Starting (TGE)</div>
+            <div style={{ ...monoStyle, fontSize: '18px', fontWeight: 700, color: '#122023' }}>{formatNumber(tokenData.quarterlyData[0].circulating)}</div>
+            <div style={{ fontSize: '11px', color: '#999', marginTop: '2px', textTransform: 'uppercase', letterSpacing: '1px' }}>Starting (TGE)</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#10B981' }}>+{formatNumber(tokenData.circulating - tokenData.quarterlyData[0].circulating)}</div>
-            <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>Added</div>
+            <div style={{ ...monoStyle, fontSize: '18px', fontWeight: 700, color: '#10B981' }}>+{formatNumber(tokenData.circulating - tokenData.quarterlyData[0].circulating)}</div>
+            <div style={{ fontSize: '11px', color: '#999', marginTop: '2px', textTransform: 'uppercase', letterSpacing: '1px' }}>Added</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#10B981' }}>{formatNumber(tokenData.circulating)}</div>
-            <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>Current</div>
+            <div style={{ ...monoStyle, fontSize: '18px', fontWeight: 700, color: '#122023' }}>{formatNumber(tokenData.circulating)}</div>
+            <div style={{ fontSize: '11px', color: '#999', marginTop: '2px', textTransform: 'uppercase', letterSpacing: '1px' }}>Current</div>
           </div>
         </div>
       </div>
 
-      {/* Inflation Trend */}
-      <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
+      {/* ── INFLATION TREND ── */}
+      <div style={{ ...cardStyle, padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
           <div>
-            <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Inflation Trend</div>
-            <div style={{ fontSize: '13px', color: '#666' }}>Annualized rate by quarter</div>
+            <div style={{ ...labelStyle, marginBottom: '6px' }}>Inflation Trend</div>
+            <div style={{ fontSize: '20px', fontWeight: 700, color: '#122023' }}>Annualized rate by quarter</div>
           </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', color: '#666' }}>
+          <div style={{ display: 'flex', gap: '14px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '10px', color: '#999', letterSpacing: '1px', textTransform: 'uppercase' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#EF4444' }} />
               <span>&gt;40%</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', color: '#666' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '10px', color: '#999', letterSpacing: '1px', textTransform: 'uppercase' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#F59E0B' }} />
-              <span>20-40%</span>
+              <span>20–40%</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', color: '#666' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '10px', color: '#999', letterSpacing: '1px', textTransform: 'uppercase' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#10B981' }} />
               <span>&lt;20%</span>
             </div>
           </div>
         </div>
 
-        {/* Chart with Y-axis */}
         <div style={{ display: 'flex', gap: '8px' }}>
-          {/* Y-axis labels */}
+          {/* Y-axis */}
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '180px', paddingBottom: '24px' }}>
-            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>80%</span>
-            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>60%</span>
-            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>40%</span>
-            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>20%</span>
-            <span style={{ fontSize: '10px', color: '#999', fontWeight: 500 }}>0%</span>
+            {['80%', '60%', '40%', '20%', '0%'].map((label) => (
+              <span key={label} style={{ ...monoStyle, fontSize: '10px', color: '#999', fontWeight: 500 }}>{label}</span>
+            ))}
           </div>
 
           {/* Bars */}
@@ -385,30 +470,27 @@ export default function TokenEmissions() {
             {/* Grid lines */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '156px' }}>
               {[0, 25, 50, 75, 100].map((pct, i) => (
-                <div
-                  key={i}
-                  style={{
-                    position: 'absolute',
-                    top: `${pct}%`,
-                    left: 0,
-                    right: 0,
-                    borderTop: '1px dashed #E8E8E8',
-                  }}
-                />
+                <div key={i} style={{ position: 'absolute', top: `${pct}%`, left: 0, right: 0, borderTop: '1px dashed #E8E8E8' }} />
               ))}
             </div>
 
             {/* Bar chart */}
             <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '4px', height: '156px', position: 'relative' }}>
               {tokenData.inflationData.map((period, i) => {
-                const maxScale = 80; // Fixed scale to 80%
+                const maxScale = 80;
                 const barHeight = Math.min((period.annualized / maxScale) * 100, 100);
                 const isHigh = period.annualized > 40;
                 const isMedium = period.annualized > 20 && period.annualized <= 40;
                 const barColor = isHigh ? '#EF4444' : isMedium ? '#F59E0B' : '#10B981';
+                const dimmed = hoveredBar !== null && hoveredBar !== i;
 
                 return (
-                  <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', justifyContent: 'flex-end' }}>
+                  <div
+                    key={i}
+                    style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', justifyContent: 'flex-end' }}
+                    onMouseEnter={() => setHoveredBar(i)}
+                    onMouseLeave={() => setHoveredBar(null)}
+                  >
                     <div
                       style={{
                         width: '100%',
@@ -418,21 +500,23 @@ export default function TokenEmissions() {
                         borderRadius: '4px 4px 0 0',
                         position: 'relative',
                         minHeight: '4px',
+                        opacity: dimmed ? 0.2 : 1,
+                        transition: 'opacity 0.2s',
                       }}
                     >
-                      {/* Value label on top of bar */}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: '-20px',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          fontSize: '10px',
-                          fontWeight: 700,
-                          color: barColor,
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
+                      <div style={{
+                        position: 'absolute',
+                        top: '-20px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        fontFamily: '"SF Mono", "Fira Code", monospace',
+                        fontSize: '10px',
+                        fontWeight: 700,
+                        color: barColor,
+                        whiteSpace: 'nowrap',
+                        opacity: dimmed ? 0.2 : 1,
+                        transition: 'opacity 0.2s',
+                      }}>
                         {period.annualized}%
                       </div>
                     </div>
@@ -445,8 +529,8 @@ export default function TokenEmissions() {
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px' }}>
               {tokenData.inflationData.map((period, i) => (
                 <div key={i} style={{ flex: 1, textAlign: 'center' }}>
-                  <div style={{ fontSize: '9px', color: '#666', fontWeight: 500 }}>
-                    {period.period.replace('Q', 'Q').replace(' 20', "'")}
+                  <div style={{ fontFamily: '"SF Mono", "Fira Code", monospace', fontSize: '9px', color: '#999', fontWeight: 500 }}>
+                    {period.period.replace(' 20', "'")}
                   </div>
                 </div>
               ))}
@@ -455,63 +539,82 @@ export default function TokenEmissions() {
         </div>
 
         {/* Summary stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #E0E0E0' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #EBEBEB' }}>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#EF4444' }}>73.5%</div>
-            <div style={{ fontSize: '10px', color: '#666', marginTop: '2px' }}>Peak (Q4 '23)</div>
+            <div style={{ ...monoStyle, fontSize: '18px', fontWeight: 700, color: '#EF4444' }}>73.5%</div>
+            <div style={{ fontSize: '11px', color: '#999', marginTop: '2px', textTransform: 'uppercase', letterSpacing: '1px' }}>Peak (Q4 '23)</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#10B981' }}>6.1%</div>
-            <div style={{ fontSize: '10px', color: '#666', marginTop: '2px' }}>Low (Q2 '25)</div>
+            <div style={{ ...monoStyle, fontSize: '18px', fontWeight: 700, color: '#10B981' }}>6.1%</div>
+            <div style={{ fontSize: '11px', color: '#999', marginTop: '2px', textTransform: 'uppercase', letterSpacing: '1px' }}>Low (Q2 '25)</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#122023' }}>{tokenData.avgAnnualInflation}%</div>
-            <div style={{ fontSize: '10px', color: '#666', marginTop: '2px' }}>Average</div>
+            <div style={{ ...monoStyle, fontSize: '18px', fontWeight: 700, color: '#122023' }}>{tokenData.avgAnnualInflation}%</div>
+            <div style={{ fontSize: '11px', color: '#999', marginTop: '2px', textTransform: 'uppercase', letterSpacing: '1px' }}>Average</div>
           </div>
         </div>
       </div>
 
-      {/* Vesting Progress */}
-      <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
-        <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Vesting Progress</div>
-        <div style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Token release status by allocation</div>
-        {tokenData.vestingProgress.map((item) => (
-          <div key={item.name} style={{ marginBottom: '14px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 600, color: '#122023' }}>
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: item.color }} />
-                {item.name}
+      {/* ── VESTING PROGRESS ── */}
+      <div style={{ ...cardStyle, padding: '24px' }}>
+        <div style={{ marginBottom: '20px' }}>
+          <div style={{ ...labelStyle, marginBottom: '6px' }}>Vesting Progress</div>
+          <div style={{ fontSize: '20px', fontWeight: 700, color: '#122023' }}>Token release status by allocation</div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+          {tokenData.vestingProgress.map((item) => (
+            <div key={item.name}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: item.color, flexShrink: 0 }} />
+                  <span style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>{item.name}</span>
+                </div>
+                <div style={{ ...monoStyle, fontSize: '12px', color: '#666' }}>
+                  {formatNumber(item.released)} / {formatNumber(item.initial)}
+                  <span style={{ marginLeft: '8px', fontWeight: 700, color: item.color }}>({item.pct}%)</span>
+                </div>
               </div>
-              <div style={{ fontSize: '12px', color: '#666' }}>
-                {formatNumber(item.released)} / {formatNumber(item.initial)} ({item.pct}%)
+              <div style={{ height: '6px', background: '#E8E8E8', borderRadius: '3px', overflow: 'hidden' }}>
+                <div style={{ height: '100%', width: `${item.pct}%`, background: item.color, borderRadius: '3px' }} />
               </div>
             </div>
-            <div style={{ height: '6px', background: '#E0E0E0', borderRadius: '3px', overflow: 'hidden' }}>
-              <div style={{ height: '100%', width: `${item.pct}%`, background: item.color, borderRadius: '3px' }} />
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* Distribution Status Table */}
-      <div style={{ background: '#FFF', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0', overflow: 'hidden' }}>
-        <div style={{ padding: '16px 20px', borderBottom: '1px solid #E0E0E0' }}>
-          <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Distribution Status</div>
-          <div style={{ fontSize: '13px', color: '#666' }}>Detailed breakdown by allocation</div>
+      {/* ── DISTRIBUTION STATUS TABLE ── */}
+      <div style={{ ...cardStyle, overflow: 'hidden' }}>
+        <div style={{ padding: '20px 24px', borderBottom: '1px solid #E0E0E0' }}>
+          <div style={{ ...labelStyle, marginBottom: '6px' }}>Distribution Status</div>
+          <div style={{ fontSize: '20px', fontWeight: 700, color: '#122023' }}>Detailed breakdown by allocation</div>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
             <thead>
               <tr>
-                <th style={{ textAlign: 'left', padding: '12px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0' }}>Allocation</th>
-                <th style={{ textAlign: 'right', padding: '12px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0' }}>Initial</th>
-                <th style={{ textAlign: 'right', padding: '12px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0' }}>Remaining</th>
-                <th style={{ textAlign: 'right', padding: '12px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0' }}>Distributed</th>
-                <th style={{ textAlign: 'left', padding: '12px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0' }}>Status</th>
+                {['Allocation', 'Initial', 'Remaining', 'Distributed', 'Status'].map((h, i) => (
+                  <th
+                    key={h}
+                    style={{
+                      textAlign: i === 0 || i === 4 ? 'left' : 'right',
+                      padding: '12px 16px',
+                      background: '#F7F7F7',
+                      fontWeight: 600,
+                      fontSize: '11px',
+                      letterSpacing: '1px',
+                      textTransform: 'uppercase',
+                      color: '#999',
+                      borderBottom: '1px solid #E0E0E0',
+                    }}
+                  >
+                    {h}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {tokenData.allocations.map((alloc) => {
+              {tokenData.allocations.map((alloc, rowIdx) => {
                 const inCirculation = alloc.allocation - alloc.remaining;
                 const statusColors: Record<string, { bg: string; color: string }> = {
                   'Active Distribution': { bg: '#E8F5E9', color: '#2E7D32' },
@@ -520,19 +623,20 @@ export default function TokenEmissions() {
                   'Net Accumulation': { bg: '#F3E5F5', color: '#7B1FA2' },
                 };
                 const statusStyle = statusColors[alloc.status] || { bg: '#F5F5F5', color: '#666' };
+                const isLast = rowIdx === tokenData.allocations.length - 1;
 
                 return (
                   <tr key={alloc.name}>
-                    <td style={{ padding: '12px 16px', borderBottom: '1px solid #E0E0E0', color: '#122023' }}>
+                    <td style={{ padding: '12px 16px', borderBottom: isLast ? 'none' : '1px solid #F0F0F0', color: '#122023' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: alloc.color }} />
+                        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: alloc.color, flexShrink: 0 }} />
                         <span style={{ fontWeight: 600 }}>{alloc.name}</span>
                       </div>
                     </td>
-                    <td style={{ padding: '12px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', fontFamily: 'monospace', color: '#666', fontSize: '12px' }}>{formatFullNumber(alloc.allocation)}</td>
-                    <td style={{ padding: '12px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', fontFamily: 'monospace', color: '#666', fontSize: '12px' }}>{formatFullNumber(alloc.remaining)}</td>
-                    <td style={{ padding: '12px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', fontFamily: 'monospace', fontWeight: 600, color: '#122023', fontSize: '12px' }}>{formatFullNumber(inCirculation)}</td>
-                    <td style={{ padding: '12px 16px', borderBottom: '1px solid #E0E0E0' }}>
+                    <td style={{ padding: '12px 16px', borderBottom: isLast ? 'none' : '1px solid #F0F0F0', textAlign: 'right', fontFamily: '"SF Mono", "Fira Code", monospace', color: '#666', fontSize: '12px' }}>{formatFullNumber(alloc.allocation)}</td>
+                    <td style={{ padding: '12px 16px', borderBottom: isLast ? 'none' : '1px solid #F0F0F0', textAlign: 'right', fontFamily: '"SF Mono", "Fira Code", monospace', color: '#666', fontSize: '12px' }}>{formatFullNumber(alloc.remaining)}</td>
+                    <td style={{ padding: '12px 16px', borderBottom: isLast ? 'none' : '1px solid #F0F0F0', textAlign: 'right', fontFamily: '"SF Mono", "Fira Code", monospace', fontWeight: 600, color: '#122023', fontSize: '12px' }}>{formatFullNumber(inCirculation)}</td>
+                    <td style={{ padding: '12px 16px', borderBottom: isLast ? 'none' : '1px solid #F0F0F0' }}>
                       <span style={{ display: 'inline-block', padding: '4px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600, background: statusStyle.bg, color: statusStyle.color }}>
                         {alloc.status}
                       </span>
@@ -540,15 +644,34 @@ export default function TokenEmissions() {
                   </tr>
                 );
               })}
+              {/* Dark total row */}
+              <tr style={{ background: '#122023' }}>
+                <td style={{ padding: '14px 16px', color: '#40FB50', fontWeight: 700, fontSize: '13px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#40FB50' }} />
+                    Total
+                  </div>
+                </td>
+                <td style={{ padding: '14px 16px', textAlign: 'right', fontFamily: '"SF Mono", "Fira Code", monospace', color: '#FFF', fontWeight: 700, fontSize: '12px' }}>{formatFullNumber(tokenData.totalSupply)}</td>
+                <td style={{ padding: '14px 16px', textAlign: 'right', fontFamily: '"SF Mono", "Fira Code", monospace', color: '#FFF', fontWeight: 700, fontSize: '12px' }}>{formatFullNumber(tokenData.nonCirculating)}</td>
+                <td style={{ padding: '14px 16px', textAlign: 'right', fontFamily: '"SF Mono", "Fira Code", monospace', color: '#40FB50', fontWeight: 700, fontSize: '12px' }}>{formatFullNumber(tokenData.circulating)}</td>
+                <td style={{ padding: '14px 16px' }}>
+                  <span style={{ display: 'inline-block', padding: '4px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 600, background: 'rgba(64, 251, 80, 0.12)', color: '#40FB50' }}>
+                    {tokenData.circulationRate}% Circulating
+                  </span>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      {/* Key Milestones */}
-      <div style={{ background: '#FFF', borderRadius: '12px', padding: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', border: '1px solid #E0E0E0' }}>
-        <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '4px' }}>Key Milestones</div>
-        <div style={{ fontSize: '13px', color: '#666', marginBottom: '24px' }}>Token distribution journey</div>
+      {/* ── KEY MILESTONES ── */}
+      <div style={{ ...cardStyle, padding: '24px' }}>
+        <div style={{ marginBottom: '24px' }}>
+          <div style={{ ...labelStyle, marginBottom: '6px' }}>Key Milestones</div>
+          <div style={{ fontSize: '20px', fontWeight: 700, color: '#122023' }}>Token distribution journey</div>
+        </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
           {tokenData.milestones.map((milestone, i) => {
@@ -562,12 +685,13 @@ export default function TokenEmissions() {
                   gridTemplateColumns: '70px 24px 1fr',
                   alignItems: 'center',
                   gap: '0',
-                  minHeight: '48px',
+                  minHeight: '52px',
                 }}
               >
-                {/* Date column */}
+                {/* Date */}
                 <div style={{
-                  fontSize: '12px',
+                  fontFamily: '"SF Mono", "Fira Code", monospace',
+                  fontSize: '11px',
                   fontWeight: 600,
                   color: '#999',
                   textAlign: 'right',
@@ -576,56 +700,28 @@ export default function TokenEmissions() {
                   {milestone.date}
                 </div>
 
-                {/* Timeline column */}
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  alignSelf: 'stretch',
-                }}>
-                  {/* Top line segment */}
-                  <div style={{
-                    width: '2px',
-                    flex: 1,
-                    background: isFirst ? 'transparent' : '#10B981',
-                  }} />
-                  {/* Dot */}
+                {/* Timeline */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignSelf: 'stretch' }}>
+                  <div style={{ width: '2px', flex: 1, background: isFirst ? 'transparent' : '#10B981' }} />
                   <div style={{
                     width: isLast ? '14px' : '10px',
                     height: isLast ? '14px' : '10px',
                     borderRadius: '50%',
                     background: isLast ? '#10B981' : '#FFF',
-                    border: `2px solid #10B981`,
+                    border: '2px solid #10B981',
                     flexShrink: 0,
                     boxShadow: isLast ? '0 0 0 4px rgba(16, 185, 129, 0.15)' : 'none',
                   }} />
-                  {/* Bottom line segment */}
-                  <div style={{
-                    width: '2px',
-                    flex: 1,
-                    background: isLast ? 'transparent' : '#10B981',
-                  }} />
+                  <div style={{ width: '2px', flex: 1, background: isLast ? 'transparent' : '#10B981' }} />
                 </div>
 
-                {/* Event name column */}
-                <div style={{
-                  paddingLeft: '16px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '2px',
-                }}>
-                  <div style={{
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    color: '#122023',
-                  }}>
+                {/* Event */}
+                <div style={{ paddingLeft: '16px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                  <div style={{ fontSize: '14px', fontWeight: 600, color: isLast ? '#10B981' : '#122023' }}>
                     {milestone.event}
                   </div>
                   {milestone.description && (
-                    <div style={{
-                      fontSize: '11px',
-                      color: '#888',
-                    }}>
+                    <div style={{ fontSize: '11px', color: '#999' }}>
                       {milestone.description}
                     </div>
                   )}
@@ -636,47 +732,118 @@ export default function TokenEmissions() {
         </div>
       </div>
 
-      {/* Monthly Data (Expandable) */}
+      {/* ── QUARTERLY SUPPLY DATA (EXPANDABLE) ── */}
       <div>
         <div
           onClick={() => setExpandedTable(!expandedTable)}
-          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', padding: '16px 20px', background: '#FFF', borderRadius: '12px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            cursor: 'pointer',
+            padding: '18px 24px',
+            background: '#FFF',
+            borderRadius: expandedTable ? '12px 12px 0 0' : '12px',
+            border: '1px solid #E0E0E0',
+            borderBottom: expandedTable ? '1px solid transparent' : '1px solid #E0E0E0',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+          }}
         >
           <div>
-            <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023' }}>Quarterly Supply Data</div>
-            <div style={{ fontSize: '12px', color: '#666' }}>Complete historical data</div>
+            <div style={{ ...labelStyle, marginBottom: '4px' }}>Quarterly Supply Data</div>
+            <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023' }}>Complete historical data</div>
           </div>
-          <span style={{ fontSize: '14px', color: '#666', transform: expandedTable ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>&#9660;</span>
+          <span style={{
+            fontSize: '12px',
+            color: '#999',
+            transform: expandedTable ? 'rotate(180deg)' : 'rotate(0deg)',
+            transition: 'transform 0.2s',
+            display: 'inline-block',
+          }}>&#9660;</span>
         </div>
+
         {expandedTable && (
-          <div style={{ background: '#FFF', borderRadius: '0 0 12px 12px', marginTop: '-12px', paddingTop: '12px', border: '1px solid #E0E0E0', borderTop: 'none', maxHeight: '400px', overflowY: 'auto' }}>
+          <div style={{
+            background: '#FFF',
+            borderRadius: '0 0 12px 12px',
+            border: '1px solid #E0E0E0',
+            borderTop: '1px solid #EBEBEB',
+            maxHeight: '420px',
+            overflowY: 'auto',
+          }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
               <thead>
                 <tr>
-                  <th style={{ textAlign: 'left', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>Quarter</th>
-                  <th style={{ textAlign: 'right', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>Circulating</th>
-                  <th style={{ textAlign: 'right', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>QoQ Change</th>
-                  <th style={{ textAlign: 'right', padding: '10px 16px', background: '#F5F5F5', fontWeight: 600, color: '#122023', borderBottom: '1px solid #E0E0E0', position: 'sticky', top: 0 }}>QoQ %</th>
+                  {['Quarter', 'Circulating', 'QoQ Change', 'QoQ %'].map((h, i) => (
+                    <th
+                      key={h}
+                      style={{
+                        textAlign: i === 0 ? 'left' : 'right',
+                        padding: '11px 16px',
+                        background: '#F7F7F7',
+                        fontWeight: 600,
+                        fontSize: '11px',
+                        letterSpacing: '1px',
+                        textTransform: 'uppercase',
+                        color: '#999',
+                        borderBottom: '1px solid #E0E0E0',
+                        position: 'sticky',
+                        top: 0,
+                      }}
+                    >
+                      {h}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {[...tokenData.quarterlyData].reverse().map((row, i) => (
-                  <tr key={i}>
-                    <td style={{ padding: '10px 16px', borderBottom: '1px solid #E0E0E0', fontWeight: 500, color: '#122023' }}>{row.date}</td>
-                    <td style={{ padding: '10px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', fontFamily: 'monospace', color: '#666' }}>{formatFullNumber(row.circulating)}</td>
-                    <td style={{ padding: '10px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', fontFamily: 'monospace', color: row.qoqChange ? '#10B981' : '#666' }}>
-                      {row.qoqChange ? `+${formatFullNumber(row.qoqChange)}` : '-'}
-                    </td>
-                    <td style={{ padding: '10px 16px', borderBottom: '1px solid #E0E0E0', textAlign: 'right', color: '#666' }}>
-                      {row.qoqPct ? `+${row.qoqPct.toFixed(2)}%` : '-'}
-                    </td>
-                  </tr>
-                ))}
+                {[...tokenData.quarterlyData].reverse().map((row, i) => {
+                  const isTotal = i === tokenData.quarterlyData.length - 1;
+                  return (
+                    <tr key={i} style={{ background: isTotal ? '#122023' : undefined }}>
+                      <td style={{
+                        padding: '10px 16px',
+                        borderBottom: '1px solid #F0F0F0',
+                        fontFamily: '"SF Mono", "Fira Code", monospace',
+                        fontWeight: 600,
+                        color: isTotal ? '#40FB50' : '#122023',
+                        fontSize: '12px',
+                      }}>{row.date}</td>
+                      <td style={{
+                        padding: '10px 16px',
+                        borderBottom: '1px solid #F0F0F0',
+                        textAlign: 'right',
+                        fontFamily: '"SF Mono", "Fira Code", monospace',
+                        color: isTotal ? '#FFF' : '#666',
+                        fontWeight: isTotal ? 700 : 400,
+                      }}>{formatFullNumber(row.circulating)}</td>
+                      <td style={{
+                        padding: '10px 16px',
+                        borderBottom: '1px solid #F0F0F0',
+                        textAlign: 'right',
+                        fontFamily: '"SF Mono", "Fira Code", monospace',
+                        color: row.qoqChange ? '#10B981' : '#999',
+                      }}>
+                        {row.qoqChange ? `+${formatFullNumber(row.qoqChange)}` : '—'}
+                      </td>
+                      <td style={{
+                        padding: '10px 16px',
+                        borderBottom: '1px solid #F0F0F0',
+                        textAlign: 'right',
+                        fontFamily: '"SF Mono", "Fira Code", monospace',
+                        color: row.qoqPct ? '#10B981' : '#999',
+                      }}>
+                        {row.qoqPct ? `+${row.qoqPct.toFixed(2)}%` : '—'}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         )}
       </div>
+
     </div>
   );
 }
