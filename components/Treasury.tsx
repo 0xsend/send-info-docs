@@ -488,135 +488,83 @@ export default function Treasury() {
   const stablecoinValue = currentHoldings.cusd + currentHoldings.usdcx + currentHoldings.usdc + currentHoldings.fiat;
   const totalTreasuryValue = sendValue + ccValue + stablecoinValue + currentHoldings.pol;
 
+  const thStyle = { textAlign: 'right' as const, padding: '10px 12px', fontSize: '10px', fontWeight: 600, color: '#999', textTransform: 'uppercase' as const, letterSpacing: '1px', borderBottom: '2px solid #E0E0E0', fontFamily: 'monospace' };
+  const tdStyle = { padding: '12px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right' as const, color: '#122023', fontFamily: 'monospace', fontSize: '13px' };
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', padding: '8px 0' }}>
-      {/* Info Callout */}
-      <div style={{
-        backgroundColor: '#E8F4FD',
-        border: '1px solid #B8DAFF',
-        borderRadius: '8px',
-        padding: '14px 18px',
-        fontSize: '14px',
-        color: '#004085',
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: '12px',
-        lineHeight: 1.5,
-      }}>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: '2px' }}>
-          <circle cx="10" cy="10" r="9" stroke="#004085" strokeWidth="2"/>
-          <path d="M10 9V14M10 6V7" stroke="#004085" strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-        <span>Treasury balances are updated on the <strong>1st of every month</strong>. All values reflect on-chain and off-chain holdings.</span>
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
-      {/* Total Treasury Value */}
-      <div style={{
-        background: 'linear-gradient(135deg, #122023 0%, #1a3a3f 100%)',
-        borderRadius: '12px',
-        padding: '24px',
-        border: '2px solid #40FB50',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+      {/* ── HERO: Bento grid ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gridTemplateRows: 'auto auto', gap: '2px', borderRadius: '14px', overflow: 'hidden' }}>
+        {/* Total value — large cell */}
+        <div style={{
+          gridRow: '1 / 3',
+          background: '#122023',
+          padding: '44px 36px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          minHeight: '200px',
+        }}>
           <div>
-            <div style={{ fontSize: '13px', fontWeight: 600, color: '#40FB50', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Total Treasury Value</div>
-            <div style={{ fontSize: '36px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(totalTreasuryValue)}</div>
-            <div style={{ fontSize: '11px', color: '#8ab4b8', marginTop: '6px' }}>As of 3/1 &middot; SEND @ ${tokenPrices.send} &middot; CC @ ${tokenPrices.cc}</div>
+            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '6px' }}>
+              Total Treasury Value
+            </div>
+            <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6 }}>
+              As of 3/1 · SEND @ ${tokenPrices.send} · CC @ ${tokenPrices.cc}
+            </div>
           </div>
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '10px', color: '#8ab4b8', marginBottom: '2px' }}>SEND</div>
-              <div style={{ fontSize: '16px', fontWeight: 600, color: '#40FB50' }}>{formatCurrency(sendValue)}</div>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '10px', color: '#8ab4b8', marginBottom: '2px' }}>CC</div>
-              <div style={{ fontSize: '16px', fontWeight: 600, color: '#FF9800' }}>{formatCurrency(ccValue)}</div>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '10px', color: '#8ab4b8', marginBottom: '2px' }}>Stablecoins</div>
-              <div style={{ fontSize: '16px', fontWeight: 600, color: '#2196F3' }}>{formatCurrency(totalStablecoins)}</div>
-            </div>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '10px', color: '#8ab4b8', marginBottom: '2px' }}>POL</div>
-              <div style={{ fontSize: '16px', fontWeight: 600, color: '#7C4DFF' }}>{formatCurrency(currentHoldings.pol - polStablecoins)}</div>
-            </div>
+          <div style={{ fontFamily: '"SF Mono", "Fira Code", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+            {formatCurrency(totalTreasuryValue)}
+          </div>
+        </div>
+
+        {/* SEND value */}
+        <div style={{ background: '#171f22', padding: '20px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>SEND</div>
+            <div style={{ fontFamily: 'monospace', fontSize: '11px', color: '#40FB50' }}>{formatCurrency(sendValue)}</div>
+          </div>
+          <div style={{ fontFamily: 'monospace', fontSize: '22px', fontWeight: 700, color: '#FFF', letterSpacing: '-0.5px' }}>
+            {formatNumber(currentHoldings.send)}
+          </div>
+        </div>
+
+        {/* CC + Stablecoins + POL */}
+        <div style={{ background: '#171f22', padding: '20px 28px', display: 'flex', gap: '20px' }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>CC</div>
+            <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#FF9800' }}>{formatCurrency(ccValue)}</div>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>Stablecoins</div>
+            <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#2196F3' }}>{formatCurrency(totalStablecoins)}</div>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>POL</div>
+            <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#7C4DFF' }}>{formatCurrency(currentHoldings.pol - polStablecoins)}</div>
           </div>
         </div>
       </div>
 
-      {/* Main Holdings Cards - All on same row, equal size */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-        {/* Stablecoin Holdings */}
-        <div style={{
-          backgroundColor: '#E3F2FD',
-          borderRadius: '12px',
-          padding: '20px',
-          border: '2px solid #2196F3',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#2196F3', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>💵</div>
-            <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>Stablecoins</div>
-          </div>
-          <div style={{ fontSize: '28px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>{formatCurrency(totalStablecoins)}</div>
-          <div style={{ fontSize: '10px', color: '#666' }}>CUSD + USDC + USDCx + Fiat</div>
+      {/* ── HOLDINGS BREAKDOWN ── */}
+      <div style={{ background: '#FFF', borderRadius: '12px', padding: '24px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '16px' }}>
+          Current Holdings
         </div>
-
-        {/* Canton Coin */}
-        <div style={{
-          backgroundColor: '#FFF3E0',
-          borderRadius: '12px',
-          padding: '20px',
-          border: '2px solid #FF9800',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#FF9800', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>🪙</div>
-            <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>Canton Coin</div>
-          </div>
-          <div style={{ fontSize: '28px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>{formatNumber(currentHoldings.cc)}</div>
-          <div style={{ fontSize: '10px', color: '#666' }}>Partner token holdings</div>
-        </div>
-
-        {/* SEND Holdings */}
-        <div style={{
-          backgroundColor: '#E8FDE9',
-          borderRadius: '12px',
-          padding: '20px',
-          border: '2px solid #40FB50',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#40FB50', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>💎</div>
-            <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>SEND Token</div>
-          </div>
-          <div style={{ fontSize: '28px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>{formatNumber(currentHoldings.send)}</div>
-          <div style={{ fontSize: '10px', color: '#666' }}>21.3% of total supply</div>
-        </div>
-      </div>
-
-      {/* Asset Breakdown */}
-      <div style={{
-        backgroundColor: '#FFF',
-        borderRadius: '12px',
-        padding: '24px',
-        border: '1px solid #E0E0E0',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-      }}>
-        <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023', marginBottom: '20px' }}>Current Holdings Breakdown</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '12px' }}>
           {assets.map((asset) => {
             const value = currentHoldings[asset.key as keyof typeof currentHoldings] as number;
             const isCurrency = ['usdcx', 'usdc', 'pol', 'fiat'].includes(asset.key);
             return (
               <div key={asset.key} style={{
-                padding: '16px',
-                backgroundColor: '#FAFAFA',
-                borderRadius: '10px',
-                borderLeft: `4px solid ${asset.color}`,
+                padding: '14px',
+                backgroundColor: '#fafafa',
+                borderRadius: '8px',
+                borderLeft: `3px solid ${asset.color}`,
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                  <span style={{ fontSize: '16px' }}>{asset.icon}</span>
-                  <span style={{ fontSize: '12px', color: '#666', fontWeight: 500 }}>{asset.label}</span>
-                </div>
-                <div style={{ fontSize: '18px', fontWeight: 700, color: '#122023' }}>
+                <div style={{ fontSize: '11px', color: '#999', fontWeight: 500, marginBottom: '6px' }}>{asset.label}</div>
+                <div style={{ fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#122023' }}>
                   {isCurrency ? formatCurrency(value) : formatNumber(value)}
                 </div>
               </div>
@@ -625,157 +573,119 @@ export default function Treasury() {
         </div>
       </div>
 
-      {/* Stablecoin Chart */}
-      <div style={{
-        backgroundColor: '#FFF',
-        borderRadius: '12px',
-        padding: '24px',
-        border: '1px solid #E0E0E0',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-          <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#E3F2FD', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>💵</div>
-          <div style={{ fontSize: '18px', fontWeight: 600, color: '#122023' }}>Stablecoin Position</div>
+      {/* ── CHARTS: 2-column grid ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        {/* Stablecoin Chart */}
+        <div style={{ background: '#FFF', borderRadius: '12px', padding: '24px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '4px' }}>
+            Stablecoin Position
+          </div>
+          <div style={{ fontSize: '12px', color: '#ccc', marginBottom: '16px' }}>CUSD + USDCx + USDC · 12 months</div>
+          <StablecoinChart />
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '12px' }}>
+            {[
+              { label: 'CUSD', color: '#2196F3' },
+              { label: 'USDCx', color: '#1976D2' },
+              { label: 'USDC', color: '#2775CA' },
+            ].map((l) => (
+              <div key={l.label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <div style={{ width: '10px', height: '10px', borderRadius: '2px', background: l.color }} />
+                <span style={{ fontSize: '11px', color: '#888' }}>{l.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>CUSD + USDCx + USDC over 12 months</div>
-        <StablecoinChart />
-        {/* Legend */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginTop: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#2196F3' }} />
-            <span style={{ fontSize: '13px', color: '#666' }}>CUSD</span>
+
+        {/* Canton Coin Chart */}
+        <div style={{ background: '#FFF', borderRadius: '12px', padding: '24px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '4px' }}>
+            Canton Coin Holdings
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#1976D2' }} />
-            <span style={{ fontSize: '13px', color: '#666' }}>USDCx</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#2775CA' }} />
-            <span style={{ fontSize: '13px', color: '#666' }}>USDC</span>
-          </div>
+          <div style={{ fontSize: '12px', color: '#ccc', marginBottom: '16px' }}>12-month trend</div>
+          <CantonCoinChart />
         </div>
       </div>
 
-      {/* Canton Coin Chart */}
-      <div style={{
-        backgroundColor: '#FFF',
-        borderRadius: '12px',
-        padding: '24px',
-        border: '1px solid #E0E0E0',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-          <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#FFF3E0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>🪙</div>
-          <div style={{ fontSize: '18px', fontWeight: 600, color: '#122023' }}>Canton Coin Holdings</div>
+      {/* SEND Holdings Chart — full width */}
+      <div style={{ background: '#FFF', borderRadius: '12px', padding: '24px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '4px' }}>
+          SEND Holdings
         </div>
-        <div style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>12-month trend</div>
-        <CantonCoinChart />
-      </div>
-
-      {/* SEND Holdings Chart */}
-      <div style={{
-        backgroundColor: '#FFF',
-        borderRadius: '12px',
-        padding: '24px',
-        border: '1px solid #E0E0E0',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-          <div style={{ width: '28px', height: '28px', borderRadius: '8px', backgroundColor: '#E8FDE9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>💎</div>
-          <div style={{ fontSize: '18px', fontWeight: 600, color: '#122023' }}>SEND Holdings</div>
-        </div>
-        <div style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>12-month trend</div>
+        <div style={{ fontSize: '12px', color: '#ccc', marginBottom: '16px' }}>12-month trend</div>
         <SendHoldingsChart />
       </div>
 
-      {/* Historical Data Table */}
-      <div style={{
-        backgroundColor: '#FFF',
-        borderRadius: '12px',
-        padding: '24px',
-        border: '1px solid #E0E0E0',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-      }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      {/* ── HISTORICAL TABLE ── */}
+      <div style={{ background: '#FFF', borderRadius: '12px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 24px', borderBottom: '1px solid #E0E0E0' }}>
           <div>
-            <div style={{ fontSize: '16px', fontWeight: 600, color: '#122023' }}>Historical Holdings</div>
-            <div style={{ fontSize: '12px', color: '#888', marginTop: '2px' }}>Monthly treasury snapshots</div>
+            <div style={{ fontSize: '15px', fontWeight: 600, color: '#122023' }}>Historical Holdings</div>
+            <div style={{ fontSize: '12px', color: '#999', marginTop: '2px' }}>Monthly treasury snapshots</div>
           </div>
           <button
             onClick={() => setShowAllData(!showAllData)}
             style={{
-              backgroundColor: '#F5F5F5',
+              backgroundColor: '#fafafa',
               border: '1px solid #E0E0E0',
               borderRadius: '8px',
-              padding: '10px 16px',
-              fontSize: '13px',
+              padding: '8px 14px',
+              fontSize: '12px',
               color: '#122023',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px',
+              gap: '6px',
               fontWeight: 500,
             }}
           >
             {showAllData ? 'Show Less' : 'Show All'}
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 16 16"
-              fill="none"
-              style={{ transform: showAllData ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}
-            >
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" style={{ transform: showAllData ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
               <path d="M4 6L8 10L12 6" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>
-                <th style={{ textAlign: 'left', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Date</th>
-                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$SEND</th>
-                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$CC</th>
-                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$CUSD</th>
-                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>USDCx</th>
-                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>$USDC</th>
-                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>POL</th>
-                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Fiat</th>
-                <th style={{ textAlign: 'right', padding: '12px 12px', borderBottom: '2px solid #E0E0E0', color: '#666', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>ETH</th>
+                <th style={{ ...thStyle, textAlign: 'left' }}>Date</th>
+                <th style={thStyle}>SEND</th>
+                <th style={thStyle}>CC</th>
+                <th style={thStyle}>CUSD</th>
+                <th style={thStyle}>USDCx</th>
+                <th style={thStyle}>USDC</th>
+                <th style={thStyle}>POL</th>
+                <th style={thStyle}>Fiat</th>
+                <th style={thStyle}>ETH</th>
               </tr>
             </thead>
             <tbody>
-              {displayData.map((row) => (
-                <tr key={row.date} style={row.isLatest ? { backgroundColor: '#F8FFF8' } : {}}>
-                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', fontWeight: row.isLatest ? 700 : 500, color: '#122023' }}>
+              {displayData.map((row, ri) => (
+                <tr key={row.date} style={{ background: row.isLatest ? '#122023' : (ri % 2 === 0 ? '#fafafa' : '#FFF') }}>
+                  <td style={{ ...tdStyle, textAlign: 'left', fontWeight: 600, color: row.isLatest ? '#40FB50' : '#122023' }}>
                     {row.date}
                     {row.isLatest && (
-                      <span style={{
-                        backgroundColor: '#40FB50',
-                        color: '#122023',
-                        fontSize: '9px',
-                        fontWeight: 700,
-                        padding: '2px 6px',
-                        borderRadius: '4px',
-                        marginLeft: '8px',
-                      }}>
-                        LATEST
-                      </span>
+                      <span style={{ fontSize: '9px', fontWeight: 700, marginLeft: '8px', color: '#40FB50', letterSpacing: '1px' }}>LATEST</span>
                     )}
                   </td>
-                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', fontWeight: 600, color: '#122023' }}>{formatNumber(row.send)}</td>
-                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatNumber(row.cc)}</td>
-                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatNumber(row.cusd)}</td>
-                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.usdcx)}</td>
-                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.usdc)}</td>
-                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.pol)}</td>
-                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#122023' }}>{formatCurrency(row.fiat)}</td>
-                  <td style={{ padding: '14px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right', color: '#888' }}>{row.eth > 0 ? row.eth.toFixed(2) : '—'}</td>
+                  <td style={{ ...tdStyle, fontWeight: 600, color: row.isLatest ? '#FFF' : '#122023' }}>{formatNumber(row.send)}</td>
+                  <td style={{ ...tdStyle, color: row.isLatest ? '#FFF' : '#122023' }}>{formatNumber(row.cc)}</td>
+                  <td style={{ ...tdStyle, color: row.isLatest ? '#FFF' : '#122023' }}>{formatNumber(row.cusd)}</td>
+                  <td style={{ ...tdStyle, color: row.isLatest ? '#FFF' : '#122023' }}>{formatCurrency(row.usdcx)}</td>
+                  <td style={{ ...tdStyle, color: row.isLatest ? '#FFF' : '#122023' }}>{formatCurrency(row.usdc)}</td>
+                  <td style={{ ...tdStyle, color: row.isLatest ? '#FFF' : '#122023' }}>{formatCurrency(row.pol)}</td>
+                  <td style={{ ...tdStyle, color: row.isLatest ? '#FFF' : '#122023' }}>{formatCurrency(row.fiat)}</td>
+                  <td style={{ ...tdStyle, color: row.isLatest ? '#6b7c7f' : '#888' }}>{row.eth > 0 ? row.eth.toFixed(2) : '—'}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Info */}
+      <div style={{ fontSize: '11px', color: '#999', lineHeight: 1.6, padding: '0 4px' }}>
+        Treasury balances are updated on the 1st of every month. All values reflect on-chain and off-chain holdings.
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const fundData = {
   cusdYield: 21397.00,
   defiVaultYield: 58164.51,
   get total() { return this.cusdYield + this.defiVaultYield; },
-  lastUpdated: 'March 2026',
+  lastUpdated: 'September 2025 – March 2026',
 };
 
 const allocations = [
@@ -73,7 +73,7 @@ export default function EcosystemFund() {
               {fmt(fundData.total)}
             </div>
             <div style={{ fontSize: '12px', color: '#4a5c5f', marginTop: '10px', fontWeight: 500 }}>
-              Total revenue collected · as of {fundData.lastUpdated}
+              Total revenue collected · {fundData.lastUpdated}
             </div>
           </div>
         </div>
