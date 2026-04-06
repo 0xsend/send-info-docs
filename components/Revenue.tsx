@@ -321,6 +321,13 @@ export default function Revenue() {
               </tr>
             </thead>
             <tbody>
+              <tr style={{ background: '#122023' }}>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace' }}>TOTAL</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalSendtags)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalTrades)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalTransactions)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace' }}>{fmt(totalSendAppRevenue)}</td>
+              </tr>
               {sendAppRevenue.map((row) => (
                 <tr key={row.date}>
                   <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>
@@ -348,13 +355,6 @@ export default function Revenue() {
                   </td>
                 </tr>
               ))}
-              <tr style={{ background: '#122023' }}>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace', borderRadius: '0 0 0 12px' }}>TOTAL</td>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalSendtags)}</td>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalTrades)}</td>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalTransactions)}</td>
-                <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderRadius: '0 0 12px 0' }}>{fmt(totalSendAppRevenue)}</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -370,7 +370,7 @@ export default function Revenue() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>
-                {['Date', 'Yield', 'Total'].map((h, i) => (
+                {['Date', 'Yield', 'Running Total'].map((h, i) => (
                   <th key={h} style={{
                     textAlign: i === 2 ? 'right' : 'left',
                     padding: '10px 16px',
@@ -388,18 +388,21 @@ export default function Revenue() {
               </tr>
             </thead>
             <tbody>
-              {cusdRevenue.map((row) => (
-                <tr key={row.date}>
-                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>{row.date}</td>
-                  <td style={{ padding: '12px 16px', fontSize: '13px', color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>{fmt(row.yield)}</td>
-                  <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 700, color: '#122023', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>{fmt(row.total)}</td>
-                </tr>
-              ))}
               <tr style={{ background: '#122023' }}>
-                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace', borderRadius: '0 0 0 12px' }}>TOTAL</td>
+                <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace' }}>TOTAL</td>
                 <td style={{ padding: '14px 16px', fontSize: '12px', fontWeight: 600, color: '#FFF', fontFamily: '"DM Mono", monospace' }}>{fmt(totalCusdRevenue)}</td>
-                <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderRadius: '0 0 12px 0' }}>{fmt(totalCusdRevenue)}</td>
+                <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace' }}>{fmt(totalCusdRevenue)}</td>
               </tr>
+              {cusdRevenue.map((row, i) => {
+                const runningTotal = totalCusdRevenue - cusdRevenue.slice(0, i).reduce((sum, r) => sum + r.total, 0);
+                return (
+                  <tr key={row.date}>
+                    <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>{row.date}</td>
+                    <td style={{ padding: '12px 16px', fontSize: '13px', color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>{fmt(row.yield)}</td>
+                    <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: 600, color: '#888', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #F0F0F0' }}>{fmt(runningTotal)}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
