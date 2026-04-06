@@ -5,8 +5,7 @@ import { useState } from 'react';
 // ============ DATA ============
 const fundData = {
   cusdYield: 21397.00,
-  defiVaultYield: 58164.51,
-  get total() { return this.cusdYield + this.defiVaultYield; },
+  get total() { return this.cusdYield; },
   lastUpdated: 'September 2025 – March 2026',
 };
 
@@ -26,7 +25,7 @@ const cusdFeatures = [
 ];
 
 const steps = [
-  { num: '01', title: 'Collect', desc: 'CUSD reserve yield and stablecoin revenue collected monthly' },
+  { num: '01', title: 'Collect', desc: 'CUSD reserve yield collected monthly via Brale' },
   { num: '02', title: 'Acquire', desc: '$CC acquired through Pool Party periodically' },
   { num: '03', title: 'Deploy', desc: 'Allocated across growth initiatives expanding CUSD and Canton' },
 ];
@@ -45,14 +44,12 @@ export default function EcosystemFund() {
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1.6fr 1fr',
-        gridTemplateRows: 'auto auto',
         gap: '2px',
         borderRadius: '14px',
         overflow: 'hidden',
       }}>
         {/* Total — large cell */}
         <div style={{
-          gridRow: '1 / 3',
           background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
           padding: '44px 36px',
           display: 'flex',
@@ -65,7 +62,7 @@ export default function EcosystemFund() {
               CUSD Ecosystem Fund
             </div>
             <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6, maxWidth: '380px' }}>
-              Revenue from CUSD reserve economics and DeFi vaults, deployed to grow the Canton ecosystem.
+              Revenue from CUSD reserve economics, deployed to grow the Canton ecosystem.
             </div>
           </div>
           <div>
@@ -79,28 +76,15 @@ export default function EcosystemFund() {
         </div>
 
         {/* CUSD Reserve Yield */}
-        <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ background: '#171f22', padding: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>
             CUSD Reserve Yield
           </div>
           <div>
-            <div style={{ fontFamily: 'monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
               {fmt(fundData.cusdYield)}
             </div>
             <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>via Brale · 90% revenue share</div>
-          </div>
-        </div>
-
-        {/* Stablecoin Revenue */}
-        <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>
-            Stablecoin Revenue
-          </div>
-          <div>
-            <div style={{ fontFamily: 'monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
-              {fmt(fundData.defiVaultYield)}
-            </div>
-            <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>via DeFi vaults · monthly</div>
           </div>
         </div>
       </div>
@@ -315,7 +299,6 @@ export default function EcosystemFund() {
           <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', marginBottom: '12px' }}>Revenue Sources</div>
           {[
             { source: 'CUSD Reserve Yield', detail: '90% of reserve economics from CUSD outstanding', via: 'Brale', freq: 'Monthly' },
-            { source: 'Stablecoin Revenue', detail: 'Revenue from stablecoin operations', via: 'DeFi vaults', freq: 'Monthly' },
           ].map((r, i) => (
             <div key={r.source} style={{
               display: 'flex',
