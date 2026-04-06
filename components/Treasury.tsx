@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 // ============ TREASURY DATA ============
 const treasuryData = [
-  { date: '2/2026', send: 208879479, cc: 62113382, cusd: 185000, usdcx: 165000, usdc: 3200000, pol: 2128330, fiat: 34963, eth: 0, isLatest: true },
+  { date: '3/2026', send: 206991992, cc: 66637126, cusd: 112147, usdcx: 52655, usdc: 3006624, pol: 2561000, fiat: 42550, eth: 0, isLatest: true },
+  { date: '2/2026', send: 208879479, cc: 62113382, cusd: 185000, usdcx: 165000, usdc: 3200000, pol: 2128330, fiat: 34963, eth: 0 },
   { date: '1/2026', send: 212705811, cc: 64819991, cusd: 0, usdcx: 0, usdc: 2837000, pol: 949000, fiat: 183409, eth: 0 },
   { date: '12/2025', send: 214371974, cc: 55312796, cusd: 2752008, usdcx: 0, usdc: 36049.98, pol: 790976, fiat: 20783.78, eth: 0 },
   { date: '11/2025', send: 215761675, cc: 31402896, cusd: 2225640, usdcx: 0, usdc: 506813.95, pol: 1199746, fiat: 62488.28, eth: 0 },
@@ -41,8 +42,8 @@ const currentHoldings = treasuryData[0];
 
 // Token prices (updated monthly alongside treasury data)
 const tokenPrices = {
-  send: 0.025,   // SEND price in USD
-  cc: 0.16,      // Canton Coin price in USD
+  send: 0.024,   // SEND price in USD
+  cc: 0.142,     // Canton Coin price in USD
 };
 
 // Asset definitions with Send brand colors and colored left-border styling
@@ -81,18 +82,13 @@ function StablecoinChart() {
   const innerWidth = width - padding.left - padding.right;
   const innerHeight = height - padding.top - padding.bottom;
 
-  // Add Aerodrome USDC (polStablecoins) to the latest month's USDC bar
-  const polStablecoins = 782845;
-  const stablecoinData = recentData.map(d => {
-    const extraUsdc = d.isLatest ? polStablecoins : 0;
-    return {
-      date: d.date,
-      cusd: d.cusd,
-      usdcx: d.usdcx,
-      usdc: d.usdc + extraUsdc,
-      total: d.cusd + d.usdcx + d.usdc + extraUsdc,
-    };
-  });
+  const stablecoinData = recentData.map(d => ({
+    date: d.date,
+    cusd: d.cusd,
+    usdcx: d.usdcx,
+    usdc: d.usdc,
+    total: d.cusd + d.usdcx + d.usdc,
+  }));
 
   const maxValue = Math.max(...stablecoinData.map(d => d.total));
   const barWidth = (innerWidth / stablecoinData.length) - 6;
@@ -484,15 +480,13 @@ export default function Treasury() {
   const [showAllData, setShowAllData] = useState(false);
   const displayData = showAllData ? treasuryData : treasuryData.slice(0, 12);
 
-  // Stablecoins includes wallet holdings + stablecoin side of LP positions (Aerodrome USDC: 782,845)
-  const polStablecoins = 782845;
-  const totalStablecoins = currentHoldings.cusd + currentHoldings.usdcx + currentHoldings.usdc + currentHoldings.fiat + polStablecoins;
+  // Stablecoins — wallet holdings only (POL tracked separately)
+  const totalStablecoins = currentHoldings.cusd + currentHoldings.usdcx + currentHoldings.usdc + currentHoldings.fiat;
 
   // Total treasury value (tokens at market price + stablecoins + POL)
   const sendValue = currentHoldings.send * tokenPrices.send;
   const ccValue = currentHoldings.cc * tokenPrices.cc;
-  const stablecoinValue = currentHoldings.cusd + currentHoldings.usdcx + currentHoldings.usdc + currentHoldings.fiat;
-  const totalTreasuryValue = sendValue + ccValue + stablecoinValue + currentHoldings.pol;
+  const totalTreasuryValue = sendValue + ccValue + totalStablecoins + currentHoldings.pol;
 
   const thStyle = { textAlign: 'right' as const, padding: '10px 12px', fontSize: '10px', fontWeight: 600, color: '#999', textTransform: 'uppercase' as const, letterSpacing: '1px', borderBottom: '2px solid #E0E0E0', fontFamily: '"DM Mono", monospace' };
   const tdStyle = { padding: '12px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right' as const, color: '#122023', fontFamily: '"DM Mono", monospace', fontSize: '13px' };
@@ -517,7 +511,7 @@ export default function Treasury() {
               Total Treasury Value
             </div>
             <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6 }}>
-              As of 3/1 · SEND @ ${tokenPrices.send} · CC @ ${tokenPrices.cc}
+              As of 4/1 · SEND @ ${tokenPrices.send} · CC @ ${tokenPrices.cc}
             </div>
           </div>
           <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
@@ -548,7 +542,7 @@ export default function Treasury() {
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '4px' }}>POL</div>
-            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(currentHoldings.pol - polStablecoins)}</div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '16px', fontWeight: 700, color: '#FFF' }}>{formatCurrency(currentHoldings.pol)}</div>
           </div>
         </div>
       </div>
