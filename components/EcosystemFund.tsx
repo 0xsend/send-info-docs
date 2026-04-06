@@ -51,11 +51,11 @@ export default function EcosystemFund() {
         {/* Total — large cell */}
         <div style={{
           background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
-          padding: '44px 36px',
+          padding: '36px 36px',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
-          minHeight: '200px',
+          justifyContent: 'center',
+          gap: '20px',
         }}>
           <div>
             <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '6px' }}>
@@ -66,10 +66,10 @@ export default function EcosystemFund() {
             </div>
           </div>
           <div>
-            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '44px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
               {fmt(fundData.total)}
             </div>
-            <div style={{ fontSize: '12px', color: '#4a5c5f', marginTop: '10px', fontWeight: 500 }}>
+            <div style={{ fontSize: '12px', color: '#4a5c5f', marginTop: '8px', fontWeight: 500 }}>
               Total revenue collected · {fundData.lastUpdated}
             </div>
           </div>
@@ -313,7 +313,7 @@ export default function EcosystemFund() {
             </div>
           ))}
           <div style={{ fontSize: '12px', color: '#888', marginTop: '12px' }}>
-            For monthly breakdowns, see the <a href="/docs/cusd-stablecoin/reserves-report" style={{ color: '#1a8a2e', textDecoration: 'none', fontWeight: 500 }}>Reserves Report</a> and <a href="/docs/finance/revenue" style={{ color: '#1a8a2e', textDecoration: 'none', fontWeight: 500 }}>Revenue</a> pages.
+            For monthly breakdowns, see the <a href="/docs/cusd-stablecoin/reserves-report" style={{ color: '#1a8a2e', textDecoration: 'none', fontWeight: 500 }}>Reserves Report</a> page.
           </div>
         </div>
 
