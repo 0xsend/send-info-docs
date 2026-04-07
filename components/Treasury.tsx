@@ -488,6 +488,15 @@ export default function Treasury() {
   const ccValue = currentHoldings.cc * tokenPrices.cc;
   const totalTreasuryValue = sendValue + ccValue + totalStablecoins + currentHoldings.pol;
 
+  // Month-over-month deltas
+  const prevHoldings = treasuryData[1];
+  const prevStablecoins = prevHoldings.cusd + prevHoldings.usdcx + prevHoldings.usdc + prevHoldings.fiat;
+  const prevSendValue = prevHoldings.send * tokenPrices.send;
+  const prevCcValue = prevHoldings.cc * tokenPrices.cc;
+  const prevTotal = prevSendValue + prevCcValue + prevStablecoins + prevHoldings.pol;
+  const totalDelta = totalTreasuryValue - prevTotal;
+  const totalDeltaPct = prevTotal > 0 ? ((totalDelta / prevTotal) * 100) : 0;
+
   const thStyle = { textAlign: 'right' as const, padding: '10px 12px', fontSize: '10px', fontWeight: 600, color: '#999', textTransform: 'uppercase' as const, letterSpacing: '1px', borderBottom: '2px solid #E0E0E0', fontFamily: '"DM Mono", monospace' };
   const tdStyle = { padding: '12px 12px', borderBottom: '1px solid #F0F0F0', textAlign: 'right' as const, color: '#122023', fontFamily: '"DM Mono", monospace', fontSize: '13px' };
 
@@ -514,8 +523,26 @@ export default function Treasury() {
               As of 4/1 · SEND @ ${tokenPrices.send} · CC @ ${tokenPrices.cc}
             </div>
           </div>
-          <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
-            {formatCurrency(totalTreasuryValue)}
+          <div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+              {formatCurrency(totalTreasuryValue)}
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '10px' }}>
+              <span style={{
+                fontFamily: '"DM Mono", monospace', fontSize: '12px', fontWeight: 600,
+                color: totalDelta >= 0 ? '#40FB50' : '#ff6b6b',
+              }}>
+                {totalDelta >= 0 ? '+' : ''}{formatCurrency(totalDelta)}
+              </span>
+              <span style={{
+                fontFamily: '"DM Mono", monospace', fontSize: '11px',
+                color: totalDelta >= 0 ? '#40FB50' : '#ff6b6b',
+                opacity: 0.7,
+              }}>
+                ({totalDeltaPct >= 0 ? '+' : ''}{totalDeltaPct.toFixed(1)}%)
+              </span>
+              <span style={{ fontSize: '10px', color: '#4a5c5f' }}>vs prev month</span>
+            </div>
           </div>
         </div>
 
