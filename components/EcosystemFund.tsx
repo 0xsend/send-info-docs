@@ -276,7 +276,7 @@ export default function EcosystemFund() {
           </div>
           <div>
             <div style={{ fontSize: '12px', color: '#999', marginBottom: '4px' }}>Address</div>
-            <div style={{ fontSize: '14px', fontWeight: 500, color: '#999', fontStyle: 'italic' }}>To be published</div>
+            <div style={{ fontSize: '12px', fontWeight: 500, color: '#122023', fontFamily: '"DM Mono", monospace', wordBreak: 'break-all' }}>cusd-ecosystem-fund::1220...8d57</div>
           </div>
         </div>
 

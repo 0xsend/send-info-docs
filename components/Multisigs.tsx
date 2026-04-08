@@ -44,6 +44,12 @@ const cantonMultisigs = [
     shortAddress: 'pool-party-rewards::1220...f197',
     url: 'https://lighthouse.fivenorth.io/party/cantonwallet-pool-party-rewards%3A%3A1220062050fd57a71014715bd517203a464fd3eb1ee1e6c5f69ce51bbe055e5cf197',
   },
+  {
+    name: 'CUSD Ecosystem Fund',
+    address: 'cantonwallet-cusd-ecosystem-fund::1220e06619076b7db52340b1d53432385b986c1cf072611afa12a9588ad261fd8d57',
+    shortAddress: 'cusd-ecosystem-fund::1220...8d57',
+    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-cusd-ecosystem-fund%3A%3A1220e06619076b7db52340b1d53432385b986c1cf072611afa12a9588ad261fd8d57',
+  },
 ];
 
 // ============ STYLES ============
