@@ -40,6 +40,7 @@ const heroItemIcons = {
   'pool-party/overview': <HeroIcon name="pool" />,
   'pool-party/how-it-works': <HeroIcon name="swap_horiz" />,
   'pool-party/liquidity-pairs': <HeroIcon name="water_drop" />,
+  'pool-party/rewards': <HeroIcon name="star" />,
   'pool-party/faqs': <HeroIcon name="help" />,
   'finance/multisigs': <HeroIcon name="key" />,
   'finance/token-emissions': <HeroIcon name="swap_horiz" />,
