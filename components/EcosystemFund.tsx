@@ -4,9 +4,10 @@ import { useState } from 'react';
 
 // ============ DATA ============
 const fundData = {
-  cusdYield: 21397.00,
-  get total() { return this.cusdYield; },
-  lastUpdated: 'September 2025 – March 2026',
+  yieldEarned: 21397.00,
+  ccAcquired: 143333,
+  ccDeployed: 0,
+  lastUpdated: 'September 2025 – April 2026',
 };
 
 const allocations = [
@@ -40,51 +41,50 @@ export default function EcosystemFund() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
-      {/* ── HERO: Bento grid ── */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1.6fr 1fr',
-        gap: '2px',
-        borderRadius: '14px',
-        overflow: 'hidden',
-      }}>
-        {/* Total — large cell */}
+      {/* ── HERO ── */}
+      <div style={{ borderRadius: '14px', overflow: 'hidden' }}>
+        {/* Title bar */}
         <div style={{
           background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
-          padding: '36px 36px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          gap: '20px',
+          padding: '32px 36px',
         }}>
-          <div>
-            <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '6px' }}>
-              CUSD Ecosystem Fund
-            </div>
-            <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6, maxWidth: '380px' }}>
-              Revenue from CUSD reserve economics, deployed to grow the Canton ecosystem.
-            </div>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '6px' }}>
+            CUSD Ecosystem Fund
           </div>
-          <div>
-            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '44px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
-              {fmt(fundData.total)}
-            </div>
-            <div style={{ fontSize: '12px', color: '#4a5c5f', marginTop: '8px', fontWeight: 500 }}>
-              Total revenue collected · {fundData.lastUpdated}
-            </div>
+          <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6, maxWidth: '420px' }}>
+            Revenue from CUSD reserve economics, converted to $CC and deployed to grow the Canton ecosystem.
           </div>
+          <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '10px' }}>{fundData.lastUpdated}</div>
         </div>
 
-        {/* CUSD Reserve Yield */}
-        <div style={{ background: '#171f22', padding: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>
-            CUSD Reserve Yield
-          </div>
-          <div>
-            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
-              {fmt(fundData.cusdYield)}
+        {/* Three lifecycle metrics */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px' }}>
+          <div style={{ background: '#171f22', padding: '24px 28px' }}>
+            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '8px' }}>
+              Yield Earned
             </div>
-            <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>via Brale · 90% revenue share</div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '24px', fontWeight: 700, color: '#FFF', letterSpacing: '-0.5px' }}>
+              {fmt(fundData.yieldEarned)}
+            </div>
+            <div style={{ fontSize: '10px', color: '#4a5c5f', marginTop: '4px' }}>via Brale · 90% revenue share</div>
+          </div>
+          <div style={{ background: '#171f22', padding: '24px 28px' }}>
+            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '8px' }}>
+              CC Acquired
+            </div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '24px', fontWeight: 700, color: '#40FB50', letterSpacing: '-0.5px' }}>
+              {fundData.ccAcquired.toLocaleString()}
+            </div>
+            <div style={{ fontSize: '10px', color: '#4a5c5f', marginTop: '4px' }}>via Pool Party</div>
+          </div>
+          <div style={{ background: '#171f22', padding: '24px 28px' }}>
+            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '8px' }}>
+              CC Deployed
+            </div>
+            <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '24px', fontWeight: 700, color: '#FFF', letterSpacing: '-0.5px' }}>
+              {fundData.ccDeployed > 0 ? fundData.ccDeployed.toLocaleString() : '—'}
+            </div>
+            <div style={{ fontSize: '10px', color: '#4a5c5f', marginTop: '4px' }}>grants & incentives</div>
           </div>
         </div>
       </div>
@@ -282,17 +282,35 @@ export default function EcosystemFund() {
 
         <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '20px' }}>
           <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', marginBottom: '12px' }}>Acquisition History</div>
-          <div style={{
-            fontFamily: 'monospace',
-            fontSize: '12px',
-            color: '#999',
-            padding: '20px',
-            background: '#fafafa',
-            borderRadius: '8px',
-            textAlign: 'center',
-          }}>
-            First acquisition pending
-          </div>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr>
+                {['Date', 'CC Acquired'].map((h, i) => (
+                  <th key={h} style={{
+                    textAlign: i === 0 ? 'left' : 'right',
+                    padding: '8px 0',
+                    fontSize: '10px',
+                    fontWeight: 600,
+                    color: '#999',
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    borderBottom: '1px solid #f0f0f0',
+                    fontFamily: '"DM Mono", monospace',
+                  }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: '10px 0', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #f0f0f0' }}>April 2026</td>
+                <td style={{ padding: '10px 0', fontSize: '13px', fontWeight: 600, color: '#122023', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #f0f0f0' }}>143,333</td>
+              </tr>
+              <tr style={{ background: '#122023', borderRadius: '0 0 8px 8px' }}>
+                <td style={{ padding: '10px 0', fontSize: '11px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace' }}>TOTAL</td>
+                <td style={{ padding: '10px 0', fontSize: '12px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace' }}>143,333</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '20px', marginTop: '20px' }}>
