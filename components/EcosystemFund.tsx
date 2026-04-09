@@ -282,35 +282,28 @@ export default function EcosystemFund() {
 
         <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '20px' }}>
           <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', marginBottom: '12px' }}>Acquisition History</div>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr>
-                {['Date', 'CC Acquired'].map((h, i) => (
-                  <th key={h} style={{
-                    textAlign: i === 0 ? 'left' : 'right',
-                    padding: '8px 0',
-                    fontSize: '10px',
-                    fontWeight: 600,
-                    color: '#999',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    borderBottom: '1px solid #f0f0f0',
-                    fontFamily: '"DM Mono", monospace',
-                  }}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style={{ padding: '10px 0', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #f0f0f0' }}>April 2026</td>
-                <td style={{ padding: '10px 0', fontSize: '13px', fontWeight: 600, color: '#122023', textAlign: 'right', fontFamily: '"DM Mono", monospace', borderBottom: '1px solid #f0f0f0' }}>143,333</td>
-              </tr>
-              <tr style={{ background: '#122023', borderRadius: '0 0 8px 8px' }}>
-                <td style={{ padding: '10px 0', fontSize: '11px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace' }}>TOTAL</td>
-                <td style={{ padding: '10px 0', fontSize: '12px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace' }}>143,333</td>
-              </tr>
-            </tbody>
-          </table>
+          <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid #f0f0f0' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr>
+                  <th style={{ textAlign: 'left', padding: '10px 14px', fontSize: '10px', fontWeight: 600, color: '#999', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #f0f0f0', fontFamily: '"DM Mono", monospace', background: '#fafafa' }}>Date</th>
+                  <th style={{ textAlign: 'right', padding: '10px 14px', fontSize: '10px', fontWeight: 600, color: '#999', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #f0f0f0', fontFamily: '"DM Mono", monospace', background: '#fafafa' }}>CC Acquired</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: '12px 14px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace' }}>April 2026</td>
+                  <td style={{ padding: '12px 14px', fontSize: '13px', fontWeight: 600, color: '#122023', textAlign: 'right', fontFamily: '"DM Mono", monospace' }}>143,333</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr style={{ background: '#122023' }}>
+                  <td style={{ padding: '12px 14px', fontSize: '11px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace' }}>TOTAL</td>
+                  <td style={{ padding: '12px 14px', fontSize: '12px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace' }}>143,333</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
 
         <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '20px', marginTop: '20px' }}>
