@@ -3,11 +3,17 @@
 import { useState } from 'react';
 
 // ============ DATA ============
+const acquisitions = [
+  { date: 'April 2026', cusdSpent: 21397.00, ccAcquired: 143333 },
+];
+
 const fundData = {
   yieldEarned: 21397.00,
-  ccAcquired: 143333,
+  ccAcquired: acquisitions.reduce((sum, a) => sum + a.ccAcquired, 0),
+  cusdSpent: acquisitions.reduce((sum, a) => sum + a.cusdSpent, 0),
   ccDeployed: 0,
   lastUpdated: 'September 2025 – April 2026',
+  multisigUrl: 'https://lighthouse.fivenorth.io/party/cantonwallet-cusd-ecosystem-fund%3A%3A1220e06619076b7db52340b1d53432385b986c1cf072611afa12a9588ad261fd8d57',
 };
 
 const allocations = [
@@ -276,30 +282,71 @@ export default function EcosystemFund() {
           </div>
           <div>
             <div style={{ fontSize: '12px', color: '#999', marginBottom: '4px' }}>Address</div>
-            <div style={{ fontSize: '12px', fontWeight: 500, color: '#122023', fontFamily: '"DM Mono", monospace', wordBreak: 'break-all' }}>cusd-ecosystem-fund::1220...8d57</div>
+            <a
+              href={fundData.multisigUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontSize: '12px', fontWeight: 500, color: '#1a8a2e',
+                fontFamily: '"DM Mono", monospace', textDecoration: 'none',
+                display: 'inline-flex', alignItems: 'center', gap: '4px',
+              }}
+            >
+              cusd-ecosystem-fund::1220...8d57
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                <path d="M3 9L9 3M9 3H5M9 3V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
           </div>
         </div>
 
         <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: '20px' }}>
           <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', marginBottom: '12px' }}>Acquisition History</div>
-          <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid #f0f0f0' }}>
+          <div className="responsive-table-wrapper" style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid #f0f0f0' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
-                  <th style={{ textAlign: 'left', padding: '10px 14px', fontSize: '10px', fontWeight: 600, color: '#999', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #f0f0f0', fontFamily: '"DM Mono", monospace', background: '#fafafa' }}>Date</th>
-                  <th style={{ textAlign: 'right', padding: '10px 14px', fontSize: '10px', fontWeight: 600, color: '#999', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #f0f0f0', fontFamily: '"DM Mono", monospace', background: '#fafafa' }}>CC Acquired</th>
+                  {[
+                    { label: 'Date', align: 'left' },
+                    { label: 'CUSD Spent', align: 'right' },
+                    { label: 'CC Acquired', align: 'right' },
+                    { label: 'Avg Price', align: 'right' },
+                  ].map((col) => (
+                    <th key={col.label} style={{
+                      textAlign: col.align as 'left' | 'right',
+                      padding: '10px 14px',
+                      fontSize: '10px',
+                      fontWeight: 600,
+                      color: '#999',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                      borderBottom: '1px solid #f0f0f0',
+                      fontFamily: '"DM Mono", monospace',
+                      background: '#fafafa',
+                      whiteSpace: 'nowrap',
+                    }}>{col.label}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td style={{ padding: '12px 14px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace' }}>April 2026</td>
-                  <td style={{ padding: '12px 14px', fontSize: '13px', fontWeight: 600, color: '#122023', textAlign: 'right', fontFamily: '"DM Mono", monospace' }}>143,333</td>
-                </tr>
+                {acquisitions.map((a) => {
+                  const avgPrice = a.cusdSpent / a.ccAcquired;
+                  return (
+                    <tr key={a.date}>
+                      <td style={{ padding: '12px 14px', fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace', whiteSpace: 'nowrap' }}>{a.date}</td>
+                      <td style={{ padding: '12px 14px', fontSize: '13px', color: '#122023', textAlign: 'right', fontFamily: '"DM Mono", monospace', whiteSpace: 'nowrap' }}>{fmt(a.cusdSpent)}</td>
+                      <td style={{ padding: '12px 14px', fontSize: '13px', fontWeight: 600, color: '#122023', textAlign: 'right', fontFamily: '"DM Mono", monospace', whiteSpace: 'nowrap' }}>{a.ccAcquired.toLocaleString()}</td>
+                      <td style={{ padding: '12px 14px', fontSize: '13px', color: '#888', textAlign: 'right', fontFamily: '"DM Mono", monospace', whiteSpace: 'nowrap' }}>${avgPrice.toFixed(4)}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
               <tfoot>
                 <tr style={{ background: '#122023' }}>
                   <td style={{ padding: '12px 14px', fontSize: '11px', fontWeight: 700, color: '#40FB50', fontFamily: '"DM Mono", monospace' }}>TOTAL</td>
-                  <td style={{ padding: '12px 14px', fontSize: '12px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace' }}>143,333</td>
+                  <td style={{ padding: '12px 14px', fontSize: '12px', fontWeight: 600, color: '#FFF', textAlign: 'right', fontFamily: '"DM Mono", monospace', whiteSpace: 'nowrap' }}>{fmt(fundData.cusdSpent)}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '12px', fontWeight: 700, color: '#40FB50', textAlign: 'right', fontFamily: '"DM Mono", monospace', whiteSpace: 'nowrap' }}>{fundData.ccAcquired.toLocaleString()}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '12px', color: '#6b7c7f', textAlign: 'right', fontFamily: '"DM Mono", monospace', whiteSpace: 'nowrap' }}>${(fundData.cusdSpent / fundData.ccAcquired).toFixed(4)}</td>
                 </tr>
               </tfoot>
             </table>
