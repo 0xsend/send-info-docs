@@ -21,7 +21,7 @@ export default function PoolParty() {
       {/* ── CORE PRINCIPLES ── */}
       <div>
         <div style={{ ...LABEL, marginBottom: '12px', paddingLeft: '2px' }}>Core Principles</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+        <div className="responsive-3col" style={{ gap: '12px' }}>
           {[
             { title: 'No KYC', desc: 'No identity verification required', color: '#122023' },
             { title: 'Non-Custodial', desc: 'You control your assets, always', color: '#1a8a2e' },
@@ -36,7 +36,7 @@ export default function PoolParty() {
       </div>
 
       {/* ── CTA CARDS ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+      <div className="responsive-2col" style={{ gap: '12px' }}>
         <div style={{ ...CARD, borderTop: '3px solid #1a8a2e', padding: '24px 22px' }}>
           <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>Already have Canton Wallet?</div>
           <div style={{ fontSize: '14px', color: '#888', lineHeight: 1.6 }}>

@@ -20,7 +20,7 @@ export default function SendVerified() {
       </div>
 
       {/* ── STATUS STRIP ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px', borderRadius: '12px', overflow: 'hidden' }}>
+      <div className="responsive-2col" style={{ gap: '2px', borderRadius: '12px', overflow: 'hidden' }}>
         <div style={{ background: '#171f22', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontFamily: MONO, fontSize: '11px', fontWeight: 600, color: '#FFF' }}>Base Network</span>
           <span style={{ fontFamily: MONO, fontSize: '10px', color: '#4a5c5f', marginLeft: 'auto' }}>Canton soon</span>
@@ -93,7 +93,7 @@ export default function SendVerified() {
       {/* ── DOWNLOAD ── */}
       <div>
         <div style={{ ...LABEL, marginBottom: '12px', paddingLeft: '2px' }}>Get Started</div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <div className="responsive-2col" style={{ gap: '12px' }}>
           <a href="https://apps.apple.com/pl/app/send/id6748525971" target="_blank" rel="noopener noreferrer" style={{
             background: '#122023', borderRadius: '12px', padding: '18px 20px', textDecoration: 'none',
             display: 'flex', alignItems: 'center', gap: '14px',

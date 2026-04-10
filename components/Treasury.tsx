@@ -504,10 +504,9 @@ export default function Treasury() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
       {/* ── HERO: Bento grid ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gridTemplateRows: 'auto auto', gap: '2px', borderRadius: '14px', overflow: 'hidden' }}>
+      <div className="bento-hero">
         {/* Total value — large cell */}
-        <div style={{
-          gridRow: '1 / 3',
+        <div className="bento-hero-main bento-hero-cell-large" style={{
           background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
           padding: '44px 36px',
           display: 'flex',
@@ -598,7 +597,7 @@ export default function Treasury() {
       </div>
 
       {/* ── CHARTS: 2-column grid ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div className="responsive-2col">
         {/* Stablecoin Chart */}
         <div style={{ background: '#FFF', borderRadius: '12px', padding: '24px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
           <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '4px' }}>

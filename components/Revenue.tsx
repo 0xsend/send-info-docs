@@ -204,10 +204,9 @@ export default function Revenue() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
       {/* ── HERO: Bento ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gridTemplateRows: 'auto auto', gap: '2px', borderRadius: '14px', overflow: 'hidden' }}>
+      <div className="bento-hero">
         {/* Grand total */}
-        <div style={{
-          gridRow: '1 / 3',
+        <div className="bento-hero-main bento-hero-cell-large" style={{
           background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
           padding: '44px 36px',
           display: 'flex',

@@ -1803,3 +1803,148 @@ body {
     display: none;
   }
 }
+
+/* ============================================
+   RESPONSIVE BENTO COMPONENTS
+   Used by Treasury, Revenue, EcosystemFund,
+   TokenEmissions, FundingRounds, etc.
+   ============================================ */
+
+/* Bento hero grid — collapses on mobile */
+.bento-hero {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.bento-hero-main {
+  grid-row: 1 / 3;
+}
+
+@media (max-width: 768px) {
+  .bento-hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .bento-hero-main {
+    grid-row: auto;
+  }
+  .bento-hero-cell {
+    padding: 24px 20px !important;
+    min-height: auto !important;
+  }
+  .bento-hero-cell-large {
+    padding: 32px 24px !important;
+    min-height: auto !important;
+  }
+  .bento-hero-number {
+    font-size: 36px !important;
+  }
+  .bento-hero-number-md {
+    font-size: 22px !important;
+  }
+}
+
+/* 2-column responsive grid (charts, partners, etc) */
+.responsive-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .responsive-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 3-column responsive grid */
+.responsive-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .responsive-3col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 3-column tight (2px gap, used for bento metrics) */
+.responsive-3col-tight {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+@media (max-width: 768px) {
+  .responsive-3col-tight {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hero CC + Stablecoins/POL paired flex rows */
+.bento-paired-row {
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 480px) {
+  .bento-paired-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* Card padding adjustments on mobile */
+@media (max-width: 768px) {
+  .responsive-card {
+    padding: 18px !important;
+  }
+  .responsive-card-lg {
+    padding: 20px !important;
+  }
+}
+
+/* Allocation grid in TokenEmissions/EcosystemFund */
+.allocation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+}
+
+@media (max-width: 640px) {
+  .allocation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tables — horizontal scroll on mobile */
+.responsive-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .responsive-table-wrapper table {
+    min-width: 560px;
+  }
+}
+
+/* Bento hero number that uses variable size */
+@media (max-width: 768px) {
+  .bento-number-xl {
+    font-size: 36px !important;
+    letter-spacing: -1px !important;
+  }
+  .bento-number-lg {
+    font-size: 24px !important;
+  }
+  .bento-number-md {
+    font-size: 20px !important;
+  }
+}

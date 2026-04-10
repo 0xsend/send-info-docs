@@ -204,9 +204,9 @@ export default function TokenEmissions() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
       {/* ── HERO ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gridTemplateRows: 'auto auto', gap: '2px', borderRadius: '14px', overflow: 'hidden' }}>
+      <div className="bento-hero">
         {/* Total supply */}
-        <div style={{ gridRow: '1 / 3', background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)', padding: '44px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
+        <div className="bento-hero-main bento-hero-cell-large" style={{ background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)', padding: '44px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
           <div>
             <div style={{ ...LABEL, color: '#40FB50', letterSpacing: '3px', marginBottom: '6px' }}>Total Supply</div>
             <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6 }}>Fixed cap · no inflation beyond allocation</div>
@@ -284,7 +284,7 @@ export default function TokenEmissions() {
         </div>
 
         {/* Allocation detail rows */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 24px' }}>
+        <div className="allocation-grid">
           {tokenData.allocations.map((a, i) => {
             const pct = (a.allocation / tokenData.totalSupply) * 100;
             const distributed = a.allocation - a.remaining;

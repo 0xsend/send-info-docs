@@ -60,7 +60,7 @@ export default function BusinessModels() {
         </div>
 
         {/* Revenue flow strip */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', borderTop: '1px solid #E0E0E0' }}>
+        <div className="responsive-3col" style={{ gap: '0', borderTop: '1px solid #E0E0E0' }}>
           {[
             { step: '01', label: 'User Activity', sub: 'Send App' },
             { step: '02', label: 'Product Multisigs', sub: 'Track by source' },
@@ -78,7 +78,7 @@ export default function BusinessModels() {
       </div>
 
       {/* ── MODEL CARDS ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div className="responsive-2col">
         {businessModels.map((model) => (
           <div key={model.type} style={{ ...CARD, overflow: 'hidden' }}>
             <div style={{ borderLeft: `4px solid ${model.color}`, padding: '20px 20px 20px 18px', display: 'flex', flexDirection: 'column', gap: '14px' }}>

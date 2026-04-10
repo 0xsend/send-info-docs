@@ -58,7 +58,7 @@ export default function EcosystemFund() {
         </div>
 
         {/* Three lifecycle metrics */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px' }}>
+        <div className="responsive-3col-tight">
           <div style={{ background: '#171f22', padding: '24px 28px' }}>
             <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f', marginBottom: '8px' }}>
               Yield Earned
@@ -90,7 +90,7 @@ export default function EcosystemFund() {
       </div>
 
       {/* ── HOW IT WORKS: 3-step strip ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+      <div className="responsive-3col">
         {steps.map((step) => (
           <div key={step.num} style={{
             background: '#FFF',
@@ -114,7 +114,7 @@ export default function EcosystemFund() {
       </div>
 
       {/* ── ALLOCATION + CUSD side by side ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div className="responsive-2col">
         {/* Allocation */}
         <div style={{
           background: '#FFF',
@@ -216,7 +216,7 @@ export default function EcosystemFund() {
       </div>
 
       {/* ── PARTNERS ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div className="responsive-2col">
         <div style={{
           background: '#FFF',
           borderRadius: '12px',
@@ -265,7 +265,7 @@ export default function EcosystemFund() {
           Fund Transparency
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+        <div className="responsive-3col" style={{ marginBottom: '24px' }}>
           <div>
             <div style={{ fontSize: '12px', color: '#999', marginBottom: '4px' }}>Multisig</div>
             <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>CUSD Ecosystem Fund</div>
