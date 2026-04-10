@@ -11,10 +11,10 @@ const fundData = {
 };
 
 const allocations = [
-  { label: 'CUSD Adoption & Partnerships', pct: 40, color: '#40FB50', desc: 'Integration grants for projects adopting CUSD' },
-  { label: 'Pool Party Liquidity', pct: 25, color: '#2196F3', desc: 'Deepen CUSD trading pairs on Pool Party' },
-  { label: 'Builder Grants', pct: 20, color: '#FF9800', desc: 'Fund developers building on Canton' },
-  { label: 'Strategic Reserve', pct: 15, color: '#8B5CF6', desc: 'Partnerships and future programs' },
+  { label: 'CUSD Adoption & Partnerships', pct: 40, color: '#1a8a2e', desc: 'Integration grants for projects adopting CUSD' },
+  { label: 'Pool Party Liquidity', pct: 25, color: '#2aaa3e', desc: 'Deepen CUSD trading pairs on Pool Party' },
+  { label: 'Builder Grants', pct: 20, color: '#4a5c5f', desc: 'Fund developers building on Canton' },
+  { label: 'Strategic Reserve', pct: 15, color: '#6b7c7f', desc: 'Partnerships and future programs' },
 ];
 
 const cusdFeatures = [
