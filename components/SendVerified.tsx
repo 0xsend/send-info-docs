@@ -38,8 +38,8 @@ export default function SendVerified() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {[
             { step: '01', title: 'Purchase a Sendtag', desc: 'Claim a unique Sendtag through the in-app marketplace so other members can find you easily.' },
-            { step: '02', title: 'Hold 3,000 $SEND', desc: 'Maintain a minimum balance of 3,000 SEND tokens in your primary wallet. Keep the tokens in place to retain verification.', note: 'Trading is currently disabled in the iOS and Android apps — use send.app to swap USDC to $SEND.' },
-            { step: '03', title: 'Deposit 25 USDC to Savings', desc: 'Move at least 25 USDC into your Send savings vault to confirm you have an active balance.' },
+            { step: '02', title: 'Hold 5,000 $SEND', desc: 'Maintain a minimum balance of 5,000 SEND tokens in your primary wallet. Keep the tokens in place to retain verification.', note: 'Trading is currently disabled in the iOS and Android apps — use send.app to swap USDC to $SEND.' },
+            { step: '03', title: 'Deposit 30 USDC to Savings', desc: 'Move at least 30 USDC into your Send savings vault to confirm you have an active balance.' },
           ].map((item) => (
             <div key={item.step} style={{ ...CARD, padding: '20px', display: 'flex', gap: '16px' }}>
               <div style={{ fontFamily: MONO, fontSize: '24px', fontWeight: 800, color: '#e8eaeb', lineHeight: 1, flexShrink: 0, width: '36px' }}>
