@@ -31,6 +31,7 @@ const heroItemIcons = {
   'send-safe/overview': <HeroIcon name="dashboard" />,
   'cusd-stablecoin/overview': <HeroIcon name="dashboard" />,
   'cusd-stablecoin/buybacks': <HeroIcon name="rocket_launch" />,
+  'cusd-stablecoin/builder-program': <HeroIcon name="code" />,
   'cusd-stablecoin/reserves-report': <HeroIcon name="description" />,
   'cusd-stablecoin/faqs': <HeroIcon name="help" />,
   'send-safe/passkeys': <HeroIcon name="fingerprint" />,
