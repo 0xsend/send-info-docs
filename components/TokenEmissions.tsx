@@ -5,16 +5,17 @@ import { useState } from 'react';
 // ============ TOKEN DATA ============
 const tokenData = {
   totalSupply: 1_000_000_000,
-  circulating: 346_292_487,
-  nonCirculating: 653_707_513,
-  circulationRate: 34.63,
+  circulating: 349_898_419,
+  nonCirculating: 650_101_581,
+  circulationRate: 34.99,
+  asOf: 'May 2026',
 
   allocations: [
-    { name: 'Rewards', allocation: 300_000_000, remaining: 221_019_521, color: '#40FB50' },
-    { name: 'Treasury', allocation: 200_000_000, remaining: 206_991_992, color: '#2dd444' },
+    { name: 'Rewards', allocation: 300_000_000, remaining: 220_019_521, color: '#40FB50' },
+    { name: 'Treasury', allocation: 200_000_000, remaining: 205_414_060, color: '#2dd444' },
     { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#1a8a2e' },
-    { name: 'Team', allocation: 100_000_000, remaining: 57_535_000, color: '#6b7c7f' },
-    { name: 'Contributors', allocation: 100_000_000, remaining: 58_161_000, color: '#4a5c5f' },
+    { name: 'Team', allocation: 100_000_000, remaining: 56_575_000, color: '#6b7c7f' },
+    { name: 'Contributors', allocation: 100_000_000, remaining: 58_093_000, color: '#4a5c5f' },
     { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#2a3c3f' },
   ],
 
@@ -48,9 +49,9 @@ const tokenData = {
   ],
 
   vestingProgress: [
-    { name: 'Team', initial: 100_000_000, released: 42_465_000, pct: 42.5 },
-    { name: 'Contributors', initial: 100_000_000, released: 41_839_000, pct: 41.8 },
-    { name: 'Rewards', initial: 300_000_000, released: 78_980_479, pct: 26.3 },
+    { name: 'Team', initial: 100_000_000, released: 43_425_000, pct: 43.4 },
+    { name: 'Contributors', initial: 100_000_000, released: 41_907_000, pct: 41.9 },
+    { name: 'Rewards', initial: 300_000_000, released: 79_980_479, pct: 26.7 },
   ],
 
   milestones: [
@@ -59,7 +60,8 @@ const tokenData = {
     { date: 'Q2 2024', event: '259M Circulating', circulating: '259M' },
     { date: 'Q1 2025', event: '293M Circulating', circulating: '293M' },
     { date: 'Q4 2025', event: '328M Circulating', circulating: '328M' },
-    { date: 'Q1 2026', event: 'Current — 346M Circulating', circulating: '346M' },
+    { date: 'Q1 2026', event: '346M Circulating', circulating: '346M' },
+    { date: 'May 2026', event: 'Current — 350M Circulating', circulating: '350M' },
   ],
 };
 
@@ -210,6 +212,7 @@ export default function TokenEmissions() {
           <div>
             <div style={{ ...LABEL, color: '#40FB50', letterSpacing: '3px', marginBottom: '6px' }}>Total Supply</div>
             <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6 }}>Fixed cap · no inflation beyond allocation</div>
+            <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '8px', fontFamily: MONO }}>As of {tokenData.asOf}</div>
           </div>
           <div>
             <div style={{ fontFamily: MONO, fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
