@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Mono:wght@300;400;500&display=swap');
+/* Fonts (DM Sans + DM Mono) are loaded via next/font in app/layout.jsx for self-hosting */
 
 /* Light Theme Design System Variables from Figma */
 :root {
