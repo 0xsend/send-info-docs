@@ -205,129 +205,179 @@ export default function TokenEmissions() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
-      {/* ── HERO ── */}
-      <div className="bento-hero">
-        {/* Total supply */}
-        <div className="bento-hero-main bento-hero-cell-large" style={{ background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)', padding: '44px 36px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
+      {/* ── HERO: SUPPLY MAP ── */}
+      <div style={{ background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)', borderRadius: '14px', padding: '40px 36px 36px', overflow: 'hidden' }}>
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '32px' }}>
           <div>
-            <div style={{ ...LABEL, color: '#40FB50', letterSpacing: '3px', marginBottom: '6px' }}>Total Supply</div>
-            <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6 }}>Fixed cap · no inflation beyond allocation</div>
-            <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '8px', fontFamily: MONO }}>As of {tokenData.asOf}</div>
+            <div style={{ ...LABEL, color: '#40FB50', letterSpacing: '3px', marginBottom: '6px' }}>Supply Map</div>
+            <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6, maxWidth: '420px' }}>
+              Every $SEND token in existence, mapped by where it lives today. Fixed 1B cap, no inflation beyond allocation.
+            </div>
           </div>
-          <div>
-            <div style={{ fontFamily: MONO, fontSize: '48px', fontWeight: 700, color: '#FFF', letterSpacing: '-2px', lineHeight: 1 }}>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontFamily: MONO, fontSize: '36px', fontWeight: 700, color: '#FFF', letterSpacing: '-1.5px', lineHeight: 1 }}>
               1,000,000,000
             </div>
-            <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '8px' }}>$SEND tokens</div>
+            <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '6px', fontFamily: MONO }}>As of {tokenData.asOf}</div>
           </div>
         </div>
 
-        {/* Circulating */}
-        <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div style={LABEL}>Circulating</div>
-            <div style={{ fontFamily: MONO, fontSize: '11px', color: '#40FB50' }}>{fmtPct(circPct)}</div>
+        {/* Circulating / Locked split labels */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+          <div>
+            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '2px' }}>Circulating</div>
+            <div style={{ fontFamily: MONO, fontSize: '15px', color: '#FFF', fontWeight: 600 }}>
+              {fmt(tokenData.circulating)} <span style={{ color: '#40FB50', fontSize: '11px' }}>{fmtPct(circPct)}</span>
+            </div>
           </div>
-          <div style={{ fontFamily: MONO, fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
-            {fmt(tokenData.circulating)}
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#6b7c7f', marginBottom: '2px' }}>Locked</div>
+            <div style={{ fontFamily: MONO, fontSize: '15px', color: '#FFF', fontWeight: 600 }}>
+              {fmt(tokenData.nonCirculating)} <span style={{ color: '#6b7c7f', fontSize: '11px' }}>{fmtPct(nonCircPct)}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* The supply map — one bar showing the full 1B */}
+        <div style={{ position: 'relative', marginBottom: '12px' }}>
+          {/* Top labels (circulating allocations - shown above) */}
+          {/* The bar itself: circulating segment + each locked allocation */}
+          <div style={{ display: 'flex', height: '40px', borderRadius: '6px', overflow: 'hidden', boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.3)' }}>
+            {/* Circulating - gets the full circulating share, brand green */}
+            <div
+              style={{
+                width: `${circPct}%`,
+                background: '#40FB50',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                opacity: hoveredAlloc !== null ? 0.3 : 1,
+                transition: 'opacity 0.2s',
+              }}
+            />
+            {/* Each locked allocation */}
+            {tokenData.allocations
+              .filter((a) => a.remaining > 0)
+              .map((a) => {
+                const allocIdx = tokenData.allocations.indexOf(a);
+                const pct = (a.remaining / tokenData.totalSupply) * 100;
+                const isHov = hoveredAlloc === allocIdx;
+                const dim = hoveredAlloc !== null && !isHov;
+                return (
+                  <div
+                    key={a.name}
+                    style={{
+                      width: `${pct}%`,
+                      background: a.color,
+                      opacity: dim ? 0.3 : 1,
+                      transition: 'opacity 0.2s',
+                      cursor: 'pointer',
+                      borderLeft: '1px solid rgba(0,0,0,0.2)',
+                    }}
+                    onMouseEnter={() => setHoveredAlloc(allocIdx)}
+                    onMouseLeave={() => setHoveredAlloc(null)}
+                    title={`${a.name}: ${fmt(a.remaining)} (${pct.toFixed(1)}%)`}
+                  />
+                );
+              })}
           </div>
         </div>
 
-        {/* Non-circulating */}
-        <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div style={LABEL}>Non-Circulating</div>
-            <div style={{ fontFamily: MONO, fontSize: '11px', color: '#6b7c7f' }}>{fmtPct(nonCircPct)}</div>
-          </div>
-          <div style={{ fontFamily: MONO, fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>
-            {fmt(tokenData.nonCirculating)}
-          </div>
-        </div>
-      </div>
-
-      {/* ── SUPPLY RATIO BAR ── */}
-      <div style={{ ...CARD, padding: '24px' }}>
-        <div style={{ ...LABEL, marginBottom: '14px' }}>Supply Distribution</div>
-        {/* Full-width proportional bar */}
-        <div style={{ display: 'flex', height: '32px', borderRadius: '6px', overflow: 'hidden', marginBottom: '16px' }}>
-          <div
-            style={{ width: `${circPct}%`, background: '#40FB50', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'width 0.3s' }}
-          >
-            <span style={{ fontFamily: MONO, fontSize: '11px', fontWeight: 700, color: '#122023' }}>{fmtPct(circPct)}</span>
-          </div>
-          <div style={{ flex: 1, background: '#122023', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ fontFamily: MONO, fontSize: '11px', fontWeight: 600, color: '#6b7c7f' }}>{fmtPct(nonCircPct)} locked</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ── ALLOCATION GRID ── */}
-      <div style={{ ...CARD, padding: '24px' }}>
-        <div style={{ ...LABEL, marginBottom: '16px' }}>Token Allocation</div>
-
-        {/* Stacked horizontal bar — Flourish-style */}
-        <div style={{ display: 'flex', height: '12px', borderRadius: '6px', overflow: 'hidden', marginBottom: '20px' }}>
-          {tokenData.allocations.map((a, i) => {
-            const pct = (a.allocation / tokenData.totalSupply) * 100;
+        {/* Bottom: tiny allocation legend */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '14px' }}>
+          {tokenData.allocations.filter((a) => a.remaining > 0).map((a) => {
+            const pct = (a.remaining / tokenData.totalSupply) * 100;
+            const allocIdx = tokenData.allocations.indexOf(a);
+            const dim = hoveredAlloc !== null && hoveredAlloc !== allocIdx;
             return (
               <div
                 key={a.name}
-                style={{
-                  width: `${pct}%`,
-                  background: a.color,
-                  opacity: hoveredAlloc !== null && hoveredAlloc !== i ? 0.2 : 1,
-                  transition: 'opacity 0.2s',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={() => setHoveredAlloc(i)}
-                onMouseLeave={() => setHoveredAlloc(null)}
-              />
-            );
-          })}
-        </div>
-
-        {/* Allocation detail rows */}
-        <div className="allocation-grid">
-          {tokenData.allocations.map((a, i) => {
-            const pct = (a.allocation / tokenData.totalSupply) * 100;
-            const distributed = a.allocation - a.remaining;
-            const distPct = (distributed / a.allocation) * 100;
-            const dim = hoveredAlloc !== null && hoveredAlloc !== i;
-
-            return (
-              <div
-                key={a.name}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  padding: '12px 0',
-                  borderTop: i < 2 ? 'none' : '1px solid #f0f0f0',
-                  opacity: dim ? 0.3 : 1,
-                  transition: 'opacity 0.2s',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={() => setHoveredAlloc(i)}
+                style={{ display: 'flex', alignItems: 'center', gap: '6px', opacity: dim ? 0.3 : 1, transition: 'opacity 0.2s', cursor: 'pointer' }}
+                onMouseEnter={() => setHoveredAlloc(allocIdx)}
                 onMouseLeave={() => setHoveredAlloc(null)}
               >
-                <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: a.color, flexShrink: 0 }} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 600, color: '#122023' }}>{a.name}</span>
-                    <span style={{ fontFamily: MONO, fontSize: '11px', color: '#999' }}>{pct}%</span>
-                  </div>
-                  {/* Mini progress bar */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
-                    <div style={{ flex: 1, height: '3px', background: '#f0f0f0', borderRadius: '2px', overflow: 'hidden' }}>
-                      <div style={{ width: `${distPct}%`, height: '100%', background: a.color, borderRadius: '2px' }} />
-                    </div>
-                    <span style={{ fontFamily: MONO, fontSize: '10px', color: '#999', flexShrink: 0 }}>{distPct.toFixed(0)}%</span>
-                  </div>
-                </div>
+                <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: a.color }} />
+                <span style={{ fontSize: '11px', color: '#FFF', fontWeight: 500 }}>{a.name}</span>
+                <span style={{ fontFamily: MONO, fontSize: '10px', color: '#6b7c7f' }}>{pct.toFixed(1)}%</span>
               </div>
             );
           })}
         </div>
+      </div>
+
+      {/* ── PORTFOLIO ROWS ── */}
+      <div style={{ ...CARD, overflow: 'hidden' }}>
+        <div style={{ padding: '20px 24px', borderBottom: '1px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <div>
+            <div style={{ fontSize: '15px', fontWeight: 600, color: '#122023' }}>Token Allocations</div>
+            <div style={{ fontSize: '12px', color: '#999', marginTop: '2px' }}>Where every token lives, by allocation</div>
+          </div>
+          <div style={{ ...LABEL, color: '#bbb' }}>{tokenData.allocations.length} buckets</div>
+        </div>
+
+        {tokenData.allocations.map((a, i) => {
+          const pct = (a.allocation / tokenData.totalSupply) * 100;
+          const distributed = a.allocation - a.remaining;
+          const distPct = a.allocation > 0 ? (distributed / a.allocation) * 100 : 0;
+          const isFullyDistributed = a.remaining === 0;
+          const dim = hoveredAlloc !== null && hoveredAlloc !== i;
+
+          // Status label
+          let status: { label: string; color: string; bg: string };
+          if (isFullyDistributed) status = { label: 'Fully Distributed', color: '#1565C0', bg: '#E3F2FD' };
+          else if (a.remaining > a.allocation) status = { label: 'Accumulating', color: '#7B1FA2', bg: '#F3E5F5' };
+          else if (a.name === 'Team' || a.name === 'Contributors') status = { label: 'Vesting', color: '#E65100', bg: '#FFF3E0' };
+          else status = { label: 'Active Distribution', color: '#2E7D32', bg: '#E8F5E9' };
+
+          return (
+            <div
+              key={a.name}
+              style={{
+                padding: '20px 24px',
+                borderTop: i === 0 ? 'none' : '1px solid #f0f0f0',
+                opacity: dim ? 0.4 : 1,
+                transition: 'opacity 0.2s',
+                cursor: 'pointer',
+                display: 'grid',
+                gridTemplateColumns: '1fr auto',
+                gap: '16px',
+                alignItems: 'center',
+              }}
+              onMouseEnter={() => setHoveredAlloc(i)}
+              onMouseLeave={() => setHoveredAlloc(null)}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: 0 }}>
+                <div style={{ width: '4px', alignSelf: 'stretch', background: a.color, borderRadius: '2px', flexShrink: 0 }} />
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                    <span style={{ fontSize: '15px', fontWeight: 700, color: '#122023' }}>{a.name}</span>
+                    <span style={{ fontFamily: MONO, fontSize: '11px', color: '#999' }}>{pct}% of supply</span>
+                    <span style={{
+                      fontSize: '10px', fontWeight: 700, color: status.color, background: status.bg,
+                      padding: '2px 8px', borderRadius: '4px', letterSpacing: '0.5px', textTransform: 'uppercase',
+                    }}>{status.label}</span>
+                  </div>
+                  {/* Mini distribution bar */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', maxWidth: '480px' }}>
+                    <div style={{ flex: 1, height: '4px', background: '#f0f0f0', borderRadius: '2px', overflow: 'hidden' }}>
+                      <div style={{ width: `${Math.min(distPct, 100)}%`, height: '100%', background: a.color, borderRadius: '2px' }} />
+                    </div>
+                    <span style={{ fontFamily: MONO, fontSize: '10px', color: '#999', flexShrink: 0 }}>
+                      {distPct < 0 ? `+${Math.abs(distPct).toFixed(0)}%` : `${distPct.toFixed(0)}%`} distributed
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ fontFamily: MONO, fontSize: '20px', fontWeight: 700, color: '#122023', letterSpacing: '-0.5px' }}>
+                  {fmtM(a.remaining)}
+                </div>
+                <div style={{ fontFamily: MONO, fontSize: '10px', color: '#bbb', marginTop: '2px' }}>
+                  remaining
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* ── CIRCULATING SUPPLY CHART ── */}
