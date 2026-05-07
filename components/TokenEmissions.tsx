@@ -11,9 +11,9 @@ const tokenData = {
   asOf: 'May 2026',
 
   allocations: [
-    { name: 'Rewards', allocation: 300_000_000, remaining: 220_019_521, color: '#40FB50' },
-    { name: 'Treasury', allocation: 200_000_000, remaining: 205_414_060, color: '#2dd444' },
-    { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#1a8a2e' },
+    { name: 'Rewards', allocation: 300_000_000, remaining: 220_019_521, color: '#16a34a' },
+    { name: 'Treasury', allocation: 200_000_000, remaining: 205_414_060, color: '#15803d' },
+    { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#166534' },
     { name: 'Team', allocation: 100_000_000, remaining: 56_575_000, color: '#6b7c7f' },
     { name: 'Contributors', allocation: 100_000_000, remaining: 58_093_000, color: '#4a5c5f' },
     { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#2a3c3f' },
