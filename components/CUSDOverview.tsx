@@ -6,10 +6,10 @@ const CARD: React.CSSProperties = { background: '#FFF', borderRadius: '12px', bo
 
 // Latest CUSD outstanding (from most recent Brale report)
 const cusdData = {
-  outstanding: 1040189.69,
-  avgDaily: 1049555.96,
-  monthlyYield: 2865.29,
-  asOf: 'March 2026',
+  outstanding: 1227418.09,
+  avgDaily: 1162687.78,
+  monthlyYield: 3071.75,
+  asOf: 'April 2026',
 };
 
 const features = [
