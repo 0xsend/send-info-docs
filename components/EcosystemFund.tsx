@@ -8,7 +8,7 @@ const acquisitions = [
 ];
 
 const fundData = {
-  yieldEarned: 21397.00,
+  yieldEarned: 24468.75,
   ccAcquired: acquisitions.reduce((sum, a) => sum + a.ccAcquired, 0),
   cusdSpent: acquisitions.reduce((sum, a) => sum + a.cusdSpent, 0),
   ccDeployed: 0,
