@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 // ============ TREASURY DATA ============
 const treasuryData = [
-  { date: '3/2026', send: 206991992, cc: 66637126, cusd: 112147, usdcx: 52655, usdc: 3006624, pol: 2561000, fiat: 42550, eth: 0, isLatest: true },
+  { date: '4/2026', send: 205414060, cc: 67693382, cusd: 119188, usdcx: 43926, usdc: 2598983, pol: 1736291, fiat: 119965, eth: 0, isLatest: true },
+  { date: '3/2026', send: 206991992, cc: 66637126, cusd: 112147, usdcx: 52655, usdc: 3006624, pol: 2561000, fiat: 42550, eth: 0 },
   { date: '2/2026', send: 208879479, cc: 62113382, cusd: 185000, usdcx: 165000, usdc: 3200000, pol: 2128330, fiat: 34963, eth: 0 },
   { date: '1/2026', send: 212705811, cc: 64819991, cusd: 0, usdcx: 0, usdc: 2837000, pol: 949000, fiat: 183409, eth: 0 },
   { date: '12/2025', send: 214371974, cc: 55312796, cusd: 2752008, usdcx: 0, usdc: 36049.98, pol: 790976, fiat: 20783.78, eth: 0 },
@@ -42,8 +43,8 @@ const currentHoldings = treasuryData[0];
 
 // Token prices (updated monthly alongside treasury data)
 const tokenPrices = {
-  send: 0.024,   // SEND price in USD
-  cc: 0.142,     // Canton Coin price in USD
+  send: 0.0215,  // SEND price in USD
+  cc: 0.149,     // Canton Coin price in USD
 };
 
 // Asset definitions with Send brand colors and colored left-border styling
@@ -519,7 +520,7 @@ export default function Treasury() {
               Total Treasury Value
             </div>
             <div style={{ fontSize: '13px', color: '#6b7c7f', lineHeight: 1.6 }}>
-              As of 4/1 · SEND @ ${tokenPrices.send} · CC @ ${tokenPrices.cc}
+              As of 5/1 · SEND @ ${tokenPrices.send} · CC @ ${tokenPrices.cc}
             </div>
           </div>
           <div>
