@@ -5,7 +5,7 @@ import { useState } from 'react';
 // ============ TREASURY DATA ============
 const treasuryData = [
   { date: '4/2026', send: 205414060, cc: 67693382, cusd: 119188, usdcx: 43926, usdc: 2598983, pol: 1776801, fiat: 119965, eth: 0, isLatest: true },
-  { date: '3/2026', send: 206991992, cc: 66637126, cusd: 112147, usdcx: 52655, usdc: 3006624, pol: 2561000, fiat: 42550, eth: 0 },
+  { date: '3/2026', send: 206991992, cc: 66637126, cusd: 112147, usdcx: 52655, usdc: 3006624, pol: 1966000, fiat: 42550, eth: 0 },
   { date: '2/2026', send: 208879479, cc: 62113382, cusd: 185000, usdcx: 165000, usdc: 3200000, pol: 2128330, fiat: 34963, eth: 0 },
   { date: '1/2026', send: 212705811, cc: 64819991, cusd: 0, usdcx: 0, usdc: 2837000, pol: 949000, fiat: 183409, eth: 0 },
   { date: '12/2025', send: 214371974, cc: 55312796, cusd: 2752008, usdcx: 0, usdc: 36049.98, pol: 790976, fiat: 20783.78, eth: 0 },
