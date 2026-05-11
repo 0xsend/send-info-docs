@@ -37,6 +37,7 @@ const heroItemIcons = {
   'send-safe/passkeys': <HeroIcon name="fingerprint" />,
   'send-safe/wallet-maintenance': <HeroIcon name="build" />,
   'send-safe/safe': <HeroIcon name="shield" />,
+  'send-safe/send-connect': <HeroIcon name="extension" />,
   'send-safe/canton-coin-rewards': <HeroIcon name="star" />,
   'pool-party/overview': <HeroIcon name="pool" />,
   'pool-party/how-it-works': <HeroIcon name="swap_horiz" />,

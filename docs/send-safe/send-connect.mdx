@@ -1,0 +1,67 @@
+---
+id: send-connect
+title: Send Connect
+---
+
+# Send Connect
+
+Send Connect is the browser extension that lets users interact with Canton Network applications directly from their browser. It's the canonical wallet extension for Canton — implementing the [CIP-103 standard](https://github.com/digital-asset/canton/blob/main/canton-3x/CIP-103.md) for `window.canton` providers so any compliant Canton dApp can request connections, signatures, and transactions through it.
+
+It's built by the Send team and lives alongside the Send Canton Wallet as part of the broader Send Canton Wallet ecosystem.
+
+## What It Is
+
+| | |
+|--|--|
+| **Product** | Browser extension (Chrome Web Store) |
+| **Network** | Canton Network |
+| **Standard** | CIP-103 (Canton window.canton provider) |
+| **Authentication** | Passkeys (no seed phrases) |
+| **Validator** | send-cantonwallet1 |
+| **Status** | v0.3.1 — alpha (pending CIP-103 sign-off from Digital Asset) |
+
+## How It Works
+
+Send Connect injects a `window.canton` provider into web pages. dApp builders can detect it, request a user connection, and submit transactions. The extension handles passkey authentication, surfaces approval prompts, and routes signed transactions to Canton via the Send validator.
+
+For end users it's a one-click install and a passkey sign-in. For dApp builders, integration is a handful of lines using the open-source `@sigilry/dapp` SDK.
+
+## Send Connect for Developers
+
+Beyond the end-user extension, Send Connect for Developers is a partner platform for dApp builders. It provides:
+
+- A self-service developer dashboard (registration, billing, monitoring, API key rotation)
+- Per-dApp rate limits, origin allowlists, and DAML template allowlists
+- Prepaid Canton CC traffic balance (top up from the dashboard)
+- Server-side abuse protection so a misconfigured frontend cannot drain a balance
+
+Partners pay only for the Canton CC traffic their dApp consumes at the validator's prevailing rate — no per-request markup during alpha. Send earns Canton app rewards on the traffic flowing through `send-cantonwallet1`.
+
+## Sigilry — Open-Source Standards
+
+The wallet RPC standards, schemas, and SDK are published under the **Sigilry** brand at [sigilry.org](https://sigilry.org). This is deliberately separate from Send so the standards stay neutral — any Canton wallet can implement them, any dApp can integrate against them, without depending on Send specifically.
+
+| | |
+|--|--|
+| **Site** | [sigilry.org](https://sigilry.org) |
+| **GitHub** | [github.com/sigilry/sigilry](https://github.com/sigilry/sigilry) |
+| **SDK** | `@sigilry/dapp` (npm) |
+
+Sigilry is also applying for a Canton Network Developer Fund grant. Send Connect is one implementation of the standard. Sigilry is the standard.
+
+## Alpha Partners
+
+Initial Canton dApp partners integrating Send Connect:
+
+- [poolparty.fun](https://poolparty.fun) — Pool Party AMM on Canton
+- [hundred.exchange](https://hundred.exchange) — Hundred Exchange
+
+## Resources
+
+- [Send Connect on Chrome Web Store](https://chromewebstore.google.com/detail/send/ldmohiccoioolenadmogclhoklmanpgi)
+- [Sigilry — sigilry.org](https://sigilry.org)
+- [Sigilry GitHub — github.com/sigilry/sigilry](https://github.com/sigilry/sigilry)
+
+:::info Status
+Send Connect v0.3.1 is awaiting CIP-103 conformance sign-off from Digital Asset before the Chrome Web Store listing updates publicly. Developer platform launches after. This page will be updated as milestones land.
+:::
