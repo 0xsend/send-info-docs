@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 // ============ DATA ============
 const acquisitions = [
+  { date: 'May 2026', cusdSpent: 3071.75, ccAcquired: 19701 },
   { date: 'April 2026', cusdSpent: 21397.00, ccAcquired: 143333 },
 ];
 
