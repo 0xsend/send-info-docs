@@ -7,7 +7,7 @@ title: Send Connect
 
 Send Connect is the browser extension that lets users interact with Canton Network applications directly from their browser. It's the canonical wallet extension for Canton — implementing the [CIP-103 standard](https://github.com/digital-asset/canton/blob/main/canton-3x/CIP-103.md) for `window.canton` providers so any compliant Canton dApp can request connections, signatures, and transactions through it.
 
-It's built by the Send team and lives alongside the Send Canton Wallet as part of the broader Send Canton Wallet ecosystem.
+Send Connect ships as a Chrome browser extension and is the connective tissue between the Send Canton Wallet and the broader Canton dApp ecosystem. It's also designed for third-party developers to build on Send's wallet infrastructure rather than rebuild it.
 
 ## What It Is
 
@@ -18,7 +18,13 @@ It's built by the Send team and lives alongside the Send Canton Wallet as part o
 | **Standard** | CIP-103 (Canton window.canton provider) |
 | **Authentication** | Passkeys (no seed phrases) |
 | **Validator** | send-cantonwallet1 |
-| **Status** | v0.3.1 — alpha (pending CIP-103 sign-off from Digital Asset) |
+| **Status** | Live on Chrome Web Store — soft launch in progress |
+
+## First Live dApp — Pool Party
+
+[Pool Party](https://poolparty.fun) is the first dApp live with Send Connect. Users with Send Connect installed can connect to Pool Party and execute swaps, bridges, and liquidity operations directly through their browser, signed with their passkey.
+
+Additional Canton dApps are integrating via the `@sigilry/dapp` SDK.
 
 ## How It Works
 
@@ -49,19 +55,15 @@ The wallet RPC standards, schemas, and SDK are published under the **Sigilry** b
 
 Sigilry is also applying for a Canton Network Developer Fund grant. Send Connect is one implementation of the standard. Sigilry is the standard.
 
-## Alpha Partners
+## What's Next
 
-Initial Canton dApp partners integrating Send Connect:
-
-- [poolparty.fun](https://poolparty.fun) — Pool Party AMM on Canton
-- [hundred.exchange](https://hundred.exchange) — Hundred Exchange
+- **Public announcement** — Send Connect is in soft launch with in-app links going out to active users; a wider announcement follows once additional dApps are integrated.
+- **Base account support** — Future versions will support existing Send accounts on Base, making Send Connect the seamless bridge between Base and Canton for Send users.
+- **More dApp integrations** — Active conversations with additional Canton partners.
 
 ## Resources
 
-- [Send Connect on Chrome Web Store](https://chromewebstore.google.com/detail/send/ldmohiccoioolenadmogclhoklmanpgi)
+- [Send Connect on Chrome Web Store](https://chromewebstore.google.com/detail/send-connect/ldmohiccoioolenadmogclhoklmanpgi)
+- [Pool Party — first live dApp](https://poolparty.fun)
 - [Sigilry — sigilry.org](https://sigilry.org)
 - [Sigilry GitHub — github.com/sigilry/sigilry](https://github.com/sigilry/sigilry)
-
-:::info Status
-Send Connect v0.3.1 is awaiting CIP-103 conformance sign-off from Digital Asset before the Chrome Web Store listing updates publicly. Developer platform launches after. This page will be updated as milestones land.
-:::
