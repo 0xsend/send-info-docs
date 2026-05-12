@@ -5,30 +5,131 @@ title: Send Connect
 
 # Send Connect
 
-Send Connect is the browser extension that lets users interact with Canton Network applications directly from their browser. It's the canonical wallet extension for Canton — implementing the [CIP-103 standard](https://github.com/digital-asset/canton/blob/main/canton-3x/CIP-103.md) for `window.canton` providers so any compliant Canton dApp can request connections, signatures, and transactions through it.
+{/* ── HERO ── */}
+<div style={{
+  background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
+  borderRadius: '14px',
+  padding: '40px 36px 32px',
+  marginBottom: '24px',
+  position: 'relative',
+  overflow: 'hidden',
+}}>
+  <div style={{
+    position: 'absolute', top: '-60px', right: '-40px',
+    width: '240px', height: '240px', borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(64,251,80,0.15) 0%, transparent 65%)',
+  }} />
+  <div style={{ position: 'relative' }}>
+    <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '12px' }}>
+      Send Connect
+    </div>
+    <div style={{ fontSize: '28px', fontWeight: 700, color: '#FFF', lineHeight: 1.25, marginBottom: '12px', maxWidth: '520px' }}>
+      The browser wallet for Canton Network
+    </div>
+    <div style={{ fontSize: '14px', color: '#6b7c7f', lineHeight: 1.6, marginBottom: '28px', maxWidth: '520px' }}>
+      Connect to any Canton dApp directly from your browser. Sign with passkeys, no seed phrases. Built by the team behind Send.
+    </div>
+    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+      <a
+        href="https://chromewebstore.google.com/detail/send-connect/ldmohiccoioolenadmogclhoklmanpgi"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          background: '#40FB50',
+          color: '#122023',
+          fontWeight: 700,
+          fontSize: '14px',
+          padding: '14px 24px',
+          borderRadius: '10px',
+          textDecoration: 'none',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '8px',
+          boxShadow: '0 4px 14px rgba(64,251,80,0.25)',
+        }}
+      >
+        Install on Chrome
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M4 8H12M12 8L8 4M12 8L8 12" stroke="#122023" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </a>
+      <a
+        href="https://poolparty.fun"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          background: 'transparent',
+          color: '#FFF',
+          fontWeight: 600,
+          fontSize: '13px',
+          padding: '13px 20px',
+          borderRadius: '10px',
+          textDecoration: 'none',
+          border: '1px solid rgba(255,255,255,0.2)',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '6px',
+        }}
+      >
+        Try it on Pool Party
+        <span style={{ color: '#40FB50', fontSize: '11px' }}>↗</span>
+      </a>
+    </div>
+  </div>
+</div>
 
-Send Connect ships as a Chrome browser extension and is the connective tissue between the Send Canton Wallet and the broader Canton dApp ecosystem. It's also designed for third-party developers to build on Send's wallet infrastructure rather than rebuild it.
-
-## What It Is
-
-| | |
-|--|--|
-| **Product** | Browser extension (Chrome Web Store) |
-| **Network** | Canton Network |
-| **Standard** | CIP-103 (Canton window.canton provider) |
-| **Authentication** | Passkeys (no seed phrases) |
-| **Validator** | send-cantonwallet1 |
-| **Status** | Live on Chrome Web Store — soft launch in progress |
+{/* ── QUICK FACTS ── */}
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '12px', marginBottom: '32px' }}>
+  <div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '12px', padding: '16px 18px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '6px' }}>Network</div>
+    <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>Canton</div>
+  </div>
+  <div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '12px', padding: '16px 18px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '6px' }}>Standard</div>
+    <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>CIP-103</div>
+  </div>
+  <div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '12px', padding: '16px 18px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '6px' }}>Auth</div>
+    <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>Passkeys</div>
+  </div>
+  <div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '12px', padding: '16px 18px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '6px' }}>Status</div>
+    <div style={{ fontSize: '14px', fontWeight: 600, color: '#1a8a2e' }}>Live · Soft Launch</div>
+  </div>
+</div>
 
 ## First Live dApp — Pool Party
 
-[Pool Party](https://poolparty.fun) is the first dApp live with Send Connect. Users with Send Connect installed can connect to Pool Party and execute swaps, bridges, and liquidity operations directly through their browser, signed with their passkey.
+<div style={{
+  background: '#FFF',
+  border: '1px solid #E0E0E0',
+  borderLeft: '4px solid #40FB50',
+  borderRadius: '12px',
+  padding: '20px 24px',
+  marginBottom: '24px',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  gap: '20px',
+  flexWrap: 'wrap',
+}}>
+  <div style={{ flex: 1, minWidth: '240px' }}>
+    <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023', marginBottom: '6px' }}>Pool Party</div>
+    <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.6 }}>
+      The first Canton dApp integrated with Send Connect. Swap, bridge USDC, and provide liquidity directly from your browser — signed with your passkey.
+    </div>
+  </div>
+  <a href="https://poolparty.fun" target="_blank" rel="noopener noreferrer" style={{ color: '#1a8a2e', fontWeight: 600, fontSize: '13px', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+    poolparty.fun →
+  </a>
+</div>
 
-Additional Canton dApps are integrating via the `@sigilry/dapp` SDK.
+Additional Canton dApps are integrating via the open-source `@sigilry/dapp` SDK.
 
 ## How It Works
 
-Send Connect injects a `window.canton` provider into web pages. dApp builders can detect it, request a user connection, and submit transactions. The extension handles passkey authentication, surfaces approval prompts, and routes signed transactions to Canton via the Send validator.
+Send Connect injects a `window.canton` provider into web pages. dApp builders can detect it, request a user connection, and submit transactions. The extension handles passkey authentication, surfaces approval prompts, and routes signed transactions to Canton via the Send validator (`send-cantonwallet1`).
 
 For end users it's a one-click install and a passkey sign-in. For dApp builders, integration is a handful of lines using the open-source `@sigilry/dapp` SDK.
 
@@ -45,15 +146,36 @@ Partners pay only for the Canton CC traffic their dApp consumes at the validator
 
 ## Sigilry — Open-Source Standards
 
-The wallet RPC standards, schemas, and SDK are published under the **Sigilry** brand at [sigilry.org](https://sigilry.org). This is deliberately separate from Send so the standards stay neutral — any Canton wallet can implement them, any dApp can integrate against them, without depending on Send specifically.
+<div style={{
+  background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 100%)',
+  borderRadius: '12px',
+  padding: '28px 28px 24px',
+  marginBottom: '24px',
+}}>
+  <img
+    src="/img/sigilry-logo.svg"
+    alt="Sigilry"
+    style={{ height: '32px', marginBottom: '16px', display: 'block' }}
+  />
+  <div style={{ fontSize: '14px', color: '#6b7c7f', lineHeight: 1.6, marginBottom: '20px', maxWidth: '560px' }}>
+    The wallet RPC standards, schemas, and SDK are published under the Sigilry brand — deliberately separate from Send so the standards stay neutral. Any Canton wallet can implement them, any dApp can integrate against them. Send Connect is one implementation. Sigilry is the standard.
+  </div>
+  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+    <a href="https://sigilry.org" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', fontWeight: 600, color: '#40FB50', textDecoration: 'none' }}>
+      sigilry.org →
+    </a>
+    <span style={{ color: '#4a5c5f' }}>·</span>
+    <a href="https://github.com/sigilry/sigilry" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', fontWeight: 600, color: '#40FB50', textDecoration: 'none' }}>
+      GitHub →
+    </a>
+    <span style={{ color: '#4a5c5f' }}>·</span>
+    <span style={{ fontSize: '12px', color: '#6b7c7f', fontFamily: '"DM Mono", monospace' }}>
+      @sigilry/dapp
+    </span>
+  </div>
+</div>
 
-| | |
-|--|--|
-| **Site** | [sigilry.org](https://sigilry.org) |
-| **GitHub** | [github.com/sigilry/sigilry](https://github.com/sigilry/sigilry) |
-| **SDK** | `@sigilry/dapp` (npm) |
-
-Sigilry is also applying for a Canton Network Developer Fund grant. Send Connect is one implementation of the standard. Sigilry is the standard.
+Sigilry is also applying for a Canton Network Developer Fund grant.
 
 ## What's Next
 
@@ -63,7 +185,7 @@ Sigilry is also applying for a Canton Network Developer Fund grant. Send Connect
 
 ## Resources
 
-- [Send Connect on Chrome Web Store](https://chromewebstore.google.com/detail/send-connect/ldmohiccoioolenadmogclhoklmanpgi)
+- [Install Send Connect on Chrome Web Store](https://chromewebstore.google.com/detail/send-connect/ldmohiccoioolenadmogclhoklmanpgi)
 - [Pool Party — first live dApp](https://poolparty.fun)
 - [Sigilry — sigilry.org](https://sigilry.org)
 - [Sigilry GitHub — github.com/sigilry/sigilry](https://github.com/sigilry/sigilry)
