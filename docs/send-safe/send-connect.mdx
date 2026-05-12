@@ -3,283 +3,220 @@ id: send-connect
 title: Send Connect
 ---
 
-# Send Connect
-
 {/* ── HERO ── */}
 <div style={{
-  background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)',
-  borderRadius: '14px',
-  padding: '44px 36px 36px',
-  marginBottom: '20px',
+  background: 'linear-gradient(160deg, #0c1416 0%, #122023 40%, #1a3a3f 100%)',
+  borderRadius: '20px',
+  padding: '88px 56px 80px',
+  marginBottom: '12px',
   position: 'relative',
   overflow: 'hidden',
+  textAlign: 'center',
 }}>
   <div style={{
-    position: 'absolute', top: '-80px', right: '-40px',
-    width: '280px', height: '280px', borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(64,251,80,0.15) 0%, transparent 65%)',
-  }} />
-  <div style={{
-    position: 'absolute', bottom: '-100px', left: '20%',
-    width: '320px', height: '320px', borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(64,251,80,0.06) 0%, transparent 60%)',
+    position: 'absolute', top: '-120px', left: '50%', transform: 'translateX(-50%)',
+    width: '600px', height: '600px', borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(64,251,80,0.10) 0%, transparent 65%)',
+    pointerEvents: 'none',
   }} />
   <div style={{ position: 'relative' }}>
-    <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '14px' }}>
-      Send Connect · Live
+    <div style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '4px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '24px' }}>
+      Send Connect
     </div>
-    <div style={{ fontSize: '32px', fontWeight: 700, color: '#FFF', lineHeight: 1.2, marginBottom: '14px', maxWidth: '540px', letterSpacing: '-0.5px' }}>
-      The browser wallet for Canton Network
+    <div style={{ fontSize: '44px', fontWeight: 700, color: '#FFF', lineHeight: 1.1, marginBottom: '20px', letterSpacing: '-1.5px', maxWidth: '720px', margin: '0 auto 20px' }}>
+      Canton Network, in your browser.
     </div>
-    <div style={{ fontSize: '15px', color: 'rgba(255,255,255,0.78)', lineHeight: 1.6, marginBottom: '32px', maxWidth: '520px' }}>
-      Install Send Connect to interact with any Canton dApp from your browser. Passkey sign-in, no seed phrases.
+    <div style={{ fontSize: '17px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.55, marginBottom: '40px', maxWidth: '520px', margin: '0 auto 40px', fontWeight: 400 }}>
+      The wallet extension that connects you to Canton dApps. One click to install. Passkey to sign.
     </div>
-    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+    <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
       <a
         href="https://chromewebstore.google.com/detail/send-connect/ldmohiccoioolenadmogclhoklmanpgi"
         target="_blank"
         rel="noopener noreferrer"
         style={{
           background: '#40FB50',
-          color: '#122023',
-          fontWeight: 700,
-          fontSize: '14px',
-          padding: '14px 26px',
-          borderRadius: '10px',
+          color: '#0c1416',
+          fontWeight: 600,
+          fontSize: '15px',
+          padding: '16px 32px',
+          borderRadius: '999px',
           textDecoration: 'none',
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '10px',
-          boxShadow: '0 4px 18px rgba(64,251,80,0.3)',
+          gap: '8px',
         }}
       >
         Install on Chrome
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-          <path d="M4 8H12M12 8L8 4M12 8L8 12" stroke="#122023" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
       </a>
       <a
-        href="#integrate"
+        href="#developers"
         style={{
           background: 'transparent',
           color: '#FFF',
-          fontWeight: 600,
-          fontSize: '13px',
-          padding: '13px 22px',
-          borderRadius: '10px',
+          fontWeight: 500,
+          fontSize: '15px',
+          padding: '16px 28px',
           textDecoration: 'none',
-          border: '1px solid rgba(255,255,255,0.25)',
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '6px',
         }}
       >
-        For developers
+        For developers →
       </a>
     </div>
   </div>
 </div>
 
-{/* ── QUICK FACTS ── */}
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '10px', marginBottom: '36px' }}>
-  <div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '12px', padding: '14px 18px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '6px' }}>Network</div>
-    <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>Canton</div>
-  </div>
-  <div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '12px', padding: '14px 18px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '6px' }}>Standard</div>
-    <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>CIP-103</div>
-  </div>
-  <div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '12px', padding: '14px 18px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '6px' }}>Auth</div>
-    <div style={{ fontSize: '14px', fontWeight: 600, color: '#122023' }}>Passkeys</div>
-  </div>
-  <div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '12px', padding: '14px 18px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#999', marginBottom: '6px' }}>Validator</div>
-    <div style={{ fontSize: '13px', fontWeight: 600, color: '#122023', fontFamily: '"DM Mono", monospace' }}>send-cantonwallet1</div>
-  </div>
-</div>
-
-## Live on These dApps
-
-<div style={{ marginBottom: '32px' }}>
-
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
-
-<div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderTop: '3px solid #40FB50', borderRadius: '12px', padding: '22px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-      <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'linear-gradient(135deg, #40FB50, #1a8a2e)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#122023', fontWeight: 800, fontSize: '15px', fontFamily: '"DM Mono", monospace' }}>PP</div>
-      <div>
-        <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023' }}>Pool Party</div>
-        <div style={{ fontSize: '11px', color: '#999', fontFamily: '"DM Mono", monospace' }}>poolparty.fun</div>
-      </div>
+{/* ── LIVE INTEGRATIONS ── */}
+<div style={{ padding: '72px 8px 56px' }}>
+  <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+    <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#999', marginBottom: '14px' }}>
+      Live Now
     </div>
-    <span style={{ fontSize: '9px', fontWeight: 700, color: '#1a8a2e', background: '#e8f5e9', padding: '3px 8px', borderRadius: '4px', letterSpacing: '0.5px' }}>LIVE</span>
-  </div>
-  <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.55, marginBottom: '14px' }}>
-    AMM and DEX on Canton Network. Swap CC, CUSD, and USDCx. Bridge USDC from Ethereum. Provide liquidity.
-  </div>
-  <a href="https://poolparty.fun" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', fontWeight: 600, color: '#1a8a2e', textDecoration: 'none' }}>
-    Open Pool Party →
-  </a>
-</div>
-
-<div style={{ background: '#FFF', border: '1px solid #E0E0E0', borderTop: '3px solid #40FB50', borderRadius: '12px', padding: '22px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-      <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'linear-gradient(135deg, #122023, #4a5c5f)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#40FB50', fontWeight: 800, fontSize: '15px', fontFamily: '"DM Mono", monospace' }}>HE</div>
-      <div>
-        <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023' }}>Hundred Exchange</div>
-        <div style={{ fontSize: '11px', color: '#999', fontFamily: '"DM Mono", monospace' }}>hundred.exchange</div>
-      </div>
+    <div style={{ fontSize: '28px', fontWeight: 700, color: '#122023', letterSpacing: '-0.5px', maxWidth: '540px', margin: '0 auto', lineHeight: 1.25 }}>
+      Where you can use Send Connect today.
     </div>
-    <span style={{ fontSize: '9px', fontWeight: 700, color: '#1a8a2e', background: '#e8f5e9', padding: '3px 8px', borderRadius: '4px', letterSpacing: '0.5px' }}>LIVE</span>
   </div>
-  <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.55, marginBottom: '14px' }}>
-    Exchange on Canton Network. Trade and manage positions directly through Send Connect.
+
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', maxWidth: '880px', margin: '0 auto' }}>
+    <a
+      href="https://poolparty.fun"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        background: '#fafafa',
+        borderRadius: '16px',
+        padding: '32px 28px',
+        textDecoration: 'none',
+        color: 'inherit',
+        display: 'block',
+        transition: 'background 0.15s',
+      }}
+    >
+      <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#1a8a2e', marginBottom: '14px' }}>
+        DEX · Canton
+      </div>
+      <div style={{ fontSize: '22px', fontWeight: 700, color: '#122023', marginBottom: '10px', letterSpacing: '-0.3px' }}>
+        Pool Party
+      </div>
+      <div style={{ fontSize: '14px', color: '#666', lineHeight: 1.55, marginBottom: '20px' }}>
+        Swap CC, CUSD, and USDCx. Bridge USDC from Ethereum. Provide liquidity.
+      </div>
+      <div style={{ fontSize: '13px', fontWeight: 500, color: '#122023' }}>
+        poolparty.fun <span style={{ color: '#999' }}>→</span>
+      </div>
+    </a>
+
+    <a
+      href="https://www.hundred.exchange"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        background: '#fafafa',
+        borderRadius: '16px',
+        padding: '32px 28px',
+        textDecoration: 'none',
+        color: 'inherit',
+        display: 'block',
+        transition: 'background 0.15s',
+      }}
+    >
+      <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#1a8a2e', marginBottom: '14px' }}>
+        Exchange · Canton
+      </div>
+      <div style={{ fontSize: '22px', fontWeight: 700, color: '#122023', marginBottom: '10px', letterSpacing: '-0.3px' }}>
+        Hundred Exchange
+      </div>
+      <div style={{ fontSize: '14px', color: '#666', lineHeight: 1.55, marginBottom: '20px' }}>
+        Trade and manage positions directly through Send Connect.
+      </div>
+      <div style={{ fontSize: '13px', fontWeight: 500, color: '#122023' }}>
+        hundred.exchange <span style={{ color: '#999' }}>→</span>
+      </div>
+    </a>
   </div>
-  <a href="https://www.hundred.exchange" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', fontWeight: 600, color: '#1a8a2e', textDecoration: 'none' }}>
-    Open Hundred Exchange →
-  </a>
 </div>
 
-</div>
-
-<div style={{ fontSize: '12px', color: '#999', marginTop: '14px', fontStyle: 'italic' }}>
-  Building on Canton? <a href="#integrate" style={{ color: '#1a8a2e', textDecoration: 'none', fontWeight: 600 }}>Integrate Send Connect</a> to be listed here.
-</div>
-
-</div>
-
-## How It Works
-
-Send Connect injects a `window.canton` provider into web pages. dApp builders can detect it, request a user connection, and submit transactions. The extension handles passkey authentication, surfaces approval prompts, and routes signed transactions to Canton via the Send validator (`send-cantonwallet1`).
-
-For end users it's a one-click install and a passkey sign-in. For dApp builders, integration is a handful of lines using the open-source `@sigilry/dapp` SDK.
-
-{/* ── DEVELOPER SECTION ── */}
-<div id="integrate" style={{
-  background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 100%)',
-  borderRadius: '14px',
-  padding: '36px 32px 32px',
+{/* ── DEVELOPERS ── */}
+<div id="developers" style={{
+  background: '#fafafa',
+  borderRadius: '20px',
+  padding: '72px 56px',
   marginTop: '32px',
-  marginBottom: '24px',
+  marginBottom: '32px',
 }}>
-  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#40FB50', marginBottom: '10px' }}>
-    For Developers
-  </div>
-  <div style={{ fontSize: '22px', fontWeight: 700, color: '#FFF', lineHeight: 1.3, marginBottom: '12px', maxWidth: '520px' }}>
-    Integrate Send Connect in minutes
-  </div>
-  <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.78)', lineHeight: 1.6, marginBottom: '24px', maxWidth: '560px' }}>
-    Drop the SDK into your dApp, detect Send Connect through the CIP-103 standard, and start signing transactions through your users' passkeys. The platform handles auth, billing, rate limiting, and abuse controls.
+  <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+    <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', color: '#1a8a2e', marginBottom: '14px' }}>
+      For Developers
+    </div>
+    <div style={{ fontSize: '32px', fontWeight: 700, color: '#122023', letterSpacing: '-0.8px', maxWidth: '560px', margin: '0 auto 16px', lineHeight: 1.2 }}>
+      Integrate in minutes. Ship in an afternoon.
+    </div>
+    <div style={{ fontSize: '15px', color: '#666', lineHeight: 1.6, maxWidth: '520px', margin: '0 auto' }}>
+      The open-source <span style={{ fontFamily: '"DM Mono", monospace', background: '#FFF', padding: '1px 6px', borderRadius: '4px', fontSize: '13px' }}>@sigilry/dapp</span> SDK gives you everything to detect Send Connect, sign with passkeys, and submit to Canton.
+    </div>
   </div>
 
-  {/* Code snippet */}
   <div style={{
-    background: 'rgba(0,0,0,0.35)',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: '8px',
-    padding: '16px 20px',
+    background: '#0c1416',
+    borderRadius: '14px',
+    padding: '28px 32px',
     fontFamily: '"DM Mono", monospace',
-    fontSize: '12px',
-    color: 'rgba(255,255,255,0.88)',
-    lineHeight: 1.7,
-    marginBottom: '24px',
+    fontSize: '13px',
+    color: 'rgba(255,255,255,0.92)',
+    lineHeight: 1.85,
     overflowX: 'auto',
+    maxWidth: '640px',
+    margin: '0 auto 36px',
   }}>
-    <div><span style={{ color: '#6b7c7f' }}>// Detect Send Connect</span></div>
-    <div><span style={{ color: '#40FB50' }}>window</span>.addEventListener(<span style={{ color: '#e2c08d' }}>'canton:announceProvider'</span>, (e) {'=>'} {'{'}</div>
-    <div>  <span style={{ color: '#6b7c7f' }}>// e.detail: {`{ id, name, icon, target }`}</span></div>
+    <div style={{ color: 'rgba(255,255,255,0.4)' }}>// Detect Send Connect</div>
+    <div>window.addEventListener('canton:announceProvider', (e) =&gt; {'{'}</div>
+    <div>{'  '}<span style={{ color: 'rgba(255,255,255,0.4)' }}>// e.detail = {`{ id, name, icon, target }`}</span></div>
     <div>{'}'})</div>
-    <div><span style={{ color: '#40FB50' }}>window</span>.dispatchEvent(<span style={{ color: '#40FB50' }}>new</span> Event(<span style={{ color: '#e2c08d' }}>'canton:requestProvider'</span>))</div>
-    <div style={{ marginTop: '8px' }}><span style={{ color: '#6b7c7f' }}>// Connect and sign</span></div>
-    <div><span style={{ color: '#40FB50' }}>await</span> window.canton.request({'{ method: '}<span style={{ color: '#e2c08d' }}>'connect'</span> {'}'})</div>
+    <div>window.dispatchEvent(new Event('canton:requestProvider'))</div>
+    <div>&nbsp;</div>
+    <div style={{ color: 'rgba(255,255,255,0.4)' }}>// Connect and sign</div>
+    <div>await window.canton.request({'{ method: '}'connect' {'}'})</div>
   </div>
 
-  {/* Developer features */}
-  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginBottom: '24px' }}>
-    {[
-      { title: 'Self-service dashboard', desc: 'Register dApps, top up balances, rotate API keys' },
-      { title: 'Per-dApp controls', desc: 'Rate limits, origin allowlists, DAML template allowlists' },
-      { title: 'Pay only for usage', desc: 'Prepaid Canton CC traffic, no per-request markup during alpha' },
-    ].map((item) => (
-      <div key={item.title} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '14px 16px' }}>
-        <div style={{ fontSize: '12px', fontWeight: 700, color: '#FFF', marginBottom: '4px' }}>{item.title}</div>
-        <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.5 }}>{item.desc}</div>
-      </div>
-    ))}
-  </div>
-
-  {/* CTAs */}
-  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+  <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
     <a
       href="https://github.com/sigilry/sigilry"
       target="_blank"
       rel="noopener noreferrer"
       style={{
-        background: '#40FB50', color: '#122023', fontWeight: 700, fontSize: '13px',
-        padding: '12px 22px', borderRadius: '10px', textDecoration: 'none',
-        display: 'inline-flex', alignItems: 'center', gap: '8px',
+        background: '#122023',
+        color: '#FFF',
+        fontWeight: 600,
+        fontSize: '15px',
+        padding: '14px 28px',
+        borderRadius: '999px',
+        textDecoration: 'none',
       }}
     >
-      View SDK on GitHub
-      <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-        <path d="M4 8H12M12 8L8 4M12 8L8 12" stroke="#122023" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
+      View on GitHub
     </a>
     <a
       href="mailto:builders@send.it"
       style={{
-        background: 'transparent', color: '#FFF', fontWeight: 600, fontSize: '13px',
-        padding: '11px 20px', borderRadius: '10px', textDecoration: 'none',
-        border: '1px solid rgba(255,255,255,0.25)',
-        display: 'inline-flex', alignItems: 'center', gap: '6px',
+        background: 'transparent',
+        color: '#122023',
+        fontWeight: 500,
+        fontSize: '15px',
+        padding: '14px 24px',
+        textDecoration: 'none',
       }}
     >
-      Contact for partnership
+      Partner with us →
     </a>
   </div>
 </div>
 
-## Sigilry — Open-Source Standards
-
-<div style={{
-  background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 100%)',
-  borderRadius: '12px',
-  padding: '28px 28px 24px',
-  marginBottom: '24px',
-}}>
-  <img
-    src="/img/sigilry-logo.svg"
-    alt="Sigilry"
-    style={{ height: '32px', marginBottom: '18px', display: 'block' }}
-  />
-  <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.65, marginBottom: '20px', maxWidth: '600px' }}>
-    The wallet RPC standards, schemas, and SDK are published under the Sigilry brand — deliberately separate from Send so the standards stay neutral. Any Canton wallet can implement them, any dApp can integrate against them. Send Connect is one implementation. Sigilry is the standard.
-  </div>
-  <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center' }}>
-    <a href="https://sigilry.org" target="_blank" rel="noopener noreferrer" style={{ fontSize: '13px', fontWeight: 600, color: '#40FB50', textDecoration: 'none' }}>
-      sigilry.org →
-    </a>
-    <span style={{ color: 'rgba(255,255,255,0.25)' }}>·</span>
-    <a href="https://github.com/sigilry/sigilry" target="_blank" rel="noopener noreferrer" style={{ fontSize: '13px', fontWeight: 600, color: '#40FB50', textDecoration: 'none' }}>
-      GitHub →
-    </a>
-    <span style={{ color: 'rgba(255,255,255,0.25)' }}>·</span>
-    <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', fontFamily: '"DM Mono", monospace', background: 'rgba(255,255,255,0.08)', padding: '4px 8px', borderRadius: '4px' }}>
-      @sigilry/dapp
-    </span>
+{/* ── SIGILRY ── */}
+<div style={{ textAlign: 'center', padding: '40px 16px 24px' }}>
+  <img src="/img/sigilry-logo.svg" alt="Sigilry" style={{ height: '28px', marginBottom: '20px', opacity: 0.85 }} />
+  <div style={{ fontSize: '14px', color: '#666', lineHeight: 1.65, maxWidth: '520px', margin: '0 auto 16px' }}>
+    Send Connect is built on open standards. The wallet RPC, schemas, and SDK live under <a href="https://sigilry.org" target="_blank" rel="noopener noreferrer" style={{ color: '#122023', fontWeight: 600, textDecoration: 'none', borderBottom: '1px solid #122023' }}>Sigilry</a> — neutral, open-source, and usable by any Canton wallet. Send Connect is one implementation. Sigilry is the standard.
   </div>
 </div>
-
-Sigilry is also applying for a Canton Network Developer Fund grant.
-
-## Resources
-
-- [Install Send Connect on Chrome Web Store](https://chromewebstore.google.com/detail/send-connect/ldmohiccoioolenadmogclhoklmanpgi)
-- [Pool Party — poolparty.fun](https://poolparty.fun)
-- [Hundred Exchange — hundred.exchange](https://www.hundred.exchange)
-- [Sigilry — sigilry.org](https://sigilry.org)
-- [Sigilry GitHub — github.com/sigilry/sigilry](https://github.com/sigilry/sigilry)
