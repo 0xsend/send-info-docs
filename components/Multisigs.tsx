@@ -50,6 +50,12 @@ const cantonMultisigs = [
     shortAddress: 'cusd-ecosystem-fund::1220...8d57',
     url: 'https://lighthouse.fivenorth.io/party/cantonwallet-cusd-ecosystem-fund%3A%3A1220e06619076b7db52340b1d53432385b986c1cf072611afa12a9588ad261fd8d57',
   },
+  {
+    name: 'Asset Relayer (Featured App)',
+    address: 'asset-relayer::1220f1b0d7a83c7eaaf6d712d95d5952ea2c801238af9c342e8d83c87dfc45c999dc',
+    shortAddress: 'asset-relayer::1220...99dc',
+    url: 'https://lighthouse.fivenorth.io/party/asset-relayer%3A%3A1220f1b0d7a83c7eaaf6d712d95d5952ea2c801238af9c342e8d83c87dfc45c999dc',
+  },
 ];
 
 // ============ STYLES ============
