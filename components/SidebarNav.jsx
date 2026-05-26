@@ -58,7 +58,15 @@ const sectionIcons = {
       className="sidebar-section-icon-image"
     />
   ),
-  'asset-relayer': <SidebarIcon name="compare_arrows" />,
+  'asset-relayer': (
+    <Image
+      src="/img/asset-relayer.svg"
+      alt=""
+      width={20}
+      height={20}
+      className="sidebar-section-icon-image"
+    />
+  ),
   'finance': <SidebarIcon name="attach_money" />,
   'miscellaneous': <SidebarIcon name="more_horiz" />,
   'legal': <SidebarIcon name="gavel" />,
