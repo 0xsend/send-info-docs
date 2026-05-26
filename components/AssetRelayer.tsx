@@ -266,12 +266,70 @@ export default function AssetRelayer() {
         </div>
       </div>
 
+      {/* ── RISKS ── */}
+      <div style={{ ...CARD, overflow: 'hidden' }}>
+        <div style={{ padding: '24px 28px 8px' }}>
+          <div style={{ ...LABEL, color: '#999', marginBottom: '10px' }}>Risks</div>
+          <div style={{ fontSize: '18px', fontWeight: 700, color: '#122023', marginBottom: '6px' }}>
+            Understand what you're using before you use it.
+          </div>
+          <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.6, marginBottom: '8px' }}>
+            Asset Relayer is bridge infrastructure. Bridging involves risks distinct from holding the underlying assets. Read these carefully.
+          </div>
+        </div>
+        <div style={{ padding: '8px 28px 24px' }}>
+          {[
+            {
+              title: 'Smart contract risk',
+              desc: 'Reserve contracts on Base and multisig infrastructure on Canton may contain undiscovered vulnerabilities. A failure or exploit could result in permanent loss of bridged assets, despite audits and testing.',
+            },
+            {
+              title: 'Wrapped token risk',
+              desc: 'The .B versions are claims against locked reserves — not the underlying tokens. Their value depends on the integrity of the reserve contracts, the multisig signers, and the ability to unwind positions back to Base.',
+            },
+            {
+              title: 'Multisig signer risk',
+              desc: 'Bridge authorization requires majority quorum from independent signers drawn from Canton Foundation or supervalidators. While designed to prevent single points of failure, signer compromise, key loss, or coordinated collusion could affect bridge operations.',
+            },
+            {
+              title: 'Network risk',
+              desc: 'Asset Relayer depends on both Base and Canton Network. Outages, reorganizations, congestion, or governance changes on either network may delay or prevent bridge confirmations.',
+            },
+            {
+              title: 'Liquidity risk',
+              desc: 'Wrapped tokens may not have immediate liquidity on Canton. The ability to trade, swap, or use .B tokens at fair market value depends on third-party liquidity providers and venues that may not yet exist for a given pair.',
+            },
+            {
+              title: 'No insurance, no recovery',
+              desc: 'Bridged assets are not insured by the FDIC, SIPC, or any government agency. There is no recovery mechanism for losses caused by smart contract failures, signer compromise, network failures, or operational issues.',
+            },
+          ].map((risk, i) => (
+            <div key={risk.title} style={{
+              padding: '14px 0',
+              borderTop: i === 0 ? 'none' : '1px solid #f0f0f0',
+              display: 'flex',
+              gap: '14px',
+              alignItems: 'flex-start',
+            }}>
+              <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#1a8a2e', flexShrink: 0, marginTop: '8px' }} />
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: 700, color: '#122023', marginBottom: '4px' }}>{risk.title}</div>
+                <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.55 }}>{risk.desc}</div>
+              </div>
+            </div>
+          ))}
+          <div style={{ fontSize: '12px', color: '#888', lineHeight: 1.55, marginTop: '14px', padding: '14px', background: '#fafafa', borderRadius: '8px' }}>
+            These risks are not exhaustive. Only use Asset Relayer with funds you can afford to lose. Test with small amounts before bridging significant value.
+          </div>
+        </div>
+      </div>
+
       {/* ── DISCLAIMER ── */}
       <div style={{
         background: '#fafafa', borderRadius: '12px', padding: '20px 24px',
         fontSize: '11px', color: '#999', lineHeight: 1.7,
       }}>
-        Wrapped tokens (the .B versions) are claims against locked reserves on Base — they are not the original tokens. Bridging involves smart contract risk, including but not limited to vulnerabilities in the reserve contracts, signing infrastructure, or underlying networks. Wrapped token names may change as the product matures. This page is informational and does not constitute investment or financial advice.
+        Asset Relayer is bridge infrastructure operated by Send Foundation. Send Foundation is not a bank, broker-dealer, money transmitter, or custodian. Supported assets, fee structures, wrapped token naming conventions, bridge timing, and overall availability are subject to change without notice and may be paused or discontinued at any time. Asset Relayer may not be available in all jurisdictions; users are responsible for ensuring their use complies with applicable laws. Digital assets and wrapped versions of them are volatile and may lose value. This page is for informational purposes only and does not constitute an offer to sell or solicitation to buy any securities, nor investment, financial, legal, or tax advice. Consult your own advisors before using Asset Relayer.
       </div>
     </div>
   );
