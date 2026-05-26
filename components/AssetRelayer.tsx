@@ -273,7 +273,7 @@ export default function AssetRelayer() {
       }}>
         <div style={{ ...LABEL, color: '#8a6d00', marginBottom: '8px' }}>Disclaimer</div>
         <div style={{ fontSize: '13px', color: '#3d3000', lineHeight: 1.7 }}>
-          Asset Relayer is bridge infrastructure operated by Send Foundation. Bridging carries smart contract, multisig, network, and liquidity risk. Wrapped .B tokens are claims against locked reserves, not the underlying assets, and may lose value. Bridged assets are not insured by the FDIC, SIPC, or any government agency, and there is no recovery mechanism for losses. Send Foundation is not a bank, broker-dealer, money transmitter, or custodian. Supported assets, fees, timing, and availability may change or be paused at any time. Asset Relayer may not be available in all jurisdictions; users are responsible for compliance with applicable laws. This page is informational only and not investment, financial, legal, or tax advice.
+          Asset Relayer is bridge infrastructure. Bridging carries smart contract, multisig, network, and liquidity risk. Wrapped .B tokens are claims against locked reserves, not the underlying assets, and may lose value. Bridged assets are not insured by the FDIC, SIPC, or any government agency, and there is no recovery mechanism for losses. Send Foundation is not a bank, broker-dealer, money transmitter, or custodian. Supported assets, fees, timing, and availability may change or be paused at any time. Asset Relayer may not be available in all jurisdictions; users are responsible for compliance with applicable laws. This page is informational only and not investment, financial, legal, or tax advice.
         </div>
       </div>
     </div>
