@@ -66,11 +66,8 @@ export default function AssetRelayer() {
             pointerEvents: 'none',
           }} />
           <div style={{ position: 'relative', maxWidth: '640px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '14px' }}>
-              <img src="/img/asset-relayer.svg" alt="Asset Relayer" style={{ width: '40px', height: '40px', borderRadius: '10px' }} />
-              <div style={{ ...LABEL, color: '#40FB50', letterSpacing: '3px', marginBottom: 0 }}>
-                Asset Relayer · Base ↔ Canton Bridge
-              </div>
+            <div style={{ ...LABEL, color: '#40FB50', letterSpacing: '3px', marginBottom: '14px' }}>
+              Asset Relayer · Base ↔ Canton Bridge
             </div>
             <div style={{ fontSize: '32px', fontWeight: 700, color: '#FFF', lineHeight: 1.15, letterSpacing: '-1px', marginBottom: '14px' }}>
               Move assets between Base and Canton.
