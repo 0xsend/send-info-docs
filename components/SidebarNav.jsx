@@ -58,6 +58,7 @@ const sectionIcons = {
       className="sidebar-section-icon-image"
     />
   ),
+  'asset-relayer': <SidebarIcon name="compare_arrows" />,
   'finance': <SidebarIcon name="attach_money" />,
   'miscellaneous': <SidebarIcon name="more_horiz" />,
   'legal': <SidebarIcon name="gavel" />,
@@ -70,6 +71,7 @@ const sectionLabels = {
   'features': 'Features',
   'send-safe': 'Send Canton Wallet',
   'pool-party': 'Pool Party Exchange',
+  'asset-relayer': 'Asset Relayer',
   'cusd-stablecoin': 'CUSD Stablecoin',
   'finance': 'Finance',
   'miscellaneous': 'Miscellaneous',
@@ -100,6 +102,7 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
     'send-mobile-apps',
     'send-safe',
     'pool-party',
+    'asset-relayer',
     'cusd-stablecoin',
     'finance',
     'miscellaneous',

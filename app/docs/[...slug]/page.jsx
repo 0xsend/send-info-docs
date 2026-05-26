@@ -36,6 +36,10 @@ export async function generateMetadata({ params }) {
       title: 'Pool Party Info Docs – Confidential AMM on Canton',
       description: 'Explore Pool Party, the confidential automated market maker on Canton Network.'
     },
+    'asset-relayer': {
+      title: 'Asset Relayer Info Docs – Base ↔ Canton Bridge',
+      description: 'Move SEND, USDC, cbBTC, and frxUSD between Base and Canton Network through Asset Relayer.'
+    },
     'cusd-stablecoin': {
       image: '/img/cusd-opengraph.png',
       title: 'CUSD Info Docs – Privacy-Native Stablecoin',
@@ -62,6 +66,7 @@ export async function generateMetadata({ params }) {
       'send-mobile-apps': 'Send App',
       'send-safe': 'Send Canton Wallet',
       'pool-party': 'Pool Party',
+      'asset-relayer': 'Asset Relayer',
       'cusd-stablecoin': 'CUSD Stablecoin',
       'finance': 'Finance',
       'miscellaneous': 'Miscellaneous',
@@ -120,6 +125,7 @@ export default async function DocPage({ params }) {
       'send-mobile-apps': 'Send App',
       'send-safe': 'Send Canton Wallet',
       'pool-party': 'Pool Party',
+      'asset-relayer': 'Asset Relayer',
       'cusd-stablecoin': 'CUSD Stablecoin',
       'finance': 'Finance',
       'miscellaneous': 'Miscellaneous',
