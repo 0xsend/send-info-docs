@@ -5,17 +5,18 @@ import { useState } from 'react';
 // ============ TOKEN DATA ============
 const tokenData = {
   totalSupply: 1_000_000_000,
-  circulating: 349_898_419,
-  nonCirculating: 650_101_581,
-  circulationRate: 34.99,
-  asOf: 'May 2026',
+  circulating: 351_922_752,
+  nonCirculating: 648_077_248,
+  circulationRate: 35.19,
+  asOf: 'June 2026',
+  lastUpdated: 'June 5, 2026',
 
   allocations: [
-    { name: 'Rewards', allocation: 300_000_000, remaining: 220_019_521, color: '#16a34a' },
-    { name: 'Treasury', allocation: 200_000_000, remaining: 205_414_060, color: '#15803d' },
+    { name: 'Rewards', allocation: 300_000_000, remaining: 219_519_521, color: '#16a34a' },
+    { name: 'Treasury', allocation: 200_000_000, remaining: 204_929_727, color: '#15803d' },
     { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#166534' },
-    { name: 'Team', allocation: 100_000_000, remaining: 56_575_000, color: '#6b7c7f' },
-    { name: 'Contributors', allocation: 100_000_000, remaining: 58_093_000, color: '#4a5c5f' },
+    { name: 'Team', allocation: 100_000_000, remaining: 55_575_000, color: '#6b7c7f' },
+    { name: 'Contributors', allocation: 100_000_000, remaining: 58_053_000, color: '#4a5c5f' },
     { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#2a3c3f' },
   ],
 
@@ -49,9 +50,9 @@ const tokenData = {
   ],
 
   vestingProgress: [
-    { name: 'Team', initial: 100_000_000, released: 43_425_000, pct: 43.4 },
-    { name: 'Contributors', initial: 100_000_000, released: 41_907_000, pct: 41.9 },
-    { name: 'Rewards', initial: 300_000_000, released: 79_980_479, pct: 26.7 },
+    { name: 'Team', initial: 100_000_000, released: 44_425_000, pct: 44.4 },
+    { name: 'Contributors', initial: 100_000_000, released: 41_947_000, pct: 41.9 },
+    { name: 'Rewards', initial: 300_000_000, released: 80_480_479, pct: 26.8 },
   ],
 
   milestones: [
@@ -61,7 +62,7 @@ const tokenData = {
     { date: 'Q1 2025', event: '293M Circulating', circulating: '293M' },
     { date: 'Q4 2025', event: '328M Circulating', circulating: '328M' },
     { date: 'Q1 2026', event: '346M Circulating', circulating: '346M' },
-    { date: 'May 2026', event: 'Current — 350M Circulating', circulating: '350M' },
+    { date: 'June 2026', event: 'Current — 352M Circulating', circulating: '352M' },
   ],
 };
 
@@ -204,6 +205,14 @@ export default function TokenEmissions() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
+      {/* ── LAST UPDATED ── */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px', marginBottom: '-8px' }}>
+        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#40FB50' }} />
+        <span style={{ fontFamily: MONO, fontSize: '11px', color: '#6b7c7f', letterSpacing: '0.5px' }}>
+          Last updated {tokenData.lastUpdated}
+        </span>
+      </div>
 
       {/* ── HERO: SUPPLY MAP ── */}
       <div style={{ background: 'linear-gradient(145deg, #122023 0%, #1a3a3f 60%, #1e4a4f 100%)', borderRadius: '14px', padding: '40px 36px 36px', overflow: 'hidden' }}>
