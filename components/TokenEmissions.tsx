@@ -5,15 +5,15 @@ import { useState } from 'react';
 // ============ TOKEN DATA ============
 const tokenData = {
   totalSupply: 1_000_000_000,
-  circulating: 351_922_752,
-  nonCirculating: 648_077_248,
+  circulating: 351_868_553,
+  nonCirculating: 648_131_447,
   circulationRate: 35.19,
   asOf: 'June 2026',
   lastUpdated: 'June 5, 2026',
 
   allocations: [
     { name: 'Rewards', allocation: 300_000_000, remaining: 219_519_521, color: '#16a34a' },
-    { name: 'Treasury', allocation: 200_000_000, remaining: 204_929_727, color: '#15803d' },
+    { name: 'Treasury', allocation: 200_000_000, remaining: 204_983_926, color: '#15803d' },
     { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#166534' },
     { name: 'Team', allocation: 100_000_000, remaining: 55_575_000, color: '#6b7c7f' },
     { name: 'Contributors', allocation: 100_000_000, remaining: 58_053_000, color: '#4a5c5f' },
@@ -33,6 +33,7 @@ const tokenData = {
     { date: 'Q3 2025', circulating: 315_544_897, qoqChange: 17_874_980, qoqPct: 6.00 },
     { date: 'Q4 2025', circulating: 327_985_505, qoqChange: 12_440_608, qoqPct: 3.94 },
     { date: 'Q1 2026', circulating: 346_292_487, qoqChange: 18_306_982, qoqPct: 5.58 },
+    { date: 'Q2 2026', circulating: 351_868_553, qoqChange: 5_576_066, qoqPct: 1.61 },
   ],
 
   inflationData: [
@@ -47,6 +48,7 @@ const tokenData = {
     { period: 'Q3 \'25', annualized: 24.0, tokens: 17_874_980 },
     { period: 'Q4 \'25', annualized: 15.8, tokens: 12_440_608 },
     { period: 'Q1 \'26', annualized: 22.3, tokens: 18_306_982 },
+    { period: 'Q2 \'26', annualized: 6.4, tokens: 5_576_066 },
   ],
 
   vestingProgress: [
@@ -393,7 +395,7 @@ export default function TokenEmissions() {
       <div style={{ ...CARD, padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '16px' }}>
           <div style={LABEL}>Circulating Supply</div>
-          <div style={{ fontFamily: MONO, fontSize: '11px', color: '#999' }}>Q2 '23 – Q1 '26</div>
+          <div style={{ fontFamily: MONO, fontSize: '11px', color: '#999' }}>Q2 '23 – Q2 '26</div>
         </div>
         <SupplyChart />
       </div>
