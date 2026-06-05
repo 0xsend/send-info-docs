@@ -5,6 +5,13 @@ import { useState } from 'react';
 // ============ REVENUE DATA ============
 const sendAppRevenue = [
   {
+    date: '5/2026',
+    sendtags: { amount: 1526, tx: '0x171081c2f0b7cf83b257a4d612f873436723992986c994bb0b219d667eed0334' },
+    trades: { amount: 563.65, tx: '0xd63b8826a9ac833ceade872dafa0de7349a96b6adba8a35541e068ebaf228b55' },
+    transactions: { amount: 841.99, tx: '0xa0496b11179829159936a4360a7a94ff8a8cf7753cff8fb70a094aa9c44eb7aa' },
+    total: 2931.64,
+  },
+  {
     date: '4/2026',
     sendtags: { amount: 1597, tx: '0x1bd35f79729ca23b671350ecf31814663dec864d6d7c7c7d6353053fc8daa8d4' },
     trades: { amount: 296.91, tx: '0x704c5f9e4376dea0677098ee9e62ad2ff60aa1290877262e39bc6d417fe54524' },
@@ -105,6 +112,7 @@ const sendAppRevenue = [
 ];
 
 const cusdRevenue = [
+  { date: '5/2026', yield: 0, total: 0 },
   { date: '4/2026', yield: 5581.58, total: 5581.58 },
   { date: '3/2026', yield: 6719.30, total: 6719.30 },
   { date: '2/2026', yield: 8901.97, total: 8901.97 },
