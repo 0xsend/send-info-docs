@@ -40,7 +40,7 @@ export default function PoolParty() {
         <div style={{ ...CARD, borderTop: '3px solid #1a8a2e', padding: '24px 22px' }}>
           <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>Already have Canton Wallet?</div>
           <div style={{ fontSize: '14px', color: '#888', lineHeight: 1.6 }}>
-            Pool Party is live now in Send Canton Wallet — start trading today.
+            Pool Party is live now in Canton Wallet — start trading today.
           </div>
         </div>
         <div style={{ ...CARD, borderTop: '3px solid #6b7c7f', padding: '24px 22px' }}>

@@ -3,48 +3,46 @@ id: send-safe-overview
 title: Overview
 ---
 
-# Send Safe Overview
+# Canton Wallet
 
-Send Safe is a passkey-first crypto wallet that lets you log in with your face or fingerprint instead of memorizing seed phrases. It runs on Canton Network, so your transactions stay private end to end.
-
-Send Safe is currently a separate app from Send App. Canton Network's technology stack is fundamentally different from EVM-based chains, so we built a dedicated wallet to get it into your hands faster. We plan to consolidate Send Safe into Send App around Q1 2026.
-
-## What It Does
-
-**Input:** Your biometric authentication (face, fingerprint, or hardware key)  
-**Output:** Send and receive Canton Coin privately  
-**How:** WebAuthn passkeys replace seed phrases, Canton Network hides transaction details
-
-## Why This Matters
-
-Seed phrases are terrible UX and a massive security risk. Most people either lose them or store them insecurely. Meanwhile, every transaction on public blockchains is visible forever.
-
-Send Safe fixes both problems today: no seed phrases to lose, no public transaction history to expose your financial activity.
+Canton Wallet is a passkey-first wallet on Canton Network. Log in with your face, fingerprint, or hardware security key — no seed phrases, no browser extensions. Transactions stay confidential by default thanks to Canton Network's privacy model.
 
 ## What You Get
 
-- **No seed phrases:** Log in with biometrics like you do with your banking app
-- **Private transactions:** Canton Network keeps amounts and recipients confidential
-- **Institutional security:** Same WebAuthn standards banks and enterprises use
-- **Live ecosystem access:** Gateway to privacy-first DeFi applications and future Send integrations
+- **No seed phrases** — sign in with biometrics the way you do with your banking app
+- **Private transactions** — Canton Network keeps amounts and counterparties confidential
+- **Institutional-grade security** — same WebAuthn standards banks and enterprises rely on
+- **Ecosystem access** — gateway to Canton-native apps and the rest of the Send product surface
+
+## What's Inside
+
+Canton Wallet hosts several features built on top of the wallet:
+
+- **[Passkeys](/docs/send-safe/passkeys)** — biometric authentication that replaces seed phrases
+- **[Bridging](/docs/send-safe/bridging)** — move assets between Base, Ethereum, and Canton
+- **[Wallet Maintenance](/docs/send-safe/wallet-maintenance)** — manage devices, recovery, and rotation
+- **[Send Safe](/docs/send-safe/safe)** — multisig accounts with `m-of-n` approvals for shared treasuries
+- **[Send Connect](/docs/send-safe/send-connect)** — browser extension for connecting to Canton dApps
+
+Send Safe is not a separate wallet — it is the multisig product available inside Canton Wallet.
 
 ## Getting Started
 
-1. Visit <a href="https://sendsafe.global" className="multisig-token-link" target="_blank" rel="noreferrer">SendSafe.global ↗</a> on a passkey-capable device.
+1. Visit <a href="https://send.cantonwallet.com" target="_blank" rel="noreferrer">send.cantonwallet.com</a> on a passkey-capable device.
 2. Create or select the passkey you want to use (Face ID, Touch ID, Windows Hello, or a hardware security key).
-3. Approve the Send Safe enrollment prompt and confirm your recovery device if prompted.
-4. Start sending and receiving Canton Coin with private settlement on Canton Network.
+3. Approve the enrollment prompt and confirm a recovery device if prompted.
+4. Start transacting on Canton Network.
 
 ## Security FAQ
 
 - **Is face login secure?** Yes. Passkeys require possession of your trusted device and a successful biometric unlock. Spoofed photos or video replays fail because the device performs hardware-level liveness checks before releasing your credential.
-- **Do attackers need my phone?** Yes. Without the physical device, the passkey cannot be used, and even with the device, they still need your biometric or device passcode.
+- **Do attackers need my phone?** Yes. Without the physical device the passkey cannot be used, and even with the device they still need your biometric or device passcode.
 - **What counts as a hardware key?** Any FIDO2/WebAuthn security key (like YubiKey or Feitian) that plugs into or pairs with your device. You can enroll one as an additional passkey for extra assurance.
 
 ## Support
 
-Need help with enrollment or device rotation? Reach the Send Safe team through the in-app support widget or email <a href="mailto:support@send.app" className="multisig-token-link">support@send.app</a>.
+Need help with enrollment or device rotation? Reach the team through the in-app support widget or email <a href="mailto:support@send.app" className="multisig-token-link">support@send.app</a>.
 
 ## Status
 
-Send Safe launched on September 28th, 2025 and is now live. Sign in at <a href="https://sendsafe.global" className="multisig-token-link" target="_blank" rel="noreferrer">SendSafe.global ↗</a> to enroll with your passkey and start transacting.
+Canton Wallet is live. Sign in at <a href="https://send.cantonwallet.com" target="_blank" rel="noreferrer">send.cantonwallet.com</a> to enroll with your passkey and start transacting.

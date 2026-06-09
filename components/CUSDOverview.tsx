@@ -21,8 +21,8 @@ const features = [
 ];
 
 const integrations = [
-  { name: 'Send Safe', desc: 'Hold, send, and manage CUSD with multi-signature security' },
-  { name: 'Send Canton Wallet', desc: 'Use CUSD privately on Canton Network with biometric passkeys' },
+  { name: 'Canton Wallet', desc: 'Use CUSD privately on Canton Network with biometric passkeys' },
+  { name: 'Send Safe', desc: 'Hold, send, and manage CUSD with multi-signature security inside Canton Wallet' },
   { name: 'Pool Party', desc: 'Trade CUSD against $CC and USDCx with low slippage' },
 ];
 
