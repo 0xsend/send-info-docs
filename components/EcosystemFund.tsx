@@ -4,16 +4,17 @@ import { useState } from 'react';
 
 // ============ DATA ============
 const acquisitions = [
+  { date: 'June 2026', cusdSpent: 3153.07, ccAcquired: 20366.66 },
   { date: 'May 2026', cusdSpent: 3071.75, ccAcquired: 19701 },
   { date: 'April 2026', cusdSpent: 21397.00, ccAcquired: 143333 },
 ];
 
 const fundData = {
-  yieldEarned: 24468.75,
+  yieldEarned: 27621.82,
   ccAcquired: acquisitions.reduce((sum, a) => sum + a.ccAcquired, 0),
   cusdSpent: acquisitions.reduce((sum, a) => sum + a.cusdSpent, 0),
   ccDeployed: 0,
-  lastUpdated: 'September 2025 – April 2026',
+  lastUpdated: 'September 2025 – May 2026',
   multisigUrl: 'https://lighthouse.fivenorth.io/party/cantonwallet-cusd-ecosystem-fund%3A%3A1220e06619076b7db52340b1d53432385b986c1cf072611afa12a9588ad261fd8d57',
 };
 
