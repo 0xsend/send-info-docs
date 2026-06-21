@@ -50,13 +50,44 @@ const cantonMultisigs = [
     shortAddress: 'cusd-ecosystem-fund::1220...8d57',
     url: 'https://lighthouse.fivenorth.io/party/cantonwallet-cusd-ecosystem-fund%3A%3A1220e06619076b7db52340b1d53432385b986c1cf072611afa12a9588ad261fd8d57',
   },
+];
+
+const featuredAppLocks = [
   {
-    name: 'Asset Relayer FA Lock',
+    name: 'Asset Relayer',
+    role: 'Issuer',
+    lockedM: 25,
     address: 'cantonwallet-assetrelayerfalock::122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',
     shortAddress: 'assetrelayerfalock::1220...c721',
     url: 'https://lighthouse.fivenorth.io/party/cantonwallet-assetrelayerfalock%3A%3A122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',
   },
+  {
+    name: 'Canton Wallet',
+    role: 'Non-issuer',
+    lockedM: 5,
+    address: 'cantonwallet-send-wallet-fa-lock::122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',
+    shortAddress: 'send-wallet-fa-lock::1220...c721',
+    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-send-wallet-fa-lock%3A%3A122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',
+  },
+  {
+    name: 'Pool Party',
+    role: 'Non-issuer',
+    lockedM: 5,
+    address: 'cantonwallet-pool-party-fa-lock::122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',
+    shortAddress: 'pool-party-fa-lock::1220...c721',
+    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-pool-party-fa-lock%3A%3A122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',
+  },
+  {
+    name: 'Squid',
+    role: 'Non-issuer',
+    lockedM: 5,
+    address: 'cantonwallet-squid-fa-lock::122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',
+    shortAddress: 'squid-fa-lock::1220...c721',
+    url: 'https://lighthouse.fivenorth.io/party/cantonwallet-squid-fa-lock%3A%3A122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',
+  },
 ];
+
+const totalLockedM = featuredAppLocks.reduce((sum, l) => sum + l.lockedM, 0);
 
 // ============ STYLES ============
 const styles = {
@@ -95,6 +126,49 @@ const styles = {
     display: 'flex',
     alignItems: 'baseline',
     gap: '12px',
+    justifyContent: 'space-between',
+  },
+  sectionHeaderLeft: {
+    display: 'flex',
+    alignItems: 'baseline',
+    gap: '12px',
+    minWidth: 0,
+  },
+  totalBadge: {
+    fontFamily: '"DM Mono", monospace',
+    fontSize: '13px',
+    fontWeight: 700,
+    color: '#40FB50',
+    letterSpacing: '0.02em',
+    flexShrink: 0,
+  },
+  totalBadgeLabel: {
+    fontSize: '10px',
+    fontWeight: 600,
+    letterSpacing: '1.5px',
+    textTransform: 'uppercase' as const,
+    color: 'rgba(255,255,255,0.45)',
+    marginRight: '8px',
+  },
+  roleBadge: (isIssuer: boolean): React.CSSProperties => ({
+    display: 'inline-block',
+    fontSize: '9px',
+    fontWeight: 700,
+    letterSpacing: '1.5px',
+    textTransform: 'uppercase',
+    padding: '2px 6px',
+    borderRadius: '3px',
+    marginLeft: '8px',
+    color: isIssuer ? '#1a8a2e' : '#666',
+    backgroundColor: isIssuer ? '#E8F5E9' : '#F0F0F0',
+  }),
+  lockedAmount: {
+    fontFamily: '"DM Mono", monospace',
+    fontSize: '12px',
+    fontWeight: 700,
+    color: '#122023',
+    minWidth: '70px',
+    textAlign: 'right' as const,
   },
   sectionTitle: {
     fontSize: '14px',
@@ -207,16 +281,67 @@ interface SectionProps {
   title: string;
   subtitle: string;
   children: React.ReactNode;
+  rightElement?: React.ReactNode;
 }
 
-function Section({ title, subtitle, children }: SectionProps) {
+function Section({ title, subtitle, children, rightElement }: SectionProps) {
   return (
     <div style={styles.section}>
       <div style={styles.sectionHeader}>
-        <span style={styles.sectionTitle}>{title}</span>
-        <span style={styles.sectionSubtitle}>{subtitle}</span>
+        <div style={styles.sectionHeaderLeft}>
+          <span style={styles.sectionTitle}>{title}</span>
+          <span style={styles.sectionSubtitle}>{subtitle}</span>
+        </div>
+        {rightElement}
       </div>
       {children}
+    </div>
+  );
+}
+
+function FALockRow({
+  name,
+  role,
+  lockedM,
+  shortAddress,
+  url,
+  index,
+}: {
+  name: string;
+  role: string;
+  lockedM: number;
+  shortAddress: string;
+  url: string;
+  index: number;
+}) {
+  const isEven = index % 2 === 0;
+  const isIssuer = role === 'Issuer';
+
+  return (
+    <div style={styles.row(isEven)}>
+      <div style={{ ...styles.rowName, display: 'flex', alignItems: 'center', minWidth: '200px' }}>
+        <span>{name}</span>
+        <span style={styles.roleBadge(isIssuer)}>{role}</span>
+      </div>
+      <div style={styles.lockedAmount}>{lockedM}M $CC</div>
+      <div style={styles.rowAddress}>{shortAddress}</div>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={styles.viewLink}
+      >
+        View
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+          <path
+            d="M3 9L9 3M9 3H4M9 3V8"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </a>
     </div>
   );
 }
@@ -252,6 +377,30 @@ export default function Multisigs() {
             name={multisig.name}
             address={multisig.shortAddress || multisig.address}
             url={multisig.url}
+            index={i}
+          />
+        ))}
+      </Section>
+
+      {/* Canton Network — Featured App Locks */}
+      <Section
+        title="Canton Network Featured App Locks"
+        subtitle="$CC locked per featured app"
+        rightElement={
+          <span>
+            <span style={styles.totalBadgeLabel}>Total Locked</span>
+            <span style={styles.totalBadge}>{totalLockedM}M $CC</span>
+          </span>
+        }
+      >
+        {featuredAppLocks.map((lock, i) => (
+          <FALockRow
+            key={lock.address}
+            name={lock.name}
+            role={lock.role}
+            lockedM={lock.lockedM}
+            shortAddress={lock.shortAddress}
+            url={lock.url}
             index={i}
           />
         ))}
