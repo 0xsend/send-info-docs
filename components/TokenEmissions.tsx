@@ -12,12 +12,12 @@ const tokenData = {
   lastUpdated: 'July 2, 2026',
 
   allocations: [
-    { name: 'Rewards', allocation: 300_000_000, remaining: 219_269_521, color: '#B85C1F' },
-    { name: 'Treasury', allocation: 200_000_000, remaining: 204_484_116, color: '#4A6E82' },
-    { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#C99429' },
-    { name: 'Team', allocation: 100_000_000, remaining: 54_575_000, color: '#6B4E71' },
-    { name: 'Contributors', allocation: 100_000_000, remaining: 58_020_000, color: '#7C8A3A' },
-    { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#A88A5C' },
+    { name: 'Rewards', allocation: 300_000_000, remaining: 219_269_521, color: '#B45309' },
+    { name: 'Treasury', allocation: 200_000_000, remaining: 204_484_116, color: '#0F766E' },
+    { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#6D28D9' },
+    { name: 'Team', allocation: 100_000_000, remaining: 54_575_000, color: '#374151' },
+    { name: 'Contributors', allocation: 100_000_000, remaining: 58_020_000, color: '#6b7c7f' },
+    { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#9aaaad' },
   ],
 
   quarterlyData: [
@@ -58,25 +58,26 @@ const tokenData = {
   ],
 };
 
-// ============ THEME (wiki light-cream) ============
+// ============ THEME (Send light — brand-aligned) ============
 const theme = {
-  bg: '#faf6ee',
-  bgTint: '#f3eee2',
-  cardBg: 'rgba(255,252,244,0.78)',
-  cardBorder: 'rgba(28,24,20,0.07)',
-  cardShadow: '0 1px 3px rgba(28,24,20,0.04), 0 4px 16px rgba(28,24,20,0.05)',
+  bg: '#FAFAFA',            // subtle off-white canvas
+  bgTint: '#F5F5F5',
+  cardBg: '#FFFFFF',
+  cardBorder: '#E0E0E0',    // Send card border
+  cardShadow: '0 2px 8px rgba(18,32,35,0.04)',
 
-  text: '#1c1814',
-  textSecondary: 'rgba(28,24,20,0.6)',
-  textDim: 'rgba(28,24,20,0.45)',
-  textFaint: 'rgba(28,24,20,0.28)',
-  hairline: 'rgba(28,24,20,0.08)',
-  hairlineStrong: 'rgba(28,24,20,0.12)',
+  text: '#122023',          // Send blackGreen
+  textSecondary: '#6b7c7f', // Send slate
+  textDim: '#9aaaad',       // Send light slate
+  textFaint: '#c9d1d3',
+  hairline: '#F0F0F0',
+  hairlineStrong: '#E0E0E0',
 
-  brand: '#15803D',
-  brandSoft: 'rgba(21,128,61,0.18)',
-  brandBg: 'rgba(21,128,61,0.08)',
-  danger: '#c73e3e',
+  brand: '#1a8a2e',                        // Send dark green (readable on white)
+  brandNeon: '#40FB50',                    // reserved for tooltips on dark strips
+  brandSoft: 'rgba(26,138,46,0.18)',
+  brandBg: 'rgba(26,138,46,0.06)',
+  danger: '#DC2626',
 
   sans: '"DM Sans", system-ui, sans-serif',
   mono: '"DM Mono", ui-monospace, monospace',
@@ -338,7 +339,7 @@ function SupplyChart() {
               <g>
                 <line x1={p.x} y1={pad.top} x2={p.x} y2={pad.top + ih} stroke={theme.brand} strokeWidth="1" strokeDasharray="3,3" opacity="0.4" />
                 <rect x={Math.max(pad.left, Math.min(p.x - 50, w - pad.right - 100))} y={p.y - 40} width="100" height="28" rx="6" fill={theme.text} />
-                <text x={Math.max(pad.left + 50, Math.min(p.x, w - pad.right - 50))} y={p.y - 22} textAnchor="middle" fontSize="11" fontWeight="700" fill={theme.bg} fontFamily={theme.mono}>{fmtM(p.data.circulating)}</text>
+                <text x={Math.max(pad.left + 50, Math.min(p.x, w - pad.right - 50))} y={p.y - 22} textAnchor="middle" fontSize="11" fontWeight="700" fill={theme.brandNeon} fontFamily={theme.mono}>{fmtM(p.data.circulating)}</text>
               </g>
             )}
             <text x={p.x} y={h - 4} textAnchor="middle" fontSize="9" fill={isHov ? theme.text : theme.textDim} fontWeight={isHov ? 700 : 400} fontFamily={theme.mono}>
@@ -453,15 +454,15 @@ export default function TokenEmissions() {
     >
       <WikiStyles />
 
-      {/* Ambient washes — sized for full-width container */}
+      {/* Ambient washes — Send green + slate, very subtle on light canvas */}
       <div className="we-ambient" aria-hidden>
         <div className="we-ambient__blob" style={{
           top: '-8%', left: '-8%', width: 700, height: 700,
-          background: 'radial-gradient(circle, rgba(21,128,61,0.10) 0%, transparent 65%)',
+          background: 'radial-gradient(circle, rgba(26,138,46,0.05) 0%, transparent 65%)',
         }} />
         <div className="we-ambient__blob" style={{
           bottom: '-14%', right: '-10%', width: 900, height: 900,
-          background: 'radial-gradient(circle, rgba(190,170,130,0.16) 0%, transparent 65%)',
+          background: 'radial-gradient(circle, rgba(155,175,177,0.10) 0%, transparent 65%)',
         }} />
       </div>
 
@@ -602,8 +603,8 @@ export default function TokenEmissions() {
 
               let status: { label: string; color: string };
               if (isFullyDistributed) status = { label: 'Fully Distributed', color: theme.textSecondary };
-              else if (a.remaining > a.allocation) status = { label: 'Accumulating', color: '#7B4FA2' };
-              else if (a.name === 'Team' || a.name === 'Contributors') status = { label: 'Vesting', color: '#B85C1F' };
+              else if (a.remaining > a.allocation) status = { label: 'Accumulating', color: '#6D28D9' };
+              else if (a.name === 'Team' || a.name === 'Contributors') status = { label: 'Vesting', color: '#B45309' };
               else status = { label: 'Active', color: theme.brand };
 
               return (
@@ -747,17 +748,17 @@ export default function TokenEmissions() {
                   {[...tokenData.quarterlyData].reverse().map((row, ri) => {
                     const isLatest = ri === 0;
                     return (
-                      <tr key={row.date} style={{ background: isLatest ? theme.text : 'transparent' }}>
+                      <tr key={row.date} style={{ background: isLatest ? theme.brandBg : 'transparent' }}>
                         <td style={{ padding: '13px 16px', fontSize: 13, fontWeight: 600, color: isLatest ? theme.brand : theme.text, fontFamily: theme.mono, borderBottom: `1px solid ${theme.hairline}` }}>
                           {row.date}
                         </td>
-                        <td style={{ padding: '13px 16px', fontSize: 13, textAlign: 'right', color: isLatest ? theme.bg : theme.text, fontFamily: theme.mono, borderBottom: `1px solid ${theme.hairline}` }}>
+                        <td style={{ padding: '13px 16px', fontSize: 13, textAlign: 'right', color: theme.text, fontFamily: theme.mono, borderBottom: `1px solid ${theme.hairline}` }}>
                           {fmt(row.circulating)}
                         </td>
-                        <td style={{ padding: '13px 16px', fontSize: 13, textAlign: 'right', color: isLatest ? theme.brand : (row.qoqChange ? theme.brand : theme.textFaint), fontFamily: theme.mono, borderBottom: `1px solid ${theme.hairline}` }}>
+                        <td style={{ padding: '13px 16px', fontSize: 13, textAlign: 'right', color: row.qoqChange ? theme.brand : theme.textFaint, fontFamily: theme.mono, borderBottom: `1px solid ${theme.hairline}` }}>
                           {row.qoqChange ? `+${fmt(row.qoqChange)}` : '—'}
                         </td>
-                        <td style={{ padding: '13px 16px', fontSize: 13, textAlign: 'right', color: isLatest ? 'rgba(255,252,244,0.6)' : theme.textSecondary, fontFamily: theme.mono, borderBottom: `1px solid ${theme.hairline}` }}>
+                        <td style={{ padding: '13px 16px', fontSize: 13, textAlign: 'right', color: theme.textSecondary, fontFamily: theme.mono, borderBottom: `1px solid ${theme.hairline}` }}>
                           {row.qoqPct ? `+${row.qoqPct.toFixed(2)}%` : '—'}
                         </td>
                       </tr>
