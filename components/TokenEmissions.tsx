@@ -9,7 +9,7 @@ const tokenData = {
   nonCirculating: 646_348_637,
   circulationRate: 35.37,
   asOf: 'June 2026',
-  lastUpdated: 'June 21, 2026',
+  lastUpdated: 'July 2, 2026',
 
   allocations: [
     { name: 'Rewards', allocation: 300_000_000, remaining: 219_269_521, color: '#16a34a' },
