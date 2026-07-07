@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 // ============ TREASURY DATA ============
 const treasuryData = [
-  { date: '6/2026', send: 204484116, cc: 89440158, cusd: 16523, usdcx: 34827, usdc: 2400000, pol: 1600000, fiat: 41964, eth: 0, sendPrice: 0.02, ccPrice: 0.14, isLatest: true },
-  { date: '5/2026', send: 204983926, cc: 73516933, cusd: 77420, usdcx: 88577, usdc: 2475230, pol: 2006000, fiat: 9864, eth: 0, sendPrice: 0.024, ccPrice: 0.155 },
+  { date: '6/2026', send: 204484116, cc: 89440158, cusd: 16523, usdcx: 34827, usdc: 2400000, pol: 1600000, fiat: 41964, eth: 0, isLatest: true },
+  { date: '5/2026', send: 204983926, cc: 73516933, cusd: 77420, usdcx: 88577, usdc: 2475230, pol: 2006000, fiat: 9864, eth: 0 },
   { date: '4/2026', send: 205414060, cc: 67693382, cusd: 119188, usdcx: 43926, usdc: 2598983, pol: 1776801, fiat: 119965, eth: 0 },
   { date: '3/2026', send: 206991992, cc: 66637126, cusd: 112147, usdcx: 52655, usdc: 3006624, pol: 1966000, fiat: 42550, eth: 0 },
   { date: '2/2026', send: 208879479, cc: 62113382, cusd: 185000, usdcx: 165000, usdc: 3200000, pol: 2128330, fiat: 34963, eth: 0 },
@@ -488,18 +488,17 @@ export default function Treasury() {
   // Stablecoins — wallet holdings only (POL tracked separately)
   const totalStablecoins = currentHoldings.cusd + currentHoldings.usdcx + currentHoldings.usdc + currentHoldings.fiat;
 
-  // Total treasury value (tokens at market price + stablecoins + POL).
-  // Prefer per-row historical prices when present, fall back to current.
-  const sendValue = currentHoldings.send * (currentHoldings.sendPrice ?? tokenPrices.send);
-  const ccValue = currentHoldings.cc * (currentHoldings.ccPrice ?? tokenPrices.cc);
+  // Total treasury value (tokens at market price + stablecoins + POL)
+  const sendValue = currentHoldings.send * tokenPrices.send;
+  const ccValue = currentHoldings.cc * tokenPrices.cc;
   const totalTreasuryValue = sendValue + ccValue + totalStablecoins + currentHoldings.pol;
 
-  // Month-over-month deltas — use each snapshot's own recorded prices so
-  // the delta reflects real $ movement, not a same-price-both-months illusion.
+  // Month-over-month deltas — apples-to-apples at current prices so the
+  // delta reflects holdings change, not price P&L noise.
   const prevHoldings = treasuryData[1];
   const prevStablecoins = prevHoldings.cusd + prevHoldings.usdcx + prevHoldings.usdc + prevHoldings.fiat;
-  const prevSendValue = prevHoldings.send * (prevHoldings.sendPrice ?? tokenPrices.send);
-  const prevCcValue = prevHoldings.cc * (prevHoldings.ccPrice ?? tokenPrices.cc);
+  const prevSendValue = prevHoldings.send * tokenPrices.send;
+  const prevCcValue = prevHoldings.cc * tokenPrices.cc;
   const prevTotal = prevSendValue + prevCcValue + prevStablecoins + prevHoldings.pol;
   const totalDelta = totalTreasuryValue - prevTotal;
   const totalDeltaPct = prevTotal > 0 ? ((totalDelta / prevTotal) * 100) : 0;
