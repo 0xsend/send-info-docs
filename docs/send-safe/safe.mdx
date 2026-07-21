@@ -6,22 +6,22 @@ sidebar_position: 5
 
 # Send Safe
 
-Send Safe is the multisig product available inside Canton Wallet. It's built for Canton teams that want passkey-grade security with treasury-level controls — require multiple approvers on any transfer while keeping the same biometric UX that already secures your Canton Wallet.
+Send Safe is a multisig on Canton Network. It's built for Canton teams that want passkey-grade security with treasury-level controls — require multiple approvers on any transfer while keeping a familiar biometric UX.
 
 ## What Send Safe Provides
 
 - **Shared ownership:** Any asset inside a Send Safe requires a quorum before it can move.
-- **Device-level security:** Every signer authenticates with their Canton Wallet passkeys, removing the need to manage seed phrases or browser extensions.
+- **Device-level security:** Every signer authenticates with their own passkeys, removing the need to manage seed phrases or browser extensions.
 - **Policy transparency:** Thresholds, roles, and pending transactions are always visible to every signer in the safe dashboard.
 - **Private settlement:** Transactions execute on Canton Network, so counterparties and amounts stay confidential even when multiple signers participate.
 
 ## Create a Send Safe
 
-1. Open Canton Wallet, navigate to **Send Safe → Multisig**, and select **Create Multisig**.
+1. Open Send Safe, navigate to **Multisig**, and select **Create Multisig**.
 2. Name the multisig and pick a unique name.
 3. Define the multisig's signing threshold: `m-of-n` (default to majority).
-4. Add signer party ids or Canton Wallet usernames. Invitations stay pending until each signer accepts from their wallet.
-5. Fund the multisig by transferring assets from an existing Canton Wallet or importing an onchain balance using the provided deposit address.
+4. Add signer party ids or usernames. Invitations stay pending until each signer accepts.
+5. Fund the multisig by transferring assets from an existing account or importing an onchain balance using the provided deposit address.
 
 A Send Safe stays in a draft state until the final signer joins and the funding transaction finalizes. Draft safes cannot hold assets.
 

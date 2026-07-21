@@ -17,7 +17,7 @@ These are **different tokens**. `USDCx` originates from Ethereum; `USDC.B` origi
 :::
 
 :::info New to Canton?
-You'll need a Canton Wallet before bridging. See [Canton Wallet → Overview](/docs/send-safe) to get set up with passkeys.
+You'll need a Send Safe before bridging. See [Send Safe → Overview](/docs/send-safe) to get set up with passkeys.
 :::
 
 ## Base ↔ Canton (via Asset Relayer)
@@ -28,14 +28,14 @@ Move SEND, USDC, cbBTC, or frxUSD between Base and Canton.
 
 - A **Send** account with the asset you want to bridge ([create one](https://send.app))
 - **USDC** in Send to cover the network fee (e.g. ~0.02 USDC)
-- **Send** connected to your **Canton Wallet** ([create one](https://send.cantonwallet.com))
+- **Send** connected to your **Send Safe** ([create one](https://send.cantonwallet.com))
 - A **Bridge User Agreement** for the asset (one-time setup — Part 1 below)
 
 ### Part 1: Create the Bridge Agreement (one-time per asset)
 
 The first time you bridge a given asset, you must create a Bridge User Agreement. This is a one-time setup per asset that enables deposits and withdrawals.
 
-**Step 1:** Open your **Canton Wallet** and tap the menu icon (☰) in the top left.
+**Step 1:** Open your **Send Safe** and tap the menu icon (☰) in the top left.
 
 **Step 2:** Tap **Bridge**.
 
@@ -63,20 +63,20 @@ Once your Bridge Agreement is approved, you can bridge that asset any time witho
 
 **Step 4:** Tap **Bridge to Canton**.
 
-**Step 5:** Enter the amount you want to bridge. Tap **MAX** to bridge your full balance. The destination is your Canton Wallet address.
+**Step 5:** Enter the amount you want to bridge. Tap **MAX** to bridge your full balance. The destination is your Send Safe address.
 
 **Step 6:** Tap **Review** and verify:
 - **You bridge** — amount being sent
 - **You receive** — amount arriving on Canton
 - **Network fee** — paid in USDC
-- **Destination** — your Canton Wallet address
+- **Destination** — your Send Safe address
 
 **Step 7:** Tap **CONFIRM**. Authenticate with your passkey when prompted.
 
-**Step 8:** You'll see a *"Deposit submitted"* status. Your bridged asset typically arrives in your Canton Wallet **within seconds**.
+**Step 8:** You'll see a *"Deposit submitted"* status. Your bridged asset typically arrives in your Send Safe **within seconds**.
 
 :::tip Done
-Your bridged asset is now in your Canton Wallet. To move it back to Base, use the reverse direction in the Canton Wallet bridge interface.
+Your bridged asset is now in your Send Safe. To move it back to Base, use the reverse direction in the Send Safe bridge interface.
 :::
 
 ## Ethereum → Canton (USDCx)
@@ -85,17 +85,17 @@ Bridges USDC from Ethereum mainnet to Canton Network as **USDCx**. This is the o
 
 ### What you need
 
-- A Canton Wallet ([create one](https://send.cantonwallet.com))
+- A Send Safe ([create one](https://send.cantonwallet.com))
 - USDC on Ethereum mainnet
 - ETH on Ethereum mainnet for gas
 
-> **TODO** — Click-by-click flow for the USDCx Ethereum bridge in the Canton Wallet. Mirror the structure above (one-time setup if applicable, then bridge steps).
+> **TODO** — Click-by-click flow for the USDCx Ethereum bridge in the Send Safe. Mirror the structure above (one-time setup if applicable, then bridge steps).
 
 ## After Bridging
 
 Once your asset is on Canton, you can:
 
-- Hold it in your Canton Wallet
+- Hold it in your Send Safe
 - Transfer it to other Canton addresses
 - Use it in Canton apps like [Pool Party](/docs/pool-party) for swaps and liquidity
 
@@ -111,13 +111,13 @@ No. The Bridge User Agreement is a one-time setup **per asset**. Once approved, 
 A small network fee paid in USDC on Base (e.g. ~0.02 USDC). Make sure you have USDC in Send before bridging.
 
 **How long does bridging take?**
-Bridged assets typically arrive in your Canton Wallet **within seconds** after the transaction confirms.
+Bridged assets typically arrive in your Send Safe **within seconds** after the transaction confirms.
 
 **Why do I need USDC for bridging?**
 USDC is used to pay the network transaction fee on Base.
 
 **Which tokens can I bridge?**
-At launch via Asset Relayer: SEND, USDC, cbBTC, and frxUSD. Check the Bridge page in your Canton Wallet for the current list of authorized assets.
+At launch via Asset Relayer: SEND, USDC, cbBTC, and frxUSD. Check the Bridge page in your Send Safe for the current list of authorized assets.
 
 **What if my Bridge Agreement is not approved?**
 Approval typically takes a few minutes. If it takes longer, tap **Check Status** to refresh, or contact support.

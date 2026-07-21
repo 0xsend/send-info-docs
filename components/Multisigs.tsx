@@ -62,7 +62,7 @@ const featuredAppLocks = [
     url: 'https://lighthouse.fivenorth.io/party/cantonwallet-assetrelayerfalock%3A%3A122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',
   },
   {
-    name: 'Canton Wallet',
+    name: 'Send Safe',
     role: 'Non-issuer',
     lockedM: 5,
     address: 'cantonwallet-send-wallet-fa-lock::122063fba3059f9875022069d0d71113f670b7b5e1ae23f5b2321a29a7278220c721',

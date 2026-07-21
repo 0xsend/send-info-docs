@@ -14,7 +14,7 @@ export default function PoolParty() {
           Send's Decentralized Exchange<br />on Canton Network
         </div>
         <div style={{ fontSize: '14px', color: '#6b7c7f', maxWidth: '480px', lineHeight: 1.6 }}>
-          Swap tokens, bridge USDC, and provide liquidity — all directly from Canton Wallet.
+          Swap tokens, bridge USDC, and provide liquidity — all directly from Send Safe.
         </div>
       </div>
 
@@ -38,13 +38,13 @@ export default function PoolParty() {
       {/* ── CTA CARDS ── */}
       <div className="responsive-2col" style={{ gap: '12px' }}>
         <div style={{ ...CARD, borderTop: '3px solid #1a8a2e', padding: '24px 22px' }}>
-          <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>Already have Canton Wallet?</div>
+          <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>Already have Send Safe?</div>
           <div style={{ fontSize: '14px', color: '#888', lineHeight: 1.6 }}>
-            Pool Party is live now in Canton Wallet — start trading today.
+            Pool Party is live now in Send Safe — start trading today.
           </div>
         </div>
         <div style={{ ...CARD, borderTop: '3px solid #6b7c7f', padding: '24px 22px' }}>
-          <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>Don't have Canton Wallet yet?</div>
+          <div style={{ fontSize: '15px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>Don't have Send Safe yet?</div>
           <div style={{ fontSize: '14px', color: '#888', lineHeight: 1.6 }}>
             Join the waitlist at{' '}
             <a href="https://poolparty.fun" target="_blank" rel="noopener noreferrer" style={{ color: '#1a8a2e', fontWeight: 600, textDecoration: 'none' }}>

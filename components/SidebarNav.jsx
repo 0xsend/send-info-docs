@@ -77,8 +77,8 @@ const sectionLabels = {
   'send-token': 'Send Token',
   'send-mobile-apps': 'Send',
   'features': 'Features',
-  'send-safe': 'Canton Wallet',
-  'pool-party': 'Pool Party Exchange',
+  'send-safe': 'Send Safe',
+  'pool-party': 'Pool Party DEX',
   'asset-relayer': 'Asset Relayer',
   'cusd-stablecoin': 'CUSD Stablecoin',
   'finance': 'Finance',
@@ -106,8 +106,8 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
   // Desired order
   const desiredOrder = [
     'welcome',
-    'send-token',
     'send-mobile-apps',
+    'send-token',
     'send-safe',
     'pool-party',
     'asset-relayer',

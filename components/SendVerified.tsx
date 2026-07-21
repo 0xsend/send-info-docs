@@ -81,9 +81,9 @@ export default function SendVerified() {
         }}>
           <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#122023', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0, color: '#40FB50', fontWeight: 800 }}>PP</div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '14px', fontWeight: 700, color: '#122023', marginBottom: '4px' }}>Pool Party on Canton Wallet</div>
+            <div style={{ fontSize: '14px', fontWeight: 700, color: '#122023', marginBottom: '4px' }}>Pool Party on Send Safe</div>
             <div style={{ fontSize: '13px', color: '#888', lineHeight: 1.5 }}>
-              Once verified, access Pool Party via <strong style={{ color: '#122023' }}>Explore → Canton Wallet</strong>.
+              Once verified, access Pool Party via <strong style={{ color: '#122023' }}>Explore → Send Safe</strong>.
             </div>
           </div>
           <span style={{ color: '#1a8a2e', fontWeight: 600, fontSize: '13px', flexShrink: 0 }}>Open →</span>

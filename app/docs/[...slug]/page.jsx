@@ -29,8 +29,8 @@ export async function generateMetadata({ params }) {
       description: 'Learn how Send delivers fast, private peer-to-peer transfers.'
     },
     'send-safe': {
-      title: 'Canton Wallet Info Docs – Secure account access for Canton',
-      description: 'Understand passkeys, privacy, and workflows for the Canton Wallet.'
+      title: 'Send Safe Info Docs – Secure account access for Canton',
+      description: 'Understand passkeys, privacy, and workflows for the Send Safe.'
     },
     'pool-party': {
       title: 'Pool Party Info Docs – Confidential AMM on Canton',
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }) {
       'welcome': 'Welcome',
       'send-token': 'Send Token',
       'send-mobile-apps': 'Send',
-      'send-safe': 'Canton Wallet',
+      'send-safe': 'Send Safe',
       'pool-party': 'Pool Party',
       'asset-relayer': 'Asset Relayer',
       'cusd-stablecoin': 'CUSD Stablecoin',
@@ -123,7 +123,7 @@ export default async function DocPage({ params }) {
       'welcome': 'Welcome',
       'send-token': 'Send Token',
       'send-mobile-apps': 'Send',
-      'send-safe': 'Canton Wallet',
+      'send-safe': 'Send Safe',
       'pool-party': 'Pool Party',
       'asset-relayer': 'Asset Relayer',
       'cusd-stablecoin': 'CUSD Stablecoin',
