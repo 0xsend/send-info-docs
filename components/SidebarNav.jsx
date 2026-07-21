@@ -75,7 +75,7 @@ const sectionIcons = {
 const sectionLabels = {
   'welcome': 'Send Foundation',
   'send-token': 'Send Token',
-  'send-mobile-apps': 'Send App',
+  'send-mobile-apps': 'Send',
   'features': 'Features',
   'send-safe': 'Canton Wallet',
   'pool-party': 'Pool Party Exchange',

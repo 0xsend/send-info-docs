@@ -256,7 +256,7 @@ export default function EcosystemFund() {
             Ship first on Canton
           </div>
           <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.6 }}>
-            Active ecosystem partners get priority access to new Send infrastructure, Pool Party pairs, APIs, and Canton tooling as it ships. Reach out through the Send app or community channels.
+            Active ecosystem partners get priority access to new Send infrastructure, Pool Party pairs, APIs, and Canton tooling as it ships. Reach out through Send or community channels.
           </div>
         </div>
       </div>

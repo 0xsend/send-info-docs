@@ -85,7 +85,7 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
   const sectionLabels = {
     'welcome': 'Send Foundation',
     'send-token': 'Send Token',
-    'send-mobile-apps': 'Send App',
+    'send-mobile-apps': 'Send',
     'send-safe': 'Canton Wallet',
     'pool-party': 'Pool Party',
     'asset-relayer': 'Asset Relayer',
@@ -116,7 +116,7 @@ export default function DocsLayout({ children, treeData, headings = [] }) {
     root: { image: '/img/yourprivateneobank.png', aria: 'Your private neobank - Send' },
     welcome: { image: '/img/privatebydefault.png', aria: 'Private by default - Send Foundation' },
     'send-token': { image: '/img/send-token-banner.png', aria: 'Send Token documentation banner' },
-    'send-mobile-apps': { image: '/img/globalbynature.png', aria: 'Global by nature - Send App' },
+    'send-mobile-apps': { image: '/img/globalbynature.png', aria: 'Global by nature - Send' },
     'send-safe': { image: '/img/theprivacyfirstwallet.png', aria: 'The privacy first wallet - Canton Wallet' },
     'pool-party': { image: '/img/pool_party_banner.jpeg', aria: 'Pool Party - Confidential AMM on Canton' },
     'asset-relayer': { image: '/img/asset_relayer_banner.png', aria: 'Asset Relayer - Bridge between Base and Canton' },

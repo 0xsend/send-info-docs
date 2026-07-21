@@ -249,9 +249,9 @@ export default function Revenue() {
           </div>
         </div>
 
-        {/* Send App */}
+        {/* Send */}
         <div style={{ background: '#171f22', padding: '24px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>Send App</div>
+          <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#4a5c5f' }}>Send</div>
           <div>
             <div style={{ fontFamily: '"DM Mono", monospace', fontSize: '26px', fontWeight: 700, color: '#FFF', letterSpacing: '-1px' }}>{fmt(totalSendAppRevenue)}</div>
             <div style={{ fontSize: '11px', color: '#4a5c5f', marginTop: '4px' }}>Sendtags · Trades · Transactions</div>
@@ -315,10 +315,10 @@ export default function Revenue() {
         </div>
       </div>
 
-      {/* ── SEND APP TABLE ── */}
+      {/* ── SEND REVENUE TABLE ── */}
       <div style={{ background: '#FFF', borderRadius: '12px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
         <div style={{ padding: '20px 24px', borderBottom: '1px solid #E0E0E0' }}>
-          <div style={{ fontSize: '15px', fontWeight: 600, color: '#122023' }}>Send App Revenue History</div>
+          <div style={{ fontSize: '15px', fontWeight: 600, color: '#122023' }}>Send Revenue History</div>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>

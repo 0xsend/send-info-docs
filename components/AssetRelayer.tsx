@@ -93,7 +93,7 @@ export default function AssetRelayer() {
                   gap: '6px',
                 }}
               >
-                Open Send App on Canton →
+                Open Send on Canton →
               </a>
               <a
                 href="#how-it-works"
@@ -241,12 +241,12 @@ export default function AssetRelayer() {
       {/* ── WHERE TO USE ── */}
       <div className="responsive-2col">
         <div style={{ ...CARD, padding: '24px' }}>
-          <div style={{ ...LABEL, color: '#1a8a2e', marginBottom: '10px' }}>Send App</div>
+          <div style={{ ...LABEL, color: '#1a8a2e', marginBottom: '10px' }}>Send</div>
           <div style={{ fontSize: '16px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>
             Dedicated bridge page
           </div>
           <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.6, marginBottom: '14px' }}>
-            Available on web and mobile within Send App on Canton. Bridge from Base, hold, transfer, and trade in one place.
+            Available on web and mobile within Send on Canton. Bridge from Base, hold, transfer, and trade in one place.
           </div>
           <a href={SEND_APP_URL} target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', fontWeight: 600, color: '#1a8a2e', textDecoration: 'none' }}>
             send.cantonwallet.com →
@@ -255,7 +255,7 @@ export default function AssetRelayer() {
         <div style={{ ...CARD, padding: '24px' }}>
           <div style={{ ...LABEL, color: '#1a8a2e', marginBottom: '10px' }}>Standalone Bridge</div>
           <div style={{ fontSize: '16px', fontWeight: 700, color: '#122023', marginBottom: '8px' }}>
-            No Send App required
+            No Send account required
           </div>
           <div style={{ fontSize: '13px', color: '#666', lineHeight: 1.6 }}>
             Connect your wallet directly and bridge between Base and Canton. Same security model, lighter footprint.

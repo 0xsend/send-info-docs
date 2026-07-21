@@ -20,7 +20,7 @@ const businessModels = [
   },
   {
     type: 'Trades',
-    description: 'Token swaps and trading within the Send App',
+    description: 'Token swaps and trading within Send',
     fee: '0.75%',
     feeType: 'Per trade',
     multisig: { name: 'Trade Revenue', address: '0x17D46f667B0e4156238645536c344d010FC099d7' },
@@ -62,7 +62,7 @@ export default function BusinessModels() {
         {/* Revenue flow strip */}
         <div className="responsive-3col" style={{ gap: '0', borderTop: '1px solid #E0E0E0' }}>
           {[
-            { step: '01', label: 'User Activity', sub: 'Send App' },
+            { step: '01', label: 'User Activity', sub: 'Send' },
             { step: '02', label: 'Product Multisigs', sub: 'Track by source' },
             { step: '03', label: 'Treasury', sub: '1st of month' },
           ].map((s, i) => (

@@ -25,8 +25,8 @@ export async function generateMetadata({ params }) {
     },
     'send-mobile-apps': {
       image: '/img/sendmobileapps-opengraph.png',
-      title: 'Send App Info Docs – Your global wallet',
-      description: 'Learn how the Send App delivers fast, private peer-to-peer transfers.'
+      title: 'Send Info Docs – Your global wallet',
+      description: 'Learn how Send delivers fast, private peer-to-peer transfers.'
     },
     'send-safe': {
       title: 'Canton Wallet Info Docs – Secure account access for Canton',
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }) {
     const sectionLabels = {
       'welcome': 'Welcome',
       'send-token': 'Send Token',
-      'send-mobile-apps': 'Send App',
+      'send-mobile-apps': 'Send',
       'send-safe': 'Canton Wallet',
       'pool-party': 'Pool Party',
       'asset-relayer': 'Asset Relayer',
@@ -122,7 +122,7 @@ export default async function DocPage({ params }) {
     const sectionLabels = {
       'welcome': 'Welcome',
       'send-token': 'Send Token',
-      'send-mobile-apps': 'Send App',
+      'send-mobile-apps': 'Send',
       'send-safe': 'Canton Wallet',
       'pool-party': 'Pool Party',
       'asset-relayer': 'Asset Relayer',
