@@ -36,6 +36,15 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/docs/finance/token-emissions',
+        destination: '/docs/send-token/token-emissions',
+        permanent: true,
+      },
+    ];
+  },
   webpack: (config) => {
     config.resolve = config.resolve || {};
     config.resolve.alias = config.resolve.alias || {};
