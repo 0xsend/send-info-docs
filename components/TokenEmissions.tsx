@@ -5,18 +5,18 @@ import { useEffect, useState, ReactNode } from 'react';
 // ============ TOKEN DATA ============
 const tokenData = {
   totalSupply: 1_000_000_000,
-  circulating: 353_651_363,
-  nonCirculating: 646_348_637,
-  circulationRate: 35.37,
-  asOf: 'June 2026',
-  lastUpdated: 'July 2, 2026',
+  circulating: 355_433_244,
+  nonCirculating: 644_566_756,
+  circulationRate: 35.54,
+  asOf: 'July 2026',
+  lastUpdated: 'August 4, 2026',
 
   allocations: [
-    { name: 'Rewards', allocation: 300_000_000, remaining: 219_269_521, color: '#B45309' },
-    { name: 'Treasury', allocation: 200_000_000, remaining: 204_484_116, color: '#0F766E' },
+    { name: 'Rewards', allocation: 300_000_000, remaining: 219_019_521, color: '#B45309' },
+    { name: 'Treasury', allocation: 200_000_000, remaining: 204_002_235, color: '#0F766E' },
     { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#6D28D9' },
-    { name: 'Team', allocation: 100_000_000, remaining: 54_575_000, color: '#374151' },
-    { name: 'Contributors', allocation: 100_000_000, remaining: 58_020_000, color: '#6b7c7f' },
+    { name: 'Team', allocation: 100_000_000, remaining: 53_575_000, color: '#374151' },
+    { name: 'Contributors', allocation: 100_000_000, remaining: 57_970_000, color: '#6b7c7f' },
     { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#9aaaad' },
   ],
 
@@ -34,6 +34,7 @@ const tokenData = {
     { date: 'Q4 2025', circulating: 327_985_505, qoqChange: 12_440_608, qoqPct: 3.94 },
     { date: 'Q1 2026', circulating: 346_292_487, qoqChange: 18_306_982, qoqPct: 5.58 },
     { date: 'Q2 2026', circulating: 353_651_363, qoqChange: 7_358_876, qoqPct: 2.12 },
+    { date: 'Q3 2026', circulating: 355_433_244, qoqChange: 1_781_881, qoqPct: 0.50 },
   ],
 
   inflationData: [
@@ -49,12 +50,13 @@ const tokenData = {
     { period: 'Q4 \'25', annualized: 15.8, tokens: 12_440_608 },
     { period: 'Q1 \'26', annualized: 22.3, tokens: 18_306_982 },
     { period: 'Q2 \'26', annualized: 8.5, tokens: 7_358_876 },
+    { period: 'Q3 \'26', annualized: 2.0, tokens: 1_781_881 },
   ],
 
   vestingProgress: [
-    { name: 'Team', initial: 100_000_000, released: 45_425_000, pct: 45.4 },
-    { name: 'Contributors', initial: 100_000_000, released: 41_980_000, pct: 42.0 },
-    { name: 'Rewards', initial: 300_000_000, released: 80_730_479, pct: 26.9 },
+    { name: 'Team', initial: 100_000_000, released: 46_425_000, pct: 46.4 },
+    { name: 'Contributors', initial: 100_000_000, released: 42_030_000, pct: 42.0 },
+    { name: 'Rewards', initial: 300_000_000, released: 80_980_479, pct: 27.0 },
   ],
 };
 
@@ -655,7 +657,7 @@ export default function TokenEmissions() {
         {/* ── CHAPTER: CIRCULATING ── */}
         <Chapter label="Circulating supply">
           <p className="we-body">
-            Quarterly circulating supply from launch to today. Q2 &rsquo;23 &ndash; Q2 &rsquo;26.
+            Quarterly circulating supply from launch to today. Q2 &rsquo;23 &ndash; Q3 &rsquo;26.
           </p>
           <SupplyChart />
         </Chapter>
