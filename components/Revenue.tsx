@@ -5,6 +5,13 @@ import { useState } from 'react';
 // ============ REVENUE DATA ============
 const sendAppRevenue = [
   {
+    date: '7/2026',
+    sendtags: { amount: 75, tx: '0xae271dd077e2a5fe8a62af1f404b777c8d68257a45fccb45d7d6d56a6cac1edb' },
+    trades: { amount: 225.52, tx: '0x8b4c78390fd2abfd08595799e3ed2923c4bd20228d80f6fa3b26b12fb76d7607' },
+    transactions: { amount: 71.24, tx: '0x4695153771479d22a45f685055a733b65377d0f3d283a2be6612dfd15b271f53' },
+    total: 371.76,
+  },
+  {
     date: '6/2026',
     sendtags: { amount: 101, tx: '0xf933b7a5351f367d76c9c8d38e406c502b71bd50c9dac54676bc849c3f97231f' },
     trades: { amount: 343.10, tx: '0x8aa07b4ab46dbf27a87b35195bf0855aca2e419ec3923b84282aaa4ca992edd4' },
