@@ -43,6 +43,11 @@ const nextConfig = {
         destination: '/docs/send-token/token-emissions',
         permanent: true,
       },
+      {
+        source: '/docs/send-safe/send-connect',
+        destination: '/docs/send-connect/overview',
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {
