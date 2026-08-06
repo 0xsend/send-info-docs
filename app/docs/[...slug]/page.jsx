@@ -32,6 +32,10 @@ export async function generateMetadata({ params }) {
       title: 'Send Safe Info Docs – Secure account access for Canton',
       description: 'Understand passkeys, privacy, and workflows for the Send Safe.'
     },
+    'send-connect': {
+      title: 'Send Connect Info Docs – Browser wallet for Canton dApps',
+      description: 'Install the Send Connect extension to connect your Send Safe to Canton dApps with passkeys.'
+    },
     'pool-party': {
       title: 'Pool Party Info Docs – Confidential AMM on Canton',
       description: 'Explore Pool Party, the confidential automated market maker on Canton Network.'
@@ -65,6 +69,7 @@ export async function generateMetadata({ params }) {
       'send-token': 'Send Token',
       'send-mobile-apps': 'Send',
       'send-safe': 'Send Safe',
+      'send-connect': 'Send Connect',
       'pool-party': 'Pool Party',
       'asset-relayer': 'Asset Relayer',
       'cusd-stablecoin': 'CUSD Stablecoin',
@@ -124,6 +129,7 @@ export default async function DocPage({ params }) {
       'send-token': 'Send Token',
       'send-mobile-apps': 'Send',
       'send-safe': 'Send Safe',
+      'send-connect': 'Send Connect',
       'pool-party': 'Pool Party',
       'asset-relayer': 'Asset Relayer',
       'cusd-stablecoin': 'CUSD Stablecoin',

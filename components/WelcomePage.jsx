@@ -6,6 +6,7 @@ const sectionCards = [
   { key: 'send-mobile-apps', title: 'Send', href: '/docs/send-mobile-apps' },
   { key: 'send-token', title: 'Send Token', href: '/docs/send-token' },
   { key: 'send-safe', title: 'Send Safe', href: '/docs/send-safe' },
+  { key: 'send-connect', title: 'Send Connect', href: '/docs/send-connect' },
   { key: 'pool-party', title: 'Pool Party DEX', href: '/docs/pool-party' },
   { key: 'asset-relayer', title: 'Asset Relayer', href: '/docs/asset-relayer' },
   { key: 'cusd-stablecoin', title: 'CUSD Stablecoin', href: '/docs/cusd-stablecoin' },
@@ -16,6 +17,7 @@ const cardImages = {
   'send-token': { src: '/img/sendtoken.png', alt: 'Send Token' },
   'send-mobile-apps': { src: '/img/sendapps.png', alt: 'Send' },
   'send-safe': { src: '/img/sendapps.png', alt: 'Send Safe' },
+  'send-connect': { src: '/img/sendapps.png', alt: 'Send Connect' },
   'pool-party': { src: '/img/PoolParty_Icon.png', alt: 'Pool Party' },
   'asset-relayer': { src: '/img/asset-relayer.svg', alt: 'Asset Relayer' },
   'cusd-stablecoin': { src: '/img/cusdstablecoin.jpg', alt: 'CUSD Stablecoin' }

@@ -40,6 +40,7 @@ const sectionIcons = {
       className="sidebar-section-icon-image"
     />
   ),
+  'send-connect': <SidebarIcon name="extension" />,
   'pool-party': (
     <Image
       src="/img/PoolParty_Icon.png"
@@ -78,6 +79,7 @@ const sectionLabels = {
   'send-mobile-apps': 'Send',
   'features': 'Features',
   'send-safe': 'Send Safe',
+  'send-connect': 'Send Connect',
   'pool-party': 'Pool Party DEX',
   'asset-relayer': 'Asset Relayer',
   'cusd-stablecoin': 'CUSD Stablecoin',
@@ -109,6 +111,7 @@ export default function SidebarNav({ treeData, isMobileOpen = false, onClose }) 
     'send-mobile-apps',
     'send-token',
     'send-safe',
+    'send-connect',
     'pool-party',
     'asset-relayer',
     'cusd-stablecoin',
