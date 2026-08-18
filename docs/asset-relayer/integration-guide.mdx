@@ -148,4 +148,4 @@ Burns are `BridgeUserAgreement` / `BridgeUserAgreement_Burn`. Mints on the defau
 Yes, one per (party, asset). Most integrators create them during user onboarding so bridging never blocks on it.
 
 **What's the difference between `USDC.B` and `USDCx`?**
-`USDC.B` comes from Base via the Asset Relayer. `USDCx` is Circle's CCTP bridged token. Different tokens, not interchangeable without a swap.
+`USDC.B` is USDC bridged from Base by the Asset Relayer. `USDCx` is the equivalent from Ethereum. Both are USDC-backed through Circle's xReserve, but they are separate instruments and not interchangeable without a swap.
