@@ -1329,6 +1329,49 @@ body {
   overflow-wrap: anywhere;
 }
 
+/* Fenced code blocks. rehype-pretty-code (Shiki) tokenises at build time and
+   writes the colours inline, so there is no theme stylesheet to load. It wraps
+   each block in <figure data-rehype-pretty-code-figure>. */
+.markdown figure[data-rehype-pretty-code-figure] {
+  margin: 20px 0;
+}
+
+.markdown pre {
+  font-family: 'DM Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  background: #F6F8FA;
+  border: 1px solid var(--Border-Color);
+  color: var(--Content-Primary);
+  padding: 16px 18px;
+  border-radius: var(--Corner-Radius-S);
+  margin: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  font-size: 13.5px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+/* A <code> inside <pre> must not inherit the inline-code chip styling. */
+.markdown pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+  overflow-wrap: normal;
+  white-space: pre;
+}
+
+.markdown pre::-webkit-scrollbar {
+  height: 6px;
+}
+.markdown pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+.markdown pre::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+}
+
 /* Table styles for markdown */
 .markdown table {
   width: max-content;
