@@ -1,0 +1,151 @@
+---
+id: integration-guide
+title: Integration Guide
+---
+
+# Integration Guide
+
+For teams integrating the Asset Relayer directly: your own validator, your own UI, no Send wallet involved.
+
+The bridge locks an ERC-20 in an escrow on Base and mints a `.B` Holding on Canton. Going the other way, it burns the Holding on Canton and releases the ERC-20 on Base. Everything you exercise on the Canton side lives in the `send-utility-bridge-v0` DAR, module `Send.Utility.Bridge.V0.Agreement.User`.
+
+:::info Get allowlisted first
+The bridge operator only accepts agreement requests from allowlisted participants. Send us your **participant UID** (e.g. `send-validator-1::1220…`) before you start. Capitalization matters, so copy the exact string Canton reports rather than retyping it.
+
+Until you're listed, requests sit **pending** rather than being rejected. Once you're added they go through on the next poll.
+:::
+
+## Reference values
+
+| | Mainnet | Testnet |
+|---|---|---|
+| Base chain | Base (8453) | Base Sepolia (84532) |
+| `domainId` | `8453` | `84532` |
+| Escrow (xReserve) | `0xCaC6d06470Ce86d6B2AC82F1609294b93CaDf1cd` | `0x948BD87E0F57830C8DAb7D46473e8e3a25173FC1` |
+| Utility registry | `https://api.utilities.digitalasset.com` | `https://api.utilities.digitalasset-staging.com` |
+| Minimum amount | `0.000001` | `0.000001` |
+| Payload precision | 6 decimals | 6 decimals |
+
+:::caution `domainId` is not a CCTP domain
+`domainId` equals the **EVM chain id**: `8453` on mainnet, `84532` on testnet. It is *not* Circle's CCTP domain id (`6` for Base). Using the CCTP value produces a withdrawal no attestor can release. The authoritative value is the `domainId` field on your `BridgeUserAgreement`, which is fixed per environment.
+:::
+
+## Supported assets (mainnet)
+
+| Symbol | Base ERC-20 | Canton instrument | Decimals |
+|---|---|---|---|
+| SEND | `0xeab49138ba2ea6dd776220fe26b7b8e446638956` | `SEND.B` | 18 |
+| USDC | `0x833589fcd6edb6e08f4c7c32d4f71b54bda02913` | `USDC.B` | 6 |
+| frxUSD | `0xe5020a6d073a794b6e7f05678707de47986fb0b6` | `FRXUSD.B` | 18 |
+| USDT | `0xfde4c96c8593536e31f229ea8f37b2ada2699bb2` | `USDT.B` | 6 |
+| EURC | `0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42` | `EURC.B` | 6 |
+| USDS | `0x820c137fa70c8691f0e44dc420a5e53c168921dc` | `USDS.B` | 18 |
+| USDe | `0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34` | `USDE.B` | 18 |
+| cbBTC | `0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf` | `CBBTC.B` | 8 |
+| cbETH | `0x2ae3f1ec7f1f5012cfeab0185bfc7aa3cf0dec22` | `CBETH.B` | 18 |
+| QUID | `0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53` | `QUID.B` | 18 |
+
+Every instrument's `admin` is the cross-chain representative party, which you can read off your own `BridgeUserAgreement` rather than hardcoding. Ask us if you want an asset that isn't listed.
+
+## One-time: the bridge user agreement
+
+One agreement per **(Canton party, asset)**. Without it, deposits to that party are held rather than minted.
+
+1. Create a `BridgeUserAgreementRequest`. You are the sole signatory; `bridgeOperator` and `crossChainRepresentative` are observers. Set `preApproval: True` so deposits mint automatically.
+2. The bridge operator and the cross-chain representative accept it, which creates the `BridgeUserAgreement` on your ACS. This takes a few minutes.
+3. Read your working values off that contract: `domainId`, `minBurnValue`, `tokenId`, `instrumentId`.
+
+## Base → Canton (deposit)
+
+`approve` the escrow, then call:
+
+```solidity
+depositToRemote(
+  uint256 value,
+  uint32  remoteDomain,     // 8453 mainnet / 84532 testnet
+  bytes32 remoteRecipient,  // keccak256(utf8(cantonPartyId))
+  address localToken,       // the Base ERC-20
+  uint256 maxFee,           // 0
+  bytes   hookData          // hex(utf8(cantonPartyId))
+)
+```
+
+`remoteRecipient` is matched against `userHash` on your agreement; `hookData` carries the readable party id so the operator can resolve it. Derive both from the same party string.
+
+**Precision.** The bridge moves amounts at 6 decimal places, so anything finer is rejected with `InvalidPrecision`. `1.0000005` SEND fails; `1.000000` passes. In base units that means `value` must be a multiple of `10^(decimals - 6)`: `1e12` for the 18-decimal tokens, `100` for cbBTC, and nothing to do for the 6-decimal ones.
+
+Watch the `DepositedToRemote` event for confirmation, then expect the Canton mint in roughly **3 minutes**.
+
+## Canton → Base (withdrawal)
+
+Exercise `BridgeUserAgreement_Burn` on your agreement. It is `nonconsuming`, so one agreement serves every withdrawal.
+
+| Field | Notes |
+|---|---|
+| `amount` | `> 0`, at least `minBurnValue`, and an exact multiple of `0.000001` |
+| `destinationDomain` | `8453` / `84532`. Not checked on-ledger, see below |
+| `destinationRecipient` | 20-byte EVM address, 40 hex chars, `0x` optional, not all zeros |
+| `holdingCids` | Holdings to burn. Must total at least `amount`; the change is minted back to you |
+| `requestId` | Must be globally unique; it becomes the EVM release nonce. See below |
+| `reference` | Free-text, not used by the protocol |
+| `factoryCid`, `contextContractIds` | Resolved from the DA Utility registry |
+
+The choice archives the input Holdings and returns a `WithdrawAttestation` contract id plus any change Holding ids. The operator then collects the attestor quorum (3-of-5 on mainnet) and submits `release()` on Base. **It pays the gas, you don't.** Expect roughly **3 minutes**.
+
+:::caution Two fields the ledger will not check
+The choice validates every field except `destinationDomain` and `requestId`. Both are accepted as they are, the burn succeeds, and nothing shows up as wrong until the withdrawal fails to release.
+
+- A wrong `destinationDomain` produces an attestation no attestor can release.
+- A reused `requestId` produces a release nonce the escrow has already spent, so the release is rejected for good. The nonce is `keccak256` of the string, so you have to guarantee it is unique.
+
+Recovering from either needs operator involvement. Verify both before you burn.
+:::
+
+**You cannot cancel a withdrawal.** If a release can't be completed, the bridge operator and cross-chain representative revoke the attestation, which produces a `RevokedWithdrawAttestation`. You then reclaim your Holding with `BridgeUserAgreement_ReclaimHolding`.
+
+## Reading pause state
+
+The bridge can be paused as a whole, or for deposits and withdrawals separately. Check both and reflect them in your UI, since deposits revert while they are paused.
+
+```solidity
+function paused() view returns (bool)
+function domainDepositsPaused(uint32 domain) view returns (bool)
+function domainWithdrawalsPaused(uint32 domain) view returns (bool)
+
+event DomainPauseStateUpdated(uint32 indexed domain, bool depositsPaused, bool withdrawalsPaused)
+event Paused(address account)
+event Unpaused(address account)
+```
+
+Deposits are enabled only when `paused()` and `domainDepositsPaused(domain)` are both false, and withdrawals only when `paused()` and `domainWithdrawalsPaused(domain)` are both false. Either one is enough to disable that direction. Subscribe to the three events rather than polling.
+
+Pauses are precautionary and usually reflect an attestor consensus disagreement rather than a minting problem. They stop new deposits and releases; balances already on either side are unaffected.
+
+## FAQs
+
+**Are there fees?**
+No protocol fee in either direction, for now. You pay Base gas on the deposit; the operator pays Base gas on the release.
+
+**How long does it take?**
+About 3 minutes each way under normal operation. Canton → Base often settles faster.
+
+**Is there a minimum?**
+`0.000001` of any token, both directions. It's the `minBurnValue` field on your agreement.
+
+**Does `domainId` ever change?**
+It's fixed per environment and we don't expect it to change. Pinning it per environment is fine; reading it from your `BridgeUserAgreement` is safer still.
+
+**The burn went through but nothing arrived on Base.**
+Almost always `destinationDomain` (a CCTP domain id instead of the chain id) or a malformed `destinationRecipient`. Check both on the burn's choice arguments.
+
+**I deposited to a party with no agreement.**
+The deposit is held, not lost, and flagged `RECIPIENT_NOT_ONBOARDED`. Complete the agreement for that party and it mints on the next poll. If you can't, contact us for a refund to the depositing EVM address.
+
+**Which choices should I be watching?**
+Burns are `BridgeUserAgreement` / `BridgeUserAgreement_Burn`. Mints on the default path are `BridgeUserAgreement` / `BridgeUserAgreement_DirectMint`. `BridgeUserAgreementRequest_Accept` is the one-time onboarding event.
+
+**Do I need a separate agreement per asset?**
+Yes, one per (party, asset). Most integrators create them during user onboarding so bridging never blocks on it.
+
+**What's the difference between `USDC.B` and `USDCx`?**
+`USDC.B` comes from Base via the Asset Relayer. `USDCx` is Circle's CCTP bridged token. Different tokens, not interchangeable without a swap.

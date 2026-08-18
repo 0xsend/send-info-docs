@@ -46,6 +46,7 @@ const heroItemIcons = {
   'pool-party/faqs': <HeroIcon name="help" />,
   'asset-relayer/overview': <HeroIcon name="compare_arrows" />,
   'asset-relayer/how-to-bridge': <HeroIcon name="route" />,
+  'asset-relayer/integration-guide': <HeroIcon name="code" />,
   'finance/multisigs': <HeroIcon name="key" />,
   'send-token/token-emissions': <HeroIcon name="swap_horiz" />,
   'finance/treasury': <HeroIcon name="account_balance" />,
