@@ -26,12 +26,6 @@ Canton participant UID(s):
 What do you need help with?
 ```
 
-:::info Onboard your participant first
-Agreement requests are accepted from onboarded participants. Submit your **participant UID** (e.g. `send-validator-1::1220…`) to the bridge operator before you start. Capitalization matters, so copy the exact string Canton reports rather than retyping it.
-
-Until onboarding completes, requests sit **pending** rather than being rejected. Once it's done they go through on the next poll.
-:::
-
 ## Reference values
 
 | | Mainnet | Testnet |
@@ -62,7 +56,7 @@ Until onboarding completes, requests sit **pending** rather than being rejected.
 | cbETH | `0x2ae3f1ec7f1f5012cfeab0185bfc7aa3cf0dec22` | `CBETH.B` | 18 |
 | QUID | `0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53` | `QUID.B` | 18 |
 
-Every instrument's `admin` is the cross-chain representative party, which you can read off your own `BridgeUserAgreement` rather than hardcoding. Ask the bridge operator if you want an asset that isn't listed.
+Every instrument's `admin` is the cross-chain representative party, which you can read off your own `BridgeUserAgreement` rather than hardcoding.
 
 ## One-time: the bridge user agreement
 
@@ -156,7 +150,7 @@ It's fixed per environment and is not expected to change. Pinning it per environ
 Almost always `destinationDomain` (a CCTP domain id instead of the chain id) or a malformed `destinationRecipient`. Check both on the burn's choice arguments.
 
 **I deposited to a party with no agreement.**
-The deposit is held, not lost, and flagged `RECIPIENT_NOT_ONBOARDED`. Complete the agreement for that party and it mints on the next poll. If you can't, contact the bridge operator for a refund to the depositing EVM address.
+The deposit is held, not lost, and flagged `RECIPIENT_NOT_ONBOARDED`. Complete the agreement for that party and it mints on the next poll. If you can't, it can be refunded to the depositing EVM address.
 
 **Which choices should I be watching?**
 Burns are `BridgeUserAgreement` / `BridgeUserAgreement_Burn`. Mints on the default path are `BridgeUserAgreement` / `BridgeUserAgreement_DirectMint`. `BridgeUserAgreementRequest_Accept` is the one-time onboarding event.
