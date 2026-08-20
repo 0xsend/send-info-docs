@@ -149,9 +149,6 @@ It's fixed per environment and is not expected to change. Pinning it per environ
 **The burn went through but nothing arrived on Base.**
 Almost always `destinationDomain` (a CCTP domain id instead of the chain id) or a malformed `destinationRecipient`. Check both on the burn's choice arguments.
 
-**I deposited to a party with no agreement.**
-The deposit is held, not lost, and flagged `RECIPIENT_NOT_ONBOARDED`. Complete the agreement for that party and it mints on the next poll. If you can't, it can be refunded to the depositing EVM address.
-
 **Which choices should I be watching?**
 Burns are `BridgeUserAgreement` / `BridgeUserAgreement_Burn`. Mints on the default path are `BridgeUserAgreement` / `BridgeUserAgreement_DirectMint`. `BridgeUserAgreementRequest_Accept` is the one-time onboarding event.
 
