@@ -23,13 +23,13 @@ Integration overview:
 Live on Canton mainnet (yes or no):
 Live on Canton testnet (yes or no):
 Canton participant UID(s):
-How can we help?
+What do you need help with?
 ```
 
-:::info Get allowlisted first
-The bridge operator only accepts agreement requests from allowlisted participants. Send us your **participant UID** (e.g. `send-validator-1::1220…`) before you start. Capitalization matters, so copy the exact string Canton reports rather than retyping it.
+:::info Onboard your participant first
+Agreement requests are accepted from onboarded participants. Submit your **participant UID** (e.g. `send-validator-1::1220…`) to the bridge operator before you start. Capitalization matters, so copy the exact string Canton reports rather than retyping it.
 
-Until you're listed, requests sit **pending** rather than being rejected. Once you're added they go through on the next poll.
+Until onboarding completes, requests sit **pending** rather than being rejected. Once it's done they go through on the next poll.
 :::
 
 ## Reference values
@@ -62,7 +62,7 @@ Until you're listed, requests sit **pending** rather than being rejected. Once y
 | cbETH | `0x2ae3f1ec7f1f5012cfeab0185bfc7aa3cf0dec22` | `CBETH.B` | 18 |
 | QUID | `0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53` | `QUID.B` | 18 |
 
-Every instrument's `admin` is the cross-chain representative party, which you can read off your own `BridgeUserAgreement` rather than hardcoding. Ask us if you want an asset that isn't listed.
+Every instrument's `admin` is the cross-chain representative party, which you can read off your own `BridgeUserAgreement` rather than hardcoding. Ask the bridge operator if you want an asset that isn't listed.
 
 ## One-time: the bridge user agreement
 
@@ -107,7 +107,7 @@ Exercise `BridgeUserAgreement_Burn` on your agreement. It is `nonconsuming`, so 
 | `reference` | Free-text, not used by the protocol |
 | `factoryCid`, `contextContractIds` | Resolved from the DA Utility registry |
 
-The choice archives the input Holdings and returns a `WithdrawAttestation` contract id plus any change Holding ids. The operator then collects the attestor quorum (3-of-5 on mainnet) and submits `release()` on Base. **It pays the gas, you don't.** Expect roughly **3 minutes**.
+The choice archives the input Holdings and returns a `WithdrawAttestation` contract id plus any change Holding ids. The operator then collects the attestor quorum and submits `release()` on Base. **It pays the gas, you don't.** Expect roughly **3 minutes**.
 
 :::caution Two fields the ledger will not check
 The choice validates every field except `destinationDomain` and `requestId`. Both are accepted as they are, the burn succeeds, and nothing shows up as wrong until the withdrawal fails to release.
@@ -150,13 +150,13 @@ About 3 minutes each way under normal operation. Canton → Base often settles f
 `0.000001` of any token, both directions. It's the `minBurnValue` field on your agreement.
 
 **Does `domainId` ever change?**
-It's fixed per environment and we don't expect it to change. Pinning it per environment is fine; reading it from your `BridgeUserAgreement` is safer still.
+It's fixed per environment and is not expected to change. Pinning it per environment is fine; reading it from your `BridgeUserAgreement` is safer still.
 
 **The burn went through but nothing arrived on Base.**
 Almost always `destinationDomain` (a CCTP domain id instead of the chain id) or a malformed `destinationRecipient`. Check both on the burn's choice arguments.
 
 **I deposited to a party with no agreement.**
-The deposit is held, not lost, and flagged `RECIPIENT_NOT_ONBOARDED`. Complete the agreement for that party and it mints on the next poll. If you can't, contact us for a refund to the depositing EVM address.
+The deposit is held, not lost, and flagged `RECIPIENT_NOT_ONBOARDED`. Complete the agreement for that party and it mints on the next poll. If you can't, contact the bridge operator for a refund to the depositing EVM address.
 
 **Which choices should I be watching?**
 Burns are `BridgeUserAgreement` / `BridgeUserAgreement_Burn`. Mints on the default path are `BridgeUserAgreement` / `BridgeUserAgreement_DirectMint`. `BridgeUserAgreementRequest_Accept` is the one-time onboarding event.
@@ -165,4 +165,4 @@ Burns are `BridgeUserAgreement` / `BridgeUserAgreement_Burn`. Mints on the defau
 Yes, one per (party, asset). Most integrators create them during user onboarding so bridging never blocks on it.
 
 **What's the difference between `USDC.B` and `USDCx`?**
-`USDC.B` is bridged from Base by the Asset Relayer, which Send operates. `USDCx` is bridged from Ethereum and is operated by Circle. They are separate instruments on separate infrastructure, so they carry different operational risk and are not interchangeable without a swap. Pick the one your counterparties actually hold.
+`USDC.B` is bridged from Base by the Asset Relayer. `USDCx` is bridged from Ethereum. They are separate instruments run on separate infrastructure by different operators, so they carry different operational risk and are not interchangeable without a swap. Pick the one your counterparties actually hold.

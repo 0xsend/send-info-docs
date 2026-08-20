@@ -16,7 +16,7 @@ const features = [
   { label: 'Bidirectional', detail: 'Transfers move both directions between Base (ERC-20) and Canton (CIP-56). No one-way wrapping.' },
   { label: 'Sub-3-minute', detail: 'Bridge confirmations land in under three minutes from lock to mint.' },
   { label: 'xReserve framework', detail: 'Reserve contracts on Base are built on Circle\'s battle-tested xReserve infrastructure.' },
-  { label: 'Send Safe multisig', detail: 'Canton DAML signature primitives. Majority quorum, three or more independent signers from Canton Foundation or supervalidators.' },
+  { label: 'Send Safe multisig', detail: 'Canton DAML signature primitives. Majority quorum of independent signers from Canton Foundation or supervalidators.' },
   { label: 'Composable framework', detail: 'Asset issuers maintain control through a composable framework, not a hard-coded asset list.' },
 ];
 
@@ -224,7 +224,7 @@ export default function AssetRelayer() {
             {[
               { label: 'Reserve contracts', value: 'Circle xReserve framework' },
               { label: 'Signature model', value: 'Canton DAML primitives via Send Safe' },
-              { label: 'Multisig quorum', value: 'Majority n of m, 3+ independent signers' },
+              { label: 'Multisig quorum', value: 'Majority quorum, independent signers' },
               { label: 'Signer eligibility', value: 'Canton Foundation or supervalidator' },
               { label: 'Onboarding', value: 'Opsec checklist + attestation required' },
               { label: 'Issuance registry', value: 'Digital Assets Utility Registry' },
