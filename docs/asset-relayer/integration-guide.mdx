@@ -103,7 +103,19 @@ Watch the `DepositedToRemote` event for confirmation, then expect the Canton min
 
 ## Canton → Base (withdrawal)
 
-Exercise `BridgeUserAgreement_Burn` on your agreement. It is `nonconsuming`, so one agreement serves every withdrawal.
+Exercise `BridgeUserAgreement_Burn` on your agreement. One agreement serves every withdrawal.
+
+```daml
+exercise bridgeUserAgreementCid BridgeUserAgreement_Burn with
+  amount               = 1.000000
+  destinationDomain    = 8453                     -- 84532 on testnet
+  destinationRecipient = "<40 hex chars>"
+  holdingCids          = [<holding contract ids>]
+  requestId            = "<globally unique>"
+  reference            = ""
+  factoryCid           = <from the DA Utility registry>
+  contextContractIds   = <from the DA Utility registry>
+```
 
 | Field | Notes |
 |---|---|
