@@ -62,9 +62,23 @@ Every instrument's `admin` is the cross-chain representative party, which you ca
 
 One agreement per **(Canton party, asset)**. Without it, deposits to that party are held rather than minted.
 
-1. Create a `BridgeUserAgreementRequest`. You are the sole signatory; `bridgeOperator` and `crossChainRepresentative` are observers. Set `preApproval: True` so deposits mint automatically.
-2. The bridge operator and the cross-chain representative accept it, which creates the `BridgeUserAgreement` on your ACS. This takes a few minutes.
-3. Read your working values off that contract: `domainId`, `minBurnValue`, `tokenId`, `instrumentId`.
+Create a `BridgeUserAgreementRequest`:
+
+```daml
+BridgeUserAgreementRequest with
+  user                     = "<your party id>"
+  bridgeOperator           = "<bridge operator party>"
+  crossChainRepresentative = "<cross-chain representative party>"
+  operator                 = "<utilities operator party>"
+  instrumentId = InstrumentId with
+    id    = "SEND.B"                               -- the Canton instrument
+    admin = "<cross-chain representative party>"
+  preApproval = True                               -- deposits mint automatically
+```
+
+Wait for the bridge operator and cross-chain representative to accept it. This takes a few minutes and creates the `BridgeUserAgreement` on your ACS.
+
+Read your working values off it: `domainId`, `minBurnValue`, `tokenId`, `instrumentId`.
 
 ## Base → Canton (deposit)
 
@@ -81,7 +95,7 @@ depositToRemote(
 )
 ```
 
-`remoteRecipient` is matched against `userHash` on your agreement; `hookData` carries the readable party id so the operator can resolve it. Derive both from the same party string.
+`remoteRecipient` is matched against `userHash` on your agreement; `hookData` carries the readable party id. Derive both from the same party string.
 
 **Precision.** The bridge moves amounts at 6 decimal places, so anything finer is rejected with `InvalidPrecision`. `1.0000005` SEND fails; `1.000000` passes. In base units that means `value` must be a multiple of `10^(decimals - 6)`: `1e12` for the 18-decimal tokens, `100` for cbBTC, and nothing to do for the 6-decimal ones.
 
@@ -89,7 +103,19 @@ Watch the `DepositedToRemote` event for confirmation, then expect the Canton min
 
 ## Canton → Base (withdrawal)
 
-Exercise `BridgeUserAgreement_Burn` on your agreement. It is `nonconsuming`, so one agreement serves every withdrawal.
+Exercise `BridgeUserAgreement_Burn` on your agreement. One agreement serves every withdrawal.
+
+```daml
+exercise bridgeUserAgreementCid BridgeUserAgreement_Burn with
+  amount               = 1.000000
+  destinationDomain    = 8453                     -- 84532 on testnet
+  destinationRecipient = "<40 hex chars>"
+  holdingCids          = [<holding contract ids>]
+  requestId            = "<globally unique>"
+  reference            = ""
+  factoryCid           = <from the DA Utility registry>
+  contextContractIds   = <from the DA Utility registry>
+```
 
 | Field | Notes |
 |---|---|
@@ -101,7 +127,7 @@ Exercise `BridgeUserAgreement_Burn` on your agreement. It is `nonconsuming`, so 
 | `reference` | Free-text, not used by the protocol |
 | `factoryCid`, `contextContractIds` | Resolved from the DA Utility registry |
 
-The choice archives the input Holdings and returns a `WithdrawAttestation` contract id plus any change Holding ids. The operator then collects the attestor quorum and submits `release()` on Base. **It pays the gas, you don't.** Expect roughly **3 minutes**.
+The choice archives the input Holdings and returns a `WithdrawAttestation` contract id plus any change Holding ids. Release on Base follows in roughly **3 minutes**, and you don't pay the gas.
 
 :::caution Two fields the ledger will not check
 The choice validates every field except `destinationDomain` and `requestId`. Both are accepted as they are, the burn succeeds, and nothing shows up as wrong until the withdrawal fails to release.
@@ -112,7 +138,16 @@ The choice validates every field except `destinationDomain` and `requestId`. Bot
 Recovering from either needs operator involvement. Verify both before you burn.
 :::
 
-**You cannot cancel a withdrawal.** If a release can't be completed, the bridge operator and cross-chain representative revoke the attestation, which produces a `RevokedWithdrawAttestation`. You then reclaim your Holding with `BridgeUserAgreement_ReclaimHolding`.
+**You cannot cancel a withdrawal.** If a release can't be completed, the attestation is revoked and you reclaim your Holding:
+
+```daml
+exercise bridgeUserAgreementCid BridgeUserAgreement_ReclaimHolding with
+  revokedWithdrawAttestationCid = <the RevokedWithdrawAttestation>
+  factoryCid                    = <from the DA Utility registry>
+  contextContractIds            = <from the DA Utility registry>
+```
+
+It returns the reclaimed `holdingCid`.
 
 ## Reading pause state
 
@@ -130,12 +165,12 @@ event Unpaused(address account)
 
 Deposits are enabled only when `paused()` and `domainDepositsPaused(domain)` are both false, and withdrawals only when `paused()` and `domainWithdrawalsPaused(domain)` are both false. Either one is enough to disable that direction. Subscribe to the three events rather than polling.
 
-Pauses are precautionary and usually reflect an attestor consensus disagreement rather than a minting problem. They stop new deposits and releases; balances already on either side are unaffected.
+Pauses stop new deposits and releases; balances already on either side are unaffected.
 
 ## FAQs
 
 **Are there fees?**
-No protocol fee in either direction, for now. You pay Base gas on the deposit; the operator pays Base gas on the release.
+No protocol fee in either direction, for now. You pay Base gas on the deposit and nothing on the release.
 
 **How long does it take?**
 About 3 minutes each way under normal operation. Canton → Base often settles faster.
