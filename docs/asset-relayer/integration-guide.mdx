@@ -138,7 +138,16 @@ The choice validates every field except `destinationDomain` and `requestId`. Bot
 Recovering from either needs operator involvement. Verify both before you burn.
 :::
 
-**You cannot cancel a withdrawal.** If a release can't be completed, the attestation is revoked and you reclaim your Holding with `BridgeUserAgreement_ReclaimHolding`.
+**You cannot cancel a withdrawal.** If a release can't be completed, the attestation is revoked and you reclaim your Holding:
+
+```daml
+exercise bridgeUserAgreementCid BridgeUserAgreement_ReclaimHolding with
+  revokedWithdrawAttestationCid = <the RevokedWithdrawAttestation>
+  factoryCid                    = <from the DA Utility registry>
+  contextContractIds            = <from the DA Utility registry>
+```
+
+It returns the reclaimed `holdingCid`.
 
 ## Reading pause state
 
