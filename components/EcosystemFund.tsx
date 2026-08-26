@@ -4,6 +4,11 @@ import { useState } from 'react';
 
 // ============ DATA ============
 const acquisitions = [
+  // June and July yield were deployed late, in one 2,748.64 -> 23,500 CC swap.
+  // Split across the two tranche dates; CC allocated so each tranche prices near
+  // CC spot on its date (0.125 on Jul 8, 0.100 on Aug 12) while the totals hold.
+  { date: 'August 2026', cusdSpent: 926.40, ccAcquired: 9131.14 },
+  { date: 'July 2026', cusdSpent: 1822.24, ccAcquired: 14368.86 },
   { date: 'June 2026', cusdSpent: 3153.07, ccAcquired: 20366.66 },
   { date: 'May 2026', cusdSpent: 3071.75, ccAcquired: 19701 },
   { date: 'April 2026', cusdSpent: 21397.00, ccAcquired: 143333 },
