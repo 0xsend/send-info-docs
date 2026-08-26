@@ -10,11 +10,11 @@ const acquisitions = [
 ];
 
 const fundData = {
-  yieldEarned: 29444.06,
+  yieldEarned: 30370.46,
   ccAcquired: acquisitions.reduce((sum, a) => sum + a.ccAcquired, 0),
   cusdSpent: acquisitions.reduce((sum, a) => sum + a.cusdSpent, 0),
   ccDeployed: 0,
-  lastUpdated: 'September 2025 – June 2026',
+  lastUpdated: 'September 2025 – July 2026',
   multisigUrl: 'https://lighthouse.fivenorth.io/party/cantonwallet-cusd-ecosystem-fund%3A%3A1220e06619076b7db52340b1d53432385b986c1cf072611afa12a9588ad261fd8d57',
 };
 
