@@ -48,6 +48,11 @@ const nextConfig = {
         destination: '/docs/send-connect/overview',
         permanent: true,
       },
+      {
+        source: '/docs/legal/terms-of-service',
+        destination: '/docs/legal/terms-of-use',
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {
