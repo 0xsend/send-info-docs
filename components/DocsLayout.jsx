@@ -64,7 +64,7 @@ const heroItemIcons = {
   'legal/disclaimer': <HeroIcon name="warning" />,
   'legal/licenses': <HeroIcon name="info" />,
   'legal/prohibited-activities': <HeroIcon name="block" />,
-  'legal/terms-of-service': <HeroIcon name="gavel" />,
+  'legal/terms-of-use': <HeroIcon name="gavel" />,
   'legal/privacy-policy': <HeroIcon name="lock" />,
 };
 
