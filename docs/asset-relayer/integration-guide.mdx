@@ -52,12 +52,16 @@ bridgeOperator            cantonwallet-asset-relayer-operator::122037a46a3d9a911
 crossChainRepresentative  cantonwallet-asset-relayer-instrument-operator::12202e6dd1f885994b22ca64e10582328bcd1a31b4fe69bf529982d31d57c8cab71c
 ```
 
+On Lighthouse: [bridge operator](https://lighthouse.cantonloop.com/party/cantonwallet-asset-relayer-operator%3A%3A122037a46a3d9a911874726536d0ddbd40c01a38c0d5afa41ab0589df2ba91493d27), [cross-chain representative](https://lighthouse.cantonloop.com/party/cantonwallet-asset-relayer-instrument-operator%3A%3A12202e6dd1f885994b22ca64e10582328bcd1a31b4fe69bf529982d31d57c8cab71c).
+
 **Testnet**
 
 ```text
 bridgeOperator            cantonwallet-send-bridge-operator-retry-20260513::1220f6ac73835e1086f0d23aa42767e26234d175b4f8188399446c344bbfcdfbfe57
 crossChainRepresentative  cantonwallet-send-bridge-registrar::1220f6ac73835e1086f0d23aa42767e26234d175b4f8188399446c344bbfcdfbfe57
 ```
+
+On Lighthouse: [bridge operator](https://lighthouse.testnet.cantonloop.com/party/cantonwallet-send-bridge-operator-retry-20260513%3A%3A1220f6ac73835e1086f0d23aa42767e26234d175b4f8188399446c344bbfcdfbfe57), [cross-chain representative](https://lighthouse.testnet.cantonloop.com/party/cantonwallet-send-bridge-registrar%3A%3A1220f6ac73835e1086f0d23aa42767e26234d175b4f8188399446c344bbfcdfbfe57).
 
 `operator` and every `instrumentId.admin` are the cross-chain representative party. To check the representative against the ledger, list the instrument configurations on the Utility registry (`GET /api/utilities/v0/contract/instrument-configuration/all`); each `.B` instrument carries it as `registrar`.
 
