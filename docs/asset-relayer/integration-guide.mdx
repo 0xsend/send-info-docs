@@ -41,6 +41,30 @@ What do you need help with?
 `domainId` equals the **EVM chain id**: `8453` on mainnet, `84532` on testnet. It is *not* Circle's CCTP domain id (`6` for Base). Using the CCTP value produces a withdrawal no attestor can release. The authoritative value is the `domainId` field on your `BridgeUserAgreement`, which is fixed per environment.
 :::
 
+## Bridge parties
+
+Fixed per environment. Put them in the agreement request exactly as written.
+
+**Mainnet**
+
+```text
+bridgeOperator            cantonwallet-asset-relayer-operator::122037a46a3d9a911874726536d0ddbd40c01a38c0d5afa41ab0589df2ba91493d27
+crossChainRepresentative  cantonwallet-asset-relayer-instrument-operator::12202e6dd1f885994b22ca64e10582328bcd1a31b4fe69bf529982d31d57c8cab71c
+```
+
+On Lighthouse: [bridge operator](https://lighthouse.cantonloop.com/party/cantonwallet-asset-relayer-operator%3A%3A122037a46a3d9a911874726536d0ddbd40c01a38c0d5afa41ab0589df2ba91493d27), [cross-chain representative](https://lighthouse.cantonloop.com/party/cantonwallet-asset-relayer-instrument-operator%3A%3A12202e6dd1f885994b22ca64e10582328bcd1a31b4fe69bf529982d31d57c8cab71c).
+
+**Testnet**
+
+```text
+bridgeOperator            cantonwallet-send-bridge-operator-retry-20260513::1220f6ac73835e1086f0d23aa42767e26234d175b4f8188399446c344bbfcdfbfe57
+crossChainRepresentative  cantonwallet-send-bridge-registrar::1220f6ac73835e1086f0d23aa42767e26234d175b4f8188399446c344bbfcdfbfe57
+```
+
+On Lighthouse: [bridge operator](https://lighthouse.testnet.cantonloop.com/party/cantonwallet-send-bridge-operator-retry-20260513%3A%3A1220f6ac73835e1086f0d23aa42767e26234d175b4f8188399446c344bbfcdfbfe57), [cross-chain representative](https://lighthouse.testnet.cantonloop.com/party/cantonwallet-send-bridge-registrar%3A%3A1220f6ac73835e1086f0d23aa42767e26234d175b4f8188399446c344bbfcdfbfe57).
+
+`operator` and every `instrumentId.admin` are the cross-chain representative party. To check the representative against the ledger, list the instrument configurations on the Utility registry (`GET /api/utilities/v0/contract/instrument-configuration/all`); each `.B` instrument carries it as `registrar`.
+
 ## Supported assets (mainnet)
 
 | Symbol | Base ERC-20 | Canton instrument | Decimals |
@@ -56,20 +80,24 @@ What do you need help with?
 | cbETH | `0x2ae3f1ec7f1f5012cfeab0185bfc7aa3cf0dec22` | `CBETH.B` | 18 |
 | QUID | `0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53` | `QUID.B` | 18 |
 
-Every instrument's `admin` is the cross-chain representative party, which you can read off your own `BridgeUserAgreement` rather than hardcoding.
+Every instrument's `admin` is the cross-chain representative party listed under [Bridge parties](#bridge-parties).
 
 ## One-time: the bridge user agreement
 
 One agreement per **(Canton party, asset)**. Without it, deposits to that party are held rather than minted.
 
-Create a `BridgeUserAgreementRequest`:
+:::caution Your participant must be allowlisted first
+The bridge operator accepts requests only from parties hosted on an allowlisted Canton participant. Send your participant UID(s) through the [integration support](#integration-support) intake before you create the request.
+:::
+
+Create a `BridgeUserAgreementRequest` with the parties from [Bridge parties](#bridge-parties):
 
 ```daml
 BridgeUserAgreementRequest with
   user                     = "<your party id>"
   bridgeOperator           = "<bridge operator party>"
   crossChainRepresentative = "<cross-chain representative party>"
-  operator                 = "<utilities operator party>"
+  operator                 = "<cross-chain representative party>"  -- same party as crossChainRepresentative
   instrumentId = InstrumentId with
     id    = "SEND.B"                               -- the Canton instrument
     admin = "<cross-chain representative party>"
@@ -186,6 +214,9 @@ Almost always `destinationDomain` (a CCTP domain id instead of the chain id) or 
 
 **Which choices should I be watching?**
 Burns are `BridgeUserAgreement` / `BridgeUserAgreement_Burn`. Mints on the default path are `BridgeUserAgreement` / `BridgeUserAgreement_DirectMint`. `BridgeUserAgreementRequest_Accept` is the one-time onboarding event.
+
+**My agreement request has been pending for more than a few minutes.**
+Almost always the party's hosting participant is not on the operator's allowlist. Send the participant UID through the intake above. The pending request is picked up once the allowlist is updated; you do not need to recreate it.
 
 **Do I need a separate agreement per asset?**
 Yes, one per (party, asset). Most integrators create them during user onboarding so bridging never blocks on it.
