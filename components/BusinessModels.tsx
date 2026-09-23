@@ -26,14 +26,6 @@ const businessModels = [
     multisig: { name: 'Trade Revenue', address: '0x17D46f667B0e4156238645536c344d010FC099d7' },
     color: '#1a8a2e',
   },
-  {
-    type: 'Transactions',
-    description: 'Transfer fees for sending crypto to other users',
-    fee: '0.01',
-    feeType: 'USDC per tx',
-    multisig: { name: 'Transaction Revenue', address: '0xB3dCBE168cFe6ccb123b2c13F7CF9Aa95B7Ec5aE' },
-    color: '#6b7c7f',
-  },
 ];
 
 const MONO = '"DM Mono", monospace';
