@@ -53,6 +53,16 @@ const nextConfig = {
         destination: '/docs/legal/terms-of-use',
         permanent: true,
       },
+      {
+        source: '/docs/finance/multisigs',
+        destination: '/docs/finance',
+        permanent: true,
+      },
+      {
+        source: '/docs/finance/treasury',
+        destination: '/docs/finance',
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {
