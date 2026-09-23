@@ -59,7 +59,7 @@ export default function SendAppsPage() {
 
       <div className="apps-hero">
         <Image
-          src="https://api.builder.io/api/v1/image/assets/TEMP/d40f30d4672352e9756c571190b2d440c3c71eea?width=1920"
+          src="/img/send-apps-hero.png"
           alt="Send"
           width={960}
           height={320}
