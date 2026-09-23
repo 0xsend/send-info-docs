@@ -50,8 +50,8 @@ export async function generateMetadata({ params }) {
       description: 'See how CUSD keeps balances private while remaining fully collateralized.'
     },
     'finance': {
-      title: 'Send Finance Info Docs – Treasury & Metrics',
-      description: 'Review treasury balances, revenue streams, and financial operations.'
+      title: 'Send Finance Info Docs – Revenue & Funding',
+      description: 'Review revenue streams, funding rounds, and financial operations.'
     },
     'miscellaneous': {
       title: 'Send Info Docs – Additional Resources',
