@@ -88,6 +88,16 @@ const nextConfig = {
         destination: '/docs/miscellaneous',
         permanent: true,
       },
+      {
+        source: '/docs/pool-party/how-it-works',
+        destination: '/docs/pool-party',
+        permanent: true,
+      },
+      {
+        source: '/docs/pool-party/rewards',
+        destination: '/docs/pool-party',
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {
