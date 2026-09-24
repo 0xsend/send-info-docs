@@ -63,6 +63,31 @@ const nextConfig = {
         destination: '/docs/finance',
         permanent: true,
       },
+      {
+        source: '/docs/miscellaneous/whats-new',
+        destination: '/docs/miscellaneous',
+        permanent: true,
+      },
+      {
+        source: '/docs/miscellaneous/send-metrics',
+        destination: '/docs/miscellaneous',
+        permanent: true,
+      },
+      {
+        source: '/docs/miscellaneous/intellectual-property',
+        destination: '/docs/miscellaneous',
+        permanent: true,
+      },
+      {
+        source: '/docs/miscellaneous/send-contract-addresses',
+        destination: '/docs/miscellaneous',
+        permanent: true,
+      },
+      {
+        source: '/docs/miscellaneous/glossary',
+        destination: '/docs/miscellaneous',
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {

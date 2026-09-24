@@ -55,7 +55,7 @@ export async function generateMetadata({ params }) {
     },
     'miscellaneous': {
       title: 'Send Info Docs – Additional Resources',
-      description: 'Browse roadmaps, metrics, brand assets, and other helpful links.'
+      description: 'Browse the roadmap, brand assets, and other helpful links.'
     },
     'legal': {
       title: 'Send Info Docs – Legal & Policies',
