@@ -5,17 +5,17 @@ import { useEffect, useState, ReactNode } from 'react';
 // ============ TOKEN DATA ============
 const tokenData = {
   totalSupply: 1_000_000_000,
-  circulating: 356_671_471,
-  nonCirculating: 643_328_529,
-  circulationRate: 35.67,
-  asOf: 'September 2026',
-  lastUpdated: 'September 6, 2026',
+  circulating: 357_238_895,
+  nonCirculating: 642_761_105,
+  circulationRate: 35.72,
+  asOf: 'October 2026',
+  lastUpdated: 'October 5, 2026',
 
   allocations: [
-    { name: 'Rewards', allocation: 300_000_000, remaining: 218_769_521, color: '#B45309' },
-    { name: 'Treasury', allocation: 200_000_000, remaining: 204_014_008, color: '#0F766E' },
+    { name: 'Rewards', allocation: 300_000_000, remaining: 219_188_548, color: '#B45309' },
+    { name: 'Treasury', allocation: 200_000_000, remaining: 204_027_557, color: '#0F766E' },
     { name: 'Exchange Listings', allocation: 200_000_000, remaining: 110_000_000, color: '#6D28D9' },
-    { name: 'Team', allocation: 100_000_000, remaining: 52_575_000, color: '#374151' },
+    { name: 'Team', allocation: 100_000_000, remaining: 51_575_000, color: '#374151' },
     { name: 'Contributors', allocation: 100_000_000, remaining: 57_970_000, color: '#6b7c7f' },
     { name: 'Liquidity', allocation: 100_000_000, remaining: 0, color: '#9aaaad' },
   ],
@@ -35,6 +35,7 @@ const tokenData = {
     { date: 'Q1 2026', circulating: 346_292_487, qoqChange: 18_306_982, qoqPct: 5.58 },
     { date: 'Q2 2026', circulating: 353_651_363, qoqChange: 7_358_876, qoqPct: 2.12 },
     { date: 'Q3 2026', circulating: 356_671_471, qoqChange: 3_020_108, qoqPct: 0.85 },
+    { date: 'Q4 2026', circulating: 357_238_895, qoqChange: 567_424, qoqPct: 0.16 },
   ],
 
   inflationData: [
@@ -51,12 +52,13 @@ const tokenData = {
     { period: 'Q1 \'26', annualized: 22.3, tokens: 18_306_982 },
     { period: 'Q2 \'26', annualized: 8.5, tokens: 7_358_876 },
     { period: 'Q3 \'26', annualized: 3.4, tokens: 3_020_108 },
+    { period: 'Q4 \'26', annualized: 0.6, tokens: 567_424 },
   ],
 
   vestingProgress: [
-    { name: 'Team', initial: 100_000_000, released: 47_425_000, pct: 47.4 },
+    { name: 'Team', initial: 100_000_000, released: 48_425_000, pct: 48.4 },
     { name: 'Contributors', initial: 100_000_000, released: 42_030_000, pct: 42.0 },
-    { name: 'Rewards', initial: 300_000_000, released: 81_230_479, pct: 27.1 },
+    { name: 'Rewards', initial: 300_000_000, released: 80_811_452, pct: 26.9 },
   ],
 };
 
