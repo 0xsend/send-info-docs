@@ -126,6 +126,8 @@ const sendAppRevenue = [
 ];
 
 const cusdRevenue = [
+  { date: '9/2026', yield: 5952.57, total: 5952.57 },
+  { date: '8/2026', yield: 5164.33, total: 5164.33 },
   { date: '7/2026', yield: 6620.71, total: 6620.71 },
   { date: '6/2026', yield: 0, total: 0 },
   { date: '5/2026', yield: 0, total: 0 },
