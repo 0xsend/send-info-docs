@@ -5,6 +5,20 @@ import { useState } from 'react';
 // ============ REVENUE DATA ============
 const sendAppRevenue = [
   {
+    date: '9/2026',
+    sendtags: { amount: 98, tx: '0xaa4e710b9b09ecc175305905be3a127842178e9662afcadb4c09fb11cfb3ec52' },
+    trades: { amount: 314, tx: '0x89d007dd92bac79cab0ae63a913c08abdfe2ab9ba699ded2c352c3e513082c04' },
+    transactions: { amount: 13, tx: '0x8686bc6f19115b24ebbb9375a8bf14182944225cf68d503c15c2a8ab6c78915a' },
+    total: 425,
+  },
+  {
+    date: '8/2026',
+    sendtags: { amount: 90, tx: '0xc37e7f92539f823fac9b341a1c54a8f9adb6f8e0b6549a271bea70914cd78dcc' },
+    trades: { amount: 305, tx: '0x13287b86c481577fa17e70019f63b08e860a7bc4223a541b7f321f352dd13763' },
+    transactions: { amount: 10, tx: '0xb1f430c0d3ff9db608b98e50ca0dd7daa6cf929730feee4d3374378522c86ce9' },
+    total: 405,
+  },
+  {
     date: '7/2026',
     sendtags: { amount: 75, tx: '0xae271dd077e2a5fe8a62af1f404b777c8d68257a45fccb45d7d6d56a6cac1edb' },
     trades: { amount: 225.52, tx: '0x8b4c78390fd2abfd08595799e3ed2923c4bd20228d80f6fa3b26b12fb76d7607' },
@@ -112,9 +126,9 @@ const sendAppRevenue = [
   {
     date: '4/2025',
     sendtags: { amount: 3876.50, tx: '0x477b920524c1a42b946003620534993e827e470e79b9474f2b160fe3764a7411' },
-    trades: { amount: 333.64, tx: '0x477b920524c1a42b946003620534993e827e470e79b9474f2b160fe3764a7411' },
+    trades: { amount: 333.64, tx: '0x440cd5b7478c61afbb8bd2771f6471f65ef063fc765fa1ff5b0956cf957b996c' },
     transactions: { amount: 1137.77, tx: '0x1d2ca7115c69805117826c3b05fbbd46c524cbe7faffac950609a5f41be07b32' },
-    total: 5347.90,
+    total: 5347.91,
   },
   {
     date: '3/2025',
@@ -126,6 +140,8 @@ const sendAppRevenue = [
 ];
 
 const cusdRevenue = [
+  { date: '9/2026', yield: 5952.57, total: 5952.57 },
+  { date: '8/2026', yield: 5164.33, total: 5164.33 },
   { date: '7/2026', yield: 6620.71, total: 6620.71 },
   { date: '6/2026', yield: 0, total: 0 },
   { date: '5/2026', yield: 0, total: 0 },
