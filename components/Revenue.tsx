@@ -3,7 +3,19 @@
 import { useState } from 'react';
 
 // ============ REVENUE DATA ============
+// Bump on every data update; shown at the top of the page (same as Token Emissions).
+const lastUpdated = 'November 10, 2026';
+
+// Sendtag and transaction revenue are no longer tracked after 9/2026; rows from
+// 10/2026 on carry trades only, and earlier rows keep their historical figures.
 const sendAppRevenue = [
+  {
+    date: '10/2026',
+    sendtags: null,
+    trades: { amount: 288.04, tx: '0x5a8b826e477a859448d1d9668d4c044d97172727da6d03f17e3dfb15322fe41b' },
+    transactions: null,
+    total: 288.04,
+  },
   {
     date: '9/2026',
     sendtags: { amount: 98, tx: '0xaa4e710b9b09ecc175305905be3a127842178e9662afcadb4c09fb11cfb3ec52' },
@@ -250,6 +262,14 @@ export default function Revenue() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
+      {/* ── LAST UPDATED ── */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 8 }}>
+        <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1a8a2e' }} />
+        <span style={{ fontFamily: '"DM Mono", ui-monospace, monospace', fontSize: 11, color: '#6b7c7f', letterSpacing: '0.02em' }}>
+          Last updated {lastUpdated}
+        </span>
+      </div>
+
       {/* ── HERO: Bento ── */}
       <div className="bento-hero">
         {/* Grand total */}
@@ -344,6 +364,7 @@ export default function Revenue() {
       <div style={{ background: '#FFF', borderRadius: '12px', border: '1px solid #E0E0E0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
         <div style={{ padding: '20px 24px', borderBottom: '1px solid #E0E0E0' }}>
           <div style={{ fontSize: '15px', fontWeight: 600, color: '#122023' }}>Send Revenue History</div>
+          <div style={{ fontSize: '12px', color: '#888', marginTop: '2px' }}>Sendtag and transaction revenue tracked through 9/2026; trades only from 10/2026</div>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
